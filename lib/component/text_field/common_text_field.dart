@@ -1,8 +1,8 @@
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../text/common_text.dart';
 
@@ -23,10 +23,7 @@ class CommonTextField extends StatelessWidget {
     this.paddingVertical = 14,
     this.borderRadius = 10,
     this.inputFormatters,
-    this.fillColor = AppColors.filledColor,
-    this.hintTextColor = AppColors.textFiledColor,
-    this.labelTextColor = AppColors.textFiledColor,
-    this.textColor = AppColors.black,
+
     this.borderColor = AppColors.textFiledBorder,
     this.onSubmitted,
     this.onTap,
@@ -40,10 +37,7 @@ class CommonTextField extends StatelessWidget {
   final String? prefixText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final Color? fillColor;
-  final Color? labelTextColor;
-  final Color? hintTextColor;
-  final Color? textColor;
+
   final Color borderColor;
   final double paddingHorizontal;
   final double paddingVertical;
@@ -70,31 +64,26 @@ class CommonTextField extends StatelessWidget {
         obscureText: obscureText.value,
         textInputAction: textInputAction,
         maxLength: mexLength,
-        cursorColor: AppColors.white,
         inputFormatters: inputFormatters,
-        style: TextStyle(fontSize: 14, color: textColor),
         onFieldSubmitted: onSubmitted,
         onTap: onTap,
+        style: theme.textTheme.bodyLarge!.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 12,
+        ),
         validator: validator,
         decoration: InputDecoration(
           errorMaxLines: 2,
           filled: true,
           prefixIcon: prefixIcon,
-          fillColor: fillColor,
           counterText: "",
           contentPadding: EdgeInsets.symmetric(
             horizontal: paddingHorizontal.w,
             vertical: paddingVertical.h,
           ),
-          border: _buildBorder(),
-          enabledBorder: _buildBorder(),
-          focusedBorder: _buildBorder(),
-          disabledBorder: _buildBorder(),
-          errorBorder: _buildBorder(),
+
           hintText: hintText,
           labelText: labelText,
-          hintStyle: GoogleFonts.dmSans(fontSize: 14, color: hintTextColor),
-          labelStyle: GoogleFonts.dmSans(fontSize: 14, color: labelTextColor),
           prefix: CommonText(
             text: prefixText ?? "",
             fontWeight: FontWeight.w400,
@@ -102,13 +91,6 @@ class CommonTextField extends StatelessWidget {
           suffixIcon: isPassword ? _buildPasswordSuffixIcon() : suffixIcon,
         ),
       ),
-    );
-  }
-
-  OutlineInputBorder _buildBorder() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(borderRadius.r),
-      borderSide: BorderSide(color: borderColor),
     );
   }
 
@@ -122,7 +104,7 @@ class CommonTextField extends StatelessWidget {
               ? Icons.visibility_off_outlined
               : Icons.visibility_outlined,
           size: 20.sp,
-          color: textColor,
+          color: theme.colorScheme.outline,
         ),
       ),
     );

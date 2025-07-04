@@ -1,5 +1,5 @@
+import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/features/auth/controllers/otp_controller.dart';
 
 import '../../features/auth/controllers/change_password_controller.dart';
 import '../../features/auth/controllers/forget_password_controller.dart';

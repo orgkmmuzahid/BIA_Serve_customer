@@ -1,7 +1,7 @@
+import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/utils/helpers/other_helper.dart';
 import '../../../services/storage/storage_services.dart';
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_string.dart';
@@ -47,15 +47,13 @@ class PopUpMenu extends StatelessWidget {
         offset: const Offset(1, 1),
         padding: EdgeInsets.zero,
         itemBuilder:
-            (BuildContext context) =>
-        <PopupMenuEntry<String>>[
-          PopupMenuItem<String>(
-            value: 'option1',
-            child: Column(
-              children: List.generate(
-                items.length,
-                    (index) =>
-                    GestureDetector(
+            (BuildContext context) => <PopupMenuEntry<String>>[
+              PopupMenuItem<String>(
+                value: 'option1',
+                child: Column(
+                  children: List.generate(
+                    items.length,
+                    (index) => GestureDetector(
                       onTap: () async {
                         await AnimationPopUpState.closeDialog();
                         onTap(index);
@@ -69,11 +67,11 @@ class PopUpMenu extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(color: selectedColor),
                                 color:
-                                selectedItem.contains(
-                                  items[index].toString(),
-                                )
-                                    ? selectedColor
-                                    : unselectedColor,
+                                    selectedItem.contains(
+                                          items[index].toString(),
+                                        )
+                                        ? selectedColor
+                                        : unselectedColor,
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -83,10 +81,10 @@ class PopUpMenu extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ],
+            ],
         icon: Padding(
           padding: EdgeInsets.only(left: isContainer ? 40 : 0),
           child: Icon(iconData, color: iconColor, size: height),
@@ -96,10 +94,7 @@ class PopUpMenu extends StatelessWidget {
   }
 }
 
-
-
-
-logOutPopUp() {
+void logOutPopUp() {
   showDialog(
     context: Get.context!,
     builder: (context) {
@@ -158,7 +153,7 @@ logOutPopUp() {
   );
 }
 
-deletePopUp({
+void deletePopUp({
   required TextEditingController controller,
   required VoidCallback onTap,
   bool isLoading = false,
@@ -242,7 +237,7 @@ deletePopUp({
   );
 }
 
-logOutPopUps() {
+void logOutPopUps() {
   showDialog(
     context: Get.context!,
     builder: (context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/constants/app_colors.dart';
 
@@ -9,3 +10,111 @@ ThemeData themeData = ThemeData(
     centerTitle: true,
   ),
 );
+
+final ThemeData lightTheme = ThemeData(
+  useMaterial3: true,
+  brightness: Brightness.light,
+
+  colorScheme: const ColorScheme(
+    brightness: Brightness.light,
+
+    primary: Color(0xFF0A6F77), // 🟦 Primary: Buttons, active tabs
+    onPrimary: Color(0xFFFFFFFF), // 🔳 Text/icons on primary
+
+    secondary: Color(0xFF008000), // 🟢 Secondary: Chips, toggles
+    onSecondary: Color(0xFFFFFFFF), // ⚪ Text/icons on secondary
+
+    error: Color(0xFFE53935), // 🔴 Error containers
+    onError: Color(0xFFFFFFFF), // ⚪ Text/icons on error
+
+    surface: Color(0xFFE6F1F1), // 🔲 Base surface: cards, modals
+    onSurface: Color(0xFF333333), // 🔳 Text/icons on surface
+
+    surfaceContainerLowest: Color(
+      0xFFF9F9F9,
+    ), // 🪵 Scaffold background / lowest elevation
+    surfaceContainerLow: Color(0xFFF1F4F4), // 🪵 Lower elevation (forms, lists)
+    surfaceContainer: Color(0xFFE6F1F1), // 🪵 Mid elevation surfaces
+    surfaceContainerHigh: Color(0xFFDDEBEB), // 🪵 Higher elevation
+    surfaceContainerHighest: Color(0xFFD2E5E5), // 🪵 Highest elevation: dialogs
+
+    onSurfaceVariant: Color(0xFF666666), // 📝 Subtle/inactive text/icons
+
+    inverseSurface: Color(
+      0xFF333333,
+    ), // 🔄 Reverse surface (e.g. pull-to-refresh)
+    onInverseSurface: Color(0xFFFFFFFF), // ⚪ Text on inverseSurface
+
+    inversePrimary: Color(0xFF4DB8BF), // 🔄 For contrast on dark background
+
+    outline: Color(0xFFCCCCCC), // 📏 Borders, outlines
+    outlineVariant: Color(0xffE6F1F1), // 📏 Lower emphasis outlines
+
+    shadow: Color(0x1F000000), // 🧱 Shadows for elevation
+    scrim: Color(0x80000000), // 🚪 Overlays, modals
+    surfaceTint: Color(0xFF0A6F77), // 🎨 Tint applied on elevated surfaces
+  ),
+
+  scaffoldBackgroundColor: Colors.white, // 📱 Screen background
+
+  appBarTheme: const AppBarTheme(
+    surfaceTintColor: Colors.transparent, // 🧼 Disable elevation tint
+    backgroundColor: Colors.white, // 🎛 AppBar surface
+    foregroundColor: Color(0xFF333333), // 📝 AppBar text/icon color
+    elevation: 0,
+  ),
+
+  textTheme: TextTheme(
+    bodyLarge: TextStyle(
+      color: Color(0xFF333333),
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+    ), // 📝 Primary body text, font size 16
+    bodyMedium: GoogleFonts.dmSans(
+      color: Color(0xFF333333),
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+    ), // 📝 Secondary body text font size 14
+    bodySmall: TextStyle(), //font size 12
+
+    titleLarge: TextStyle(
+      color: Color(0xFF333333),
+      fontWeight: FontWeight.bold,
+    ), // 🏷 Headings / Titles
+
+    titleSmall: GoogleFonts.dmSans(
+      color: Color(0xFF333333),
+      fontSize: 12,
+      fontWeight: FontWeight.w700,
+    ),
+  ),
+
+  cardColor: const Color(0xFFE6F1F1), // 🃏 Card surfaces
+
+  dividerColor: const Color(0xFFCCCCCC), // ➖ Dividers
+
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Color(0xFF0A6F77),
+    selectionColor: Color.fromARGB(85, 44, 153, 153),
+    selectionHandleColor: Color.fromARGB(255, 10, 119, 119),
+  ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.transparent, // 🧾 TextField background
+    border: _buildBorder(color: const Color(0xffE6F1F1)),
+    enabledBorder: _buildBorder(color: const Color(0xff0A6F77)),
+    focusedBorder: _buildBorder(color: const Color(0xFF0A6F77)),
+    disabledBorder: _buildBorder(color: const Color(0xffE6F1F1)),
+    errorBorder: _buildBorder(color: const Color(0xFFE53935)),
+    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFF979797)),
+    labelStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xffBFBFBF)),
+  ),
+);
+
+OutlineInputBorder _buildBorder({required Color color}) {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(color: color),
+  );
+}

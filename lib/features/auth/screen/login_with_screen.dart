@@ -1,20 +1,18 @@
+import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/component/button/common_button.dart';
-import 'package:new_untitled/component/image/common_image.dart';
-import 'package:new_untitled/config/route/app_routes.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
-import 'package:new_untitled/utils/constants/app_images.dart';
-import 'package:new_untitled/utils/constants/app_string.dart';
-import 'package:new_untitled/utils/extensions/extension.dart';
 
 class LoginWithScreen extends StatelessWidget {
   const LoginWithScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: AppColors.background,
     body: Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
       child: Column(
@@ -57,11 +55,11 @@ class LoginWithScreen extends StatelessWidget {
     onTap: onTap,
     titleSize: 12,
     titleWeight: FontWeight.w500,
-    buttonColor: AppColors.transparent,
-    titleColor: Color.fromRGBO(51, 51, 51, 1),
-    borderColor: Color.fromRGBO(191, 191, 191, 1),
+    buttonColor: theme.scaffoldBackgroundColor,
+    titleColor: theme.textTheme.bodyLarge!.color!,
+    borderColor: theme.colorScheme.outlineVariant,
     alignment: MainAxisAlignment.start,
-    Icon: Padding(
+    icon: Padding(
       padding: EdgeInsets.only(left: 40.5, right: 20),
       child: CommonImage(imageSrc: image),
     ),

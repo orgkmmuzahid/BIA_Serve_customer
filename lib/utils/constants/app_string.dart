@@ -92,4 +92,6 @@ class AppString {
       "How would you like to get your code?";
 
   static const String otpSendButton = "Send Code Via SMS";
+  static const String enterVerifyCode =
+      "Enter the code to verify your account.";
 }

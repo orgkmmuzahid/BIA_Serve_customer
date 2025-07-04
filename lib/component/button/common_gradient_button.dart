@@ -1,6 +1,7 @@
+import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/component/button/common_button.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
 
 class CommonGradientButton extends StatelessWidget {
   final VoidCallback? onTap;
@@ -27,16 +28,23 @@ class CommonGradientButton extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(gradient: AppColors.buttonGradient),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0xff034045), theme.colorScheme.primary],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+      ),
+      borderRadius: BorderRadius.circular(04),
+    ),
     child: CommonButton(
       titleText: titleText,
       onTap: onTap,
       titleSize: titleSize,
       titleWeight: titleWeight,
       isLoading: isLoading,
-      buttonColor: AppColors.transparent,
       buttonRadius: 0,
-      Icon: icon,
+      icon: icon,
+      buttonColor: Colors.transparent,
       buttonWidth: buttonWidth ?? double.infinity,
       buttonHeight: buttonHeight ?? 48,
       titleColor: titleColor,

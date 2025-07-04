@@ -1,7 +1,7 @@
+import 'package:bai_serve/component/text_field/common_date_input_text_field.dart';
+import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/component/text_field/common_date_input_text_field.dart';
-import 'package:new_untitled/features/auth/controllers/otp_controller.dart';
 import '../../../../utils/helpers/other_helper.dart';
 import '../../../../utils/constants/app_string.dart';
 import '../../../component/text/common_text.dart';

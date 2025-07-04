@@ -1,6 +1,6 @@
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/component/image/common_image.dart';
-import 'package:new_untitled/utils/constants/app_images.dart';
 
 class CommonLogo extends StatelessWidget {
   const CommonLogo({super.key});

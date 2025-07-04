@@ -1,9 +1,8 @@
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../utils/constants/app_colors.dart';
 
 class CommonText extends StatelessWidget {
   const CommonText({
@@ -16,7 +15,7 @@ class CommonText extends StatelessWidget {
     this.bottom = 0,
     this.fontSize = 12,
     this.fontWeight = FontWeight.w400,
-    this.color = AppColors.secondary,
+    this.color,
     required this.text,
     this.style,
     this.overflow = TextOverflow.ellipsis,
@@ -28,7 +27,7 @@ class CommonText extends StatelessWidget {
   final double bottom;
   final double fontSize;
   final FontWeight fontWeight;
-  final Color color;
+  final Color? color;
   final String text;
   final TextAlign textAlign;
   final int maxLines;
@@ -54,7 +53,7 @@ class CommonText extends StatelessWidget {
             GoogleFonts.dmSans(
               fontSize: fontSize.sp,
               fontWeight: fontWeight,
-              color: color,
+              color: color ?? theme.textTheme.bodySmall!.color,
             ),
       ),
     );

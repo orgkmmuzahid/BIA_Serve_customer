@@ -1,6 +1,6 @@
+import 'package:bai_serve/features/auth/screen/login_with_screen.dart';
+import 'package:bai_serve/features/auth/screen/sign_up_otp_send_screen.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/features/auth/screen/login_with_screen.dart';
-import 'package:new_untitled/features/auth/screen/sign_up_otp_send_screen.dart';
 import '../../features/auth/screen/change_password_screen.dart';
 import '../../features/auth/widgets/create_password.dart';
 import '../../features/auth/widgets/forgot_password.dart';

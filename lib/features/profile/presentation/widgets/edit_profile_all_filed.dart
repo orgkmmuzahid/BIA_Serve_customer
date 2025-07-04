@@ -8,7 +8,6 @@ import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/helpers/other_helper.dart';
 import '../../../../../utils/log/app_log.dart';
 
-
 class EditProfileAllFiled extends StatelessWidget {
   const EditProfileAllFiled({super.key, required this.controller});
 
@@ -32,7 +31,7 @@ class EditProfileAllFiled extends StatelessWidget {
           prefixIcon: const Icon(Icons.person),
           keyboardType: TextInputType.text,
           borderColor: AppColors.black,
-          fillColor: AppColors.transparent,
+          // fillColor: AppColors.transparent,
         ),
 
         /// User Phone number here

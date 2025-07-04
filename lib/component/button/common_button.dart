@@ -1,5 +1,5 @@
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
 
 import '../other_widgets/common_loader.dart';
 import '../text/common_text.dart';
@@ -17,7 +17,7 @@ class CommonButton extends StatefulWidget {
   final double buttonHeight;
   final double buttonWidth;
   final bool isLoading;
-  final Widget? Icon;
+  final Widget? icon;
   final MainAxisAlignment alignment;
 
   const CommonButton({
@@ -34,7 +34,7 @@ class CommonButton extends StatefulWidget {
     this.isLoading = false,
     this.buttonWidth = double.infinity,
     this.borderColor = AppColors.primaryColor,
-    this.Icon,
+    this.icon,
     super.key,
   });
 
@@ -84,7 +84,7 @@ class _CommonButtonState extends State<CommonButton>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: widget.alignment,
             children: [
-              if (widget.Icon != null) widget.Icon!,
+              if (widget.icon != null) widget.icon!,
 
               widget.isLoading ? _buildLoader() : _buildText(),
             ],
@@ -127,17 +127,17 @@ class _CommonButtonState extends State<CommonButton>
     );
   }
 
-  _onTapDown(TapDownDetails details) {
+  void _onTapDown(TapDownDetails details) {
     if (widget.onTap == null) return;
     _animationController.forward();
   }
 
-  _onTapUp(TapUpDetails details) {
+  void _onTapUp(TapUpDetails details) {
     if (widget.onTap == null) return;
     _animationController.reverse();
   }
 
-  _onTapCancel() {
+  void _onTapCancel() {
     if (widget.onTap == null) return;
     _animationController.reverse();
   }

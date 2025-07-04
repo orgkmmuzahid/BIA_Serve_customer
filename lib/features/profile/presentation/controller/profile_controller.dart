@@ -1,7 +1,7 @@
+import 'package:bai_serve/services/storage/storage_services.dart';
+import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/services/storage/storage_services.dart';
-import 'package:new_untitled/utils/helpers/other_helper.dart';
 
 import '../../../../config/api/api_end_point.dart';
 import '../../../../config/route/app_routes.dart';
@@ -29,13 +29,13 @@ class ProfileController extends GetxController {
   TextEditingController numberController = TextEditingController();
 
   /// select image function here
-  getProfileImage() async {
+  Future<void> getProfileImage() async {
     image = await OtherHelper.openGalleryForProfile();
     update();
   }
 
   /// select language  function here
-  selectLanguage(int index) {
+  void selectLanguage(int index) {
     selectedLanguage = languages[index];
     update();
     Get.back();

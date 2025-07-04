@@ -1,9 +1,8 @@
+import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:new_untitled/utils/constants/app_string.dart';
-
 import '../constants/app_colors.dart';
 
 class OtherHelper {

@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:bai_serve/config/api/api_end_point.dart';
+import 'package:bai_serve/services/api/api_service.dart';
+import 'package:bai_serve/services/storage/storage_keys.dart';
+import 'package:bai_serve/services/storage/storage_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/config/api/api_end_point.dart';
-import 'package:new_untitled/services/api/api_service.dart';
-import 'package:new_untitled/services/storage/storage_keys.dart';
-import 'package:new_untitled/services/storage/storage_services.dart';
 
 class OtpController extends GetxController {
   Timer? _timer;
@@ -18,7 +18,7 @@ class OtpController extends GetxController {
   );
 
   TextEditingController otpController = TextEditingController(
-    text: kDebugMode ? '123456' : '',
+    text: kDebugMode ? '12' : '',
   );
 
   void startTimer() {

@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.example.untitled_3"
-    compileSdk = 34
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 35
+    ndkVersion =  "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -54,8 +54,9 @@ flutter {
 
 
 dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
     // For AGP 7.4+
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    //coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
     // For AGP 7.3
     // coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.2.3")
     // For AGP 4.0 to 7.2

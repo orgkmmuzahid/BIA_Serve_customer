@@ -1,6 +1,6 @@
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:new_untitled/utils/extensions/extension.dart';
 
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
@@ -15,7 +15,7 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-init() async {
+Future<void> init() async {
   DependencyInjection dI = DependencyInjection();
   dI.dependencies();
   SocketServices.connectToSocket();

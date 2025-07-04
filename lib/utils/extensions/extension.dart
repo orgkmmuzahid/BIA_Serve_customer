@@ -1,7 +1,10 @@
+import 'package:bai_serve/utils/log/error_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart' as screenutil;
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:new_untitled/utils/log/error_log.dart';
+
+ThemeData get theme => Theme.of(Get.context!);
 
 extension View on num {
   Widget get height => SizedBox(height: toDouble().h);
@@ -47,7 +50,7 @@ extension TimeFormater on DateTime {
 }
 
 extension AsyncTryCatch on Function() {
-    tryCatch() async {
+  Future<void> tryCatch() async {
     try {
       await this();
     } catch (e, stackTrace) {
@@ -55,4 +58,3 @@ extension AsyncTryCatch on Function() {
     }
   }
 }
-

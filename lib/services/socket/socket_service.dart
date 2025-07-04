@@ -1,4 +1,4 @@
-import 'package:new_untitled/utils/log/app_log.dart';
+import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../../config/api/api_end_point.dart';
 import '../notification/notification_service.dart';

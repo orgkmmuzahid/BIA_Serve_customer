@@ -1,19 +1,17 @@
+import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve/features/auth/widgets/common_logo.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:new_untitled/component/button/common_gradient_button.dart';
-import 'package:new_untitled/component/image/common_image.dart';
-import 'package:new_untitled/component/text/common_text.dart';
-import 'package:new_untitled/component/text_field/common_text_field.dart';
-import 'package:new_untitled/config/route/app_routes.dart';
-import 'package:new_untitled/features/auth/controllers/otp_controller.dart';
-import 'package:new_untitled/features/auth/widgets/common_logo.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
-import 'package:new_untitled/utils/constants/app_images.dart';
-import 'package:new_untitled/utils/constants/app_string.dart';
-import 'package:new_untitled/utils/extensions/extension.dart';
 
 class OtpSend extends StatelessWidget {
   const OtpSend({
@@ -35,8 +33,8 @@ class OtpSend extends StatelessWidget {
         children: [
           CommonLogo().center,
           50.height,
-          CommonText(text: title, fontSize: 16, fontWeight: FontWeight.w600),
-          CommonText(text: subtitle, fontSize: 12, fontWeight: FontWeight.w400),
+          CommonText(text: title, style: theme.textTheme.bodyLarge),
+          CommonText(text: subtitle, style: theme.textTheme.bodyMedium),
           20.height,
 
           _phoneNumber(controller),

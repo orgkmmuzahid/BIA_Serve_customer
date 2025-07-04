@@ -1,18 +1,14 @@
+import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/component/button/common_gradient_button.dart';
-import 'package:new_untitled/component/image/common_image.dart';
-import 'package:new_untitled/features/auth/widgets/common_logo.dart';
-import 'package:new_untitled/utils/constants/app_images.dart';
 import '../../../../../config/route/app_routes.dart';
 import '../../../../../utils/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../component/button/common_button.dart';
 import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_in_controller.dart';
 
-import '../../../../../utils/constants/app_colors.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/helpers/other_helper.dart';
 import '../widgets/do_not_account.dart';
@@ -53,6 +49,7 @@ class SignInScreen extends StatelessWidget {
                   CommonTextField(
                     controller: controller.phoneController,
                     // prefixIcon: const Icon(Icons.mail),
+                    // textStyle: theme.textTheme.bodyMedium,
                     hintText: AppString.phoneNumber,
                     validator: OtherHelper.phoneValidator,
                   ),
@@ -82,7 +79,6 @@ class SignInScreen extends StatelessWidget {
                         text: AppString.forgotThePassword,
                         top: 10,
                         bottom: 30,
-                        color: AppColors.secondary,
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ),

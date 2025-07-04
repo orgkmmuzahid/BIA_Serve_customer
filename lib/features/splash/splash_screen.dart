@@ -1,6 +1,5 @@
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
-import 'package:new_untitled/utils/extensions/extension.dart';
 import '../../../../config/route/app_routes.dart';
 import 'package:get/get.dart';
 import '../../../../utils/constants/app_images.dart';
@@ -32,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body:
           CommonImage(
             imageSrc: AppImages.appsIcon,

@@ -1,7 +1,6 @@
+import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:new_untitled/component/button/common_gradient_button.dart';
-import 'package:new_untitled/features/auth/controllers/otp_controller.dart';
-import 'package:new_untitled/features/auth/widgets/common_logo.dart';
 import '../../../../../utils/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

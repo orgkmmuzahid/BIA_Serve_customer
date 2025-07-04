@@ -1,10 +1,10 @@
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_untitled/config/route/app_routes.dart';
-import '../../../../utils/constants/app_colors.dart';
 import '../../../../utils/constants/app_string.dart';
 
 class AlreadyAccountRichText extends StatelessWidget {
@@ -17,11 +17,7 @@ class AlreadyAccountRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: AppString.doNotHaveAccount,
-            style: GoogleFonts.dmSans(
-              color: AppColors.secondary,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-            ),
+            style: theme.textTheme.titleSmall,
           ),
 
           /// Sign Up Button here
@@ -35,7 +31,7 @@ class AlreadyAccountRichText extends StatelessWidget {
                     );
                   },
             style: GoogleFonts.dmSans(
-              color: AppColors.primaryColor,
+              color: theme.colorScheme.primary,
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),

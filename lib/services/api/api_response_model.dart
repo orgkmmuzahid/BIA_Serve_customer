@@ -1,4 +1,4 @@
-import 'package:new_untitled/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
 
 class ApiResponseModel {
   final int? _statusCode;

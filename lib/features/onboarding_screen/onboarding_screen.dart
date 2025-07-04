@@ -1,10 +1,9 @@
+import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/auth/widgets/common_logo.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_untitled/component/text/common_text.dart';
-import 'package:new_untitled/config/route/app_routes.dart';
-import 'package:new_untitled/features/auth/widgets/common_logo.dart';
-import 'package:new_untitled/utils/constants/app_colors.dart';
-import 'package:new_untitled/utils/constants/app_string.dart';
 import '../../../../utils/extensions/extension.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../utils/constants/app_images.dart';
@@ -17,7 +16,6 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
         child: Column(
@@ -33,10 +31,10 @@ class OnboardingScreen extends StatelessWidget {
             10.height,
             CommonButton(
               titleText: "English",
-              buttonColor: AppColors.transparent,
-              titleColor: Color.fromRGBO(51, 51, 51, 1),
-              borderColor: Color.fromRGBO(191, 191, 191, 1),
-              Icon: Padding(
+              buttonColor: theme.scaffoldBackgroundColor,
+              titleColor: theme.textTheme.bodyLarge!.color!,
+              borderColor: theme.colorScheme.outlineVariant,
+              icon: Padding(
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
               ),
@@ -46,10 +44,10 @@ class OnboardingScreen extends StatelessWidget {
 
             CommonButton(
               titleText: "Swahili",
-              buttonColor: AppColors.transparent,
-              titleColor: Color.fromRGBO(51, 51, 51, 1),
-              borderColor: Color.fromRGBO(191, 191, 191, 1),
-              Icon: Padding(
+              buttonColor: theme.scaffoldBackgroundColor,
+              titleColor: theme.textTheme.bodyLarge!.color!,
+              borderColor: theme.colorScheme.outlineVariant,
+              icon: Padding(
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
               ),
