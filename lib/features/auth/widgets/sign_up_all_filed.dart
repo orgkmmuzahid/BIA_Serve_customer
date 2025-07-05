@@ -9,58 +9,63 @@ import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_up_controller.dart';
 
 class SignUpAllField extends StatelessWidget {
-  const SignUpAllField({super.key, required this.controller});
+  SignUpAllField({super.key, required this.controller});
 
   final SignUpController controller;
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        /// User Name here
-        const CommonText(text: AppString.fullName, bottom: 8, top: 12),
-        CommonTextField(
-          hintText: AppString.fullName,
-          controller: controller.nameController,
-          validator: OtherHelper.validator,
-        ),
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          /// User Name here
+          const CommonText(text: AppString.fullName, bottom: 8, top: 12),
+          CommonTextField(
+            hintText: AppString.fullName,
+            controller: controller.nameController,
+            validator: OtherHelper.validator,
+          ),
 
-        /// User Phone here
-        const CommonText(text: AppString.phoneNumber, bottom: 8, top: 12),
-        CommonTextField(
-          isReadOnly: true,
-          controller: Get.find<OtpController>().phoneController,
-          hintText: AppString.phoneNumber,
-          validator: OtherHelper.phoneValidator,
-        ),
+          /// User Phone here
+          const CommonText(text: AppString.phoneNumber, bottom: 8, top: 12),
+          CommonTextField(
+            isReadOnly: true,
+            controller: Get.find<OtpController>().phoneController,
+            hintText: AppString.phoneNumber,
+            validator: OtherHelper.phoneValidator,
+          ),
 
-        ///Date of Birth here
-        const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
-        CommonDateInputTextField(controller: controller.dobController),
+          ///Date of Birth here
+          const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
+          CommonDateInputTextField(controller: controller.dobController),
 
-        /// User Password here
-        const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
-        CommonTextField(
-          controller: controller.passwordController,
-          isPassword: true,
-          hintText: AppString.newPassword,
-          validator: OtherHelper.passwordValidator,
-        ),
+          /// User Password here
+          const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
+          CommonTextField(
+            controller: controller.passwordController,
+            isPassword: true,
+            hintText: AppString.newPassword,
+            validator: OtherHelper.passwordValidator,
+          ),
 
-        /// User Confirm Password here
-        const CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
-        CommonTextField(
-          controller: controller.confirmPasswordController,
-          isPassword: true,
-          hintText: AppString.confirmPassword,
-          validator:
-              (value) => OtherHelper.confirmPasswordValidator(
-                value,
-                controller.passwordController,
-              ),
-        ),
-      ],
+          /// User Confirm Password here
+          const CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
+          CommonTextField(
+            controller: controller.confirmPasswordController,
+            isPassword: true,
+            hintText: AppString.confirmPassword,
+            validator:
+                (value) => OtherHelper.confirmPasswordValidator(
+                  value,
+                  controller.passwordController,
+                ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field_v2/phone_number.dart';
 
 import '../../../config/route/app_routes.dart';
 import '../../../services/api/api_service.dart';
@@ -19,7 +19,11 @@ class SignUpController extends GetxController {
   bool isLoading = false;
 
   List selectedOption = ["User", "Consultant"];
-
+  PhoneNumber phoneNumber = PhoneNumber(
+    countryISOCode: 'bd',
+    countryCode: '+880',
+    number: '1826405558',
+  );
   String selectRole = "User";
   String countryCode = "+880";
   String? image;
@@ -42,8 +46,8 @@ class SignUpController extends GetxController {
     text: kDebugMode ? "${DateTime.now().toLocal()}".split(' ')[0] : '',
   );
 
-  onCountryChange(Country value) {
-    countryCode = value.dialCode.toString();
+  void onPhoneNumberChange(PhoneNumber value) {
+    phoneNumber = value;
   }
 
   setSelectedRole(value) {

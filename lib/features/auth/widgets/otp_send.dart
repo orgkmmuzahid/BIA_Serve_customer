@@ -1,12 +1,9 @@
 import 'package:bai_serve/component/button/common_gradient_button.dart';
-import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/component/text_field/common_phone_number_text_filed.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +33,10 @@ class OtpSend extends StatelessWidget {
           CommonText(text: title, style: theme.textTheme.bodyLarge),
           CommonText(text: subtitle, style: theme.textTheme.bodyMedium),
           20.height,
-
-          _phoneNumber(controller),
+          CommonPhoneNumberTextFiled(
+            controller: Get.find<OtpController>().phoneController,
+            countryChange: (value) {},
+          ),
 
           12.height,
 
@@ -55,27 +54,27 @@ class OtpSend extends StatelessWidget {
     );
   }
 
-  CommonTextField _phoneNumber(OtpController controller) {
-    return CommonTextField(
-      controller: controller.phoneController,
-      prefixIcon: SizedBox(
-        width: 46,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            width: 46,
-            decoration: BoxDecoration(
-              border: Border(
-                right: BorderSide(width: 0.5, color: AppColors.disableColor),
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsetsGeometry.only(right: 10, left: 10),
-              child: CommonImage(imageSrc: AppImages.langEnglish, size: 25),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // CommonTextField _phoneNumber(OtpController controller) {
+  //   return CommonTextField(
+  //     controller: controller.phoneController,
+  //     prefixIcon: SizedBox(
+  //       width: 46,
+  //       child: Align(
+  //         alignment: Alignment.centerLeft,
+  //         child: Container(
+  //           width: 46,
+  //           decoration: BoxDecoration(
+  //             border: Border(
+  //               right: BorderSide(width: 0.5, color: AppColors.disableColor),
+  //             ),
+  //           ),
+  //           child: Padding(
+  //             padding: EdgeInsetsGeometry.only(right: 10, left: 10),
+  //             child: CommonImage(imageSrc: AppImages.langEnglish, size: 25),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

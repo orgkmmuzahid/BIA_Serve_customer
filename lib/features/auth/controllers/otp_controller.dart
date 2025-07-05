@@ -8,7 +8,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+enum OtpFor { signup, forgetPassword }
+
 class OtpController extends GetxController {
+  OtpFor otpFor = OtpFor.signup;
   Timer? _timer;
   int start = 0;
   bool isLoadingVerify = false;
@@ -18,12 +21,12 @@ class OtpController extends GetxController {
   );
 
   TextEditingController otpController = TextEditingController(
-    text: kDebugMode ? '12' : '',
+    text: kDebugMode ? '123456' : '',
   );
 
   void startTimer() {
     _timer?.cancel(); // Cancel any existing timer
-    start = 180; // Reset the start value
+    start = 10; // Reset the start value
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (start > 0) {
         start--;
@@ -37,6 +40,10 @@ class OtpController extends GetxController {
         _timer?.cancel();
       }
     });
+  }
+
+  void changeOtpFor(OtpFor otpFor) {
+    this.otpFor = otpFor;
   }
 
   Future<void> verifyOtpRepo(String route) async {

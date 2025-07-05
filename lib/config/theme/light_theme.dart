@@ -75,7 +75,11 @@ final ThemeData lightTheme = ThemeData(
       fontSize: 12,
       fontWeight: FontWeight.w400,
     ), // 📝 Secondary body text font size 14
-    bodySmall: TextStyle(), //font size 12
+    bodySmall: GoogleFonts.dmSans(
+      color: Color(0xFF858585),
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+    ), //font size 12
 
     titleLarge: TextStyle(
       color: Color(0xFF333333),

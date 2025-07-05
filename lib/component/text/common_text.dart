@@ -53,7 +53,7 @@ class CommonText extends StatelessWidget {
             GoogleFonts.dmSans(
               fontSize: fontSize.sp,
               fontWeight: fontWeight,
-              color: color ?? theme.textTheme.bodySmall!.color,
+              color: color ?? theme.textTheme.bodyMedium!.color,
             ),
       ),
     );

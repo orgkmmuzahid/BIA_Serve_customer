@@ -6,8 +6,8 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
-class SignupOtpSendScreen extends StatelessWidget {
-  const SignupOtpSendScreen({super.key});
+class OtpSendScreen extends StatelessWidget {
+  const OtpSendScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -18,8 +18,15 @@ class SignupOtpSendScreen extends StatelessWidget {
             children: [
               const Spacer(),
               OtpSend(
-                title: AppString.otpTitleSignup,
-                subtitle: AppString.otpSubtitleSignup,
+                title:
+                    controller.otpFor == OtpFor.signup
+                        ? AppString.otpTitleSignup
+                        : AppString.otpTitleForgetPass,
+
+                subtitle:
+                    controller.otpFor == OtpFor.signup
+                        ? AppString.otpSubtitleSignup
+                        : AppString.otpSubTitleForgetPass,
                 controller: controller,
               ),
 

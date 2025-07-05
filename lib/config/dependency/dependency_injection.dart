@@ -1,4 +1,6 @@
+import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../../features/auth/controllers/change_password_controller.dart';
@@ -20,6 +22,10 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => SignInController(), fenix: true);
     Get.lazyPut(() => ForgetPasswordController(), fenix: true);
     Get.lazyPut(() => ChangePasswordController(), fenix: true);
+    Get.lazyPut(() => OtpController(), fenix: true);
+    Get.lazyPut(() => LoginWithController(), fenix: true);
+    Get.lazyPut(() => HomeController(), fenix: true);
+
     Get.lazyPut(() => NotificationsController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);
     Get.lazyPut(() => MessageController(), fenix: true);
@@ -27,6 +33,5 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => SettingController(), fenix: true);
     Get.lazyPut(() => PrivacyPolicyController(), fenix: true);
     Get.lazyPut(() => TermsOfServicesController(), fenix: true);
-    Get.lazyPut(() => OtpController(), fenix: true);
   }
 }

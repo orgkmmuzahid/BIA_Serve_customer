@@ -43,7 +43,7 @@ class OnboardingScreen extends StatelessWidget {
             18.height,
 
             CommonButton(
-              titleText: "Swahili",
+              titleText: "Swedish",
               buttonColor: theme.scaffoldBackgroundColor,
               titleColor: theme.textTheme.bodyLarge!.color!,
               borderColor: theme.colorScheme.outlineVariant,

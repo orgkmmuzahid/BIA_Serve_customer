@@ -1,3 +1,4 @@
+import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -26,7 +27,8 @@ class DoNotHaveAccount extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    Get.toNamed(AppRoutes.signupOtpSend);
+                    Get.find<OtpController>().changeOtpFor(OtpFor.signup);
+                    Get.toNamed(AppRoutes.otpSend);
                   },
             style: GoogleFonts.dmSans(
               color: theme.colorScheme.primary,

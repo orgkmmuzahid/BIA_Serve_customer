@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.8
 
   get: ^4.7.2
@@ -22,15 +23,16 @@ dependencies:
   flutter_local_notifications: ^19.3.0
   socket_io_client: ^3.0.2
   cached_network_image: ^3.4.1
-  intl_phone_field: ^3.2.0
+  intl_phone_field_v2: ^4.0.2
   image_picker: ^1.1.2
   pin_code_fields: ^8.0.1
-  intl: ^0.20.2
+  intl: any
   flutter_html: ^3.0.0
   dio: ^5.8.0+1
   flutter_dotenv: ^5.2.1
   image_cropper: ^9.1.0
   jwt_decoder: ^2.0.1
+  dropdown_button2: any
 
 dev_dependencies:
   flutter_test:

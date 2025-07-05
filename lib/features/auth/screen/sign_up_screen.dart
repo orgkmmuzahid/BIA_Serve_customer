@@ -1,4 +1,5 @@
 import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import '../../../../../utils/extensions/extension.dart';
@@ -39,10 +40,12 @@ class SignUpScreen extends StatelessWidget {
                   CommonGradientButton(
                     titleText: AppString.signUp,
                     isLoading: controller.isLoading,
-                    // onTap: controller.signUpUser(
-                    //   phoneNumber:
-                    //       Get.find<OtpController>().phoneController.text,
-                    // ),
+                    onTap: () {
+                      //on success
+                      Get.until(
+                        (route) => route.settings.name == AppRoutes.signIn,
+                      );
+                    },
                     buttonWidth: 132,
                     buttonHeight: 32,
                   ),

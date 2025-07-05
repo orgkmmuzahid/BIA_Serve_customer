@@ -30,7 +30,7 @@ class AppString {
   static const String email = "Email";
   static const String codeHasBeenSendTo = "Code has been send to";
   static const String otpIsInValid = "Otp is inValid";
-  static const String resendCode = "Resend Code";
+  static const String resendCode = "Resend";
   static const String resendCodeIn = "Resend code in";
   static const String minute = "minute";
   static const String verify = "Verify";
@@ -94,4 +94,8 @@ class AppString {
   static const String otpSendButton = "Send Code Via SMS";
   static const String enterVerifyCode =
       "Enter the code to verify your account.";
+  static const String didntReciveCode = "If you didn’t receive a code.";
+
+  static const String save = "Save";
+  static const String viewProfile = "View Profile";
 }

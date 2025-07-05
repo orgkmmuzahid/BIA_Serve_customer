@@ -1,4 +1,5 @@
 import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import '../../../../../config/route/app_routes.dart';
@@ -74,7 +75,12 @@ class SignInScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
-                      onTap: () => Get.toNamed(AppRoutes.forgotPassword),
+                      onTap: () {
+                        Get.find<OtpController>().changeOtpFor(
+                          OtpFor.forgetPassword,
+                        );
+                        Get.toNamed(AppRoutes.otpSend);
+                      },
                       child: const CommonText(
                         text: AppString.forgotThePassword,
                         top: 10,

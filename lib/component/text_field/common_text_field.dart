@@ -29,8 +29,12 @@ class CommonTextField extends StatelessWidget {
     this.onTap,
     this.suffixIcon,
     this.isReadOnly = false,
-  });
+    this.initialText,
+  }) {
+    if (isPassword) toggle();
+  }
 
+  final String? initialText;
   final bool isReadOnly;
   final String? hintText;
   final String? labelText;
@@ -55,9 +59,10 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => TextFormField(
+    return Obx(() {
+      return TextFormField(
         readOnly: isReadOnly,
+        initialValue: initialText,
         autovalidateMode: AutovalidateMode.onUnfocus,
         keyboardType: keyboardType,
         controller: controller,
@@ -90,8 +95,8 @@ class CommonTextField extends StatelessWidget {
           ),
           suffixIcon: isPassword ? _buildPasswordSuffixIcon() : suffixIcon,
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildPasswordSuffixIcon() {

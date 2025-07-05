@@ -1,6 +1,7 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -15,33 +16,36 @@ class LoginWithScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
-      child: Column(
-        children: [
-          180.height,
-          const Center(
-            child: CommonImage(
-              imageSrc: AppImages.appsIcon,
-              width: 124,
-              height: 107,
+      child: GetBuilder<LoginWithController>(
+        builder:
+            (controller) => Column(
+              children: [
+                180.height,
+                const Center(
+                  child: CommonImage(
+                    imageSrc: AppImages.appsIcon,
+                    width: 124,
+                    height: 107,
+                  ),
+                ),
+                50.height,
+                leftAlignButton(
+                  tilte: AppString.loginWithContactNumber,
+                  image: AppImages.iconContact,
+                  onTap: () => Get.toNamed(AppRoutes.signIn),
+                ),
+                20.height,
+                leftAlignButton(
+                  tilte: AppString.loginWithGoogle,
+                  image: AppImages.iconGoogle,
+                ),
+                20.height,
+                leftAlignButton(
+                  tilte: AppString.loginWithFacebook,
+                  image: AppImages.iconFacebook,
+                ),
+              ],
             ),
-          ),
-          50.height,
-          leftAlignButton(
-            tilte: AppString.loginWithContactNumber,
-            image: AppImages.iconContact,
-            onTap: () => Get.toNamed(AppRoutes.signIn),
-          ),
-          20.height,
-          leftAlignButton(
-            tilte: AppString.loginWithGoogle,
-            image: AppImages.iconGoogle,
-          ),
-          20.height,
-          leftAlignButton(
-            tilte: AppString.loginWithFacebook,
-            image: AppImages.iconFacebook,
-          ),
-        ],
       ),
     ),
   );

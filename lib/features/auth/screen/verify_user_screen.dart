@@ -4,9 +4,10 @@ import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/already_accunt_rich_text.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../component/text/common_text.dart';
 import '../../../../../utils/constants/app_colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -78,12 +79,16 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                     buttonWidth: 132,
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        controller.verifyOtpRepo(AppRoutes.signUp);
+                        controller.verifyOtpRepo(
+                          controller.otpFor == OtpFor.signup
+                              ? AppRoutes.signUp
+                              : AppRoutes.forgotPassword,
+                        );
                       }
                     },
                   ),
 
-                  182.height,
+                  Spacer(),
 
                   ///  Sign In Instruction here
                   const AlreadyAccountRichText(),
@@ -100,23 +105,46 @@ class _VerifyUserState extends State<VerifyUserScreen> {
   Align _resendOtpTimerBuilder(OtpController controller) {
     return Align(
       alignment: Alignment.centerRight,
-      child: GestureDetector(
-        onTap:
-            controller.time == '00:00'
-                ? () {
-                  controller.startTimer();
-                }
-                : () {},
-        child:
-            controller.time == '00:00'
-                ? CommonText(text: AppString.resendCode)
-                : CommonText(
-                  text:
-                      "${AppString.resendCodeIn} ${controller.time} ${AppString.minute}",
-                ),
-      ),
+      child:
+          controller.time == '00:00'
+              ? _resendMessageBuilder(controller)
+              : CommonText(
+                text:
+                    "${AppString.resendCodeIn} ${controller.time} ${AppString.minute}",
+              ),
     );
   }
+
+  Widget _resendMessageBuilder(OtpController controller) => Text.rich(
+    TextSpan(
+      children: [
+        TextSpan(
+          text: AppString.didntReciveCode,
+          style: GoogleFonts.dmSans(
+            color: theme.textTheme.bodySmall?.color,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+
+        /// Sign Up Button here
+        TextSpan(
+          text: " ${AppString.resendCode}",
+          recognizer:
+              TapGestureRecognizer()
+                ..onTap = () {
+                  if (controller.time == '00:00') controller.startTimer();
+                },
+          style: GoogleFonts.lato(
+            color: theme.colorScheme.primary,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+    textAlign: TextAlign.center,
+  );
 
   Flexible _otpBuilder(OtpController controller, BuildContext context) {
     return Flexible(

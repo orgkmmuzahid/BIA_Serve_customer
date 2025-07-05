@@ -1,5 +1,6 @@
 import 'package:bai_serve/config/theme/dark_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,17 @@ class MyApp extends StatelessWidget {
         transitionDuration: const Duration(milliseconds: 300),
         initialRoute: AppRoutes.splash,
         getPages: AppRoutes.routes,
+        // locale: Locale('en'), // Swedish
+        // supportedLocales: [
+        //   Locale('en'), // English
+        //   Locale('sv'), // Swedish
+        // ],
+        // localizationsDelegates: [
+        //   GlobalMaterialLocalizations.delegate,
+        //   GlobalWidgetsLocalizations.delegate,
+        //   GlobalCupertinoLocalizations.delegate,
+        //   // your custom localization delegate
+        // ],
       ),
     );
   }
