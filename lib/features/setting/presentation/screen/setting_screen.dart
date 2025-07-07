@@ -85,7 +85,7 @@ class SettingScreen extends StatelessWidget {
                           color: AppColors.secondary,
                         ),
                         CommonText(
-                          text: AppString.deleteAccount,
+                          text: AppString.drawerDeleteAccount,
                           color: AppColors.secondary,
                           left: 12.w,
                         ),

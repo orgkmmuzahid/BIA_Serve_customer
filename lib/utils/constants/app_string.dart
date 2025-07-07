@@ -59,7 +59,6 @@ class AppString {
   static const String settings = "Settings";
   static const String logOut = "Log Out";
   static const String privacyPolicy = "Privacy Policy";
-  static const String deleteAccount = "Delete account";
   static const String termsOfServices = "Terms of Services";
   static const String noInternetConnection = "No internet connection";
   static const String badResponseRequest = "Bad Response Request";
@@ -98,4 +97,35 @@ class AppString {
 
   static const String save = "Save";
   static const String viewProfile = "View Profile";
+  
+  //app drawer
+  static const String drawerReturnsProduct = "Returns Product";
+  static const String drawerLoyaltyPoints = "Loyalty Points";
+  static const String drawerMessage = "Message";
+  static const String drawerMyPayment = "My Payment";
+  static const String drawerSupport = "Support";
+  static const String drawerLanguage = "Language";
+  static const String drawerDeleteAccount = "Delete Account";
+  static const String langEnglish = "English";
+  static const String langSwahili = "Swahili";
+
+  //navBar
+  static const String navHome = "Home";
+  static const String navMyOrder = "My Order";
+  static const String navTrackingOrder = "Tracking Order";
+  static const String navAccount = "Account";
+
+
+  //home screen
+  static const String trackingID = "Tracking ID";
+ static const String homePlaceOrder = "Place Order";
+ static const String homeVendorSourcing = "Vendor Sourcing";
+ static const String homePurchaseDelivery = "Purchase & Delivery";
+ static const String homeBulkOrderAgents = "Bulk Order Agents";
+ static const String homeVerifyVendor = "Verify Vendor";
+ static const String homeDoorToDoorPickup = "Door-to-Door Pickup";
+ static const String myOrder = "My Order";
+ static const String seeAll = "See All";
+
+ 
 }

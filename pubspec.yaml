@@ -33,6 +33,7 @@ dependencies:
   image_cropper: ^9.1.0
   jwt_decoder: ^2.0.1
   dropdown_button2: any
+  lazy_scroll_view: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:

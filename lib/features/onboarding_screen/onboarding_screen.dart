@@ -30,7 +30,7 @@ class OnboardingScreen extends StatelessWidget {
             ).center,
             10.height,
             CommonButton(
-              titleText: "English",
+              titleText: AppString.langEnglish,
               buttonColor: theme.scaffoldBackgroundColor,
               titleColor: theme.textTheme.bodyLarge!.color!,
               borderColor: theme.colorScheme.outlineVariant,
@@ -43,7 +43,7 @@ class OnboardingScreen extends StatelessWidget {
             18.height,
 
             CommonButton(
-              titleText: "Swedish",
+              titleText: AppString.langSwahili,
               buttonColor: theme.scaffoldBackgroundColor,
               titleColor: theme.textTheme.bodyLarge!.color!,
               borderColor: theme.colorScheme.outlineVariant,

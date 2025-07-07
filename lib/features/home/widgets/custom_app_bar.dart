@@ -1,15 +1,16 @@
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field_v2/countries.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String userName;
   final String address;
-  final Country slectedCountry;
-  final List<Country> availableCountries;
-  final void Function(Country country) onCountryChange;
+  final MapEntry<String, String>? slectedCountry;
+  final Map<String, String> availableCountries;
+  final void Function(MapEntry<String, String> country) onCountryChange;
   final VoidCallback? onNotificationTap;
   final double iconSize = 24;
   final int notificationCount;
@@ -62,6 +63,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         _buildNotificationIcon(notificationCount: notificationCount),
         12.width,
         _buildLanguageDropdown(),
+        16.width
       ],
     );
   }
@@ -106,37 +108,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   Widget _buildLanguageDropdown() {
+    
     return DropdownButtonHideUnderline(
-      child: DropdownButton2<Country>(
+      child: DropdownButton2<MapEntry<String, String>>(
         value: slectedCountry,
-        customButton: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.only(right: 15),
-              child:
-                  kIsWeb
-                      ? Image.asset(
-                        'assets/flags/${slectedCountry.code.toLowerCase()}.png',
-                        package: 'intl_phone_field',
-                        width: iconSize,
-                        height: iconSize,
-                      )
-                      : Text(
-                        slectedCountry.flag,
-                        style: TextStyle(fontSize: iconSize),
-                      ),
-            ),
-          ],
-        ),
+        customButton: CommonImage(imageSrc: slectedCountry?.value ?? availableCountries.entries.first.value, size: 24,),
         items: [
-          ...availableCountries.map((country) {
-            return DropdownMenuItem<Country>(
+          ...availableCountries.entries.map((country) {
+            return DropdownMenuItem<MapEntry<String, String>>(
               value: country,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    width: 200,
+                    width: 118,
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
@@ -148,46 +134,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                 .color,
                       ),
                     ),
-                    child:
-                        kIsWeb
-                            ? Image.asset(
-                              'assets/flags/${country.code.toLowerCase()}.png',
-                              package: 'intl_phone_field',
-                              width: iconSize,
-                              height: iconSize,
-                            )
-                            : Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: ' ${country.flag} ',
-                                    style: TextStyle(fontSize: iconSize),
-                                  ),
-
-                                  TextSpan(
-                                    text: country.name,
-                                    style: theme.textTheme.bodyLarge?.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                    child: Row(children: [ 
+                      CommonImage(imageSrc: country.value, size: 24, borderRadius: 24), 
+                      10.width,
+                      SizedBox(
+                        child: CommonText(text: country.key, style: theme.textTheme.bodyLarge,))
+                      ],)
+                       
                   ),
                 ],
               ),
             );
           }),
         ],
-        onChanged: (Country? newCountry) {
+        onChanged: (MapEntry<String, String>? newCountry) {
           if (newCountry != null) {
             onCountryChange(newCountry);
           }
         },
         dropdownStyleData: DropdownStyleData(
-          width: 235,
+          width: 150,
           maxHeight: 320,
-          padding: EdgeInsets.only(top: 10, bottom: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: theme.scaffoldBackgroundColor,

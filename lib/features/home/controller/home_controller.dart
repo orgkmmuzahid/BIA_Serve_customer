@@ -1,24 +1,35 @@
+import 'package:bai_serve/features/home/model/order_list_model.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/enum/enum.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field_v2/countries.dart';
 
 class HomeController extends GetxController {
   String name = "Shakir Ahmed";
   String address = "1901 Thornridge Cir. Shiloh, Hawaii 81063";
   int notificationCount = 1;
-  Country selectedCountry = countries.firstWhere(
-    (country) => "United Kingdom".startsWith(country.name),
-  );
+  TextEditingController searchController = TextEditingController();
+  MapEntry<String, String>? selectedCountry;
+  Map<String, String> availableCountries = {AppString.langEnglish : AppImages.langEnglish, AppString.langSwahili: AppImages.langSwahili};
 
-  List<Country> availableCountries = [
-    countries.firstWhere(
-      (country) => "United Kingdom".startsWith(country.name),
-    ),
-
-    countries.firstWhere((country) => "Sweden".startsWith(country.name)),
+  List<OrderListModel> orderList = [
+    OrderListModel(orderNumber: 'BIA342178', orderPlacedDate: DateTime.now(), percelPickedUp: DateTime.now(), inTransition: DateTime.now(),
+     orderProgress: OrderProgress.Pending, outForDelivery: 'In Progress')
   ];
 
-  void onCountryChange(Country country) {
+  void onCountryChange(MapEntry<String, String> country) {
     selectedCountry = country;
     update();
+  }
+
+  void onSearch(){
+
+  }
+
+  @override
+  void onClose() {
+    searchController.dispose();
+    super.onClose();
   }
 }
