@@ -1,6 +1,6 @@
 import 'package:bai_serve/config/theme/dark_theme.dart';
+import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: Get.key,
         defaultTransition: Transition.fadeIn,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
+             theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: Get.find<ThemeController>().themeMode,
         transitionDuration: const Duration(milliseconds: 300),
         initialRoute: AppRoutes.splash,
         getPages: AppRoutes.routes,

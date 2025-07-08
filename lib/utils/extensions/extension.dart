@@ -6,6 +6,10 @@ import 'package:intl/intl.dart';
 
 ThemeData get theme => Theme.of(Get.context!);
 
+extension strting on String{
+  String get newLine => "$this\n";
+}
+
 extension View on num {
   Widget get height => SizedBox(height: toDouble().h);
 

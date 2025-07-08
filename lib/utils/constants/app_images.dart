@@ -40,6 +40,12 @@ class AppImages {
  static const String homeVerifyVendor = "$baseurl/home_Verify Vendor.png";
  static const String homeDoorToDoorPickup = "$baseurl/home_Door-to-Door Pickup.png";
 
+ //notification
+ static const String notificationDelivered = "$baseurl/notification_delivered.png";
+ static const String notificationOnTheWay = "$baseurl/notification_on_the_way.png";
+ static const String notificationReady = "$baseurl/notification_ready.png";
+
+
 
   
   

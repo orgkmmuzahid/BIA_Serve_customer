@@ -1,37 +1,94 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+enum NotificationType{ready, delivered, onTheWay}
 class NotificationModel {
   final String id;
-  final String message;
-  final String linkId;
-  final String type;
-  final String role;
-  final String receiver;
-  final int v;
+  final String title;
+  final String subtitle;
+  //enum
+  final NotificationType type;
   final DateTime createdAt;
   final DateTime updatedAt;
-
   NotificationModel({
     required this.id,
-    required this.message,
-    required this.linkId,
+    required this.title,
+    required this.subtitle,
     required this.type,
-    required this.role,
-    required this.receiver,
-    required this.v,
     required this.createdAt,
     required this.updatedAt,
   });
+ 
 
-  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+  NotificationModel copyWith({
+    String? id,
+    String? title,
+    String? subtitle,
+    NotificationType? type,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
     return NotificationModel(
-      id: json['_id'] ?? "",
-      message: json['message'] ?? '',
-      linkId: json['linkId'] ?? '',
-      type: json['type'] ?? '',
-      role: json['role'] ?? '',
-      receiver: json['receiver'] ?? '',
-      v: json['__v'] ?? 0,
-      createdAt: DateTime.tryParse(json['createdAt']) ?? DateTime.now(),
-      updatedAt: DateTime.tryParse(json['updatedAt']) ?? DateTime.now(),
+      id: id ?? this.id,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      type: type ?? this.type,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'subtitle': subtitle,
+      'type': type.index,
+      'createdAt': createdAt.millisecondsSinceEpoch,
+      'updatedAt': updatedAt.millisecondsSinceEpoch,
+    };
+  }
+
+  factory NotificationModel.fromMap(Map<String, dynamic> map) {
+    return NotificationModel(
+      id: map['id'] as String,
+      title: map['title'] as String,
+      subtitle: map['subtitle'] as String,
+      type: NotificationType.values[map['type'] as int],
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory NotificationModel.fromJson(String source) => NotificationModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'NotificationModel(id: $id, title: $title, subtitle: $subtitle, type: $type, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  bool operator ==(covariant NotificationModel other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.id == id &&
+      other.title == title &&
+      other.subtitle == subtitle &&
+      other.type == type &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      title.hashCode ^
+      subtitle.hashCode ^
+      type.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode;
   }
 }

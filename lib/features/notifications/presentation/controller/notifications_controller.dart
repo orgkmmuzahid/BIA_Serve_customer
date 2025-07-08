@@ -5,7 +5,9 @@ import '../../repository/notification_repository.dart';
 
 class NotificationsController extends GetxController {
   /// Notification List
-  List notifications = [];
+  List<NotificationModel> notifications = [];
+
+  int totalUnreadNotification = 10;
 
   /// Notification Loading Bar
   bool isLoading = false;
@@ -44,8 +46,8 @@ class NotificationsController extends GetxController {
     });
   }
 
-  /// Notification data Loading function
-  getNotificationsRepo() async {
+  // / Notification data Loading function
+  Future<void> getNotificationsRepo() async {
     if (isLoading || hasNoData) return;
     isLoading = true;
     update();
@@ -68,7 +70,7 @@ class NotificationsController extends GetxController {
   /// Controller on Init
   @override
   void onInit() {
-    getNotificationsRepo();
+    // getNotificationsRepo();
     moreNotification();
     super.onInit();
   }

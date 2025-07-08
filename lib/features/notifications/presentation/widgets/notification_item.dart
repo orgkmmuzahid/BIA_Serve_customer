@@ -1,9 +1,11 @@
+import 'package:bai_serve/component/text/common_rich_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../component/text/common_text.dart';
+
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
+
 import '../../data/model/notification_model.dart';
-import '../../../../../utils/extensions/extension.dart';
-import '../../../../../utils/constants/app_colors.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({super.key, required this.item});
@@ -11,71 +13,27 @@ class NotificationItem extends StatelessWidget {
   final NotificationModel item;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12.h),
-      padding: EdgeInsets.all(12.sp),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: AppColors.primaryColor),
-      ),
-      child: Row(
-        children: [
-          /// icon or image here
-          CircleAvatar(
-            backgroundColor: AppColors.background,
-            radius: 35.r,
-            child: const ClipOval(
-              child: Icon(Icons.date_range, color: AppColors.primaryColor),
-            ),
-          ),
-          16.width,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    /// Notification Title here
-                    Flexible(
-                      child: CommonText(
-                        text: item.type,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        textAlign: TextAlign.start,
-                        maxLines: 1,
-                      ),
-                    ),
+  Widget build(BuildContext context) => Card(
+    color: theme.scaffoldBackgroundColor,
+    child: Padding(padding: EdgeInsetsGeometry.all(10),
+    child: Row(children: [
+      CommonImage(imageSrc: _getImage(), size: 26, imageColor: theme.primaryColor), 
+      10.width,
+      CommonRichText(richTextContent: [
+        CommonSimpleRichTextContent(text: item.title.newLine, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+        CommonSimpleRichTextContent(text: item.subtitle, style: theme.textTheme.bodyMedium?.copyWith(color: theme.textTheme.bodySmall?.color)),
+      ])
+    ]),
+    ));
 
-                    /// Notification Time here
-                    CommonText(
-                      text: item.createdAt.checkTime,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      textAlign: TextAlign.start,
-                      color: AppColors.black,
-                      maxLines: 1,
-                    ),
-                  ],
-                ),
-
-                /// Notification Message here
-                CommonText(
-                  text: item.message,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  maxLines: 2,
-                  color: AppColors.black,
-                  textAlign: TextAlign.start,
-                  bottom: 10,
-                  top: 4,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+    String _getImage(){
+      switch (item.type) {
+         case NotificationType.delivered:
+             return AppImages.notificationDelivered;
+          case NotificationType.onTheWay:
+              return AppImages.notificationOnTheWay;
+          default:
+          return AppImages.notificationReady;
+      }
+    }
 }

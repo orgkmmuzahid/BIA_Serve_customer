@@ -21,35 +21,32 @@ class HomeDrawer extends StatelessWidget {
           bottomRight: Radius.zero,
         ),
       ),
-      child: SingleChildScrollView(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            // Drawer Header
-            DrawerHeader(
-              decoration: BoxDecoration(color: theme.primaryColor),
-              child: Container(
-                height: 146,
-                padding: EdgeInsets.only(left: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      userName,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                        fontWeight: FontWeight.w700,
-                      ),
+      child: Column(
+        children: [
+          // Drawer Header
+          DrawerHeader(
+            decoration: BoxDecoration(color: theme.primaryColor),
+            child: SizedBox(
+              height: 146,
+              child: ListView(
+                children: [
+                  Text(
+                    userName,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onPrimary,
+                      fontWeight: FontWeight.w700,
                     ),
-                    Text(
-                      address,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onPrimary,
-                      ),
+                  ),
+                  Text(
+                    address,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onPrimary,
                     ),
-                    10.height,
-                    CommonButton(
+                  ),
+                  10.height,
+                  Row(
+                    children:  [
+                      CommonButton(
                       titleText: AppString.viewProfile,
                       buttonWidth: 90,
                       buttonHeight: 24,
@@ -59,27 +56,27 @@ class HomeDrawer extends StatelessWidget {
                       buttonRadius: 4,
                       borderColor: theme.colorScheme.onPrimary,
                       buttonColor: theme.colorScheme.primary,
-                    ),
-                  ],
-                ),
+                    ),const Spacer(), ],
+                  ),
+                ],
               ),
             ),
-            // Drawer Items
-        
-            _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: (){}),
-            _buildMenu(image: AppImages.drawerLoyaltyPoints, title: AppString.drawerLoyaltyPoints, onTap: (){}),
-            _buildMenu(image: AppImages.drawerMessage, title: AppString.drawerMessage, onTap: (){}),
-            _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: (){}),
-            _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: (){}),
-            _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: (){}),
-            _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){}),
-        
-            SizedBox(height: 218,),
-            _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){})
-        
-            
-          ],
-        ),
+          ),
+          // Drawer Items
+      
+          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: (){}),
+          _buildMenu(image: AppImages.drawerLoyaltyPoints, title: AppString.drawerLoyaltyPoints, onTap: (){}),
+          _buildMenu(image: AppImages.drawerMessage, title: AppString.drawerMessage, onTap: (){}),
+          _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: (){}),
+          _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: (){}),
+          _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: (){}),
+          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){}),
+      
+          SizedBox(height: 218,),
+          _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){})
+      
+          
+        ],
       ),
     );
   }

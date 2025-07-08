@@ -1,3 +1,4 @@
+import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import '../../../../config/route/app_routes.dart';
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //   }
       // } else {
       Get.offAllNamed(AppRoutes.onboarding);
+      Utils.DeviceSize =  MediaQuery.of(Get.context!).size;
     });
     super.initState();
   }

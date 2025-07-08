@@ -4,90 +4,106 @@ import 'package:google_fonts/google_fonts.dart';
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
+
   colorScheme: const ColorScheme(
     brightness: Brightness.dark,
 
-    primary: Color(0xFF0A6F77), // 🟦 Primary: Buttons, active tabs
-    onPrimary: Color(0xFFFFFFFF), // 🔳 Text/icons on primary
+    primary: Color(0xFF4DB8BF), // 🌊 Slightly brighter teal
+    onPrimary: Color(0xFF000000), // ⬛ Dark text on bright buttons
 
-    secondary: Color(0xFF03DAC6), // 🟢 Secondary: Chips, switches, highlights
-    onSecondary: Colors.black, // 🔳 Text/icons on secondary color
+    secondary: Color(0xFF6FBF73), // 🌿 Adjusted green for better visibility
+    onSecondary: Color(0xFF000000),
 
-    error: Color(0xFFCF6679), // 🔴 Error background (dialogs, forms)
-    onError: Colors.black, // 🔳 Text/icons on error background
+    error: Color(0xFFFF6B6B),
+    onError: Color(0xFF000000),
 
-    surface: Color(0xFF1F1F1F), // 🟤 Surface: Cards, sheets, dialogs
-    onSurface: Colors.white, // ⚪ Text/icons on surface
+    surface: Color(0xFF1A1A1A),
+    onSurface: Color(0xFFEFEFEF),
 
-    surfaceContainerLowest: Color(
-      0xFF121212,
-    ), // 🪵 Deep backgrounds: Scaffold, drawers
-    surfaceContainerLow: Color(0xFF1A1A1A), // 🪵 Lower elevation surfaces
-    surfaceContainer: Color(0xFF1F1F1F), // 🪵 Mid elevation surfaces
-    surfaceContainerHigh: Color(
-      0xFF232323,
-    ), // 🪵 Higher elevation (e.g. dialogs)
-    surfaceContainerHighest: Color(0xFF262626), // 🪵 Top-level surfaces
+    surfaceContainerLowest: Color(0xFF121212),
+    surfaceContainerLow: Color(0xFF1C1C1C),
+    surfaceContainer: Color(0xFF222222),
+    surfaceContainerHigh: Color(0xFF2A2A2A),
+    surfaceContainerHighest: Color(0xFF303030),
 
-    onSurfaceVariant: Colors.white70, // ⚪ Subtle text/icons on surfaces
+    onSurfaceVariant: Color(0xFFAAAAAA),
 
-    inverseSurface: Color(
-      0xFFE6E1E5,
-    ), // 🔄 Used in pull-to-refresh, bottom sheets
-    onInverseSurface: Colors.black, // 🔳 Text/icons on inverseSurface
+    inverseSurface: Color(0xFFEFEFEF),
+    onInverseSurface: Color(0xFF1A1A1A),
 
-    inversePrimary: Color(0xFF6650A4), // 🔄 Highlight when using inverse color
-    outline: Color(0xFF8A8A8A), // 📏 Borders, dividers, outlines
-    outlineVariant: Color(0xFF424242), // 📏 Lower emphasis outlines
+    inversePrimary: Color(0xFF0A6F77), // original light primary
 
-    shadow: Colors.black, // 🧱 Shadows (e.g., elevation effects)
-    scrim: Colors.black54, // 🚪 Overlays, modals, drawers
-    surfaceTint: Color(0xFFBB86FC), // 🎨 Elevation tint (Material 3 effect)
+    outline: Color(0xFF444444),
+    outlineVariant: Color(0xFF2D2D2D),
+
+    shadow: Color(0xBF000000),
+    scrim: Color(0x99000000),
+    surfaceTint: Color(0xFF4DB8BF),
   ),
 
-  scaffoldBackgroundColor:
-      Colors.white10, // 📱 Main background (scaffolds, screens)
+  scaffoldBackgroundColor: const Color(0xFF121212),
 
-  appBarTheme: AppBarTheme(
-    surfaceTintColor: Colors.white10, // 🧼 Removes elevation overlay tint
-    backgroundColor: Colors.white10, // 🎛 App bar surface
-    foregroundColor: Colors.white10, // 📝 App bar text/icon color
+  appBarTheme: const AppBarTheme(
+    surfaceTintColor: Colors.transparent,
+    backgroundColor: Color(0xFF121212),
+    foregroundColor: Color(0xFFEFEFEF),
     elevation: 0,
   ),
 
+  cardColor: const Color(0xFF1E1E1E),
+
+  dividerColor: const Color(0xFF2C2C2C),
+
   textTheme: TextTheme(
     bodyLarge: TextStyle(
-      color: Colors.white,
+      color: Color(0xFFEFEFEF),
       fontSize: 16,
       fontWeight: FontWeight.w600,
-    ), // 📝 Primary body text, font size 16
+    ),
     bodyMedium: GoogleFonts.dmSans(
-      color: Colors.white,
+      color: Color(0xFFCCCCCC),
       fontSize: 12,
       fontWeight: FontWeight.w400,
-    ), // 📝 Secondary body text font size 14
-    bodySmall: TextStyle(color: Colors.white), //font size 12
-
+    ),
+    bodySmall: GoogleFonts.dmSans(
+      color: Color(0xFF999999),
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+    ),
     titleLarge: TextStyle(
-      color: Colors.white,
+      color: Color(0xFFEFEFEF),
       fontWeight: FontWeight.bold,
-    ), // 🏷 Headings / Titles
-
+    ),
     titleSmall: GoogleFonts.dmSans(
-      color: Colors.white,
+      color: Color(0xFFEFEFEF),
       fontSize: 12,
       fontWeight: FontWeight.w700,
     ),
   ),
 
-  cardColor: Color(0xFF1E1E1E), // 🃏 Cards and containers
-
-  dividerColor: Colors.grey, // ➖ Dividers between elements
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Color(0xFF4DB8BF),
+    selectionColor: Color(0x5536CFCF),
+    selectionHandleColor: Color(0xFF4DB8BF),
+  ),
 
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: Color(0xFF1E1E1E), // 🧾 Input field background
-    border: OutlineInputBorder(), // 🔲 Border style
-    labelStyle: TextStyle(color: Colors.white70), // 🏷 Label text color
+    fillColor: const Color(0xFF1E1E1E),
+    border: _buildBorder(color: const Color(0xFF2D2D2D)),
+    enabledBorder: _buildBorder(color: const Color(0xFF4DB8BF)),
+    focusedBorder: _buildBorder(color: const Color(0xFF4DB8BF)),
+    disabledBorder: _buildBorder(color: const Color(0xFF2D2D2D)),
+    errorBorder: _buildBorder(color: const Color(0xFFFF6B6B)),
+    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFF888888)),
+    labelStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFFAAAAAA)),
   ),
 );
+
+
+OutlineInputBorder _buildBorder({required Color color}) {
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(10),
+    borderSide: BorderSide(color: color),
+  );
+}

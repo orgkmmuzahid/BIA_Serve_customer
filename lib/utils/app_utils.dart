@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'constants/app_colors.dart';
 
 class Utils {
-  static successSnackBar(String title, String message) {
+
+   static late var DeviceSize;
+  static void successSnackBar(String title, String message) {
     Get.snackbar(
       title,
       message,
@@ -14,7 +17,7 @@ class Utils {
     );
   }
 
-  static errorSnackBar(dynamic title, String message) {
+  static void errorSnackBar(dynamic title, String message) {
     Get.snackbar(
       kDebugMode ? title.toString() : "Oops",
       message,
@@ -23,4 +26,9 @@ class Utils {
       snackPosition: SnackPosition.TOP,
     );
   }
+
+ static String formatDateTime(DateTime dateTime) {
+  final dateFormat = DateFormat('MMMM d, h:mm a');
+  return dateFormat.format(dateTime);
+}
 }

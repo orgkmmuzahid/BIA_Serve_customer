@@ -1,12 +1,15 @@
+
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
 import 'services/notification/notification_service.dart';
 import 'services/socket/socket_service.dart';
 import 'services/storage/storage_services.dart';
+
+//create a new feature through
+// mason make getx_feature --name packageName
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +22,6 @@ Future<void> init() async {
   DependencyInjection dI = DependencyInjection();
   dI.dependencies();
   SocketServices.connectToSocket();
-
   await Future.wait([
     LocalStorage.getAllPrefData(),
     NotificationService.initLocalNotification(),
