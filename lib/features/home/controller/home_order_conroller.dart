@@ -11,7 +11,10 @@ class HomeOrderConroller extends GetxController {
   ];
 
   void fetchOrderList()async{
-    
+    orderList.add(OrderListModel(orderNumber: 'BIA342178', orderPlacedDate: DateTime.now(), percelPickedUp: DateTime.now(), inTransition: DateTime.now(),
+     orderProgress: OrderProgress.Pending, outForDelivery: 'In Progress'),);
+
+     update();
   }
 
 }

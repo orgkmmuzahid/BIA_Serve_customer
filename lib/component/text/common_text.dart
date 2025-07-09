@@ -19,6 +19,9 @@ class CommonText extends StatelessWidget {
     required this.text,
     this.style,
     this.overflow = TextOverflow.ellipsis,
+    this.enableBorder = false,
+    this.borderColor,
+    this.borderRadius
   });
 
   final double left;
@@ -33,29 +36,55 @@ class CommonText extends StatelessWidget {
   final int maxLines;
   final TextOverflow overflow;
   final TextStyle? style;
+  final bool? enableBorder;
+  final Color? borderColor;
+  final double? borderRadius;
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: left.w,
-        right: right.w,
-        top: top.h,
-        bottom: bottom.h,
-      ),
-      child: Text(
-        textAlign: textAlign,
-        text,
-        maxLines: maxLines,
-        overflow: overflow,
-        style:
-            style ??
-            GoogleFonts.dmSans(
-              fontSize: fontSize.sp,
-              fontWeight: fontWeight,
-              color: color ?? theme.textTheme.bodyMedium!.color,
-            ),
-      ),
+  Widget build(BuildContext context) => enableBorder == true? withBorder() :  withoutBorder();
+  
+
+   EdgeInsets _edgInsetsBuilder() =>  EdgeInsets.only(
+      left: left.w,
+      right: right.w,
+      top: top.h,
+      bottom: bottom.h,
     );
+
+  Widget withBorder()=> Container(
+    padding: _edgInsetsBuilder(),
+    decoration: BoxDecoration(borderRadius: borderRadius != null? BorderRadius.circular(borderRadius!): null,
+     border: borderColor != null? _buildBorder(borderColor!): _buildBorder(theme.dividerColor)),
+    child: Row(
+      children: [
+        _textFiled(),
+      ],
+    ),
+  );
+
+  BoxBorder? _buildBorder(Color color) {
+    return BoxBorder.all(color: color);
+  }
+
+  Padding withoutBorder()=> Padding(
+    padding: _edgInsetsBuilder(),
+    child: _textFiled(),
+  );
+  
+
+  Text _textFiled() {
+    return Text(
+    textAlign: textAlign,
+    text,
+    maxLines: maxLines,
+    overflow: overflow,
+    style:
+        style ??
+        GoogleFonts.dmSans(
+          fontSize: fontSize.sp,
+          fontWeight: fontWeight,
+          color: color ?? theme.textTheme.bodyMedium!.color,
+        ),
+  );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/model/notification_model.dart';
@@ -71,6 +73,12 @@ class NotificationsController extends GetxController {
   @override
   void onInit() {
     // getNotificationsRepo();
+    totalUnreadNotification = 0;
+    Timer.periodic(const Duration(seconds: 2), (timer){
+      totalUnreadNotification += 1;
+      update();
+      if(totalUnreadNotification > 10 ) timer.cancel();
+    });
     moreNotification();
     super.onInit();
   }

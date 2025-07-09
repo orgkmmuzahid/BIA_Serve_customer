@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../utils/constants/app_colors.dart';
-
-ThemeData themeData = ThemeData(
-  scaffoldBackgroundColor: AppColors.background,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.background,
-    centerTitle: true,
-  ),
-);
 
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -48,7 +39,7 @@ final ThemeData lightTheme = ThemeData(
     inversePrimary: Color(0xFF4DB8BF), // 🔄 For contrast on dark background
 
     outline: Color(0xFFCCCCCC), // 📏 Borders, outlines
-    outlineVariant: Color(0xffE6F1F1), // 📏 Lower emphasis outlines
+    outlineVariant: Color(0xFFE6F1F1), // 📏 Lower emphasis outlines
 
     shadow: Color(0x1F000000), // 🧱 Shadows for elevation
     scrim: Color(0x80000000), // 🚪 Overlays, modals
@@ -66,30 +57,39 @@ final ThemeData lightTheme = ThemeData(
 
   textTheme: TextTheme(
     bodyLarge: TextStyle(
+      overflow: TextOverflow.fade,
       color: Color(0xFF333333),
       fontSize: 16,
       fontWeight: FontWeight.w600,
     ), // 📝 Primary body text, font size 16
     bodyMedium: GoogleFonts.dmSans(
+      textStyle: TextStyle(
+      overflow: TextOverflow.fade,
       color: Color(0xFF333333),
       fontSize: 12,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w400,)
     ), // 📝 Secondary body text font size 14
     bodySmall: GoogleFonts.dmSans(
+      textStyle: TextStyle(
+        overflow: TextOverflow.fade,
       color: Color(0xFF858585),
       fontSize: 10,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w400)
     ), //font size 12
 
     titleLarge: TextStyle(
+      overflow: TextOverflow.fade,
       color: Color(0xFF333333),
       fontWeight: FontWeight.bold,
     ), // 🏷 Headings / Titles
 
     titleSmall: GoogleFonts.dmSans(
-      color: Color(0xFF333333),
+      textStyle: TextStyle(
+        overflow: TextOverflow.fade,
+        color: Color(0xFF333333),
       fontSize: 12,
       fontWeight: FontWeight.w700,
+      )
     ),
   ),
 

@@ -6,4 +6,5 @@ class SecretKey {
   static final String secretKey = dotenv.env['STRIPESCERETKEY'] ?? "";
 
   static final String paymentIntent = dotenv.env['STRIPEPAYMENTINTENT'] ?? "";
+
 }

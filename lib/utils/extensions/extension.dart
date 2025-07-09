@@ -1,10 +1,16 @@
 import 'package:bai_serve/utils/log/error_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart' as screenutil;
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
 ThemeData get theme => Theme.of(Get.context!);
+
+extension pointLat on LatLng{
+  PointLatLng get pointLatLng=> PointLatLng(latitude, longitude);
+}
 
 extension strting on String{
   String get newLine => "$this\n";

@@ -24,7 +24,7 @@ class CommonTextField extends StatelessWidget {
     this.borderRadius = 10,
     this.inputFormatters,
 
-    this.borderColor = AppColors.textFiledBorder,
+    this.borderColor,
     this.onSubmitted,
     this.onTap,
     this.suffixIcon,
@@ -42,7 +42,7 @@ class CommonTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
 
-  final Color borderColor;
+  final Color? borderColor;
   final double paddingHorizontal;
   final double paddingVertical;
   final double borderRadius;
@@ -68,6 +68,7 @@ class CommonTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText.value,
         textInputAction: textInputAction,
+        
         maxLength: mexLength,
         inputFormatters: inputFormatters,
         onFieldSubmitted: onSubmitted,
@@ -78,6 +79,7 @@ class CommonTextField extends StatelessWidget {
         ),
         validator: validator,
         decoration: InputDecoration(
+          enabledBorder: borderColor != null? theme.inputDecorationTheme.enabledBorder?.copyWith(borderSide: theme.inputDecorationTheme.enabledBorder?.borderSide.copyWith(color: borderColor)) : theme.inputDecorationTheme.enabledBorder,
           errorMaxLines: 2,
           filled: true,
           prefixIcon: prefixIcon,

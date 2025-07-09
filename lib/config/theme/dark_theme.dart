@@ -42,7 +42,6 @@ final ThemeData darkTheme = ThemeData(
   ),
 
   scaffoldBackgroundColor: const Color(0xFF121212),
-
   appBarTheme: const AppBarTheme(
     surfaceTintColor: Colors.transparent,
     backgroundColor: Color(0xFF121212),

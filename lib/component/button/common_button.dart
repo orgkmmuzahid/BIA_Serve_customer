@@ -1,4 +1,4 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 import '../other_widgets/common_loader.dart';
@@ -7,8 +7,8 @@ import '../text/common_text.dart';
 class CommonButton extends StatefulWidget {
   final VoidCallback? onTap;
   final String titleText;
-  final Color titleColor;
-  final Color buttonColor;
+  final Color? titleColor;
+  final Color? buttonColor;
   final Color? borderColor;
   final double borderWidth;
   final double titleSize;
@@ -23,8 +23,8 @@ class CommonButton extends StatefulWidget {
   const CommonButton({
     this.onTap,
     required this.titleText,
-    this.titleColor = AppColors.white,
-    this.buttonColor = AppColors.primaryColor,
+    this.titleColor,
+    this.buttonColor,
     this.titleSize = 16,
     this.buttonRadius = 10,
     this.alignment = MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class CommonButton extends StatefulWidget {
     this.borderWidth = 1,
     this.isLoading = false,
     this.buttonWidth = double.infinity,
-    this.borderColor = AppColors.primaryColor,
+    this.borderColor,
     this.icon,
     super.key,
   });
@@ -96,13 +96,13 @@ class _CommonButtonState extends State<CommonButton>
 
   ButtonStyle _buttonStyle() {
     return ButtonStyle(
-      backgroundColor: WidgetStateProperty.all(widget.buttonColor),
+      backgroundColor: WidgetStateProperty.all(widget.buttonColor ?? theme.primaryColor),
       padding: WidgetStateProperty.all(EdgeInsets.zero),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(widget.buttonRadius),
           side: BorderSide(
-            color: widget.borderColor ?? Colors.blue,
+            color: widget.borderColor ?? theme.primaryColor,
             width: widget.borderWidth,
           ),
         ),
@@ -122,7 +122,7 @@ class _CommonButtonState extends State<CommonButton>
       overflow: TextOverflow.ellipsis,
       textAlign: TextAlign.center,
       fontSize: widget.titleSize,
-      color: widget.titleColor,
+      color: widget.titleColor ?? theme.colorScheme.onSecondary,
       fontWeight: widget.titleWeight,
     );
   }

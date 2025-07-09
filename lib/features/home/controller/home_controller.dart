@@ -20,14 +20,31 @@ class HomeController extends GetxController {
     update();
   }
 
-  void onSearch(){
-     
+  void onSearch(){ }
+
+  void onPlaceOrder(){
+    Get.toNamed(AppRoutes.placeOrder);
   }
+  void onVendorSourcing(){ }
+  void onPurchaseAndDelivery(){ }
+  void onBulkOrderAgents(){ }
+  void onVerifyVendor(){ }
+  void onDoorToDoorPickup(){ }
 
   void onNotificationTap(){
     Get.find<NotificationsController>().getNotificationsRepo();
     Get.toNamed(AppRoutes.notifications);
   }
+
+  //drawer
+void onDrawerReturnProduct(){}
+void onDrawerLoyaltyPoints(){}
+void onDrawerMessage(){}
+void onDrawerMyPayment(){}
+void onDrawerSupport(){}
+void onDrawerLanguage (){}
+void onDrawerDeleteAccount(){}
+void onDrawerLogout(){}
 
   @override
   void onClose() {

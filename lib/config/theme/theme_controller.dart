@@ -6,12 +6,17 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class ThemeController extends GetxController {
-  var themeMode = ThemeMode.light;
+  ThemeMode themeMode = ThemeMode.light; //ThemeMode.System;
+  late Enum selectedTheme;
+  
+  void initTheme() {
+    selectedTheme = MediaQuery.of(Get.context!).platformBrightness;
+    super.onInit();
+  }
 
-  void toggleTheme(ThemeMode themeMode) {
-    if(this.themeMode != themeMode){
-      this.themeMode = themeMode;
-    }
+  void onToggleTheme(Brightness brightness) {
+    if(brightness.name == selectedTheme.name) return;
+    selectedTheme = brightness;
     Get.changeTheme(themeMode == ThemeMode.light ? lightTheme : darkTheme);
   }
 }

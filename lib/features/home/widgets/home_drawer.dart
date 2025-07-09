@@ -1,5 +1,6 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -8,9 +9,10 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/utils.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key, required this.userName, required this.address});
+  const HomeDrawer({super.key, required this.userName, required this.address, required this.controller});
   final String userName;
   final String address;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +66,13 @@ class HomeDrawer extends StatelessWidget {
           ),
           // Drawer Items
       
-          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: (){}),
-          _buildMenu(image: AppImages.drawerLoyaltyPoints, title: AppString.drawerLoyaltyPoints, onTap: (){}),
-          _buildMenu(image: AppImages.drawerMessage, title: AppString.drawerMessage, onTap: (){}),
-          _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: (){}),
-          _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: (){}),
-          _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: (){}),
-          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){}),
+          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: controller.onDrawerReturnProduct),
+          _buildMenu(image: AppImages.drawerLoyaltyPoints, title: AppString.drawerLoyaltyPoints, onTap: controller.onDrawerLoyaltyPoints),
+          _buildMenu(image: AppImages.drawerMessage, title: AppString.drawerMessage, onTap: controller.onDrawerMessage),
+          _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: controller.onDrawerMyPayment),
+          _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: controller.onDrawerSupport),
+          _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: controller.onDrawerLanguage),
+          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: controller.onDrawerDeleteAccount),
       
           SizedBox(height: 218,),
           _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){})

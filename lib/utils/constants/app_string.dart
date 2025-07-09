@@ -127,5 +127,9 @@ class AppString {
  static const String myOrder = "My Order";
  static const String seeAll = "See All";
 
+ //place order screen
+ static const String placeOrder = 'Place Order';
+ static const String setPickupDeliveryLocation = 'Set Pickup & Delivery Location';
+ static const String recentSearch = 'Recent Search';
  
 }

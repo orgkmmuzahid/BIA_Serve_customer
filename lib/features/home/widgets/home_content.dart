@@ -11,33 +11,33 @@ import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/utils.dart';
 import 'package:lazy_scroll_view/lazy_scroll_view.dart';
 
 class HomeContent extends StatelessWidget {
-   HomeContent({super.key, required this.homeController, required this.homeOrderConroller})
-   :  orderListWidth =  Utils.DeviceSize.width - 32,
-    orderlistImageWidth =  (Utils.DeviceSize.width - 32) / 3.2;
+   HomeContent({super.key, required this.homeController})
+   :  orderListWidth =  Utils.deviceSize.width - 32,
+    orderlistImageWidth =  (Utils.deviceSize.width - 32) / 3.2;
   
   final HomeController homeController;
-  final HomeOrderConroller homeOrderConroller;
   //private constant fields.
   final double orderListWidth;
   final double orderlistImageWidth;
   
 
   @override
-  Widget build(BuildContext context) => _content();
+  Widget build(BuildContext context) => GetBuilder<HomeOrderConroller>(builder:  (controller) => _content(controller));
   
 
-  LazyListView _content() {
+  LazyListView _content(HomeOrderConroller controller) {
     return LazyListView.builder(
-  itemCount: homeOrderConroller.orderList.length + 1,
+  itemCount: controller.orderList.length + 1,
  itemBuilder: (BuildContext context, int index) {
   if(index < 1) {
     return _topItems();
   } else {
-    return _orderListItem(homeOrderConroller.orderList[index - 1]);
+    return _orderListItem(controller.orderList[index - 1]);
   }
  },
   
@@ -56,9 +56,9 @@ class HomeContent extends StatelessWidget {
             10.width,
            CommonRichText(richTextContent: [
             CommonSimpleRichTextContent(text: '#${model.orderNumber}\n', style: theme.textTheme.bodyLarge?.copyWith(color: theme.primaryColor)),
-            CommonSimpleRichTextContent(text: 'Order Placed – ${Utils.formatDateTime(model.orderPlacedDate)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 14)),
-            CommonSimpleRichTextContent(text: 'Parcel Picked Up – ${Utils.formatDateTime(model.percelPickedUp)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 14)),
-            CommonSimpleRichTextContent(text: 'In Transit – ${Utils.formatDateTime(model.inTransition)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 14)),
+            CommonSimpleRichTextContent(text: 'Order Placed – ${Utils.formatDateTime(model.orderPlacedDate)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+            CommonSimpleRichTextContent(text: 'Parcel Picked Up – ${Utils.formatDateTime(model.percelPickedUp)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+            CommonSimpleRichTextContent(text: 'In Transit – ${Utils.formatDateTime(model.inTransition)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
             CommonRichTextSpan(textSpan: TextSpan(children: [
                           TextSpan(text: 'Delivered – ', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 14)),
 
@@ -88,18 +88,18 @@ class HomeContent extends StatelessWidget {
                     SingleChildScrollView(
                       child: Row(children: [
                         Column(children: [
-                          _homeImageButton(image: AppImages.homePlaceOrder, titte: AppString.homePlaceOrder, onTap: (){}),
-                          _homeImageButton(image: AppImages.homeBulkOrderAgents, titte: AppString.homeBulkOrderAgents, onTap: (){}),
+                          _homeImageButton(image: AppImages.homePlaceOrder, titte: AppString.homePlaceOrder, onTap: homeController.onPlaceOrder),
+                          _homeImageButton(image: AppImages.homeBulkOrderAgents, titte: AppString.homeBulkOrderAgents, onTap: homeController.onBulkOrderAgents),
                         ]),
                         10.width,
                         Column(children: [
-                          _homeImageButton(image: AppImages.homeVendorSourcing, titte: AppString.homeVendorSourcing, onTap: (){}),
-                          _homeImageButton(image: AppImages.homeVerifyVendor, titte: AppString.homeVerifyVendor, onTap: (){}),
+                          _homeImageButton(image: AppImages.homeVendorSourcing, titte: AppString.homeVendorSourcing, onTap: homeController.onVendorSourcing),
+                          _homeImageButton(image: AppImages.homeVerifyVendor, titte: AppString.homeVerifyVendor, onTap: homeController.onVerifyVendor),
                         ]),
                         10.width,
                         Column(children: [
-                          _homeImageButton(image: AppImages.homePurchaseDelivery, titte: AppString.homePurchaseDelivery, onTap: (){}),
-                          _homeImageButton(image: AppImages.homeDoorToDoorPickup, titte: AppString.homeDoorToDoorPickup, onTap: (){}),
+                          _homeImageButton(image: AppImages.homePurchaseDelivery, titte: AppString.homePurchaseDelivery, onTap: homeController.onPurchaseAndDelivery),
+                          _homeImageButton(image: AppImages.homeDoorToDoorPickup, titte: AppString.homeDoorToDoorPickup, onTap: homeController.onDoorToDoorPickup),
                         ]),
                       ],)),
 
@@ -114,7 +114,7 @@ class HomeContent extends StatelessWidget {
   
 
   Widget _homeImageButton({required String image, required String titte, required Function() onTap}) {
-    double size =(Utils.DeviceSize.width - 52) / 3;
+    double size =(Utils.deviceSize.width - 52) / 3;
     return GestureDetector(onTap: onTap,
     child: SizedBox(width: size, height: size, 
     child: Card(

@@ -2,6 +2,8 @@ import 'package:bai_serve/features/auth/screen/forget_password_screen.dart';
 import 'package:bai_serve/features/auth/screen/login_with_screen.dart';
 import 'package:bai_serve/features/auth/screen/otp_send_screen.dart';
 import 'package:bai_serve/features/home/screen/home_screen.dart';
+import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
+import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:get/get.dart';
 import '../../features/auth/screen/change_password_screen.dart';
 import '../../features/auth/screen/sign_in_screen.dart';
@@ -30,6 +32,9 @@ class AppRoutes {
   static const String loginWith = "/login_with_screen.dart";
   static const String otpSend = "/otp_send_screen.dart";
   static const String home = "/home_screen.dart";
+  static const String placeOrder = "/place_order_screen.dart";
+  static const String pickupInformation = "/pick_up_information_screen.dart";
+
 
   //---------------------
   static const String changePassword = "/change_password_screen.dart";
@@ -41,6 +46,7 @@ class AppRoutes {
   static const String privacyPolicy = "/privacy_policy_screen.dart";
   static const String termsOfServices = "/terms_of_services_screen.dart";
   static const String setting = "/setting_screen.dart";
+  
 
   static List<GetPage> routes = [
     GetPage(name: splash, page: () => const SplashScreen()),
@@ -52,6 +58,8 @@ class AppRoutes {
     GetPage(name: signIn, page: () => SignInScreen()),
     GetPage(name: forgotPassword, page: () => ForgetPasswordScreen()),
     GetPage(name: home, page: () => HomeScreen()),
+    GetPage(name: placeOrder, page: () => const PlaceOrderScreen()),
+    GetPage(name: pickupInformation, page: () => const PickUpInformationScreen()),
 
     //----------------------
     GetPage(name: changePassword, page: () => ChangePasswordScreen()),

@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       //   }
       // } else {
       Get.offAllNamed(AppRoutes.onboarding);
-      Utils.DeviceSize =  MediaQuery.of(Get.context!).size;
+      Utils.deviceSize =  MediaQuery.of(Get.context!).size;
     });
     super.initState();
   }
