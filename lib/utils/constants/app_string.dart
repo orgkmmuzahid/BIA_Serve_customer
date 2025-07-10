@@ -131,5 +131,26 @@ class AppString {
  static const String placeOrder = 'Place Order';
  static const String setPickupDeliveryLocation = 'Set Pickup & Delivery Location';
  static const String recentSearch = 'Recent Search';
- 
+ static const String pickupInformation = 'Pickup Information';
+
+
+ //pickup form information hints
+
+  static const String district = 'District';
+  static const String city = 'City';
+  static const String outsideCity = 'Outside City';
+  static const String ward = 'Ward';
+  static const String subWard = 'Sub-Ward';
+  static const String  plotApartment = 'Plot/Apartment/Road';
+  static const String  itemDetails = 'Item Details';
+  static const String  pickupTime = 'Pickup Time';
+  static const String  serviceType = 'Service Type';
+  static const String  addImage = 'Add Image';
+  static const String  productWieght = 'Product Weight';
+  static const String  quantity = 'Quantity';
+  static const String  deliveryAddress = 'Delivery Address';
+  static const String  couponCode = 'Coupon Code';
+  static const String  noCouponCode = 'No Coupon Code';
+
+
 }

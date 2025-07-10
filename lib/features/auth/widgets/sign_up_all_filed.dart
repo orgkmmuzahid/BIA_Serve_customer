@@ -9,11 +9,11 @@ import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_up_controller.dart';
 
 class SignUpAllField extends StatelessWidget {
-  SignUpAllField({super.key, required this.controller});
+  const SignUpAllField({super.key, required this.controller, required this.formKey});
 
   final SignUpController controller;
 
-  final formKey = GlobalKey<FormState>();
+  final Key formKey;
 
   @override
   Widget build(BuildContext context) {

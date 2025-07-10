@@ -1,5 +1,6 @@
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -7,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../config/route/app_routes.dart';
-import '../../../utils/log/app_log.dart';
 
 
 class CommonBottomNavBar extends StatefulWidget {
@@ -57,7 +57,6 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(iconList.length, (index) {
-            print("index $index current index ${bottomNavIndex}");
             return GestureDetector(
               onTap: () => onTap(index),
               child: Container(
@@ -71,23 +70,22 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   }
 
   void onTap(int index) async {
-      appLog(widget.currentIndex, source: "common bottombar");
 
     if (index == 0) {
       if (!(widget.currentIndex == 0)) {
-        Get.toNamed(AppRoutes.home);
+        goToScreen(AppRoutes.home);
       }
     } else if (index == 1) {
       if (!(widget.currentIndex == 1)) {
-        Get.toNamed(AppRoutes.notifications);
+        goToScreen(AppRoutes.notifications);
       }
     } else if (index == 2) {
       if (!(widget.currentIndex == 2)) {
-        Get.toNamed(AppRoutes.chat);
+        goToScreen(AppRoutes.chat);
       }
     } else if (index == 3) {
       if (!(widget.currentIndex == 3)) {
-        Get.toNamed(AppRoutes.profile);
+        goToScreen(AppRoutes.profile);
       }
     }
   }

@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // Get.lazyPut(() => CustomGoogleMapController(), fenix: true);
 
 class CustomGoogleMapController extends GetxController {
-  Polyline? mapRoute;
+  Set<Polyline> mapRoute = {};
   TravelMode _mode = TravelMode.driving;
   final String _mapKey = "AIzaSyAJrp3VvbO4E4jo7HRgqsk7EP8mPIZStxQ";
   LatLng startLocation = LatLng(23.798440, 90.412663);
@@ -22,6 +22,7 @@ void onMapCreated(GoogleMapController controller){
 void onTravelModeChange(TravelMode mode){
   _mode = mode;
 }
+
 
 Future<void> getPolylinePoints(LatLng start, LatLng end) async {
   startLocation = start;
@@ -47,12 +48,13 @@ Future<void> getPolylinePoints(LatLng start, LatLng end) async {
 
 
 void _drawPolyline(List<LatLng> points) {
-   mapRoute = Polyline(
+  mapRoute.clear();
+   mapRoute.add( Polyline(
       polylineId: PolylineId("route"),
       color: Colors.blue,
       width: 5,
       points: points,
-    );
+    ));
   
   update();
 }

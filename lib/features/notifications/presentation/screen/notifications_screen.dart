@@ -1,5 +1,5 @@
 
-import 'package:bai_serve/common/common_notification_appbar.dart';
+import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,7 @@ class NotificationScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           /// App Bar Section starts here
-          appBar: CommonNotificationAppbar(title:ApiEndPoint.notifications, onBackPress: (){
+          appBar: CommonAppBar(title:ApiEndPoint.notifications, onBackPress: (){
             controller.notifications.clear();
           }),
         

@@ -1,5 +1,5 @@
 // File: place_order_screen.dart
-import 'package:bai_serve/common/common_notification_appbar.dart';
+import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
@@ -19,7 +19,7 @@ class PlaceOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetBuilder<PlaceOrderController>(builder: (controller)=> Scaffold(
-    appBar: CommonNotificationAppbar(title: AppString.placeOrder), 
+    appBar: CommonAppBar(title: AppString.placeOrder), 
     body: Padding(padding: EdgeInsetsGeometry.all(16), child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

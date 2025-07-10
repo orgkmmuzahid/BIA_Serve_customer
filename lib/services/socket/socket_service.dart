@@ -18,11 +18,11 @@ class SocketServices {
           .build(),
     );
 
-    _socket.onConnect((data) => appLog("=============> Connection $data"));
-    _socket.onConnectError((data) => appLog("========>Connection Error $data"));
+    _socket.onConnect((data) => AppLogger.info("Connection $data", tag: "socket"));
+    _socket.onConnectError((data) => AppLogger.error("Connection Error $data", tag: "socket"));
     _socket.connect();
     _socket.on("user-notification::${LocalStorage.userId}", (data) {
-      appLog("================> get Data on socket: $data");
+      AppLogger.info("get Data on socket: $data", tag: "socket");
       NotificationService.showNotification(data);
     });
   }

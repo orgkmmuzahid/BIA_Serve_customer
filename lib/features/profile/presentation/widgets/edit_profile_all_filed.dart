@@ -1,3 +1,4 @@
+import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import '../../../../component/text/common_text.dart';
 import '../../../../component/text_field/common_phone_number_text_filed.dart';
@@ -6,7 +7,6 @@ import '../controller/profile_controller.dart';
 import '../../../../../utils/constants/app_colors.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/helpers/other_helper.dart';
-import '../../../../../utils/log/app_log.dart';
 
 class EditProfileAllFiled extends StatelessWidget {
   const EditProfileAllFiled({super.key, required this.controller});
@@ -44,7 +44,7 @@ class EditProfileAllFiled extends StatelessWidget {
         CommonPhoneNumberTextFiled(
           controller: controller.numberController,
           countryChange: (value) {
-            appLog(value);
+            
           },
         ),
       ],

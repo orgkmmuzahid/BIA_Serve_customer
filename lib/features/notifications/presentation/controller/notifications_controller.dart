@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/model/notification_model.dart';
@@ -22,6 +23,12 @@ class NotificationsController extends GetxController {
 
   /// page no here
   int page = 0;
+  
+  void onNotificationTap(){
+    Get.find<NotificationsController>().getNotificationsRepo();
+    Get.toNamed(AppRoutes.notifications);
+  }
+
 
   /// Notification Scroll Controller
   ScrollController scrollController = ScrollController();
@@ -72,13 +79,6 @@ class NotificationsController extends GetxController {
   /// Controller on Init
   @override
   void onInit() {
-    // getNotificationsRepo();
-    totalUnreadNotification = 0;
-    Timer.periodic(const Duration(seconds: 2), (timer){
-      totalUnreadNotification += 1;
-      update();
-      if(totalUnreadNotification > 10 ) timer.cancel();
-    });
     moreNotification();
     super.onInit();
   }

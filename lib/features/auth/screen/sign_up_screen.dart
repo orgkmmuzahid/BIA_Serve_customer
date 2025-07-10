@@ -11,8 +11,8 @@ import '../widgets/already_accunt_rich_text.dart';
 import '../widgets/sign_up_all_filed.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
-
+   SignUpScreen({super.key});
+ final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
                   50.height,
 
                   /// All Text Filed here
-                  SignUpAllField(controller: controller),
+                  SignUpAllField(controller: controller, formKey: _formKey),
                   20.height,
 
                   /// Submit Button Here
@@ -42,6 +42,13 @@ class SignUpScreen extends StatelessWidget {
                     isLoading: controller.isLoading,
                     onTap: () {
                       //on success
+                      if (_formKey.currentState!.validate()){
+                        Get.until(
+                        (route) => route.settings.name == AppRoutes.signIn,
+                      );
+                      }
+
+                      //remove it on release
                       Get.until(
                         (route) => route.settings.name == AppRoutes.signIn,
                       );

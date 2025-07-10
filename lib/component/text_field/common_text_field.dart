@@ -23,6 +23,7 @@ class CommonTextField extends StatelessWidget {
     this.paddingVertical = 14,
     this.borderRadius = 10,
     this.inputFormatters,
+    this.onSaved,
 
     this.borderColor,
     this.onSubmitted,
@@ -33,7 +34,7 @@ class CommonTextField extends StatelessWidget {
   }) {
     if (isPassword) toggle();
   }
-
+  final Function(String value)? onSaved;
   final String? initialText;
   final bool isReadOnly;
   final String? hintText;
@@ -68,7 +69,9 @@ class CommonTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText.value,
         textInputAction: textInputAction,
-        
+        onSaved: onSaved == null? null:  (value){
+          onSaved!(value ?? '');
+        } ,
         maxLength: mexLength,
         inputFormatters: inputFormatters,
         onFieldSubmitted: onSubmitted,

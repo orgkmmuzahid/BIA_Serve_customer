@@ -1,8 +1,8 @@
+import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/route/app_routes.dart';
-import '../../utils/log/app_log.dart';
 import 'storage_keys.dart';
 
 class LocalStorage {
@@ -37,7 +37,7 @@ class LocalStorage {
     myName = localStorage.getString(LocalStorageKeys.myName) ?? "";
     myEmail = localStorage.getString(LocalStorageKeys.myEmail) ?? "";
 
-    appLog(userId, source: "Local Storage");
+    AppLogger.info(userId, tag: "Local Storage");
   }
 
   /// Remove All Data From SharedPreferences

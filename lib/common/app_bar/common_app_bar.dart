@@ -1,16 +1,47 @@
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/features/home/controller/home_controller.dart';
+import 'package:bai_serve/features/notifications/presentation/controller/notifications_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
- // ignore: non_constant_identifier_names
- List<Widget> AppBarActions({required int notificationCount, required MapEntry<String, String> slectedCountry,
-  required Map<String, String> availableCountries,
-  required void Function(MapEntry<String, String> country) onCountryChange, required Function() onNotificationTap}) =>  [
-        GestureDetector(onTap: onNotificationTap ,child: _buildNotificationIcon(notificationCount: notificationCount)),
+
+class  CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
+  
+  final String? title;
+  final Widget? titleWidget;
+  final Function()? onBackPress;
+  final Widget? leading;
+  final List<Widget>? actions;
+
+  const CommonAppBar({super.key, this.title, this.onBackPress, this.titleWidget, this.leading, this.actions});
+ 
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  Widget build(BuildContext context) => AppBar(
+                centerTitle: true,
+                leading: leading ?? IconButton(onPressed: (){
+                  if(onBackPress != null) onBackPress!();
+                  Get.back();
+                }, icon: Icon(Icons.arrow_back_ios_new_sharp)),
+                actions: actions ?? _appBarActions(),
+                title: titleWidget ?? CommonText(
+                  text: title ?? '' ,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24.sp,
+                ),
+              );
+
+          List<Widget> _appBarActions() =>  [
+        GetBuilder<NotificationsController>(builder: (controller)=> GestureDetector(onTap: controller.onNotificationTap ,child: _buildNotificationIcon(notificationCount: controller.totalUnreadNotification))),
         12.width,
-        _buildLanguageDropdown(slectedCountry: slectedCountry, availableCountries: availableCountries, onCountryChange: onCountryChange),
+        GetBuilder<HomeController>(builder: (controller)=> _buildLanguageDropdown(slectedCountry: controller.selectedCountry, availableCountries: controller.availableCountries,
+         onCountryChange: controller.onCountryChange)),
         16.width
       ];
 
@@ -112,3 +143,4 @@ Widget _buildNotificationIcon({
       ),
     );
   }
+    }

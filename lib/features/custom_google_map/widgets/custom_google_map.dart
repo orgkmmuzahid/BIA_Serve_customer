@@ -4,17 +4,17 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CustomGoogleMap  extends StatelessWidget {
+  const CustomGoogleMap({super.key});
+
   @override
   Widget build(BuildContext context) =>  GetBuilder<CustomGoogleMapController>(
     builder: (controller) {
       return GoogleMap(
             initialCameraPosition: CameraPosition(
               target: controller.startLocation,
-              zoom: 13,
+              zoom: 16,
             ),
-            polylines: {
-              if(controller.mapRoute != null) controller.mapRoute!,
-            },
+            polylines: controller.mapRoute,
             markers: {
               Marker(
                 markerId: MarkerId("start"),

@@ -1,6 +1,6 @@
 
 import 'package:bai_serve/config/route/app_routes.dart';
-import 'package:bai_serve/features/notifications/presentation/controller/notifications_controller.dart';
+import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/widgets.dart';
@@ -23,18 +23,13 @@ class HomeController extends GetxController {
   void onSearch(){ }
 
   void onPlaceOrder(){
-    Get.toNamed(AppRoutes.placeOrder);
+    goToScreen(AppRoutes.placeOrder);
   }
   void onVendorSourcing(){ }
   void onPurchaseAndDelivery(){ }
   void onBulkOrderAgents(){ }
   void onVerifyVendor(){ }
   void onDoorToDoorPickup(){ }
-
-  void onNotificationTap(){
-    Get.find<NotificationsController>().getNotificationsRepo();
-    Get.toNamed(AppRoutes.notifications);
-  }
 
   //drawer
 void onDrawerReturnProduct(){}

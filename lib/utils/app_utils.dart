@@ -4,10 +4,25 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import 'constants/app_colors.dart';
+ bool _navigating = false;
+ 
+ void goToScreen(String route) {
+  if (_navigating) return;
+
+  _navigating = true;
+  Get.toNamed(route)?.then((_) {
+    _navigating = false;
+  });
+}
 
 class Utils {
 
    static late Size deviceSize;
+   
+  
+
+
+
   static void successSnackBar(String title, String message) {
     Get.snackbar(
       title,
