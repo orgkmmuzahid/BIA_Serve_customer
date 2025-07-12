@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color rewardPointsColor = Colors.orangeAccent;
   static const Color primaryColor = Color.fromRGBO(8, 89, 95, 1);
   static const Color secondary = Color.fromRGBO(51, 51, 51, 1);
   static const Color background = Colors.white;

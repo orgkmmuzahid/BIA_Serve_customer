@@ -45,6 +45,13 @@ class AppImages {
  static const String notificationOnTheWay = "$baseurl/notification_on_the_way.png";
  static const String notificationReady = "$baseurl/notification_ready.png";
 
+ //loyalty
+ static const String loyaltyLevel = "$baseurl/rewards_level.png";
+ static const String loyaltyPonitsBackground = "$baseurl/loyalty_backgrounds.png";
+ static const String giftBox = "$baseurl/gift_box.png";
+ static const String discount = "$baseurl/discount.png";
+
+
 
 
   

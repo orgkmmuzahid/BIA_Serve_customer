@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,30 +29,98 @@ class PickUpInformationScreen  extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
             CommonText(text: AppString.pickupInformation, style: theme.textTheme.bodyLarge).paddingOnly(bottom: 10),
-            _rowBuilder( _inputTextBuilder(prefixIcon:  Icons.person,hint:  AppString.fullName, onSaved: (p0) {}) , _inputTextBuilder( prefixIcon: Icons.phone, hint: AppString.phoneNumber, onSaved: (p0){})),
+            _rowBuilder( _inputTextBuilder(prefixIcon:  Icons.person,hint:  AppString.fullName, onSaved: (p0) { 
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(fullName: p0));}) ,
+                 _inputTextBuilder( prefixIcon: Icons.phone, hint: AppString.phoneNumber,validator: OtherHelper.phoneValidator,onSaved: (p0){
+                   placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(phone: p0));
+                 })),
             
-            _rowBuilder(_buildDropdown(AppString.district, [], (value){}), _buildDropdown(AppString.city, [], (value){})),
-            _rowBuilder(_buildDropdown(AppString.ward, [], (value){}), _buildDropdown(AppString.subWard, [], (value){})),
-             _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {}).paddingOnly(bottom: 10),
-            _multilineTextField(100).paddingOnly(bottom: 10),
+            _rowBuilder(_buildDropdown(AppString.district, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(district: value));
+            }), _buildDropdown(AppString.city, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(city: value));
+            })),
+
+
+            _rowBuilder(_buildDropdown(AppString.ward, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(ward: value));
+            }), _buildDropdown(AppString.subWard, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(subWard: value));
+            })),
+
+
+             _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {
+               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(plotApartment: p0));
+             }).paddingOnly(bottom: 10),
+                    _multilineTextField(100, onSave: (p0) {
+                       placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(itemDetails: p0));
+                    },).paddingOnly(bottom: 10),
             
             //with time picker marchent
             _rowBuilder(CommonText(text: AppString.pickupTime, textAlign: TextAlign.start,style: theme.textTheme.titleSmall), CommonText(text: AppString.serviceType, textAlign: TextAlign.start, style: theme.textTheme.titleSmall)),
             _rowBuilder(_inputTextBuilder(hint: placeOrderController.placeOrderModel.marchentPickupTime ?? '', isReadOnly: true, suffixIcon: _showTimer((time){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(marchentPickupTime: time));
               placeOrderController.update();
-            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){})),
-            
+            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){
+               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(serviceType: value));
+            })),
+
+            //image picker
+             GestureDetector(
+               onTap: () {
+                 placeOrderController.pickImage();
+               },
+               child: Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: theme.colorScheme.surfaceContainerLowest),
+                height: 150, child: Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [Icon(Icons.add), CommonText(text: AppString.addImage)],))),
+             ),
+              20.height,
+
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: List.generate(placeOrderController.selectedImagesPath.length, (index){
+                return Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  padding: EdgeInsets.only(left: 12),
+                  child: Image.file(
+                    width: 80, height: 80,
+                    File(placeOrderController.selectedImagesPath.elementAt(index))),
+                );
+              }),)),
+              
+
              _rowBuilder(CommonText(text: AppString.productWieght, textAlign: TextAlign.start, style: theme.textTheme.titleSmall), CommonText(text: AppString.quantity, textAlign: TextAlign.start, style: theme.textTheme.titleSmall)),
-             _rowBuilder( _inputTextBuilder(hint: '' , initialText: '${placeOrderController.placeOrderModel.productWieght?.toString()} KG', onSaved: (p0) {}) , 
-                    _inputTextBuilder( hint: '',initialText: '${placeOrderController.placeOrderModel.quantity?.toString()} Box', onSaved: (p0){})),
+             
+             _rowBuilder( _inputTextBuilder(hint: '' , initialText: '${placeOrderController.placeOrderModel.productWieght?.toString()} KG', onSaved: (p0) {
+               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(productWieght: double.tryParse(p0)));
+             }) , 
+              _inputTextBuilder( hint: '',initialText: '${placeOrderController.placeOrderModel.quantity?.toString()} Box', onSaved: (p0){
+                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(quantity: int.tryParse(p0)));
+              })),
       
+
             //Delivery Address
            CommonText(text: AppString.deliveryAddress, style: theme.textTheme.bodyLarge).paddingOnly(bottom: 10),
-            _rowBuilder( _inputTextBuilder(prefixIcon:  Icons.person,hint:  AppString.fullName, onSaved: (p0) {}) , _inputTextBuilder( prefixIcon: Icons.phone, hint: AppString.phoneNumber, onSaved: (p0){})),
+            _rowBuilder( _inputTextBuilder(prefixIcon:  Icons.person,hint:  AppString.fullName, onSaved: (p0) {
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientFullName: p0));
+            }) , _inputTextBuilder( prefixIcon: Icons.phone, hint: AppString.phoneNumber,validator: OtherHelper.phoneValidator ,onSaved: (p0){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPhone: p0));
+            })),
             
-            _rowBuilder(_buildDropdown(AppString.district, [], (value){}), _buildDropdown(AppString.city, [], (value){})),
-            _rowBuilder(_buildDropdown(AppString.ward, [], (value){}), _buildDropdown(AppString.subWard, [], (value){})),
+            _rowBuilder(_buildDropdown(AppString.district, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientDistrict: value));
+            }), _buildDropdown(AppString.city, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientCity: value));
+            })),
+
+            _rowBuilder(_buildDropdown(AppString.ward, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientWard: value));
+            }), _buildDropdown(AppString.subWard, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientSubWard: value));
+            })),
              
             //time picker client
             _rowBuilder(CommonText(text: AppString.pickupTime, textAlign: TextAlign.start,style: theme.textTheme.titleSmall), CommonText(text: AppString.serviceType, textAlign: TextAlign.start, style: theme.textTheme.titleSmall)),
@@ -56,23 +128,39 @@ class PickUpInformationScreen  extends StatelessWidget {
               AppLogger.debug("Piked time $time", tag: "Pickup information screen");
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPickupTime: time));
               placeOrderController.update();
-            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){})),
+            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientServiceType: value));
+            })),
             
-             _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {}).paddingOnly(bottom: 10),
-            _multilineTextField(100).paddingOnly(bottom: 10),
-            if(placeOrderController.showCouponButton)
+             _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {
+              placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPlotApartment: p0));
+             }).paddingOnly(bottom: 10),
+
+            // _multilineTextField(100).paddingOnly(bottom: 10), //itemDetails
+            
+            GetBuilder<LoyaltyPointsController>(builder:(loyaltyController){
+              return Column(children: [
+                 if(placeOrderController.showCouponButton && loyaltyController.offercode == null)
             _rowBuilder( CommonButton(titleText: AppString.couponCode, onTap: placeOrderController.onCoupon), CommonButton(titleText: AppString.noCouponCode,
              buttonColor: theme.scaffoldBackgroundColor, borderColor: theme.dividerColor, titleColor: theme.textTheme.bodySmall!.color, onTap: placeOrderController.onNoCoupon), space: 20 ),
+
+             CommonText(text: loyaltyController.offercode ?? '')
+              ],);
+            }),
             
+           
             10.height,
             CommonButton(titleText: AppString.continues, onTap: () {
+            //  if( _formKey.currentState?.validate() == true){}
               _formKey.currentState?.save();
+             
             },),
                 ],).paddingOnly(left: 16, right: 16, bottom: 25);
           }
         )),
     ),
   );
+
 
   Widget _showTimer(Function(String value) ontTimeChange) {
     var itemList = Get.find<PlaceOrderController>().serviceTimes;
@@ -88,10 +176,15 @@ class PickUpInformationScreen  extends StatelessWidget {
        },);
       }
 
-  SizedBox _multilineTextField(double height) {
+  SizedBox _multilineTextField(double height, {required Function(String) onSave}) {
     return SizedBox(
 height: height,
-child: TextField(
+child: TextFormField(
+  onSaved: (newValue) {
+    if(newValue != null && newValue.isNotEmpty){
+      onSave(newValue);
+    }
+  } ,
   maxLines: null,
   expands: true, // expands to fill parent height
   decoration: InputDecoration(
@@ -111,9 +204,10 @@ child: TextField(
     ]).paddingOnly(bottom: 10);
   }
 
-  CommonTextField _inputTextBuilder({ String? initialText, bool? isReadOnly, IconData? prefixIcon, Widget? suffixIcon ,required String hint, required Function(String) onSaved}) => 
+  CommonTextField _inputTextBuilder({ FormFieldValidator? validator ,String? initialText, bool? isReadOnly, IconData? prefixIcon, Widget? suffixIcon ,required String hint, required Function(String) onSaved}) => 
       CommonTextField(
         initialText: initialText,
+        validator: validator,
         suffixIcon: suffixIcon , isReadOnly: isReadOnly ?? false ,prefixIcon: prefixIcon == null? null : _prefixBuilder(prefixIcon), hintText: hint,onSaved: onSaved ,borderColor: theme.dividerColor,);
      
   Icon _prefixBuilder(IconData iconData) => Icon(iconData, color: theme.dividerColor);

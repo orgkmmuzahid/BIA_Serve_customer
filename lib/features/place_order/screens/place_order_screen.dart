@@ -3,6 +3,7 @@ import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/custom_google_map/widgets/custom_google_map.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -19,7 +20,11 @@ class PlaceOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetBuilder<PlaceOrderController>(builder: (controller)=> Scaffold(
-    appBar: CommonAppBar(title: AppString.placeOrder), 
+    appBar: CommonAppBar(title: AppString.placeOrder,  onBackPress: (){
+       Get.until((route) {
+        return  route.settings.name == AppRoutes.placeOrder;
+       });  
+    }), 
     body: Padding(padding: EdgeInsetsGeometry.all(16), child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -72,8 +77,5 @@ class PlaceOrderScreen extends StatelessWidget {
       ],
     );
   }
-
-
-
 
 }

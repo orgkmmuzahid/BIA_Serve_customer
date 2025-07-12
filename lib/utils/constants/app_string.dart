@@ -152,5 +152,24 @@ class AppString {
   static const String  couponCode = 'Coupon Code';
   static const String  noCouponCode = 'No Coupon Code';
 
+  //loyalty points
+  static const String regularCustomersLoyaltyPoints = "Loyalty Points for Regular Customers";
+  static const String regularCustomersLoyaltyPointsMessage = '''The more you use the app, the more rewards you earn! Loyalty points, promo codes, and special discounts await our active users.''';
+  static const String points = "Points";
+  static const String points10000 = "10,000 Points";
+  static const String points1000 = "1,000 Points";
+  static const String off_10 = "10% Off";
+  static const String freeDelivery = "Free Delivery";
+  static const String viewRewards = "View Rewards";
+  static const String myRewards = "My Rewards";
+  static const String discount = "Discount";
+  static const String claim = "Claim";
+  static const String receivedCode  = "Received Code";
+  static const String orderNow  = "Order Now";
+
+  static String loaltyClaimingMessage(String value) => "You’ve received a $value on your next order! Don’t miss out ";
+
+
+
 
 }

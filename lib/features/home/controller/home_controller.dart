@@ -33,7 +33,9 @@ class HomeController extends GetxController {
 
   //drawer
 void onDrawerReturnProduct(){}
-void onDrawerLoyaltyPoints(){}
+void onDrawerLoyaltyPoints(){
+  goToScreen(AppRoutes.loyaltyPoints);
+}
 void onDrawerMessage(){}
 void onDrawerMyPayment(){}
 void onDrawerSupport(){}

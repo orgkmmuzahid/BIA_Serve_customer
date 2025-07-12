@@ -1,0 +1,84 @@
+// File: loyalty_points_screen.dart
+import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
+import 'package:bai_serve/utils/app_utils.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+// static const String loyaltyPoints = "/loyalty_points_screen.dart";
+// GetPage(name: loyaltyPoints, page: () => const LoyaltyPointsScreen()),
+
+class LoyaltyPointsScreen extends StatelessWidget {
+  const LoyaltyPointsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text(AppString.regularCustomersLoyaltyPoints, style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.primary),)), 
+   body: Padding(
+    padding: EdgeInsetsGeometry.only(left: 16, right: 16),
+    child: GetBuilder<LoyaltyPointsController>(
+      builder: (controller) {
+        return Column(children: [
+          Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: BoxBorder.all(color: theme.dividerColor)),
+            padding: EdgeInsets.all(10),
+            child: CommonText(
+              text: AppString.regularCustomersLoyaltyPointsMessage,style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400) , maxLines: 4),
+          ), 
+          35.height,
+          Stack(children: [
+            CommonImage(imageSrc: AppImages.loyaltyPonitsBackground), 
+            Positioned(
+              top: 20,
+              left: 70,
+              child: Icon(Icons.star, size: 50, color: theme.colorScheme.onSecondary,),),
+            
+            Positioned(
+               top: 60,
+              left: 50,
+              child:CommonText(text: controller.loyaltyPoints.toString(), style:  theme.textTheme.bodyMedium?.copyWith(fontSize: 48, fontWeight: FontWeight.bold, color: theme.colorScheme.onSecondary) ),),
+            
+            Positioned(
+               top: 110,
+              left: 55,
+              child: CommonText(text: AppString.points, style:  theme.textTheme.bodyMedium?.copyWith(fontSize: 30, fontWeight: FontWeight.w500, color: theme.colorScheme.onSecondary) ),)
+
+          ],), 
+
+          20.height,
+
+          Container(
+            color: theme.primaryColor.withValues(alpha: .2),
+            padding: EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
+            child: Row(children: [
+              CommonImage(imageSrc: AppImages.giftBox, size: 30),
+             10.width,
+             CommonText(text: AppString.freeDelivery, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
+             const Spacer(),
+              CommonText(text: AppString.points10000, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),)])),
+          10.height,
+          Container(
+            color: theme.primaryColor.withValues(alpha: .2),
+            padding: EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
+            child: Row(children: [
+              CommonImage(imageSrc: AppImages.giftBox, size: 30),
+             10.width,
+             CommonText(text: AppString.off_10, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
+             const Spacer(),
+              CommonText(text: AppString.points1000, style: theme.textTheme.bodyMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.bold),)])),
+        20.height,
+         CommonButton(titleText: AppString.viewRewards, onTap: () {
+           Get.toNamed(AppRoutes.myRewards);
+         },)
+        ]);
+      }
+    )),
+  );
+
+}

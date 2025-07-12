@@ -2,6 +2,8 @@ import 'package:bai_serve/features/auth/screen/forget_password_screen.dart';
 import 'package:bai_serve/features/auth/screen/login_with_screen.dart';
 import 'package:bai_serve/features/auth/screen/otp_send_screen.dart';
 import 'package:bai_serve/features/home/screen/home_screen.dart';
+import 'package:bai_serve/features/loyalty_points/screens/loyalty_points_screen.dart';
+import 'package:bai_serve/features/loyalty_points/screens/my_rewards_screen.dart';
 import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
 import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:get/get.dart';
@@ -34,6 +36,8 @@ class AppRoutes {
   static const String home = "/home_screen.dart";
   static const String placeOrder = "/place_order_screen.dart";
   static const String pickupInformation = "/pick_up_information_screen.dart";
+  static const String loyaltyPoints = "/loyalty_points_screen.dart";
+  static const String myRewards = "/my_rewards_screen.dart";
 
 
   //---------------------
@@ -60,6 +64,8 @@ class AppRoutes {
     GetPage(name: home, page: () => HomeScreen()),
     GetPage(name: placeOrder, page: () => const PlaceOrderScreen()),
     GetPage(name: pickupInformation, page: () => const PickUpInformationScreen()),
+    GetPage(name: loyaltyPoints, page: () => const LoyaltyPointsScreen()),
+    GetPage(name: myRewards, page: () => const MyRewardsScreen()),
 
     //----------------------
     GetPage(name: changePassword, page: () => ChangePasswordScreen()),

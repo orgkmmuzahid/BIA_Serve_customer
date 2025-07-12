@@ -4,6 +4,7 @@ import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/custom_google_map/controllers/custom_google_map_controller.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/home/controller/home_order_conroller.dart';
+import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +34,7 @@ class DependencyInjection extends Bindings {
     Get.lazyPut(() => ThemeController(), fenix: true);
 
     Get.lazyPut(() => PlaceOrderController(), fenix: true);
+    Get.lazyPut(() => LoyaltyPointsController(), fenix: true);
 
     Get.lazyPut(() => NotificationsController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);

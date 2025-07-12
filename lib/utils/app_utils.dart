@@ -7,11 +7,11 @@ import 'constants/app_colors.dart';
  bool _navigating = false;
  
  void goToScreen(String route) {
-  if (_navigating) return;
+  // if (_navigating) return;
 
-  _navigating = true;
+  // _navigating = true;
   Get.toNamed(route)?.then((_) {
-    _navigating = false;
+    // _navigating = false;
   });
 }
 
