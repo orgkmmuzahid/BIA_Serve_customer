@@ -31,6 +31,7 @@ class PlaceOrderModel {
    String? clientServiceType;
    double? clientProductWieght;
    int?    clientQuantity;
+   
   PlaceOrderModel({
     this.fullName,
     this.phone,

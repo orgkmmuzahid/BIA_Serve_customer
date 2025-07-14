@@ -51,6 +51,16 @@ class AppImages {
  static const String giftBox = "$baseurl/gift_box.png";
  static const String discount = "$baseurl/discount.png";
 
+ //payment 
+   static const String mapesa   = '$baseurl/mapesa.png'  ;
+   static const String tegopesa = '$baseurl/tegopesa.png';
+   static const String airtel   = '$baseurl/airtel.png'  ;
+   static const String holapesa = '$baseurl/holapesa.png';
+   static const String selcom   = '$baseurl/selcom.png'  ;
+   static const String zantel   = '$baseurl/zantel.png'  ;
+
+
+
 
 
 

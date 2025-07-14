@@ -1,0 +1,3 @@
+enum DeliveryType {
+  regular, urgent
+}

@@ -1,0 +1,123 @@
+import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/text/common_rich_text.dart';
+import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/utils/app_utils.dart';
+import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class CheckoutScreen extends StatelessWidget {
+   CheckoutScreen({super.key}) :  orderListWidth =  Utils.deviceSize.width - 32,
+    orderlistImageWidth =  (Utils.deviceSize.width - 32) / 3.2;
+  final double orderListWidth;
+  final double orderlistImageWidth;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text(AppString.checkout)),
+    body: Padding(padding: EdgeInsetsGeometry.only(left: 16, right: 16), 
+     child: GetBuilder<PlaceOrderController>(
+       builder: (orderController) {
+
+         return Column(children: [
+          CommonText(text: AppString.productDetails, style: theme.textTheme.titleMedium).start, 
+          _orderListItem(orderController), 
+          _middleCard(orderController),
+          _card([
+            _rowBuilder(title: AppString.totalPrice, data: 'TSH ${orderController.orderDetailsModel.totalPrice}'),
+            _rowBuilder(title: AppString.deliveryCharge, data: 'TSH ${orderController.orderDetailsModel.deliveryCharge}'),
+            _rowBuilder(title: AppString.totalAmount, data: 'TSH ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge}', isBold: true),
+            _rowBuilder(isBold: true ,title: '${orderController.orderDetailsModel.discountPercentage}% ${AppString.discount}', 
+            data: 'TSH ${getDeductedAmount(orderController.orderDetailsModel.discountPercentage, orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice)}'),
+            _rowBuilder( isBold: true ,title: AppString.totalPay, data: 'TSH ${ orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge - (getDeductedAmount(orderController.orderDetailsModel.discountPercentage, orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice))}'),
+           ]), 
+           
+           20.height,
+                CommonText(
+                style: theme.textTheme.titleMedium, textAlign: TextAlign.center,
+                  text: orderController.orderDetailsModel.orderStatus, top: 10, bottom: 10, left: 20, enableBorder: true, backgroundColor : theme.colorScheme.secondary.withAlpha(30),), 
+                20.height,
+
+           CommonButton(titleText: AppString.placeOrder, onTap: (){
+                 Get.until((route)=> route.settings.name == AppRoutes.home);
+             })
+         ],);
+       }
+     ),
+    ),
+  );
+
+  double getDeductedAmount(double percentage, double totalAmount) => (percentage / 100) * totalAmount;
+
+
+
+  Widget _rowBuilder({ required String title, required String data, bool isBold = false}) => Container(
+    padding: EdgeInsets.only(bottom: 5, top: 5),
+    decoration: BoxDecoration(border: Border(bottom: BorderSide(color: theme.scaffoldBackgroundColor))),
+    child: Row(children: [
+      CommonText(text: title, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: isBold? FontWeight.bold : null),), 
+      const Spacer(),
+          CommonText(text: data, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: isBold? FontWeight.bold : null),), 
+    ]),
+  );
+
+
+  Card _middleCard(PlaceOrderController controller) {
+    return _card([
+            Container(
+              decoration: BoxDecoration(color: theme.primaryColor, borderRadius: BorderRadius.circular(10)),
+              padding: EdgeInsets.all(10),
+              child: 
+                  Row(children: [
+                    Icon(Icons.home, color: theme.colorScheme.onPrimary,),
+                    CommonText(text: AppString.shippingAddress, style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSecondary, fontWeight: FontWeight.w600),),
+                    const Spacer(),
+                    Icon(Icons.edit_square, color: theme.colorScheme.onPrimary,),
+                  ],),
+
+          
+            ), 
+              20.height,
+              Row(children: [Icon(Icons.person), 10.width,CommonText(text: controller.placeOrderModel.clientFullName ?? '')],),
+                  Row(children: [Icon(Icons.phone), 10.width,CommonText(text: controller.placeOrderModel.phone ?? '')],),
+                  Row(children: [Icon(Icons.place), 10.width,CommonText(text: controller.clientAddressTextEditController.text ?? '')],),
+                    ]);
+  }
+
+  Card _card(List<Widget> list) {
+    return Card(
+          color: theme.primaryColor.withAlpha(15),
+          child: Container(
+            decoration: BoxDecoration(border: Border.all(color: theme.dividerColor), borderRadius: BorderRadius.circular(10)),
+            padding: const EdgeInsets.all(10),
+            child: Column(children: list,),
+          ));
+  }
+
+   Widget _orderListItem(PlaceOrderController orderController) => SizedBox(
+    width:  orderListWidth,
+    child: Card(
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+           CommonImage(imageSrc: AppImages.appsIcon, size: orderlistImageWidth), 
+            10.width,
+           CommonRichText(richTextContent: [
+            CommonSimpleRichTextContent(text: '#${orderController.orderDetailsModel.orderCode}\n', style: theme.textTheme.bodyLarge?.copyWith(color: theme.primaryColor)),
+            CommonSimpleRichTextContent(text: 'Order Placed – ${Utils.formatDateTime(orderController.orderDetailsModel.orderDate)}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+            CommonSimpleRichTextContent(text: 'Parcel Picked Up – ${orderController.placeOrderModel.clientPickupTime}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+            CommonSimpleRichTextContent(text: 'Quantity – ${orderController.placeOrderModel.quantity}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+            CommonSimpleRichTextContent(text: 'Total Price – ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge}\n', style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+           ]),
+        ],),
+      ),
+    ),
+  );
+}

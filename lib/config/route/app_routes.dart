@@ -4,6 +4,11 @@ import 'package:bai_serve/features/auth/screen/otp_send_screen.dart';
 import 'package:bai_serve/features/home/screen/home_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/loyalty_points_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/my_rewards_screen.dart';
+import 'package:bai_serve/features/place_order/screens/bulk_order_screen.dart';
+import 'package:bai_serve/features/place_order/screens/checkout_screen.dart';
+import 'package:bai_serve/features/place_order/screens/door_to_door_pickup_screen.dart';
+import 'package:bai_serve/features/place_order/screens/order_details_screen.dart';
+import 'package:bai_serve/features/place_order/screens/payment_screen.dart';
 import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
 import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:get/get.dart';
@@ -38,6 +43,11 @@ class AppRoutes {
   static const String pickupInformation = "/pick_up_information_screen.dart";
   static const String loyaltyPoints = "/loyalty_points_screen.dart";
   static const String myRewards = "/my_rewards_screen.dart";
+  static const String orderDetails = "/order_details_screen.dart";
+  static const String payment = "/payment_screen.dart";
+  static const String checkout = "/checkout_screen.dart";
+  static const String bulkOrder = "/bulk_order_screen.dart";
+  static const String doorToDoorPickup = "/door_to_door_pickup_screen.dart";
 
 
   //---------------------
@@ -62,10 +72,15 @@ class AppRoutes {
     GetPage(name: signIn, page: () => SignInScreen()),
     GetPage(name: forgotPassword, page: () => ForgetPasswordScreen()),
     GetPage(name: home, page: () => HomeScreen()),
-    GetPage(name: placeOrder, page: () => const PlaceOrderScreen()),
-    GetPage(name: pickupInformation, page: () => const PickUpInformationScreen()),
+    GetPage(name: placeOrder, page: () => PlaceOrderScreen()),
+    GetPage(name: pickupInformation, page: () => PickUpInformationScreen()),
     GetPage(name: loyaltyPoints, page: () => const LoyaltyPointsScreen()),
     GetPage(name: myRewards, page: () => const MyRewardsScreen()),
+    GetPage(name: orderDetails, page: () => const OrderDetailsScreen()),
+    GetPage(name: payment, page: () => const PaymentScreen()),
+    GetPage(name: checkout, page: () => CheckoutScreen()),
+    GetPage(name: bulkOrder, page: () => BulkOrderScreen()),
+    GetPage(name: doorToDoorPickup, page: () => DoorToDoorPickupScreen()),
 
     //----------------------
     GetPage(name: changePassword, page: () => ChangePasswordScreen()),

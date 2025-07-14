@@ -24,6 +24,10 @@ Future<void> main() async {
 Future<void> init() async {
   _diInit();
   SocketServices.connectToSocket();
+   FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    // Optionally log or report errors
+  };
   await Future.wait([
     LocalStorage.getAllPrefData(),
     NotificationService.initLocalNotification(),

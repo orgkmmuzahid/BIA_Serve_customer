@@ -166,6 +166,32 @@ class AppString {
   static const String claim = "Claim";
   static const String receivedCode  = "Received Code";
   static const String orderNow  = "Order Now";
+  static const String submitCodeBy  = "Submit Code: (Regular Customer)";
+  static const String totalPrice = "Total Price";
+
+  //order details report
+  static const String orderDetails = "Order Details";
+  static const String orderCode            = 'Order Code';
+  static const String customer             = 'Customer';
+  static const String shippingAddress      = 'Shipping Address';
+  static const String productDetails       = 'Product Details';
+  static const String weight               = 'Weight';
+  static const String orderDateTime        = 'Order date';
+  static const String orderStatus          = 'Order status';
+  static const String deliveryCharge       = 'Delivery Charge';
+  static const String discountPercentage   = 'Discount';
+  static const String totalAmount   = 'Total Amount';
+  static const String bankPayment   = 'Bank Payment';
+  static const String checkout   = 'Checkout';
+  static const String totalPay   = 'Total pay';
+
+  static const pickupFromMe = 'Pick Up from Me';
+  static const pickupFromVendor = 'Pick Up from Vendor';
+  static const urgentDelivery = "Urgent Delivery";
+  static const regularDelivery = "Regular Delivery";
+  static const listOfSupplier = 'List of Supplier';
+  static const addProduct = '+ Add Product';
+  
 
   static String loaltyClaimingMessage(String value) => "You’ve received a $value on your next order! Don’t miss out ";
 

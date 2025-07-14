@@ -4,6 +4,7 @@ import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/loyalty_points/model/loyalty_offer_model.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // Get.lazyPut(() => LoyaltyPointsController(), fenix: true);
@@ -22,9 +23,10 @@ class LoyaltyPointsController extends GetxController {
 
     if(Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap?.isEmpty == true 
        || Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap == null){
-       Get.offNamedUntil(AppRoutes.placeOrder, (route) {
-        return  route.settings.name == AppRoutes.home;
-       });  
+       Get.offNamedUntil(
+  AppRoutes.placeOrder,
+  ModalRoute.withName(AppRoutes.loyaltyPoints),
+); Get.toNamed(AppRoutes.placeOrder);
     }else{
        Get.until((route)=> route.settings.name == AppRoutes.pickupInformation);
     }

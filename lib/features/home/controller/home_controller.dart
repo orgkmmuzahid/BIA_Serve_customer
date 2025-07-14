@@ -27,9 +27,14 @@ class HomeController extends GetxController {
   }
   void onVendorSourcing(){ }
   void onPurchaseAndDelivery(){ }
-  void onBulkOrderAgents(){ }
+  void onBulkOrderAgents(){
+    Get.toNamed(AppRoutes.bulkOrder);
+   }
   void onVerifyVendor(){ }
-  void onDoorToDoorPickup(){ }
+  
+  void onDoorToDoorPickup(){ 
+    Get.toNamed(AppRoutes.doorToDoorPickup);
+  }
 
   //drawer
 void onDrawerReturnProduct(){}

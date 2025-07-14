@@ -1,0 +1,4 @@
+enum PickupType {
+  pickupFromMe, 
+  pickupFromVendor
+}

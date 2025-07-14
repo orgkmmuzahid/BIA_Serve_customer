@@ -5,7 +5,9 @@ import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
+import 'package:bai_serve/features/place_order/controllers/door_to_door_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/features/place_order/enum/delivery_type.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:bai_serve/utils/helpers/other_helper.dart';
@@ -15,11 +17,13 @@ import 'package:get/get.dart';
 
  final _formKey = GlobalKey<FormState>();
 class PickUpInformationScreen  extends StatelessWidget {
-  const PickUpInformationScreen({super.key});
+   PickUpInformationScreen({super.key}) : title = (Get.arguments == null? {} : Get.arguments as Map<String, dynamic>)['title'] ?? AppString.placeOrder;
+
+   final String title;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CommonAppBar(title: AppString.placeOrder, onBackPress: Get.find<PlaceOrderController>().onBackpress),
+    appBar: CommonAppBar(title: title, onBackPress: Get.find<PlaceOrderController>().onBackpress),
     body: SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -137,23 +141,18 @@ class PickUpInformationScreen  extends StatelessWidget {
              }).paddingOnly(bottom: 10),
 
             // _multilineTextField(100).paddingOnly(bottom: 10), //itemDetails
-            
-            GetBuilder<LoyaltyPointsController>(builder:(loyaltyController){
-              return Column(children: [
-                 if(placeOrderController.showCouponButton && loyaltyController.offercode == null)
-            _rowBuilder( CommonButton(titleText: AppString.couponCode, onTap: placeOrderController.onCoupon), CommonButton(titleText: AppString.noCouponCode,
-             buttonColor: theme.scaffoldBackgroundColor, borderColor: theme.dividerColor, titleColor: theme.textTheme.bodySmall!.color, onTap: placeOrderController.onNoCoupon), space: 20 ),
+            if(title == AppString.placeOrder)
+            _coupon(placeOrderController),
 
-             CommonText(text: loyaltyController.offercode ?? '')
-              ],);
-            }),
+            if(title == AppString.homeDoorToDoorPickup)
+              _doorToDoorDeliveryType(),
             
            
             10.height,
             CommonButton(titleText: AppString.continues, onTap: () {
             //  if( _formKey.currentState?.validate() == true){}
               _formKey.currentState?.save();
-             
+              placeOrderController.placeOrderNow();
             },),
                 ],).paddingOnly(left: 16, right: 16, bottom: 25);
           }
@@ -161,7 +160,52 @@ class PickUpInformationScreen  extends StatelessWidget {
     ),
   );
 
+  GetBuilder<LoyaltyPointsController> _coupon(PlaceOrderController placeOrderController) {
+    return GetBuilder<LoyaltyPointsController>(builder:(loyaltyController){
+            return Column(children: [
+               if(placeOrderController.showCouponButton && loyaltyController.offercode == null)
+          _rowBuilder( CommonButton(titleText: AppString.couponCode, onTap: placeOrderController.onCoupon), CommonButton(titleText: AppString.noCouponCode,
+           buttonColor: theme.scaffoldBackgroundColor, borderColor: theme.dividerColor, titleColor: theme.textTheme.bodySmall!.color, onTap: placeOrderController.onNoCoupon), space: 20 ),
+            if(loyaltyController.offercode != null)
+            CommonText(text: AppString.submitCodeBy, enableBorder: true, top: 15, bottom: 15, right: 10, left: 10, borderRadius: 10,),
+            10.height,
+              CommonButton( buttonColor: theme.colorScheme.secondary.withAlpha(20), titleColor: theme.textTheme.bodyMedium?.color ,titleText: '${AppString.totalPrice}: Tsh ${placeOrderController.orderDetailsModel.totalPrice}')
+            ],);
+          });
+  }
 
+  GetBuilder<DoorToDoorController> _doorToDoorDeliveryType() {
+    return GetBuilder<DoorToDoorController>(builder: (doorToDoorConroller){
+              return Row(children: [
+                Expanded(
+                  child: CommonButton(
+                    onTap: () {
+                      doorToDoorConroller.onDeliveryTypeChange(DeliveryType.urgent);
+                    }, buttonColor: theme.scaffoldBackgroundColor,
+                     borderColor: _getRadioColor(doorToDoorConroller, DeliveryType.urgent),
+                     titleColor: _getRadioColor(doorToDoorConroller, DeliveryType.urgent)
+                    ,titleText: AppString.urgentDelivery, icon: Icon(
+                         doorToDoorConroller.deliveryType == DeliveryType.urgent ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                        color:  doorToDoorConroller.deliveryType == DeliveryType.urgent? theme.colorScheme.primary : theme.dividerColor,
+                      ), ),
+                ), 
+                10.width,
+                  Expanded(
+                    child: CommonButton(  onTap: () {
+                      doorToDoorConroller.onDeliveryTypeChange(DeliveryType.regular);
+                    }, borderColor: _getRadioColor(doorToDoorConroller, DeliveryType.regular),
+                    buttonColor: theme.scaffoldBackgroundColor, titleColor: _getRadioColor(doorToDoorConroller, DeliveryType.regular),
+                    titleText: AppString.regularDelivery, icon: Icon(
+                         doorToDoorConroller.deliveryType == DeliveryType.regular ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                        color:  doorToDoorConroller.deliveryType == DeliveryType.regular? theme.colorScheme.primary : theme.dividerColor,
+                      ), ),
+                  )
+              ]);
+            });
+  }
+
+ Color _getRadioColor(DoorToDoorController doorToDoorConroller, DeliveryType buttonType) =>  doorToDoorConroller.deliveryType == buttonType? theme.colorScheme.primary : theme.disabledColor;
+ 
   Widget _showTimer(Function(String value) ontTimeChange) {
     var itemList = Get.find<PlaceOrderController>().serviceTimes;
      return PopupMenuButton<String>(
