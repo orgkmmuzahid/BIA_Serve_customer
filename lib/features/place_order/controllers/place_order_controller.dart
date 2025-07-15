@@ -121,6 +121,7 @@ class PlaceOrderController extends GetxController {
  void showInformationForm(String pageTitle){
   if(pageTitle == AppString.homeBulkOrderAgents){
     //send to negotiation assistance.
+    Get.toNamed(AppRoutes.negotiationAssistance);
     return;
   }
   if(placeOrderModel.marchentAdressOnMap?.isNotEmpty == true && placeOrderModel.clientAdressOnMap?.isNotEmpty == true) Get.toNamed(AppRoutes.pickupInformation, arguments: {'title': pageTitle});

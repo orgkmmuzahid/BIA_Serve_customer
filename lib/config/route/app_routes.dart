@@ -1,12 +1,15 @@
 import 'package:bai_serve/features/auth/screen/forget_password_screen.dart';
 import 'package:bai_serve/features/auth/screen/login_with_screen.dart';
 import 'package:bai_serve/features/auth/screen/otp_send_screen.dart';
+import 'package:bai_serve/features/chat/screens/chat_screen.dart';
 import 'package:bai_serve/features/home/screen/home_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/loyalty_points_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/my_rewards_screen.dart';
-import 'package:bai_serve/features/place_order/screens/bulk_order_screen.dart';
+import 'package:bai_serve/features/bulk_order/screens/bulk_order_details_screen.dart';
+import 'package:bai_serve/features/bulk_order/screens/bulk_order_screen.dart';
 import 'package:bai_serve/features/place_order/screens/checkout_screen.dart';
 import 'package:bai_serve/features/place_order/screens/door_to_door_pickup_screen.dart';
+import 'package:bai_serve/features/bulk_order/screens/negotiation_assistance_screen.dart';
 import 'package:bai_serve/features/place_order/screens/order_details_screen.dart';
 import 'package:bai_serve/features/place_order/screens/payment_screen.dart';
 import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
@@ -16,8 +19,6 @@ import '../../features/auth/screen/change_password_screen.dart';
 import '../../features/auth/screen/sign_in_screen.dart';
 import '../../features/auth/screen/sign_up_screen.dart';
 import '../../features/auth/screen/verify_user_screen.dart';
-import '../../features/message/presentation/screen/chat_screen.dart';
-import '../../features/message/presentation/screen/message_screen.dart';
 import '../../features/notifications/presentation/screen/notifications_screen.dart';
 import '../../features/onboarding_screen/onboarding_screen.dart';
 import '../../features/profile/presentation/screen/edit_profile.dart';
@@ -48,13 +49,14 @@ class AppRoutes {
   static const String checkout = "/checkout_screen.dart";
   static const String bulkOrder = "/bulk_order_screen.dart";
   static const String doorToDoorPickup = "/door_to_door_pickup_screen.dart";
+  static const String negotiationAssistance = "/negotiation_assistance_screen.dart";
+  static const String chat = "/chat_screen.dart";
+  static const String bulkOrderDetails = "/bulk_order_details_screen.dart";
 
 
   //---------------------
   static const String changePassword = "/change_password_screen.dart";
   static const String notifications = "/notifications_screen.dart";
-  static const String chat = "/chat_screen.dart";
-  static const String message = "/message_screen.dart";
   static const String profile = "/profile_screen.dart";
   static const String editProfile = "/edit_profile.dart";
   static const String privacyPolicy = "/privacy_policy_screen.dart";
@@ -81,12 +83,14 @@ class AppRoutes {
     GetPage(name: checkout, page: () => CheckoutScreen()),
     GetPage(name: bulkOrder, page: () => BulkOrderScreen()),
     GetPage(name: doorToDoorPickup, page: () => DoorToDoorPickupScreen()),
+    GetPage(name: negotiationAssistance, page: () => NegotiationAssistanceScreen()),
+    GetPage(name: chat, page: () =>  ChatScreen()),
+    GetPage(name: bulkOrderDetails, page: () =>  BulkOrderDetailsScreen()),
+
 
     //----------------------
     GetPage(name: changePassword, page: () => ChangePasswordScreen()),
     GetPage(name: notifications, page: () => const NotificationScreen()),
-    GetPage(name: chat, page: () => const ChatListScreen()),
-    GetPage(name: message, page: () => const MessageScreen()),
     GetPage(name: profile, page: () => const ProfileScreen()),
     GetPage(name: editProfile, page: () => EditProfile()),
     GetPage(name: privacyPolicy, page: () => const PrivacyPolicyScreen()),

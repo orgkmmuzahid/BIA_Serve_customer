@@ -1,9 +1,8 @@
-import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/common/common_language_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/notifications/presentation/controller/notifications_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,8 +39,7 @@ class  CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
           List<Widget> _appBarActions() =>  [
         GetBuilder<NotificationsController>(builder: (controller)=> GestureDetector(onTap: controller.onNotificationTap ,child: _buildNotificationIcon(notificationCount: controller.totalUnreadNotification))),
         12.width,
-        GetBuilder<HomeController>(builder: (controller)=> _buildLanguageDropdown(slectedCountry: controller.selectedCountry, availableCountries: controller.availableCountries,
-         onCountryChange: controller.onCountryChange)),
+        GetBuilder<HomeController>(builder: (controller)=> CommonLanguageDropDown(slectedCountry: controller.selectedCountry, availableCountries: controller.availableCountries, onCountryChange: controller.onCountryChange)),
         16.width
       ];
 
@@ -81,66 +79,6 @@ Widget _buildNotificationIcon({
             ),
           ),
       ],
-    );
-  }
-
-  Widget _buildLanguageDropdown({  required MapEntry<String, String> slectedCountry,
-  required Map<String, String> availableCountries,
-  required void Function(MapEntry<String, String> country) onCountryChange}) {
-    
-    return DropdownButtonHideUnderline(
-      child: DropdownButton2<MapEntry<String, String>>(
-        customButton: CommonImage(imageSrc: slectedCountry.value, size: 24,),
-        items: [
-          ...availableCountries.entries.map((country) {
-            return DropdownMenuItem<MapEntry<String, String>>(
-              value: country,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 118,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        color:
-                            theme
-                                .inputDecorationTheme
-                                .disabledBorder!
-                                .borderSide
-                                .color,
-                      ),
-                    ),
-                    child: Row(children: [ 
-                      CommonImage(imageSrc: country.value, size: 24, borderRadius: 24), 
-                      10.width,
-                      SizedBox(
-                        child: CommonText(text: country.key, style: theme.textTheme.bodyLarge,))
-                      ],)
-                       
-                  ),
-                ],
-              ),
-            );
-          }),
-        ],
-        onChanged: (newCountry) {
-          if(newCountry != null){
-        
-         onCountryChange(newCountry);
-          
-        }},
-        dropdownStyleData: DropdownStyleData(
-          width: 150,
-          maxHeight: 320,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: theme.scaffoldBackgroundColor,
-          ),
-          offset: const Offset(0, 0), // Optional spacing below the button
-        ),
-      ),
     );
   }
     }

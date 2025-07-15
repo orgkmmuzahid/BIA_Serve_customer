@@ -1,11 +1,12 @@
 import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve/features/custom_google_map/controllers/custom_google_map_controller.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/home/controller/home_order_conroller.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
-import 'package:bai_serve/features/place_order/controllers/bulk_order_controller.dart';
+import 'package:bai_serve/features/bulk_order/controllers/bulk_order_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/door_to_door_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,6 @@ import '../../features/auth/controllers/change_password_controller.dart';
 import '../../features/auth/controllers/forget_password_controller.dart';
 import '../../features/auth/controllers/sign_in_controller.dart';
 import '../../features/auth/controllers/sign_up_controller.dart';
-import '../../features/message/presentation/controller/chat_controller.dart';
-import '../../features/message/presentation/controller/message_controller.dart';
 import '../../features/notifications/presentation/controller/notifications_controller.dart';
 import '../../features/profile/presentation/controller/profile_controller.dart';
 import '../../features/setting/presentation/controller/privacy_policy_controller.dart';
@@ -39,10 +38,10 @@ class DependencyInjection extends Bindings {
 
     Get.lazyPut(() => PlaceOrderController(), fenix: true);
     Get.lazyPut(() => LoyaltyPointsController(), fenix: true);
+    Get.lazyPut(() => ChatController(), fenix: true);
 
     Get.lazyPut(() => NotificationsController(), fenix: true);
     Get.lazyPut(() => ChatController(), fenix: true);
-    Get.lazyPut(() => MessageController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => SettingController(), fenix: true);
     Get.lazyPut(() => PrivacyPolicyController(), fenix: true);

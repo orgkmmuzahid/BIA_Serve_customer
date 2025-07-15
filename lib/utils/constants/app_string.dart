@@ -191,6 +191,12 @@ class AppString {
   static const regularDelivery = "Regular Delivery";
   static const listOfSupplier = 'List of Supplier';
   static const addProduct = '+ Add Product';
+  static const negotiationAssistance = 'Negotiation Assistance';
+  static const messageRequest = 'Message Request';
+  static const negotiationAssistanceSubTitle = 'Request negotiation help from admin for better pricing.';
+  static const sentOrder = 'Sent Order';
+  static const orderSummery = 'Order Summery';
+  static const submitPromoCode = 'Submit Promo Code';
   
 
   static String loaltyClaimingMessage(String value) => "You’ve received a $value on your next order! Don’t miss out ";

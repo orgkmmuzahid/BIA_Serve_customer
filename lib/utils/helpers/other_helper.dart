@@ -20,6 +20,14 @@ class OtherHelper {
     return null;
   }
 
+  static String? requiredFieldValidator(value){
+        if (value == null || value.isEmpty) {
+          return AppString.thisFieldIsRequired;
+        } else {
+          return null;
+        }
+  }
+
   static String? emailValidator(value) {
     if (value == null || value.isEmpty) {
       return AppString.thisFieldIsRequired;
