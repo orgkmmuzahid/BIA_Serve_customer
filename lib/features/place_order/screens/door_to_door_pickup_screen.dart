@@ -20,7 +20,7 @@ class DoorToDoorPickupScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
           CommonButton(titleText: AppString.pickupFromMe, buttonWidth: 200, 
-          buttonColor: AppColors.rewardPointsColor, borderColor: AppColors.rewardPointsColor,
+          buttonColor: AppColors.primaryColor2, borderColor: AppColors.primaryColor2,
           onTap: ()=> controller.onPickupTypeChange(PickupType.pickupFromMe) ,
           ).center,
           10.height,

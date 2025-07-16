@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 
-import 'package:bai_serve/utils/enum/enum.dart';
+enum DeliveryStatus{
+  pending,delivered, cancel
+}
 
 class OrderListModel {
   final String orderNumber;
@@ -10,23 +12,24 @@ class OrderListModel {
   final DateTime percelPickedUp;
   final DateTime inTransition;
   //enum
-  final OrderProgress orderProgress;
+  final DeliveryStatus deliveryStatus;
   final String outForDelivery;
   OrderListModel({
     required this.orderNumber,
     required this.orderPlacedDate,
     required this.percelPickedUp,
     required this.inTransition,
-    required this.orderProgress,
+    required this.deliveryStatus,
     required this.outForDelivery,
   });
+ 
 
   OrderListModel copyWith({
     String? orderNumber,
     DateTime? orderPlacedDate,
     DateTime? percelPickedUp,
     DateTime? inTransition,
-    OrderProgress? orderProgress,
+    DeliveryStatus? deliveryStatus,
     String? outForDelivery,
   }) {
     return OrderListModel(
@@ -34,7 +37,7 @@ class OrderListModel {
       orderPlacedDate: orderPlacedDate ?? this.orderPlacedDate,
       percelPickedUp: percelPickedUp ?? this.percelPickedUp,
       inTransition: inTransition ?? this.inTransition,
-      orderProgress: orderProgress ?? this.orderProgress,
+      deliveryStatus: deliveryStatus ?? this.deliveryStatus,
       outForDelivery: outForDelivery ?? this.outForDelivery,
     );
   }
@@ -45,7 +48,7 @@ class OrderListModel {
       'orderPlacedDate': orderPlacedDate.millisecondsSinceEpoch,
       'percelPickedUp': percelPickedUp.millisecondsSinceEpoch,
       'inTransition': inTransition.millisecondsSinceEpoch,
-      'orderProgress': orderProgress.index,
+      'deliveryStatus': deliveryStatus.index,
       'outForDelivery': outForDelivery,
     };
   }
@@ -56,7 +59,7 @@ class OrderListModel {
       orderPlacedDate: DateTime.fromMillisecondsSinceEpoch(map['orderPlacedDate'] as int),
       percelPickedUp: DateTime.fromMillisecondsSinceEpoch(map['percelPickedUp'] as int),
       inTransition: DateTime.fromMillisecondsSinceEpoch(map['inTransition'] as int),
-      orderProgress: OrderProgress.values[map['orderProgress'] as int],
+      deliveryStatus: DeliveryStatus.values[map['deliveryStatus'] as int],
       outForDelivery: map['outForDelivery'] as String,
     );
   }
@@ -67,7 +70,7 @@ class OrderListModel {
 
   @override
   String toString() {
-    return 'OrderListModel(orderNumber: $orderNumber, orderPlacedDate: $orderPlacedDate, percelPickedUp: $percelPickedUp, inTransition: $inTransition, orderProgress: $orderProgress, outForDelivery: $outForDelivery)';
+    return 'OrderListModel(orderNumber: $orderNumber, orderPlacedDate: $orderPlacedDate, percelPickedUp: $percelPickedUp, inTransition: $inTransition, deliveryStatus: $deliveryStatus, outForDelivery: $outForDelivery)';
   }
 
   @override
@@ -79,7 +82,7 @@ class OrderListModel {
       other.orderPlacedDate == orderPlacedDate &&
       other.percelPickedUp == percelPickedUp &&
       other.inTransition == inTransition &&
-      other.orderProgress == orderProgress &&
+      other.deliveryStatus == deliveryStatus &&
       other.outForDelivery == outForDelivery;
   }
 
@@ -89,7 +92,7 @@ class OrderListModel {
       orderPlacedDate.hashCode ^
       percelPickedUp.hashCode ^
       inTransition.hashCode ^
-      orderProgress.hashCode ^
+      deliveryStatus.hashCode ^
       outForDelivery.hashCode;
   }
 }

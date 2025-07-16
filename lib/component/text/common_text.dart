@@ -21,7 +21,7 @@ class CommonText extends StatelessWidget {
     this.overflow = TextOverflow.ellipsis,
     this.enableBorder = false,
     this.borderColor,
-    this.borderRadius, this.backgroundColor
+    this.borderRadius, this.backgroundColor, this.alignment
   });
 
   final double left;
@@ -40,7 +40,7 @@ class CommonText extends StatelessWidget {
   final Color? borderColor;
   final double? borderRadius;
   final Color? backgroundColor;
-
+  final MainAxisAlignment? alignment;
   @override
   Widget build(BuildContext context) => enableBorder == true? withBorder() :  withoutBorder();
   
@@ -59,6 +59,7 @@ class CommonText extends StatelessWidget {
       borderRadius: borderRadius != null? BorderRadius.circular(borderRadius!): null,
      border: borderColor != null? _buildBorder(borderColor!): _buildBorder(theme.dividerColor)),
     child: Row(
+      mainAxisAlignment: alignment ?? MainAxisAlignment.start,
       children: [
         _textFiled(),
       ],

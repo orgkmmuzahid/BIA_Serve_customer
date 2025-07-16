@@ -75,18 +75,18 @@ class SettingScreen extends StatelessWidget {
                     height: 52.h,
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     decoration: BoxDecoration(
-                      color: AppColors.blueLight,
+                      color: AppColors.serfeceBG,
                       borderRadius: BorderRadius.circular(4.r),
                     ),
                     child: Row(
                       children: [
                         const Icon(
                           Icons.delete_outline_rounded,
-                          color: AppColors.secondary,
+                          color: AppColors.primaryButton,
                         ),
                         CommonText(
                           text: AppString.drawerDeleteAccount,
-                          color: AppColors.secondary,
+                          color: AppColors.primaryButton,
                           left: 12.w,
                         ),
                       ],
@@ -100,7 +100,7 @@ class SettingScreen extends StatelessWidget {
       ),
 
       /// Bottom Navigation Bar Section starts here
-      bottomNavigationBar: const CommonBottomNavBar(currentIndex: 0),
+      bottomNavigationBar: const CommonBottomNavBar(),
     );
   }
 }

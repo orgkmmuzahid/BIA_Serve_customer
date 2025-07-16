@@ -145,7 +145,7 @@ class AppString {
   static const String  itemDetails = 'Item Details';
   static const String  pickupTime = 'Pickup Time';
   static const String  serviceType = 'Service Type';
-  static const String  addImage = 'Add Image';
+  static const String  addImage = 'Add Images';
   static const String  productWieght = 'Product Weight';
   static const String  quantity = 'Quantity';
   static const String  deliveryAddress = 'Delivery Address';
@@ -197,6 +197,20 @@ class AppString {
   static const sentOrder = 'Sent Order';
   static const orderSummery = 'Order Summery';
   static const submitPromoCode = 'Submit Promo Code';
+  static const vendorName = 'Vendors Name';
+
+  static const vendorId = 'Vendor ID';
+  static const vendorContactNumber = 'Vendor Contact Number';
+  static const productAmount = 'Product Amount';
+  static const deliveryType = 'Delivery Type';
+  static const deliveryAdress = 'Delivery Adress';
+  static const productDescription = 'Product Description';
+  static const serviceFee = 'Service Fee';
+  static const monySign = 'TSH';
+  static const percelTracking = 'Parcel Tracking';
+  static const account = 'Account';
+  static const searchForOrder = 'Search For Order';
+
   
 
   static String loaltyClaimingMessage(String value) => "You’ve received a $value on your next order! Don’t miss out ";

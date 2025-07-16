@@ -1,5 +1,6 @@
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -11,9 +12,7 @@ import '../../../config/route/app_routes.dart';
 
 
 class CommonBottomNavBar extends StatefulWidget {
-  final int currentIndex;
-
-  const CommonBottomNavBar({required this.currentIndex, super.key});
+  const CommonBottomNavBar({ super.key});
 
   @override
   State<CommonBottomNavBar> createState() => _CommonBottomNavBarState();
@@ -26,7 +25,6 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
   final unselectedColor = theme.textTheme.bodyMedium!.color;
   final unselectedBackgroundColor = theme.textTheme.bodyMedium!.color;
 
-  var bottomNavIndex = 0;
   Map<String, String> iconList = { //"title": "image url"
     AppString.navHome: AppImages.navHome,
     AppString.navMyOrder: AppImages.navMyOrder,
@@ -36,71 +34,54 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
 
   @override
   void initState() {
-    
-    bottomNavIndex = widget.currentIndex;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(12.sp),
-        decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(iconList.length, (index) {
-            return GestureDetector(
-              onTap: () => onTap(index),
-              child: Container(
-                child: _buildIcon(iconList.entries.elementAt(index), index ),
-              ),
-            );
-          }),
-        ),
-      ),
+    return GetBuilder<HomeController>(
+      builder: (homeController) {
+        return SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(12.sp),
+            decoration: BoxDecoration(
+                color: theme.scaffoldBackgroundColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.r),
+                    topRight: Radius.circular(20.r))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(iconList.length, (index) {
+                return GestureDetector(
+                  onTap: () {
+                    homeController.onNavMenuChange(index);},
+                  child: Container(
+                    child: _buildIcon(iconList.entries.elementAt(index), index, homeController ),
+                  ),
+                );
+              }),
+            ),
+          ),
+        );
+      }
     );
   }
 
-  void onTap(int index) async {
 
-    if (index == 0) {
-      if (!(widget.currentIndex == 0)) {
-        goToScreen(AppRoutes.home);
-      }
-    } else if (index == 1) {
-      if (!(widget.currentIndex == 1)) {
-        goToScreen(AppRoutes.notifications);
-      }
-    } else if (index == 2) {
-      if (!(widget.currentIndex == 2)) {
-        goToScreen(AppRoutes.chat);
-      }
-    } else if (index == 3) {
-      if (!(widget.currentIndex == 3)) {
-        goToScreen(AppRoutes.profile);
-      }
-    }
-  }
-
-  Widget _buildIcon(MapEntry<String, String> navIcon, int index){
+  Widget _buildIcon(MapEntry<String, String> navIcon, int index, HomeController controller){
     return Column(children: [
        CircleAvatar(
-        backgroundColor: _isSelected(index)? selectedIconBackgroundColor : theme.scaffoldBackgroundColor,
+        backgroundColor: _isSelected(index, controller)? selectedIconBackgroundColor : theme.scaffoldBackgroundColor,
         radius: 20,
-        child: CommonImage(imageSrc: navIcon.value, size: 24, imageColor: _isSelected(index)? selectedIconIconColor : unselectedColor)),
-       CommonText(text: navIcon.key, style: theme.textTheme.bodyMedium?.copyWith(color: _isSelected(index)? selectedIconBackgroundColor : unselectedColor , 
-       fontSize: _isSelected(index) ? 12 : 10,
-       fontWeight:_isSelected(index)? FontWeight.w700 : FontWeight.w400))    
+        child: CommonImage(imageSrc: navIcon.value, size: 24, imageColor: _isSelected(index, controller)? selectedIconIconColor : unselectedColor)),
+       CommonText(text: navIcon.key, style: theme.textTheme.bodyMedium?.copyWith(color: _isSelected(index, controller)? selectedIconBackgroundColor : unselectedColor , 
+       fontSize: _isSelected(index, controller) ? 12 : 10,
+       fontWeight:_isSelected(index, controller)? FontWeight.w700 : FontWeight.w400))    
     ],);
   }
 
-  bool _isSelected(int index) => index == bottomNavIndex;
+  bool _isSelected(int index, HomeController controller) => index == controller.selectedNavMenu;
 }

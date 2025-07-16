@@ -1,3 +1,4 @@
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -106,11 +107,11 @@ final ThemeData lightTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Colors.transparent, // 🧾 TextField background
-    border: _buildBorder(color: const Color(0xffE6F1F1)),
-    enabledBorder: _buildBorder(color: const Color(0xff0A6F77)),
-    focusedBorder: _buildBorder(color: const Color(0xFF0A6F77)),
-    disabledBorder: _buildBorder(color: const Color(0xffE6F1F1)),
-    errorBorder: _buildBorder(color: const Color(0xFFE53935)),
+    border: _buildBorder(color: AppColors.disable),
+    enabledBorder: _buildBorder(color: AppColors.disable),
+    focusedBorder: _buildBorder(color: AppColors.primaryColor),
+    disabledBorder: _buildBorder(color: AppColors.disable),
+    errorBorder: _buildBorder(color: AppColors.error),
     hintStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFF979797)),
     labelStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xffBFBFBF)),
   ),
@@ -118,7 +119,7 @@ final ThemeData lightTheme = ThemeData(
 
 OutlineInputBorder _buildBorder({required Color color}) {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(5),
     borderSide: BorderSide(color: color),
   );
 }

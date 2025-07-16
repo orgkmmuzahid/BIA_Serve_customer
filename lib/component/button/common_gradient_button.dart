@@ -24,7 +24,7 @@ class CommonGradientButton extends StatelessWidget {
     this.buttonWidth,
     this.titleSize = 16,
     this.titleWeight = FontWeight.w700,
-    this.titleColor = AppColors.white,
+    this.titleColor = AppColors.secondaryColor,
   });
   @override
   Widget build(BuildContext context) => Container(

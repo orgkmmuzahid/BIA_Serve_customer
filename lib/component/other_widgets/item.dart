@@ -12,7 +12,7 @@ class Item extends StatelessWidget {
       this.image = "",
       this.disableDivider = false,
       this.onTap,
-      this.color = AppColors.black,
+      this.color = AppColors.primaryText,
       this.vertical = 4,
       this.horizontal = 24,
       this.disableIcon = false});

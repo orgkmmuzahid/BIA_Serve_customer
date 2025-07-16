@@ -20,7 +20,7 @@ class PopUpMenu extends StatelessWidget {
     this.unselectedColor = Colors.transparent,
     this.style,
     this.isContainer = false,
-    this.iconColor = AppColors.black,
+    this.iconColor = AppColors.primaryText,
     this.iconData = Icons.keyboard_arrow_down_outlined,
   });
 
@@ -178,7 +178,7 @@ void deletePopUp({
                     text: AppString.areYouSure,
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.black,
+                    color: AppColors.primaryText,
                     maxLines: 1,
                     bottom: 24.h,
                   ),
@@ -187,7 +187,7 @@ void deletePopUp({
                   text: AppString.deleteDetails,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.black,
+                  color: AppColors.primaryText,
                   maxLines: 2,
                   bottom: 20.h,
                 ),
@@ -205,8 +205,8 @@ void deletePopUp({
                 Expanded(
                   child: CommonButton(
                     titleText: AppString.cancel,
-                    titleColor: AppColors.black,
-                    borderColor: AppColors.black,
+                    titleColor: AppColors.primaryText,
+                    borderColor: AppColors.primaryText,
                     buttonColor: AppColors.transparent,
                     buttonRadius: 4.r,
                     buttonHeight: 48.h,
@@ -217,7 +217,7 @@ void deletePopUp({
                 Expanded(
                   child: CommonButton(
                     titleText: AppString.done,
-                    titleColor: AppColors.white,
+                    titleColor: AppColors.serfeceBG,
                     buttonRadius: 4.r,
                     buttonHeight: 48.h,
                     onTap: () async {

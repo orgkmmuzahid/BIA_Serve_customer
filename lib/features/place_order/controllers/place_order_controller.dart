@@ -16,29 +16,9 @@ import 'package:image_picker/image_picker.dart';
 class PlaceOrderController extends GetxController {
 
   bool showCouponButton = true;
- 
-  List<String> serviceTimes = [
-    "10:00 AM",
-    "10:15 AM",
-    "10:30 AM",
-    "10:45 AM",
-    "11:00 AM",
-    "11:15 AM",
-    "11:30 AM",
-    "11:45 AM",
-    "12:00 PM",
-    ];
   
   String? selectedPayment;
 
-  Map<String, String> paymentList = {
-    'mapesa' : AppImages.mapesa,
-    'tegopesa' : AppImages.tegopesa,
-    'airtel' :  AppImages.airtel,
-    'holapesa': AppImages.holapesa,
-    'selcom' : AppImages.selcom,
-    'zantel' : AppImages.zantel,
-  };
 
   List<String> recentSearch = [
     '2464 Royal Ln. Mesa, New Jersey 45463'
@@ -63,27 +43,13 @@ class PlaceOrderController extends GetxController {
            totalPrice: 50,
             deliveryCharge: 20, discountPercentage: 10);
 
-   List<String> selectedImagesPath = [];
-  final ImagePicker _picker = ImagePicker();
-
 
   void onPaymentChange(String newPayment){
            selectedPayment = newPayment;
            update();
   }
 
-  Future<void> pickImage() async {
-    final XFile? pickedFile = await _picker.pickImage(
-      source: ImageSource.gallery,
-      // imageQuality: 85, // reduce size if needed
-    );
-    if (pickedFile != null) {
-        if(selectedImagesPath.indexWhere((value)=> value == pickedFile.path)== -1) {
-          selectedImagesPath.add( pickedFile.path);
-          update();
-        }
-    }
-  }
+
 
   void placeOrderNow()async{
     //on order success;
@@ -105,7 +71,6 @@ class PlaceOrderController extends GetxController {
   
   void onBackpress(){
     showCouponButton = true;
-    selectedImagesPath.clear();
   }
   
   void onFormChange(PlaceOrderModel model){

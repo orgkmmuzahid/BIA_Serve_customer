@@ -22,7 +22,7 @@ class ErrorScreen extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 16,
-                color: AppColors.white),
+                color: AppColors.serfeceBG),
           ),
           const SizedBox(
             height: 20,

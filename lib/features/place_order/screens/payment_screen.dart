@@ -2,6 +2,7 @@ import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/common/inputdata/input_data.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,9 @@ class PaymentScreen extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: Column(children: [
-            ...List.generate(orderController.paymentList.length, (index){
+            ...List.generate( InputData.paymentList.length, (index){
           
-              var payment =  orderController.paymentList.entries.elementAt(index);
+              var payment =  InputData.paymentList.entries.elementAt(index);
           
               return GestureDetector(
                 onTap: ()=> orderController.onPaymentChange(payment.key),

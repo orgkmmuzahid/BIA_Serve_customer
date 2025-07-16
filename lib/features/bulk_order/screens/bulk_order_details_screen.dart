@@ -8,7 +8,6 @@ import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class BulkOrderDetailsScreen extends StatelessWidget {
   const BulkOrderDetailsScreen({super.key});

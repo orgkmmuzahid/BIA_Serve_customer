@@ -107,7 +107,9 @@ class HomeContent extends StatelessWidget {
                       Row(children: [
                         CommonText(text: AppString.myOrder, style: theme.textTheme.bodyLarge),
                         Spacer(), 
-                        TextButton(onPressed: (){}, child: CommonText(text: "${AppString.seeAll} \u2192"))
+                        TextButton(onPressed: (){
+                          homeController.onNavMenuChange(1);
+                        }, child: CommonText(text: "${AppString.seeAll} \u2192"))
                       ],)
     ]);
   }

@@ -20,6 +20,24 @@ class OtherHelper {
     return null;
   }
 
+  static String? validateAmount(value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'Amount is required';
+  }
+
+  final parsed = double.tryParse(value);
+  if (parsed == null) {
+    return 'Enter a valid number';
+  }
+
+  if (parsed <= 0) {
+    return 'Amount must be greater than zero';
+  }
+
+  return null; // ✅ Valid input
+}
+
+
   static String? requiredFieldValidator(value){
         if (value == null || value.isEmpty) {
           return AppString.thisFieldIsRequired;

@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   String name = "Shakir Ahmed";
   String address = "1901 Thornridge Cir. Shiloh, Hawaii 81063";
+
+  int selectedNavMenu = 0;
   
   TextEditingController searchController = TextEditingController();
   MapEntry<String, String> selectedCountry = MapEntry(AppString.langEnglish , AppImages.langEnglish);
@@ -20,13 +22,30 @@ class HomeController extends GetxController {
     update();
   }
 
+  void onNavMenuChange(int index){
+     if(index == selectedNavMenu) return;
+      if (index == 0) {
+        goToScreen(AppRoutes.home);
+    } else if (index == 1) {
+        goToScreen(AppRoutes.myOrder);
+    } else if (index == 2) {
+        goToScreen(AppRoutes.trackingOrder);
+    } else if (index == 3) {
+        goToScreen(AppRoutes.account);
+    }
+    selectedNavMenu = index;
+    update();
+  }
+
   void onSearch(){ }
 
   void onPlaceOrder(){
     goToScreen(AppRoutes.placeOrder);
   }
   void onVendorSourcing(){ }
-  void onPurchaseAndDelivery(){ }
+  void onPurchaseAndDelivery(){ 
+    Get.toNamed(AppRoutes.purchaseDelivery);
+  }
   void onBulkOrderAgents(){
     Get.toNamed(AppRoutes.bulkOrder);
    }
@@ -41,10 +60,16 @@ void onDrawerReturnProduct(){}
 void onDrawerLoyaltyPoints(){
   goToScreen(AppRoutes.loyaltyPoints);
 }
-void onDrawerMessage(){}
+void onDrawerMessage(){
+  
+}
 void onDrawerMyPayment(){}
-void onDrawerSupport(){}
-void onDrawerLanguage (){}
+void onDrawerSupport(){
+  Get.toNamed(AppRoutes.chat);
+}
+void onDrawerLanguage (){
+  Get.toNamed(AppRoutes.language);
+}
 void onDrawerDeleteAccount(){}
 void onDrawerLogout(){}
 

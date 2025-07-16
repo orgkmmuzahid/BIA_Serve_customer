@@ -32,7 +32,7 @@ class MyRewardsScreen  extends StatelessWidget {
           scrollDirection: Axis.vertical,
            child: Column(children: [
             Card(
-              color: AppColors.rewardPointsColor,
+              color: AppColors.primaryColor2,
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Row(children: [
@@ -75,7 +75,7 @@ class MyRewardsScreen  extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
             CommonText(text: model.title, style: theme.textTheme.bodyLarge),
-            CommonText(text: '${model.rewardPoints} ${AppString.points}', style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.rewardPointsColor, fontWeight: FontWeight.bold))
+            CommonText(text: '${model.rewardPoints} ${AppString.points}', style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.primaryColor2, fontWeight: FontWeight.bold))
            ],),
          ), 
          const Spacer(),

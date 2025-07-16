@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 class HomeOrderConroller extends GetxController {
     List<OrderListModel> orderList = [
     OrderListModel(orderNumber: 'BIA342178', orderPlacedDate: DateTime.now(), percelPickedUp: DateTime.now(), inTransition: DateTime.now(),
-     orderProgress: OrderProgress.Pending, outForDelivery: 'In Progress'),
+     deliveryStatus: DeliveryStatus.pending, outForDelivery: 'In Progress'),
     OrderListModel(orderNumber: 'BIA342178', orderPlacedDate: DateTime.now(), percelPickedUp: DateTime.now(), inTransition: DateTime.now(),
-     orderProgress: OrderProgress.Pending, outForDelivery: 'In Progress'),
+     deliveryStatus: DeliveryStatus.cancel, outForDelivery: 'In Progress'),
   ];
 
   void fetchOrderList()async{
     orderList.add(OrderListModel(orderNumber: 'BIA342178', orderPlacedDate: DateTime.now(), percelPickedUp: DateTime.now(), inTransition: DateTime.now(),
-     orderProgress: OrderProgress.Pending, outForDelivery: 'In Progress'),);
+     deliveryStatus: DeliveryStatus.pending, outForDelivery: 'In Progress'),);
 
      update();
   }

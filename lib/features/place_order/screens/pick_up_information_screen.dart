@@ -1,13 +1,14 @@
-import 'dart:io';
-
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/component/image/common_multiImage_picker.dart';
+import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/door_to_door_controller.dart';
 import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/features/place_order/enum/delivery_type.dart';
+import 'package:bai_serve/common/inputdata/input_data.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:bai_serve/utils/helpers/other_helper.dart';
@@ -39,18 +40,18 @@ class PickUpInformationScreen  extends StatelessWidget {
                    placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(phone: p0));
                  })),
             
-            _rowBuilder(_buildDropdown(AppString.district, [], (value){
+            _rowBuilder(CommonDropDown<String>(hint: AppString.district, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(district: value));
-            }), _buildDropdown(AppString.city, [], (value){
+            }, nameBuilder: (String value) => value,), CommonDropDown<String>(hint: AppString.city, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(city: value));
-            })),
+            }, nameBuilder: (String value) => value)),
 
 
-            _rowBuilder(_buildDropdown(AppString.ward, [], (value){
+            _rowBuilder(CommonDropDown<String>(hint: AppString.ward, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(ward: value));
-            }), _buildDropdown(AppString.subWard, [], (value){
+            }, nameBuilder: (String value) => value), CommonDropDown<String>(hint: AppString.subWard, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(subWard: value));
-            })),
+            }, nameBuilder: (String value) => value)),
 
 
              _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {
@@ -65,35 +66,12 @@ class PickUpInformationScreen  extends StatelessWidget {
             _rowBuilder(_inputTextBuilder(hint: placeOrderController.placeOrderModel.marchentPickupTime ?? '', isReadOnly: true, suffixIcon: _showTimer((time){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(marchentPickupTime: time));
               placeOrderController.update();
-            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){
+            }),onSaved: (p0) {}), CommonDropDown<String>(hint: AppString.outsideCity, items: [], onChanged: (value){
                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(serviceType: value));
-            })),
+            }, nameBuilder: (String value)=> value)),
 
             //image picker
-             GestureDetector(
-               onTap: () {
-                 placeOrderController.pickImage();
-               },
-               child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: theme.colorScheme.surfaceContainerLowest),
-                height: 150, child: Center(child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [Icon(Icons.add), CommonText(text: AppString.addImage)],))),
-             ),
-              20.height,
-
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(children: List.generate(placeOrderController.selectedImagesPath.length, (index){
-                return Container(
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                  padding: EdgeInsets.only(left: 12),
-                  child: Image.file(
-                    width: 80, height: 80,
-                    File(placeOrderController.selectedImagesPath.elementAt(index))),
-                );
-              }),)),
+             CommonMultiimagePicker(),
               
 
              _rowBuilder(CommonText(text: AppString.productWieght, textAlign: TextAlign.start, style: theme.textTheme.titleSmall), CommonText(text: AppString.quantity, textAlign: TextAlign.start, style: theme.textTheme.titleSmall)),
@@ -114,17 +92,17 @@ class PickUpInformationScreen  extends StatelessWidget {
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPhone: p0));
             })),
             
-            _rowBuilder(_buildDropdown(AppString.district, [], (value){
+            _rowBuilder(CommonDropDown<String>(hint: AppString.district, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientDistrict: value));
-            }), _buildDropdown(AppString.city, [], (value){
+            }, nameBuilder: (String value)=> value,), CommonDropDown<String>(hint: AppString.city, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientCity: value));
-            })),
+            }, nameBuilder: (String value)=>value)),
 
-            _rowBuilder(_buildDropdown(AppString.ward, [], (value){
+            _rowBuilder(CommonDropDown<String>(hint: AppString.ward, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientWard: value));
-            }), _buildDropdown(AppString.subWard, [], (value){
+            }, nameBuilder: (String value)=>value), CommonDropDown(hint: AppString.subWard, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientSubWard: value));
-            })),
+            }, nameBuilder: (value)=>value)),
              
             //time picker client
             _rowBuilder(CommonText(text: AppString.pickupTime, textAlign: TextAlign.start,style: theme.textTheme.titleSmall), CommonText(text: AppString.serviceType, textAlign: TextAlign.start, style: theme.textTheme.titleSmall)),
@@ -132,9 +110,9 @@ class PickUpInformationScreen  extends StatelessWidget {
               AppLogger.debug("Piked time $time", tag: "Pickup information screen");
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPickupTime: time));
               placeOrderController.update();
-            }),onSaved: (p0) {}), _buildDropdown(AppString.outsideCity, [], (value){
+            }),onSaved: (p0) {}), CommonDropDown<String>(hint: AppString.outsideCity, items: [], onChanged: (value){
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientServiceType: value));
-            })),
+            }, nameBuilder: (String value)=>value)),
             
              _inputTextBuilder(hint:  AppString.plotApartment, onSaved: (p0) {
               placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPlotApartment: p0));
@@ -207,7 +185,7 @@ class PickUpInformationScreen  extends StatelessWidget {
  Color _getRadioColor(DoorToDoorController doorToDoorConroller, DeliveryType buttonType) =>  doorToDoorConroller.deliveryType == buttonType? theme.colorScheme.primary : theme.disabledColor;
  
   Widget _showTimer(Function(String value) ontTimeChange) {
-    var itemList = Get.find<PlaceOrderController>().serviceTimes;
+    var itemList = InputData.serviceTimes;
      return PopupMenuButton<String>(
       icon: _prefixBuilder(Icons.access_time),
       color: theme.scaffoldBackgroundColor,
@@ -256,34 +234,6 @@ child: TextFormField(
      
   Icon _prefixBuilder(IconData iconData) => Icon(iconData, color: theme.dividerColor);
 
- Widget _buildDropdown(
-  String hint,
-  List<String> items,
-  Function(String? value) onChanged,
-) {
-  return DropdownButtonFormField<String>(
-    decoration: InputDecoration(
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: theme.dividerColor),
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-    hint: CommonText(text: hint), 
-    icon: Icon(Icons.arrow_drop_down),
-    isExpanded: true,
-    items: items.map((item) {
-      return DropdownMenuItem<String>(
-        value: item,
-        child: CommonText(text: item),
-      );
-    }).toList(),
-    onChanged: onChanged,
-  );
-}
-
 
 }
+

@@ -18,17 +18,14 @@ import 'constants/app_colors.dart';
 class Utils {
 
    static late Size deviceSize;
-   
-  
-
 
 
   static void successSnackBar(String title, String message) {
     Get.snackbar(
       title,
       message,
-      colorText: AppColors.white,
-      backgroundColor: AppColors.black,
+      colorText: AppColors.serfeceBG,
+      backgroundColor: AppColors.primaryText,
       snackPosition: SnackPosition.BOTTOM,
     );
   }
@@ -37,8 +34,8 @@ class Utils {
     Get.snackbar(
       kDebugMode ? title.toString() : "Oops",
       message,
-      colorText: AppColors.white,
-      backgroundColor: AppColors.red,
+      colorText: AppColors.serfeceBG,
+      backgroundColor: AppColors.error,
       snackPosition: SnackPosition.TOP,
     );
   }

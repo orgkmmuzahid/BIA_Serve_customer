@@ -5,7 +5,8 @@ import 'package:bai_serve/features/home/widgets/home_content.dart';
 import 'package:bai_serve/features/home/widgets/home_drawer.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart'; 
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: HomeContent(homeController: controller),
               ),
-              bottomNavigationBar: CommonBottomNavBar(currentIndex: 0 ),
+              bottomNavigationBar: CommonBottomNavBar(),
         ),
   );
 

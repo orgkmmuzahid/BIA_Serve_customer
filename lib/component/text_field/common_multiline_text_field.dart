@@ -6,7 +6,7 @@ class CommonMultilineTextField extends StatelessWidget {
     super.key,
     required this.height,
     required this.onSave,
-    this.validator, this.initialText, this.readOnly = false
+    this.validator, this.initialText, this.readOnly = false, this.hintText
   });
 
   final double height;
@@ -14,6 +14,7 @@ class CommonMultilineTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? initialText;
   final bool readOnly;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class CommonMultilineTextField extends StatelessWidget {
 height: height,
 child: TextFormField(
   initialValue: initialText,
+  
   onSaved: (newValue) {
     if(newValue != null && newValue.isNotEmpty){
       onSave(newValue);
@@ -33,6 +35,7 @@ child: TextFormField(
   validator: validator,
   expands: true, // expands to fill parent height
   decoration: InputDecoration(
+    hintText: hintText,
     enabledBorder: OutlineInputBorder(borderSide: theme.inputDecorationTheme.enabledBorder!.borderSide.copyWith(color: theme.dividerColor), borderRadius: BorderRadius.circular(10)),
     contentPadding: EdgeInsets.all(12),
   ),
