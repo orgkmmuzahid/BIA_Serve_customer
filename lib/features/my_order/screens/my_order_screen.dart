@@ -1,6 +1,6 @@
 // File: my_order_screen.dart
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/bottom_nav_bar/common_bottom_bar.dart';
+import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_rich_text.dart';

@@ -60,6 +60,10 @@ class AppImages {
    static const String zantel   = '$baseurl/zantel.png'  ;
 
 
+   static const String money   = '$baseurl/money.png'  ;
+   static String step(int number)   => '$baseurl/step_$number.png'  ;
+
+
 
 
 

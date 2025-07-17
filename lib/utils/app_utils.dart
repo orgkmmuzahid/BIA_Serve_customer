@@ -19,6 +19,26 @@ class Utils {
 
    static late Size deviceSize;
 
+static String formatDateTimeToHms(DateTime dateTime) {
+  final hours = dateTime.hour.toString().padLeft(2, '0');
+  final minutes = dateTime.minute.toString().padLeft(2, '0');
+  final seconds = dateTime.second.toString().padLeft(2, '0');
+
+  return '$hours:$minutes:$seconds';
+}
+static String formatDurationToHms(Duration duration) {
+  final hours = duration.inHours.toString().padLeft(2, '0');
+  final minutes = (duration.inMinutes % 60).toString().padLeft(2, '0');
+  final seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
+
+  return '$hours:$minutes:$seconds';
+}
+
+
+
+static String formatTime(DateTime time) {
+  return DateFormat.jm().format(time); // 'jm' = e.g., 8:00 PM
+}
 
   static void successSnackBar(String title, String message) {
     Get.snackbar(

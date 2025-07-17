@@ -102,7 +102,7 @@ class _CommonButtonState extends State<CommonButton>
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(widget.buttonRadius),
           side: BorderSide(
-            color: widget.borderColor ?? theme.primaryColor,
+            color: widget.borderColor ?? widget.buttonColor ?? theme.scaffoldBackgroundColor,
             width: widget.borderWidth,
           ),
         ),

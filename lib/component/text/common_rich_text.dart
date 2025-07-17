@@ -32,17 +32,37 @@ class CommonRichText extends StatelessWidget {
      return _content();
   }
   
-  Widget _content() => RichText(text: TextSpan(
-      children: List.generate(richTextContent.length, (index){
-        CommonRichTextContent rContent = richTextContent[index];
-        if(rContent is CommonSimpleRichTextContent){
-          TextStyle style = rContent.style ?? theme.textTheme.bodyMedium!;
-          return TextSpan(text: rContent.text,style: style,recognizer: rContent.ontap == null? null : (TapGestureRecognizer()
-                  ..onTap = rContent.ontap));
-        }else if(rContent is CommonRichTextSpan){
+Widget _content() {
+  return Flexible(
+  child: Text.rich(
+    TextSpan(
+      children: List.generate(richTextContent.length, (index) {
+        final rContent = richTextContent[index];
+
+        if (rContent is CommonSimpleRichTextContent) {
+          final style = rContent.style ?? theme.textTheme.bodyMedium!;
+          return TextSpan(
+            text: rContent.text,
+            style: style,
+            recognizer: rContent.ontap == null
+                ? null
+                : (TapGestureRecognizer()..onTap = rContent.ontap),
+          );
+        } else if (rContent is CommonRichTextSpan) {
           return rContent.textSpan;
-        }else{ return const TextSpan();}
-      })
-  ));
+        } else {
+          return const TextSpan(text: '');
+        }
+      }),
+    ),
+    softWrap: true,
+    overflow: TextOverflow.visible,
+    textAlign: TextAlign.start,
+  ),
+);
 
 }
+
+}
+
+

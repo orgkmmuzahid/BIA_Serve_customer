@@ -1,5 +1,5 @@
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/bottom_nav_bar/common_bottom_bar.dart';
+import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/home/widgets/home_content.dart';
 import 'package:bai_serve/features/home/widgets/home_drawer.dart';

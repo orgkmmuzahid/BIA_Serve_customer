@@ -1,0 +1,70 @@
+import 'package:bai_serve/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/pop_up/common_popup_menu.dart';
+import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
+import 'package:bai_serve/features/chat/model/message_model.dart';
+import 'package:bai_serve/utils/app_utils.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class MessageScreen extends StatelessWidget {
+  const MessageScreen({super.key});
+
+
+    @override
+  Widget build(BuildContext context) => Scaffold(appBar: CommonAppBar(title: AppString.drawerMessage), 
+    body: Padding(padding: EdgeInsets.only(left: 16, right: 16),
+      child: GetBuilder<ChatController>(
+        builder: (chatController) {
+          return Column(children: chatController.chatPersons.map((person)=> GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.chat);
+            },
+            child: Card(color: AppColors.serfeceBG, child: _chatItem(person))) ).toList());
+        }
+      ))
+    );
+ 
+  Widget _chatItem(MessageModel person) {
+     return Padding(
+       padding: const EdgeInsets.only(top: 10, bottom: 10),
+       child: Row(children: [
+         CommonImage(imageSrc: person.userImage, fill: BoxFit.fill, size: 30, borderRadius: 30), 
+         10.width, 
+         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          CommonText(text: person.userName, fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.primaryText),
+          CommonText(text: person.userStatus.displayName, fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.primaryText),
+         ],),   
+         const Spacer(),            
+         Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+          CommonPopupMenu(
+            triggerIcon: Icons.more_vert,
+            showTextTrigger: false,
+            showIconTrigger: true,
+            items: [AppString.deleteUser, AppString.blockUser], icons: [
+            Icons.delete_outline,
+            Icons.block_outlined
+          ] , onItemSelected: (value){
+            if(value == AppString.deleteUser){
+              //delete user
+            }else if(value == AppString.blockUser){
+              //block user
+            }
+          }),
+          CommonText(text: Utils.formatTime(person.lastSendMessageTime), color: AppColors.disable, fontSize:  12,right: 15,),
+         ],)
+       ]),
+     );
+  }
+
+
+}

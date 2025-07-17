@@ -3,6 +3,7 @@
 import 'package:bai_serve/features/chat/model/chat_info.dart';
 import 'package:bai_serve/features/chat/model/chat_model.dart';
 import 'package:bai_serve/features/chat/model/chat_user_info.dart';
+import 'package:bai_serve/features/chat/model/message_model.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,15 @@ class ChatController extends GetxController {
   TextEditingController inputMessageTextFiled = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
+
+  List<MessageModel> chatPersons = [
+     MessageModel(messageId: 'messageId', userImage: AppImages.homeBanner,
+      userStatus: UserStatus.offline, lastSendMessageTime: DateTime.now(), userName: 'Cameron Williamson'),
+     MessageModel(messageId: 'messageId', userImage: AppImages.homeBanner,
+      userStatus: UserStatus.offline, lastSendMessageTime: DateTime.now(), userName: 'Cameron Williamson'),
+     MessageModel(messageId: 'messageId', userImage: AppImages.homeBanner,
+      userStatus: UserStatus.offline, lastSendMessageTime: DateTime.now(), userName: 'Cameron Williamson'),
+   ];
   
   String? selectedImagesPath;
 

@@ -182,6 +182,7 @@ class AppString {
   static const String discountPercentage   = 'Discount';
   static const String totalAmount   = 'Total Amount';
   static const String bankPayment   = 'Bank Payment';
+  static const String payment   = 'Payment';
   static const String checkout   = 'Checkout';
   static const String totalPay   = 'Total pay';
 
@@ -210,6 +211,19 @@ class AppString {
   static const percelTracking = 'Parcel Tracking';
   static const account = 'Account';
   static const searchForOrder = 'Search For Order';
+  static const logoutMessage = 'Are you sure you want to log out?';
+  static const accountDeleteMessage = 'Are you sure you want to delete your account?';
+  static const termsCondition = 'Terms & Condition';
+  static const changePersonalInfo = 'Change Personal Info';
+  static const profileInfo = 'Profile Info';
+  static const myPayment = 'My Payment';
+  static const withdraw = 'Withdraw';
+  static const deleteUser = 'Delete User';
+  static const blockUser = 'Block User';
+  static const estimatedDeliveryTime = 'Estimated Delivery Time';
+  static const senderName = 'Sender Name';
+  static const reciverName = 'Receiver Name';
+  static const address = 'Address';
 
   
 

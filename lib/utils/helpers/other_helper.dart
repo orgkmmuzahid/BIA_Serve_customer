@@ -87,6 +87,30 @@ class OtherHelper {
     return null;
   }
 
+ static String? validateDate(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Date is required';
+  }
+
+  final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+  if (!regex.hasMatch(value)) {
+    return 'Enter date in YYYY-MM-DD format';
+  }
+
+  try {
+    final parsedDate = DateTime.parse(value);
+    // Optional: add range check
+    if (parsedDate.isBefore(DateTime(1900)) || parsedDate.isAfter(DateTime(2100))) {
+      return 'Date must be between 1900 and 2100';
+    }
+  } catch (_) {
+    return 'Invalid date';
+  }
+
+  return null; // valid
+}
+
+
   static Future<String> openDatePickerDialog(
     TextEditingController controller,
   ) async {

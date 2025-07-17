@@ -1,23 +1,17 @@
 // File: place_order_controller.dart
 import 'package:bai_serve/config/route/app_routes.dart';
-import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/place_order/model/order_details_model.dart';
 import 'package:bai_serve/features/place_order/model/place_order_model.dart';
 import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 // Get.lazyPut(() => PlaceOrderController(), fenix: true);
 
 class PlaceOrderController extends GetxController {
 
   bool showCouponButton = true;
-  
-  String? selectedPayment;
 
 
   List<String> recentSearch = [
@@ -42,13 +36,6 @@ class PlaceOrderController extends GetxController {
           orderStatus: 'orderStatus',
            totalPrice: 50,
             deliveryCharge: 20, discountPercentage: 10);
-
-
-  void onPaymentChange(String newPayment){
-           selectedPayment = newPayment;
-           update();
-  }
-
 
 
   void placeOrderNow()async{

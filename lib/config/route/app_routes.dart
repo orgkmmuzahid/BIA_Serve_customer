@@ -1,5 +1,10 @@
-import 'package:bai_serve/common/language_screen.dart';
-import 'package:bai_serve/features/account/screens/account_screen.dart';
+import 'package:bai_serve/features/auth/screen/profile_info_screen.dart';
+import 'package:bai_serve/features/chat/screens/message_screen.dart';
+import 'package:bai_serve/features/payment/screens/my_payment_screen.dart';
+import 'package:bai_serve/features/setting/screens/language_screen.dart';
+import 'package:bai_serve/features/setting/screens/privacy_policy_screen.dart';
+import 'package:bai_serve/features/setting/screens/setting_screen.dart';
+import 'package:bai_serve/features/setting/screens/terms_condition_screen.dart';
 import 'package:bai_serve/features/auth/screen/forget_password_screen.dart';
 import 'package:bai_serve/features/auth/screen/login_with_screen.dart';
 import 'package:bai_serve/features/auth/screen/otp_send_screen.dart';
@@ -14,7 +19,7 @@ import 'package:bai_serve/features/place_order/screens/checkout_screen.dart';
 import 'package:bai_serve/features/place_order/screens/door_to_door_pickup_screen.dart';
 import 'package:bai_serve/features/bulk_order/screens/negotiation_assistance_screen.dart';
 import 'package:bai_serve/features/place_order/screens/order_details_screen.dart';
-import 'package:bai_serve/features/place_order/screens/payment_screen.dart';
+import 'package:bai_serve/features/payment/screens/payment_screen.dart';
 import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
 import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:bai_serve/features/purchase_delivery/screens/purchase_delivery_screen.dart';
@@ -26,9 +31,6 @@ import '../../features/auth/screen/sign_up_screen.dart';
 import '../../features/auth/screen/verify_user_screen.dart';
 import '../../features/notifications/presentation/screen/notifications_screen.dart';
 import '../../features/onboarding_screen/onboarding_screen.dart';
-import '../../features/setting/presentation/screen/privacy_policy_screen.dart';
-import '../../features/setting/presentation/screen/setting_screen.dart';
-import '../../features/setting/presentation/screen/terms_of_services_screen.dart';
 import '../../features/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -58,18 +60,19 @@ class AppRoutes {
   static const String purchaseDelivery = "/purchase_delivery_screen.dart";
   static const String myOrder = "/my_order_screen.dart";
   static const String trackingOrder = "/tracking_order_screen.dart";
-  static const String account = "/account_screen.dart";
+  static const String setting = "/setting_screen.dart";
   static const String language = "/language_screen.dart";
+  static const String termsCondition = "/terms_condition_screen.dart";
+  static const String privacyPolicy = "/privacy_policy_screen.dart";
+  static const String profileInfo = "/profile_info_screen.dart";
+  static const String myPayment = "/my_payment_screen.dart";
+  static const String messageScreen = "/message_screen.dart";
   
 
   //---------------------
   static const String changePassword = "/change_password_screen.dart";
   static const String notifications = "/notifications_screen.dart";
-  static const String profile = "/profile_screen.dart";
-  static const String editProfile = "/edit_profile.dart";
-  static const String privacyPolicy = "/privacy_policy_screen.dart";
   static const String termsOfServices = "/terms_of_services_screen.dart";
-  static const String setting = "/setting_screen.dart";
   
 
   static List<GetPage> routes = [
@@ -97,15 +100,18 @@ class AppRoutes {
     GetPage(name: purchaseDelivery, page: () => const PurchaseDeliveryScreen()),
     GetPage(name: myOrder, page: () => MyOrderScreen()),
     GetPage(name: trackingOrder, page: () => const TrackingOrderScreen()),
-    GetPage(name: account, page: () => const AccountScreen()),
+    GetPage(name: setting, page: () => const SettingScreen()),
     GetPage(name: language, page: () => const LanguageScreen()),
+    GetPage(name: termsCondition, page: () => const TermsConditionScreen()),
+    GetPage(name: privacyPolicy, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: profileInfo, page: () => const ProfileInfoScreen()),
+    GetPage(name: myPayment, page: () => const MyPaymentScreen()),
+    GetPage(name: messageScreen, page: () => const MessageScreen()),
 
 
     //----------------------
     GetPage(name: changePassword, page: () => ChangePasswordScreen()),
     GetPage(name: notifications, page: () => const NotificationScreen()),
-    GetPage(name: privacyPolicy, page: () => const PrivacyPolicyScreen()),
-    GetPage(name: termsOfServices, page: () => const TermsOfServicesScreen()),
-    GetPage(name: setting, page: () => const SettingScreen()),
+
   ];
 }

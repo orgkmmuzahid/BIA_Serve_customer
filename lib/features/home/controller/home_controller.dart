@@ -31,7 +31,7 @@ class HomeController extends GetxController {
     } else if (index == 2) {
         goToScreen(AppRoutes.trackingOrder);
     } else if (index == 3) {
-        goToScreen(AppRoutes.account);
+        goToScreen(AppRoutes.setting);
     }
     selectedNavMenu = index;
     update();
@@ -61,16 +61,20 @@ void onDrawerLoyaltyPoints(){
   goToScreen(AppRoutes.loyaltyPoints);
 }
 void onDrawerMessage(){
-  
+  Get.toNamed(AppRoutes.messageScreen);
 }
-void onDrawerMyPayment(){}
+void onDrawerMyPayment(){
+  Get.toNamed(AppRoutes.myPayment);
+}
 void onDrawerSupport(){
   Get.toNamed(AppRoutes.chat);
 }
 void onDrawerLanguage (){
   Get.toNamed(AppRoutes.language);
 }
-void onDrawerDeleteAccount(){}
+void onDrawerDeleteAccount(){
+  
+}
 void onDrawerLogout(){}
 
   @override

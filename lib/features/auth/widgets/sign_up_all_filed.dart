@@ -41,7 +41,9 @@ class SignUpAllField extends StatelessWidget {
 
           ///Date of Birth here
           const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
-          CommonDateInputTextField(controller: controller.dobController),
+          CommonDateInputTextField(onSave: (date) {
+            
+          },),
 
           /// User Password here
           const CommonText(text: AppString.newPassword, bottom: 8, top: 12),

@@ -3,7 +3,7 @@ import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../component/bottom_nav_bar/common_bottom_bar.dart';
+import '../../../../component/common_bar/common_bottom_bar.dart';
 import '../../../../component/other_widgets/common_loader.dart';
 import '../../../../component/other_widgets/no_data.dart';
 import '../controller/notifications_controller.dart';

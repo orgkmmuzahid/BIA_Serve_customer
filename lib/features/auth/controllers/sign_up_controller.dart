@@ -41,10 +41,6 @@ class SignUpController extends GetxController {
     text: kDebugMode ? 'hello123' : '',
   );
 
-  TextEditingController dobController = TextEditingController(
-    text: kDebugMode ? "${DateTime.now().toLocal()}".split(' ')[0] : '',
-  );
-
   void onPhoneNumberChange(PhoneNumber value) {
     phoneNumber = value;
   }

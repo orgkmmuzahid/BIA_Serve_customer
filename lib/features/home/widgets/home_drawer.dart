@@ -1,5 +1,7 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/pop_up/common_alert.dart';
+import 'package:bai_serve/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -72,16 +74,21 @@ class HomeDrawer extends StatelessWidget {
           _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: controller.onDrawerMyPayment),
           _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: controller.onDrawerSupport),
           _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: controller.onDrawerLanguage),
-          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: controller.onDrawerDeleteAccount),
+          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){
+             DeleteAccountAlert();
+          }),
       
           SizedBox(height: 218,),
-          _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){})
+          _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){
+            CommonAlert(title: AppString.logoutMessage, onTap: controller.onDrawerLogout);
+          })
       
           
         ],
       ),
     );
   }
+
 
   ListTile _buildMenu({required String image,required String title, TextStyle? style ,required Function() onTap}){
     return ListTile(leading: CommonImage(imageSrc: image, size: 24,),

@@ -10,6 +10,7 @@ class ChatUserInfo {
     required this.name,
     required this.image,
   });
+  
 
   ChatUserInfo copyWith({
     String? userId,
