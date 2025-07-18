@@ -38,7 +38,9 @@ class ViewProductScreen extends StatelessWidget {
                   CommonButton(titleText: AppString.screenshot,  buttonColor: AppColors.primaryColor3, onTap: () {
                     Utils.takeScreenshot(_previewContainerKey).then((path){
                       if(path != null){
-                        ScreenshotPreview( imagePath: path);
+                       // ignore: use_build_context_synchronously
+                       var view = ScreenshotPreview(buildContext: context , imagePath: path, width: 100, height: 200);
+                       view.show();
                       }
                     });
                     

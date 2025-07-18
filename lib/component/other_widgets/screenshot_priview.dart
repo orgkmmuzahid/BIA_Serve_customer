@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 class ScreenshotPreview {
+  final BuildContext buildContext;
   final String imagePath;
   final Duration duration;
   final double width;
@@ -18,6 +17,7 @@ class ScreenshotPreview {
   OverlayEntry? _overlayEntry;
 
   ScreenshotPreview({
+    required this.buildContext,
     required this.imagePath,
     this.duration = const Duration(seconds: 3),
     this.width = 120,
@@ -32,7 +32,7 @@ class ScreenshotPreview {
           BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 3));
 
   void show() {
-    final overlay = Overlay.of(Get.context!);
+    final overlay = Overlay.of(buildContext);
 
     _overlayEntry = OverlayEntry(
       builder: (_) => Positioned(
