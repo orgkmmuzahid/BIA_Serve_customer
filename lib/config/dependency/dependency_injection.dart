@@ -15,6 +15,7 @@ import 'package:bai_serve/features/place_order/controllers/place_order_controlle
 import 'package:bai_serve/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve/features/setting/controllers/setting_controller.dart';
 import 'package:bai_serve/features/tracking_order/controllers/tracking_order_controller.dart';
+import 'package:bai_serve/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:get/get.dart';
 
 import '../../features/auth/controllers/change_password_controller.dart';
@@ -46,6 +47,7 @@ class DependencyInjection extends Bindings {
      Get.lazyPut(() => TrackingOrderController(), fenix: true);
      Get.lazyPut(() => SettingController(), fenix: true);
      Get.lazyPut(() => PaymentController(), fenix: true);
+     Get.lazyPut(() => VendorSourcingController(), fenix: true);
      
      //commponent
      Get.lazyPut(() => CommonMultiimagePickerController(), fenix: true);

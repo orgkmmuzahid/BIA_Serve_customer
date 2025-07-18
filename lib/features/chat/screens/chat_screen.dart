@@ -5,6 +5,7 @@ import 'package:bai_serve/common/common_language_drop_down.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve/features/chat/model/chat_model.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
@@ -148,7 +149,11 @@ class ChatScreen extends StatelessWidget {
       actionsPadding: EdgeInsets.only(right: 10),
       titleSpacing: 0,
       actions: [
-        action != null? action! : GestureDetector(child: Icon(Icons.call_rounded, color: theme.primaryColor, size: 27,)).paddingOnly(right: 10),
+        action != null? action! : GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.calling);
+          },
+          child: Icon(Icons.call_rounded, color: theme.primaryColor, size: 27,)).paddingOnly(right: 10),
         GetBuilder<HomeController>(builder:(homeController) => CommonLanguageDropDown(slectedCountry: homeController.selectedCountry,
          availableCountries: homeController.availableCountries, onCountryChange: homeController.onCountryChange)),
       ],

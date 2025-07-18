@@ -3,6 +3,7 @@ import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/other_widgets/common_liner_progress_step.dart';
+import 'package:bai_serve/component/other_widgets/common_timeline.dart';
 import 'package:bai_serve/component/text/common_rich_text.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/features/tracking_order/controllers/tracking_order_controller.dart';
@@ -28,13 +29,14 @@ class TrackingOrderScreen extends StatelessWidget {
       builder: (trackingOrderController) {
         return SingleChildScrollView(
           child: Padding(padding: EdgeInsetsGeometry.only(left: 16, right: 16), 
-           child: Column(children: [
-               CommonText(text: Utils.formatDurationToHms(trackingOrderController.trackingOrderModel.estimatedDeliveryTime), 
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.primaryText)).center,
-              CommonText(text: AppString.estimatedDeliveryTime, style: theme.textTheme.bodyMedium).center,
-          
+           child: Column(
+            children: [
+               CommonText(alignment: MainAxisAlignment.center, text: Utils.formatDurationToHms(trackingOrderController.trackingOrderModel.estimatedDeliveryTime), 
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.primaryText)),
+              CommonText(alignment: MainAxisAlignment.center ,text: AppString.estimatedDeliveryTime, style: theme.textTheme.bodyMedium),
               _progressBuilder(trackingOrderController.trackingOrderModel),
-              _timelineBuilder()
+              10.height,
+              CommonTimeline(timeline: trackingOrderController.trackingOrderModel.timeline)
            ]),
           ),
         );
@@ -74,7 +76,6 @@ class TrackingOrderScreen extends StatelessWidget {
         
         ),);
       
-        _timelineBuilder() => Container();
 
       
 

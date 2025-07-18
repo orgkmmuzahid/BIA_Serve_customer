@@ -24,10 +24,11 @@ class OnboardingScreen extends StatelessWidget {
             const Center(child: CommonLogo()),
             50.height,
             CommonText(
+              alignment: MainAxisAlignment.center,
               text: AppString.selectYourLanguage,
               fontSize: 20,
               fontWeight: FontWeight.w700,
-            ).center,
+            ),
             10.height,
             CommonButton(
               titleText: AppString.langEnglish,

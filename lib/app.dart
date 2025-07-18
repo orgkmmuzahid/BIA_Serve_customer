@@ -7,6 +7,13 @@ import 'package:get/get.dart';
 import 'config/route/app_routes.dart';
 import 'config/theme/light_theme.dart';
 
+class CustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics(); // or ClampingScrollPhysics, etc.
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -17,13 +24,15 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       designSize: const Size(428, 926),
+
       child: GetMaterialApp(
+        scrollBehavior: CustomScrollBehavior(),
         debugShowCheckedModeBanner: false,
         navigatorKey: Get.key,
         defaultTransition: Transition.fadeIn,
-             theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: Get.find<ThemeController>().themeMode,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: Get.find<ThemeController>().themeMode,
         transitionDuration: const Duration(milliseconds: 300),
         initialRoute: AppRoutes.splash,
         getPages: AppRoutes.routes,

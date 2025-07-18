@@ -10,7 +10,7 @@ class CommonDropDown<T> extends StatelessWidget {
     required this.items,
     required this.onChanged,
     required this.nameBuilder,
-    this.validator
+    this.validator, this.initailItem
 
   });
 
@@ -19,12 +19,14 @@ class CommonDropDown<T> extends StatelessWidget {
   final Function(T? value) onChanged;
   final String Function(T value) nameBuilder;
   final String? Function(String? value)? validator;
+  final T? initailItem;
 
 
   @override
   Widget build(BuildContext context) {
   return DropdownButtonFormField<T>(
     validator: (value) => (validator == null || value == null)? null: validator!( nameBuilder(value)),
+    value: this.initailItem,
     decoration: InputDecoration(
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(

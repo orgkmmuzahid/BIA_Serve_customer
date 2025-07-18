@@ -1,12 +1,7 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/helpers/other_helper.dart';
+import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:flutter/material.dart';
 
 class CommonDateInputTextField extends StatefulWidget {
-  final Color? fillColor;
-  final Color? labelTextColor;
-  final Color? hintTextColor;
-  final Color? textColor;
   final double paddingHorizontal;
   final double paddingVertical;
   final double borderRadius;
@@ -15,10 +10,6 @@ class CommonDateInputTextField extends StatefulWidget {
   const CommonDateInputTextField({
     super.key,
     this.onSave,
-    this.fillColor = AppColors.serfeceBG,
-    this.hintTextColor = AppColors.disable,
-    this.labelTextColor = AppColors.disable,
-    this.textColor = AppColors.primaryText,
     this.paddingHorizontal = 16,
     this.paddingVertical = 14,
     this.borderRadius = 10,
@@ -57,36 +48,21 @@ class _CommonDateInputTextFieldState extends State<CommonDateInputTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onSaved: (newValue) {
-        if(widget.onSave!= null && newValue != null) {
-          widget.onSave!(newValue);
-        }
-      },
-      readOnly: false,
+    return CommonTextField(
       controller: _controller,
-      validator: OtherHelper.validateDate,
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
-            color: widget.textColor,
-          ),
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: widget.paddingHorizontal,
-          vertical: widget.paddingVertical,
-        ),
-        fillColor: widget.fillColor,
-        hintText: 'YYYY-MM-DD',
-        hintStyle: TextStyle(color: widget.hintTextColor),
-        suffixIcon: IconButton(
-          icon: Icon(
+      paddingHorizontal: widget.paddingHorizontal,
+      paddingVertical: widget.paddingVertical,
+      borderRadius: widget.borderRadius,
+      hintText: 'YYYY-MM-DD',
+      onSaved: widget.onSave,
+      suffixIcon: GestureDetector(
+          onTap: () {
+            _openDatePicker(context);
+          },
+          child: Icon(
             Icons.calendar_month_outlined,
-            color: Theme.of(context).inputDecorationTheme.activeIndicatorBorder?.color,
           ),
-          onPressed: () => _openDatePicker(context),
         ),
-      ),
     );
   }
 }

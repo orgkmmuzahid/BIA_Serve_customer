@@ -224,6 +224,16 @@ class AppString {
   static const senderName = 'Sender Name';
   static const reciverName = 'Receiver Name';
   static const address = 'Address';
+  static const productCategory = 'Product Category';
+  static const numberOfVendor = 'Number of Vendor';
+  static const budget = 'Budget';
+  static const specialInstruction = 'Special Instruction';
+  static const submitRequest = 'Submit Request';
+  static const allProducts = 'All Products';
+  static const allVendors = 'All Vendors';
+  static const vendorSourcingCategory = 'Vendor Sourcing';
+  static const viewProduct = 'View Product';
+  static const screenshot = 'Screenshot';
 
   
 

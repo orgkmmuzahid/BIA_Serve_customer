@@ -56,11 +56,10 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                   Spacer(),
                   CommonLogo().center,
                   50.height,
-                  Center(
-                    child: CommonText(
-                      text: AppString.enterVerifyCode,
-                      style: theme.textTheme.bodyLarge,
-                    ),
+                  CommonText(
+                    alignment: MainAxisAlignment.center,
+                    text: AppString.enterVerifyCode,
+                    style: theme.textTheme.bodyLarge,
                   ),
                   20.height,
 
@@ -102,48 +101,48 @@ class _VerifyUserState extends State<VerifyUserScreen> {
     );
   }
 
-  Align _resendOtpTimerBuilder(OtpController controller) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child:
-          controller.time == '00:00'
-              ? _resendMessageBuilder(controller)
-              : CommonText(
-                text:
-                    "${AppString.resendCodeIn} ${controller.time} ${AppString.minute}",
-              ),
-    );
+  Widget _resendOtpTimerBuilder(OtpController controller) {
+    return controller.time == '00:00'
+        ? _resendMessageBuilder(controller)
+        : CommonText(
+          alignment: MainAxisAlignment.end,
+          text:
+              "${AppString.resendCodeIn} ${controller.time} ${AppString.minute}",
+        );
   }
 
-  Widget _resendMessageBuilder(OtpController controller) => Text.rich(
-    TextSpan(
-      children: [
-        TextSpan(
-          text: AppString.didntReciveCode,
-          style: GoogleFonts.dmSans(
-            color: theme.textTheme.bodySmall?.color,
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
+  Widget _resendMessageBuilder(OtpController controller) => Align(
+    alignment:Alignment.centerRight,
+    child: Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(
+            text: AppString.didntReciveCode,
+            style: GoogleFonts.dmSans(
+              color: theme.textTheme.bodySmall?.color,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-
-        /// Sign Up Button here
-        TextSpan(
-          text: " ${AppString.resendCode}",
-          recognizer:
-              TapGestureRecognizer()
-                ..onTap = () {
-                  if (controller.time == '00:00') controller.startTimer();
-                },
-          style: GoogleFonts.lato(
-            color: theme.colorScheme.primary,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    
+          /// Sign Up Button here
+          TextSpan(
+            text: " ${AppString.resendCode}",
+            recognizer:
+                TapGestureRecognizer()
+                  ..onTap = () {
+                    if (controller.time == '00:00') controller.startTimer();
+                  },
+            style: GoogleFonts.lato(
+              color: theme.colorScheme.primary,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
+      textAlign: TextAlign.center,
     ),
-    textAlign: TextAlign.center,
   );
 
   Flexible _otpBuilder(OtpController controller, BuildContext context) {

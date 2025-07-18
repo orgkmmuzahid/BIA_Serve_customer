@@ -18,12 +18,20 @@ class TrackingOrderController extends GetxController {
      address: 'address',
       status: DeliveryStatus.pending,
        estimatedDeliveryTime: Duration(days: 1, hours: 12, minutes: 20),
-        stepNumber: 3,
+        stepNumber: 2,
          timeline: [
           OrderTimelineModel(time: DateTime.now(),
            isCleared: true,
-            title: 'title',
-             subtitle: 'subtitle')
+            title: 'Has Been Confirm Return Product',
+             subtitle: 'Your order has been successfully placed! '),
+          OrderTimelineModel(time: DateTime.now(),
+           isCleared: true,
+            title: 'Rider Received',
+            subtitle: 'Pickup Assigned Head to the pickup location.'),
+          OrderTimelineModel(time: DateTime.now(),
+           isCleared: false,
+            title: 'Pickup',
+             subtitle: 'Pickup Assigned Head to the pickup location.'),
          ], image: AppImages.appsIcon);
   
 }

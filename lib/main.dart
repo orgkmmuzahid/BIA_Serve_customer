@@ -11,10 +11,16 @@ import 'services/notification/notification_service.dart';
 import 'services/socket/socket_service.dart';
 import 'services/storage/storage_services.dart';
 
+
 //create a new feature through
 // mason make getx_feature --name packageName
 
 Future<void> main() async {
+    FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint('Flutter error caught: ${details.exceptionAsString()}');
+    FlutterError.presentError(details);
+  };
+  
   WidgetsFlutterBinding.ensureInitialized();
   await init.tryCatch();
 

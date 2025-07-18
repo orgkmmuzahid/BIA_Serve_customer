@@ -16,41 +16,43 @@ class OrderDetailsScreen  extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: Text(AppString.orderDetails)),
     body: GetBuilder<PlaceOrderController>(builder: (orderController)=> Padding(padding: EdgeInsets.only(left: 16, right: 16),
-     child: Column(
-       children: [
-         Table(
-           columnWidths: const {
-          0: FlexColumnWidth(1.8),
-             1: FlexColumnWidth(0.5),
-             2: FlexColumnWidth(3),
-           },
-          children: [
-            _rowBuilder(AppString.orderCode, orderController.orderDetailsModel.orderCode),
-            _rowBuilder(AppString.customer, orderController.orderDetailsModel.customer),
-            _rowBuilder(AppString.phoneNumber, orderController.orderDetailsModel.phoneNumber),
-            _rowBuilder(AppString.shippingAddress, orderController.orderDetailsModel.shippingAddress),
-            _rowBuilder(AppString.productDetails, orderController.orderDetailsModel.productDetails),
-            _rowBuilder(AppString.weight, '${orderController.orderDetailsModel.weight} KG'),
-            _rowBuilder(AppString.quantity, '${orderController.orderDetailsModel.quantity} Box'),
-            _rowBuilder(AppString.orderDateTime, Utils.formatDateTime(orderController.orderDetailsModel.orderDate)),
-            _rowBuilder(AppString.orderStatus, orderController.orderDetailsModel.orderStatus),
-            _rowBuilder(AppString.totalPrice, 'TSH ${orderController.orderDetailsModel.totalPrice}'),
+     child: SingleChildScrollView(
+       child: Column(
+         children: [
+           Table(
+             columnWidths: const {
+            0: FlexColumnWidth(1.8),
+               1: FlexColumnWidth(0.5),
+               2: FlexColumnWidth(3),
+             },
+            children: [
+              _rowBuilder(AppString.orderCode, orderController.orderDetailsModel.orderCode),
+              _rowBuilder(AppString.customer, orderController.orderDetailsModel.customer),
+              _rowBuilder(AppString.phoneNumber, orderController.orderDetailsModel.phoneNumber),
+              _rowBuilder(AppString.shippingAddress, orderController.orderDetailsModel.shippingAddress),
+              _rowBuilder(AppString.productDetails, orderController.orderDetailsModel.productDetails),
+              _rowBuilder(AppString.weight, '${orderController.orderDetailsModel.weight} KG'),
+              _rowBuilder(AppString.quantity, '${orderController.orderDetailsModel.quantity} Box'),
+              _rowBuilder(AppString.orderDateTime, Utils.formatDateTime(orderController.orderDetailsModel.orderDate)),
+              _rowBuilder(AppString.orderStatus, orderController.orderDetailsModel.orderStatus),
+              _rowBuilder(AppString.totalPrice, 'TSH ${orderController.orderDetailsModel.totalPrice}'),
+               
+           ]),
+            
+            20.height,
+            Row(children: [
              
-         ]),
-          
-          20.height,
-          Row(children: [
-           
-          _amountBuilder(orderController,AppString.deliveryCharge , orderController.orderDetailsModel.deliveryCharge),
-          const Spacer(),
-          _amountBuilder(orderController,AppString.totalAmount , orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice),
-
-          ],),
-           10.height,
-           CommonButton(titleText: AppString.continues, onTap: () {
-             Get.toNamed(AppRoutes.payment);
-           },)
-       ],
+            _amountBuilder(orderController,AppString.deliveryCharge , orderController.orderDetailsModel.deliveryCharge),
+            const Spacer(),
+            _amountBuilder(orderController,AppString.totalAmount , orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice),
+       
+            ],),
+             10.height,
+             CommonButton(titleText: AppString.continues, onTap: () {
+               Get.toNamed(AppRoutes.payment);
+             },)
+         ],
+       ),
      ),
      
      )),

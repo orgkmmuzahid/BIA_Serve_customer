@@ -58,6 +58,7 @@ class AppImages {
    static const String holapesa = '$baseurl/holapesa.png';
    static const String selcom   = '$baseurl/selcom.png'  ;
    static const String zantel   = '$baseurl/zantel.png'  ;
+   static const String callingBackground   = '$baseurl/calling_background.jpg'  ;
 
 
    static const String money   = '$baseurl/money.png'  ;

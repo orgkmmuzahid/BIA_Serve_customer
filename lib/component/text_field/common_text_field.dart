@@ -1,12 +1,12 @@
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import '../text/common_text.dart';
 
-class CommonTextField extends StatelessWidget {
-  CommonTextField({
+class CommonTextField extends StatefulWidget {
+  const CommonTextField({
     super.key,
     this.hintText,
     this.labelText,
@@ -23,16 +23,14 @@ class CommonTextField extends StatelessWidget {
     this.borderRadius = 10,
     this.inputFormatters,
     this.onSaved,
-
     this.borderColor,
     this.onSubmitted,
     this.onTap,
     this.suffixIcon,
     this.isReadOnly = false,
     this.initialText,
-  }) {
-    if (isPassword) toggle();
-  }
+  });
+
   final Function(String value)? onSaved;
   final String? initialText;
   final bool isReadOnly;
@@ -41,85 +39,138 @@ class CommonTextField extends StatelessWidget {
   final String? prefixText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-
   final Color? borderColor;
   final double paddingHorizontal;
   final double paddingVertical;
   final double borderRadius;
   final int? mexLength;
   final bool isPassword;
-  RxBool obscureText = false.obs;
   final Function(String)? onSubmitted;
   final VoidCallback? onTap;
   final TextEditingController? controller;
   final TextInputAction textInputAction;
-  final FormFieldValidator? validator;
+  final FormFieldValidator<String>? validator;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatters;
 
   @override
-  Widget build(BuildContext context) {
-    return Obx(() {
-      return TextFormField(
-        readOnly: isReadOnly,
-        initialValue: initialText,
-        autovalidateMode: AutovalidateMode.onUnfocus,
-        keyboardType: keyboardType,
-        controller: controller,
-        obscureText: obscureText.value,
-        textInputAction: textInputAction,
-        onSaved: onSaved == null? null:  (value){
-          onSaved!(value ?? '');
-        } ,
-        maxLength: mexLength,
-        inputFormatters: inputFormatters,
-        onFieldSubmitted: onSubmitted,
-        onTap: onTap,
-        style: theme.textTheme.bodyLarge!.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 12,
-        ),
-        validator: validator,
-        decoration: InputDecoration(
-          enabledBorder: borderColor != null? theme.inputDecorationTheme.enabledBorder?.copyWith(borderSide: theme.inputDecorationTheme.enabledBorder?.borderSide.copyWith(color: borderColor)) : theme.inputDecorationTheme.enabledBorder,
-          errorMaxLines: 2,
-          filled: true,
-          prefixIcon: prefixIcon,
-          counterText: "",
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: paddingHorizontal.w,
-            vertical: paddingVertical.h,
-          ),
+  State<CommonTextField> createState() => _CommonTextFieldState();
+}
 
-          hintText: hintText,
-          labelText: labelText,
-          prefix: CommonText(
-            text: prefixText ?? "",
-            fontWeight: FontWeight.w400,
-          ),
-          suffixIcon: isPassword ? _buildPasswordSuffixIcon() : suffixIcon,
-        ),
-      );
+class _CommonTextFieldState extends State<CommonTextField> {
+  late final TextEditingController _controller;
+  late final FocusNode _focusNode;
+  late bool _obscureText;
+
+  bool get _hasController => widget.controller != null;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _obscureText = widget.isPassword;
+    _controller = widget.controller ?? TextEditingController();
+    _focusNode = FocusNode();
+
+    // Set initial text only if the controller was provided
+    if (widget.initialText != null) {
+      _controller.text = widget.initialText ?? '';
+    }
+
+    _focusNode.addListener(() {
+      setState(() {}); // rebuild to reflect focus changes
     });
   }
 
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    if (!_hasController) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  Color _iconColor() {
+    return _focusNode.hasFocus
+        ? (widget.borderColor ?? theme.primaryColor)
+        : theme.colorScheme.outline;
+  }
+
+@override
+Widget build(BuildContext context) {
+  return TextFormField(
+    controller: _controller,
+    focusNode: _focusNode,
+    obscureText: _obscureText,
+    readOnly: widget.isReadOnly,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    keyboardType: widget.keyboardType,
+    textInputAction: widget.textInputAction,
+    onSaved: widget.onSaved == null ? null : (v) => widget.onSaved!(v ?? ''),
+    maxLength: widget.mexLength,
+    inputFormatters: widget.inputFormatters,
+    onFieldSubmitted: widget.onSubmitted,
+    onTap: widget.onTap,
+    validator: widget.validator,
+    style: theme.textTheme.bodyLarge!.copyWith(
+      fontWeight: FontWeight.w500,
+      fontSize: 12.sp,
+    ),
+    decoration: InputDecoration(
+      filled: true,
+      counterText: '',
+      errorMaxLines: 2,
+      prefixIcon: widget.prefixText?.isNotEmpty == true
+          ? Padding(
+              padding: EdgeInsets.only(left: 10, right: 5), // add some right padding to allow hint space
+              child: CommonText(
+                text: widget.prefixText!,
+                fontWeight: FontWeight.w400,
+                color: _iconColor(),
+              ),
+            )
+          : widget.prefixIcon,
+      prefixIconConstraints: BoxConstraints(maxWidth: 40),
+      suffixIcon: widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
+      prefixIconColor: _iconColor(),
+      suffixIconColor: _iconColor(),
+      enabledBorder: widget.borderColor != null
+          ? theme.inputDecorationTheme.enabledBorder?.copyWith(
+              borderSide: theme.inputDecorationTheme.enabledBorder?.borderSide
+                      .copyWith(color: widget.borderColor!) ??
+                  BorderSide(color: widget.borderColor!),
+            )
+          : theme.inputDecorationTheme.enabledBorder,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: widget.paddingHorizontal.w,
+        vertical: widget.paddingVertical.h,
+      ),
+      hintText: widget.hintText,
+      labelText: widget.labelText,
+    ),
+  );
+}
+
+
   Widget _buildPasswordSuffixIcon() {
     return GestureDetector(
-      onTap: toggle,
+      onTap: _togglePasswordVisibility,
       child: Padding(
         padding: EdgeInsetsDirectional.only(end: 10.w),
         child: Icon(
-          obscureText.value
+          _obscureText
               ? Icons.visibility_off_outlined
               : Icons.visibility_outlined,
           size: 20.sp,
-          color: theme.colorScheme.outline,
         ),
       ),
     );
-  }
-
-  void toggle() {
-    obscureText.value = !obscureText.value;
   }
 }

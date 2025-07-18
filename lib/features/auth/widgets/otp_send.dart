@@ -30,8 +30,8 @@ class OtpSend extends StatelessWidget {
         children: [
           CommonLogo().center,
           50.height,
-          CommonText(text: title, style: theme.textTheme.bodyLarge),
-          CommonText(text: subtitle, style: theme.textTheme.bodyMedium),
+          CommonText(text: title, style: theme.textTheme.bodyLarge, alignment: MainAxisAlignment.center,),
+          CommonText(text: subtitle, style: theme.textTheme.bodyMedium, alignment: MainAxisAlignment.center),
           20.height,
           CommonPhoneNumberTextFiled(
             controller: Get.find<OtpController>().phoneController,

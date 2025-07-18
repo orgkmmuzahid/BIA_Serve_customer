@@ -1,5 +1,3 @@
-import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CommonText extends StatelessWidget {
   const CommonText({
     super.key,
-    this.maxLines = 1,
+    this.maxLines,
     this.textAlign = TextAlign.center,
     this.left = 0,
     this.right = 0,
@@ -18,10 +16,12 @@ class CommonText extends StatelessWidget {
     this.color,
     required this.text,
     this.style,
-    this.overflow = TextOverflow.ellipsis,
+    this.overflow,
     this.enableBorder = false,
     this.borderColor,
-    this.borderRadius, this.backgroundColor, this.alignment
+    this.borderRadius,
+    this.backgroundColor,
+    this.alignment,
   });
 
   final double left;
@@ -33,62 +33,77 @@ class CommonText extends StatelessWidget {
   final Color? color;
   final String text;
   final TextAlign textAlign;
-  final int maxLines;
-  final TextOverflow overflow;
+  final int? maxLines;
+  final TextOverflow? overflow;
   final TextStyle? style;
   final bool? enableBorder;
   final Color? borderColor;
   final double? borderRadius;
   final Color? backgroundColor;
   final MainAxisAlignment? alignment;
+
   @override
-  Widget build(BuildContext context) => enableBorder == true? withBorder() :  withoutBorder();
-  
-
-   EdgeInsets _edgInsetsBuilder() =>  EdgeInsets.only(
-      left: left.w,
-      right: right.w,
-      top: top.h,
-      bottom: bottom.h,
-    );
-
-  Widget withBorder()=> Container(
-    padding: _edgInsetsBuilder(),
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      borderRadius: borderRadius != null? BorderRadius.circular(borderRadius!): null,
-     border: borderColor != null? _buildBorder(borderColor!): _buildBorder(theme.dividerColor)),
-    child: Row(
-      mainAxisAlignment: alignment ?? MainAxisAlignment.start,
-      children: [
-        _textFiled(),
-      ],
-    ),
-  );
-
-  BoxBorder? _buildBorder(Color color) {
-    return BoxBorder.all(color: color);
+  Widget build(BuildContext context) {
+    return enableBorder == true ? _withBorder(context) : _withoutBorder(context);
   }
 
-  Padding withoutBorder()=> Padding(
-    padding: _edgInsetsBuilder(),
-    child: _textFiled(),
-  );
-  
+  EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(
+        left: left.w,
+        right: right.w,
+        top: top.h,
+        bottom: bottom.h,
+      );
 
-  Text _textFiled() {
-    return Text(
-    textAlign: textAlign,
-    text,
-    maxLines: maxLines,
-    overflow: overflow,
-    style:
-        style ??
-        GoogleFonts.dmSans(
-          fontSize: fontSize.sp,
-          fontWeight: fontWeight,
-          color: color ?? theme.textTheme.bodyMedium!.color,
+  Widget _withBorder(BuildContext context) => Container(
+        padding: _edgeInsetsBuilder(),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: borderRadius != null
+              ? BorderRadius.circular(borderRadius!)
+              : null,
+          border: Border.all(
+              color: borderColor ?? Theme.of(context).dividerColor),
         ),
-  );
+        child: Align(
+          alignment: _convertAlignment(),
+          child: _textField(context),
+        ),
+      );
+
+  Widget _withoutBorder(BuildContext context) => Padding(
+        padding: _edgeInsetsBuilder(),
+        child: Align(
+          alignment: _convertAlignment(),
+          child: _textField(context),
+        ),
+      );
+
+  Alignment _convertAlignment() {
+    switch (alignment) {
+      case MainAxisAlignment.center:
+        return Alignment.center;
+      case MainAxisAlignment.end:
+        return Alignment.centerRight;
+      case MainAxisAlignment.start:
+      default:
+        return Alignment.centerLeft;
+    }
+  }
+
+  Widget _textField(BuildContext context) {
+    return Text(
+      text,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      softWrap: true,
+      overflow:
+          maxLines == null ? TextOverflow.visible : (overflow ?? TextOverflow.ellipsis),
+      style: style ??
+          GoogleFonts.dmSans(
+            fontSize: fontSize.sp,
+            fontWeight: fontWeight,
+            color: color ?? Theme.of(context).textTheme.bodyMedium?.color,
+          ),
+    );
   }
 }

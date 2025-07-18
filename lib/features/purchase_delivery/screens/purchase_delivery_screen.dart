@@ -57,7 +57,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                 CommonText(text: AppString.productAmount, style: theme.textTheme.bodyLarge).start,
                 10.height,
                  CommonTextField(hintText: AppString.productAmount, 
-                 prefixIcon: CommonText(text: AppString.monySign, top: 15,),
+                 prefixText:  AppString.monySign,
                 validator: OtherHelper.validateAmount,
                  keyboardType: TextInputType.number, onSaved: (value) {
                   purchaseDeliveryController.onFormChange(

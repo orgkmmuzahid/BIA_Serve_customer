@@ -35,7 +35,7 @@ class CommonLinerProgressStep extends StatelessWidget {
             final stepIndex = index ~/ 2;
 
             if (isStep) {
-              final isActive = stepIndex <= currentStep;
+              final isActive = stepIndex <= currentStep -1;
               return Expanded(
                 child: Center(
                   child: Container(
@@ -50,7 +50,7 @@ class CommonLinerProgressStep extends StatelessWidget {
                 ),
               );
             } else {
-              final isActive = (index ~/ 2) < currentStep;
+              final isActive = (index ~/ 2) < currentStep -1;
               return Container(
                 width: lineWidth,
                 height: lineHeight,

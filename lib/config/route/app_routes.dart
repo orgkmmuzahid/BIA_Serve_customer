@@ -1,4 +1,5 @@
 import 'package:bai_serve/features/auth/screen/profile_info_screen.dart';
+import 'package:bai_serve/features/chat/screens/calling_screen.dart';
 import 'package:bai_serve/features/chat/screens/message_screen.dart';
 import 'package:bai_serve/features/payment/screens/my_payment_screen.dart';
 import 'package:bai_serve/features/setting/screens/language_screen.dart';
@@ -24,6 +25,11 @@ import 'package:bai_serve/features/place_order/screens/pick_up_information_scree
 import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:bai_serve/features/purchase_delivery/screens/purchase_delivery_screen.dart';
 import 'package:bai_serve/features/tracking_order/screens/tracking_order_screen.dart';
+import 'package:bai_serve/features/vendor_sourcing/screens/all_product_screen.dart';
+import 'package:bai_serve/features/vendor_sourcing/screens/all_vendors_screen.dart';
+import 'package:bai_serve/features/vendor_sourcing/screens/view%20_product_screen.dart';
+import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_category_screen.dart';
+import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_screen.dart';
 import 'package:get/get.dart';
 import '../../features/auth/screen/change_password_screen.dart';
 import '../../features/auth/screen/sign_in_screen.dart';
@@ -67,6 +73,12 @@ class AppRoutes {
   static const String profileInfo = "/profile_info_screen.dart";
   static const String myPayment = "/my_payment_screen.dart";
   static const String messageScreen = "/message_screen.dart";
+  static const String calling = "/calling_screen.dart";
+  static const String vendorSourcing = "/vendor_sourcing_screen.dart";
+  static const String allProducts = "/all_product_screen.dart";
+  static const String allVendors= "/all_vendors_screen.dart";
+  static const String vendorSourcingCategory= "/vendor_sourcing_category_screen.dart";
+  static const String viewProduct= "/view_product_screen.dart";
   
 
   //---------------------
@@ -107,6 +119,13 @@ class AppRoutes {
     GetPage(name: profileInfo, page: () => const ProfileInfoScreen()),
     GetPage(name: myPayment, page: () => const MyPaymentScreen()),
     GetPage(name: messageScreen, page: () => const MessageScreen()),
+    GetPage(name: calling, page: () => const CallingScreen()),
+    GetPage(name: vendorSourcing, page: () => const VendorSourcingScreen()),
+    GetPage(name: allProducts, page: () => const AllProductScreen()),
+    GetPage(name: allVendors, page: () => const AllVendorsScreen()),
+    GetPage(name: vendorSourcingCategory, page: () => const VendorSourcingCategoryScreen()),
+    GetPage(name: viewProduct, page: () => const ViewProductScreen()),
+
 
 
     //----------------------

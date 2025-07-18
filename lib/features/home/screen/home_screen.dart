@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => GetBuilder<HomeController>(
     builder:
         (controller) => Scaffold(
-              appBar: CommonAppBar(leading:  _leading(), titleWidget: _title(controller)),
+              appBar: CommonAppBar(leading:  _leading(),isCenterTitle: false ,titleWidget: _title(controller)),
               drawer: HomeDrawer(
                 userName: controller.name,
                 address: controller.address, controller: controller,

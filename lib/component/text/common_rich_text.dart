@@ -33,12 +33,11 @@ class CommonRichText extends StatelessWidget {
   }
   
 Widget _content() {
-  return Flexible(
-  child: Text.rich(
+  return Text.rich(
     TextSpan(
       children: List.generate(richTextContent.length, (index) {
         final rContent = richTextContent[index];
-
+  
         if (rContent is CommonSimpleRichTextContent) {
           final style = rContent.style ?? theme.textTheme.bodyMedium!;
           return TextSpan(
@@ -58,8 +57,7 @@ Widget _content() {
     softWrap: true,
     overflow: TextOverflow.visible,
     textAlign: TextAlign.start,
-  ),
-);
+  );
 
 }
 

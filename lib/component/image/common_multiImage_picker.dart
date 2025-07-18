@@ -22,7 +22,7 @@ class CommonMultiimagePicker extends StatelessWidget {
                 height: 150, child: Center(child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
-                children: [Icon(Icons.add), CommonText(text: AppString.addImage)],))),
+                children: [Icon(Icons.add), CommonText( alignment: MainAxisAlignment.center,text: AppString.addImage)],))),
              ),
               20.height,
 

@@ -42,7 +42,9 @@ class HomeController extends GetxController {
   void onPlaceOrder(){
     goToScreen(AppRoutes.placeOrder);
   }
-  void onVendorSourcing(){ }
+  void onVendorSourcing(){ 
+    Get.toNamed(AppRoutes.vendorSourcing);
+  }
   void onPurchaseAndDelivery(){ 
     Get.toNamed(AppRoutes.purchaseDelivery);
   }

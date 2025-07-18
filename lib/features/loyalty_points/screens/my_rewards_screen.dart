@@ -88,7 +88,7 @@ class MyRewardsScreen  extends StatelessWidget {
   context: Get.context!,
   builder: (context) => AlertDialog(
     backgroundColor: theme.scaffoldBackgroundColor,
-    content: CommonText(text: AppString.loaltyClaimingMessage(model.title), maxLines: 5 ,style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400) ),
+    content: IntrinsicHeight(child: CommonText(text: AppString.loaltyClaimingMessage(model.title), maxLines: 5 ,style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400) )),
     actionsAlignment: MainAxisAlignment.center,
     actions: [
       CommonButton(

@@ -1,20 +1,59 @@
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
-
 class AppLogger {
-  static bool enableLogs = kDebugMode; // Only log in debug mode by default
-
+  static bool enableLogs = kDebugMode; // Only log in debug mode
   static final DateFormat _timeFormatter = DateFormat('HH:mm:ss');
+
+  // ANSI color codes
+  static const _reset = '\x1B[0m';
+  static const _bold = '\x1B[1m';
+  static const _gray = '\x1B[90m';
+  static const _red = '\x1B[31m';
+  static const _yellow = '\x1B[33m';
+  static const _green = '\x1B[32m';
+  static const _blue = '\x1B[34m';
 
   static void _log(String level, String message, {String? tag}) {
     if (!enableLogs) return;
 
     final now = DateTime.now();
     final time = _timeFormatter.format(now);
-    final logTag = tag != null ? '[$tag]' : '';
-    
-    debugPrint('[$time] [$level] $logTag $message');
+    final coloredTime = '$_gray[$time]$_reset';
+
+    final coloredTag = tag != null ? '$_yellow[$tag]$_reset ' : '';
+
+    late String levelEmoji;
+    late String levelColor;
+
+    switch (level) {
+      case 'INFO':
+        levelEmoji = 'ℹ️ℹ️';
+        levelColor = _blue;
+        break;
+      case 'WARN':
+        levelEmoji = '⚠️⚠️';
+        levelColor = _yellow;
+        break;
+      case 'ERROR':
+        levelEmoji = '❌';
+        levelColor = _red;
+        break;
+      case 'DEBUG':
+        levelEmoji = '🐞🐞';
+        levelColor = _green;
+        break;
+      default:
+        levelEmoji = '';
+        levelColor = _reset;
+    }
+
+    final levelText = '$levelEmoji ${_bold}${levelColor}$level$_reset';
+    final coloredMessage = '$levelColor$message$_reset';
+
+    final formatted = '$coloredTime [$levelText] $coloredTag$coloredMessage';
+
+    debugPrint(formatted);
   }
 
   static void info(String message, {String? tag}) {

@@ -15,15 +15,16 @@ class  CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Function()? onBackPress;
   final Widget? leading;
   final List<Widget>? actions;
+  final bool isCenterTitle;
 
-  const CommonAppBar({super.key, this.title, this.onBackPress, this.titleWidget, this.leading, this.actions});
+  const CommonAppBar({super.key, this.title, this.onBackPress, this.titleWidget, this.leading, this.actions, this.isCenterTitle = true});
  
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) => AppBar(
-                centerTitle: true,
+                centerTitle: isCenterTitle,
                 leading: leading ?? IconButton(onPressed: (){
                   if(onBackPress != null) onBackPress!();
                   Get.back();

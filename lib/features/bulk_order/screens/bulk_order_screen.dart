@@ -59,7 +59,7 @@ class BulkOrderScreen extends StatelessWidget {
                       height: 150, child: Center(child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
-                      children: [Icon(Icons.add), CommonText(text: AppString.addImage)],))),
+                      children: [Icon(Icons.add), CommonText(text: AppString.addImage, alignment: MainAxisAlignment.center,)],))),
                    ),
                     20.height,
            
