@@ -1,3 +1,1 @@
-enum DeliveryType {
-  regular, urgent
-}
+enum DeliveryType { regular, urgent }

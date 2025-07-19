@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
-  
+
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: CommonAppBar(title: AppString.privacyPolicy),);
+  Widget build(BuildContext context) =>
+      const Scaffold(appBar: CommonAppBar(title: AppString.privacyPolicy));
 }

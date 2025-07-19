@@ -2,9 +2,7 @@
 
 import 'dart:convert';
 
-enum DeliveryStatus{
-  pending,delivered, cancel
-}
+enum DeliveryStatus { pending, delivered, cancel }
 
 class OrderListModel {
   final String orderNumber;
@@ -22,7 +20,6 @@ class OrderListModel {
     required this.deliveryStatus,
     required this.outForDelivery,
   });
- 
 
   OrderListModel copyWith({
     String? orderNumber,
@@ -56,9 +53,15 @@ class OrderListModel {
   factory OrderListModel.fromMap(Map<String, dynamic> map) {
     return OrderListModel(
       orderNumber: map['orderNumber'] as String,
-      orderPlacedDate: DateTime.fromMillisecondsSinceEpoch(map['orderPlacedDate'] as int),
-      percelPickedUp: DateTime.fromMillisecondsSinceEpoch(map['percelPickedUp'] as int),
-      inTransition: DateTime.fromMillisecondsSinceEpoch(map['inTransition'] as int),
+      orderPlacedDate: DateTime.fromMillisecondsSinceEpoch(
+        map['orderPlacedDate'] as int,
+      ),
+      percelPickedUp: DateTime.fromMillisecondsSinceEpoch(
+        map['percelPickedUp'] as int,
+      ),
+      inTransition: DateTime.fromMillisecondsSinceEpoch(
+        map['inTransition'] as int,
+      ),
       deliveryStatus: DeliveryStatus.values[map['deliveryStatus'] as int],
       outForDelivery: map['outForDelivery'] as String,
     );
@@ -66,7 +69,8 @@ class OrderListModel {
 
   String toJson() => json.encode(toMap());
 
-  factory OrderListModel.fromJson(String source) => OrderListModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory OrderListModel.fromJson(String source) =>
+      OrderListModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -76,23 +80,22 @@ class OrderListModel {
   @override
   bool operator ==(covariant OrderListModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.orderNumber == orderNumber &&
-      other.orderPlacedDate == orderPlacedDate &&
-      other.percelPickedUp == percelPickedUp &&
-      other.inTransition == inTransition &&
-      other.deliveryStatus == deliveryStatus &&
-      other.outForDelivery == outForDelivery;
+
+    return other.orderNumber == orderNumber &&
+        other.orderPlacedDate == orderPlacedDate &&
+        other.percelPickedUp == percelPickedUp &&
+        other.inTransition == inTransition &&
+        other.deliveryStatus == deliveryStatus &&
+        other.outForDelivery == outForDelivery;
   }
 
   @override
   int get hashCode {
     return orderNumber.hashCode ^
-      orderPlacedDate.hashCode ^
-      percelPickedUp.hashCode ^
-      inTransition.hashCode ^
-      deliveryStatus.hashCode ^
-      outForDelivery.hashCode;
+        orderPlacedDate.hashCode ^
+        percelPickedUp.hashCode ^
+        inTransition.hashCode ^
+        deliveryStatus.hashCode ^
+        outForDelivery.hashCode;
   }
 }

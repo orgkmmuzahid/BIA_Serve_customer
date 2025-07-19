@@ -7,5 +7,5 @@ class CommonLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      CommonImage(imageSrc: AppImages.appsIcon, width: 124, height: 107);
+      const CommonImage(imageSrc: AppImages.appsIcon, width: 124, height: 107);
 }

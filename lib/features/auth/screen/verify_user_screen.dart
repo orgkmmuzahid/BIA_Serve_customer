@@ -8,10 +8,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../component/text/common_text.dart';
-import '../../../../../utils/constants/app_colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../../../../utils/constants/app_colors.dart';
 import '../../../../../utils/constants/app_string.dart';
+import '../../../component/text/common_text.dart';
 
 class VerifyUserScreen extends StatefulWidget {
   const VerifyUserScreen({super.key});
@@ -45,16 +46,15 @@ class _VerifyUserState extends State<VerifyUserScreen> {
       body: GetBuilder<OtpController>(
         builder: (controller) {
           return Container(
-            padding: EdgeInsets.only(left: 25, right: 25),
+            padding: const EdgeInsets.only(left: 25, right: 25),
             child: Form(
               key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   /// instruction how to get OTP
-                  Spacer(),
-                  CommonLogo().center,
+                  const Spacer(),
+                  const CommonLogo().center,
                   50.height,
                   CommonText(
                     alignment: MainAxisAlignment.center,
@@ -87,7 +87,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                     },
                   ),
 
-                  Spacer(),
+                  const Spacer(),
 
                   ///  Sign In Instruction here
                   const AlreadyAccountRichText(),
@@ -107,12 +107,12 @@ class _VerifyUserState extends State<VerifyUserScreen> {
         : CommonText(
           alignment: MainAxisAlignment.end,
           text:
-              "${AppString.resendCodeIn} ${controller.time} ${AppString.minute}",
+              '${AppString.resendCodeIn} ${controller.time} ${AppString.minute}',
         );
   }
 
   Widget _resendMessageBuilder(OtpController controller) => Align(
-    alignment:Alignment.centerRight,
+    alignment: Alignment.centerRight,
     child: Text.rich(
       TextSpan(
         children: [
@@ -124,10 +124,10 @@ class _VerifyUserState extends State<VerifyUserScreen> {
               fontWeight: FontWeight.w400,
             ),
           ),
-    
+
           /// Sign Up Button here
           TextSpan(
-            text: " ${AppString.resendCode}",
+            text: ' ${AppString.resendCode}',
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {

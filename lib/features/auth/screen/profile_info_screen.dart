@@ -20,37 +20,53 @@ final _form1 = GlobalKey<FormState>();
 class ProfileInfoScreen extends StatelessWidget {
   const ProfileInfoScreen({super.key});
 
-  
-    @override
-  Widget build(BuildContext context) => Scaffold(appBar: CommonAppBar(title: AppString.profileInfo), 
-    
-    body: Padding(padding: EdgeInsets.only(left: 16, right: 16), child: Column(children: [
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: const CommonAppBar(title: AppString.profileInfo),
+
+    body: Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Column(
+        children: [
           Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(border: BoxBorder.all(width: 8 ,color: AppColors.secondaryColor,), shape: BoxShape.circle),
-          child: CommonImage(imageSrc: AppImages.homeBanner ,fill: BoxFit.fill,borderRadius: 130 ,width: 130, height: 130,).center),
-        10.height,
-        Text("Cameron Williamson", style: theme.textTheme.bodyLarge),
-        10.height,
-        Expanded(
-          child: CommonTabBar(tabs: [ AppString.editProfile, AppString.changePassword],
-           tabViews: [
-            _profileChange(),
-            _changePassowrd()
-          ])
-        )
-    ]),),
-  
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: BoxBorder.all(width: 8, color: AppColors.secondaryColor),
+              shape: BoxShape.circle,
+            ),
+            child:
+                const CommonImage(
+                  imageSrc: AppImages.homeBanner,
+                  fill: BoxFit.fill,
+                  borderRadius: 130,
+                  width: 130,
+                  height: 130,
+                ).center,
+          ),
+          10.height,
+          Text('Cameron Williamson', style: theme.textTheme.bodyLarge),
+          10.height,
+          Expanded(
+            child: CommonTabBar(
+              tabs: const [AppString.editProfile, AppString.changePassword],
+              tabViews: [_profileChange(), _changePassowrd()],
+            ),
+          ),
+        ],
+      ),
+    ),
   );
-  
-  GetBuilder<ChangePasswordController> _changePassowrd() => GetBuilder<ChangePasswordController>(
+
+  GetBuilder<ChangePasswordController> _changePassowrd() =>
+      GetBuilder<ChangePasswordController>(
         builder: (controller) {
           return Form(
             key: controller.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               30.height,
+                30.height,
+
                 /// current Password section
                 const CommonText(text: AppString.currentPassword, bottom: 8),
                 CommonTextField(
@@ -60,7 +76,7 @@ class ProfileInfoScreen extends StatelessWidget {
                   isPassword: true,
                   prefixIcon: Icon(Icons.lock, size: 20.sp),
                 ),
-          
+
                 /// New Password section
                 const CommonText(
                   text: AppString.newPassword,
@@ -74,7 +90,7 @@ class ProfileInfoScreen extends StatelessWidget {
                   isPassword: true,
                   prefixIcon: Icon(Icons.lock, size: 20.sp),
                 ),
-          
+
                 /// confirm Password section
                 const CommonText(
                   text: AppString.confirmPassword,
@@ -93,6 +109,7 @@ class ProfileInfoScreen extends StatelessWidget {
                   prefixIcon: Icon(Icons.lock, size: 20.sp),
                 ),
                 20.height,
+
                 /// submit Button
                 CommonButton(
                   titleText: AppString.save,
@@ -105,52 +122,44 @@ class ProfileInfoScreen extends StatelessWidget {
           );
         },
       );
-      
-        Form _profileChange() => Form(
-          key: _form1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             30.height,
-                  /// current Password section
-                  const CommonText(text: AppString.fullName, bottom: 8),
-                  CommonTextField(
-                    hintText: AppString.fullName,
-                    validator: OtherHelper.requiredFieldValidator,
-                    prefixIcon: Icon(Icons.person, size: 20.sp),
-                  ),
-            
-                  /// New Password section
-                  const CommonText(
-                    text: AppString.phoneNumber,
-                    bottom: 8,
-                    top: 16,
-                  ),
-                  CommonTextField(
-                    hintText: AppString.phoneNumber,
-                    validator: OtherHelper.phoneValidator,
-                    prefixIcon: Icon(Icons.phone, size: 20.sp),
-                  ),
-            
-                  /// confirm Password section
-                  const CommonText(
-                    text: AppString.dateOfBirth,
-                    bottom: 8,
-                    top: 16,
-                  ),
-                  CommonDateInputTextField(onSave: (date) {
-                    
-                  },),
-                  20.height,
-          
-                CommonButton(
-                    titleText: AppString.save,
-                    buttonWidth: 172,
-                    onTap: () {
-                      _form1.currentState?.validate();
-                      _form1.currentState?.save();
-                    },
-                  ).center,
-          ],),
-        );
+
+  Form _profileChange() => Form(
+    key: _form1,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        30.height,
+
+        /// current Password section
+        const CommonText(text: AppString.fullName, bottom: 8),
+        CommonTextField(
+          hintText: AppString.fullName,
+          validator: OtherHelper.requiredFieldValidator,
+          prefixIcon: Icon(Icons.person, size: 20.sp),
+        ),
+
+        /// New Password section
+        const CommonText(text: AppString.phoneNumber, bottom: 8, top: 16),
+        CommonTextField(
+          hintText: AppString.phoneNumber,
+          validator: OtherHelper.phoneValidator,
+          prefixIcon: Icon(Icons.phone, size: 20.sp),
+        ),
+
+        /// confirm Password section
+        const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 16),
+        CommonDateInputTextField(onSave: (date) {}),
+        20.height,
+
+        CommonButton(
+          titleText: AppString.save,
+          buttonWidth: 172,
+          onTap: () {
+            _form1.currentState?.validate();
+            _form1.currentState?.save();
+          },
+        ).center,
+      ],
+    ),
+  );
 }

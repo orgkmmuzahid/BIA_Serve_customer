@@ -54,27 +54,27 @@ final ThemeData darkTheme = ThemeData(
   dividerColor: const Color(0xFF2C2C2C),
 
   textTheme: TextTheme(
-    bodyLarge: TextStyle(
+    bodyLarge: const TextStyle(
       color: Color(0xFFEFEFEF),
       fontSize: 16,
       fontWeight: FontWeight.w600,
     ),
     bodyMedium: GoogleFonts.dmSans(
-      color: Color(0xFFCCCCCC),
+      color: const Color(0xFFCCCCCC),
       fontSize: 12,
       fontWeight: FontWeight.w400,
     ),
     bodySmall: GoogleFonts.dmSans(
-      color: Color(0xFF999999),
+      color: const Color(0xFF999999),
       fontSize: 10,
       fontWeight: FontWeight.w400,
     ),
-    titleLarge: TextStyle(
+    titleLarge: const TextStyle(
       color: Color(0xFFEFEFEF),
       fontWeight: FontWeight.bold,
     ),
     titleSmall: GoogleFonts.dmSans(
-      color: Color(0xFFEFEFEF),
+      color: const Color(0xFFEFEFEF),
       fontSize: 12,
       fontWeight: FontWeight.w700,
     ),
@@ -94,11 +94,13 @@ final ThemeData darkTheme = ThemeData(
     focusedBorder: _buildBorder(color: const Color(0xFF4DB8BF)),
     disabledBorder: _buildBorder(color: const Color(0xFF2D2D2D)),
     errorBorder: _buildBorder(color: const Color(0xFFFF6B6B)),
-    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFF888888)),
-    labelStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFFAAAAAA)),
+    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xFF888888)),
+    labelStyle: GoogleFonts.dmSans(
+      fontSize: 14,
+      color: const Color(0xFFAAAAAA),
+    ),
   ),
 );
-
 
 OutlineInputBorder _buildBorder({required Color color}) {
   return OutlineInputBorder(

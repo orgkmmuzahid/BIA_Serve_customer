@@ -6,9 +6,9 @@ import 'package:intl_phone_field_v2/phone_number.dart';
 
 class CommonPhoneNumberTextFiled extends StatelessWidget {
   const CommonPhoneNumberTextFiled({
-    super.key,
     required this.controller,
     required this.countryChange,
+    super.key,
   });
 
   final TextEditingController controller;
@@ -28,11 +28,10 @@ class CommonPhoneNumberTextFiled extends StatelessWidget {
       decoration: InputDecoration(
         labelText: '',
         prefixIcon: Container(
-          padding: EdgeInsets.only(right: 8),
-          decoration: BoxDecoration(
-            border: Border(right: BorderSide(color: Colors.grey, width: 1.0)),
+          padding: const EdgeInsets.only(right: 8),
+          decoration: const BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.grey)),
           ),
-          child: null, // let the widget render flag & code
         ),
       ),
       flagsButtonPadding: const EdgeInsets.only(left: 8, right: 8),

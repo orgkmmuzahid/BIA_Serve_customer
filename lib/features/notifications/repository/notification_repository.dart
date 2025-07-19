@@ -1,5 +1,3 @@
-import '../../../services/api/api_service.dart';
-import '../../../config/api/api_end_point.dart';
 import '../data/model/notification_model.dart';
 
 Future<List<NotificationModel>> notificationRepository(int page) async {
@@ -18,13 +16,32 @@ Future<List<NotificationModel>> notificationRepository(int page) async {
 
   //   return list;
   // } else {
-    return [ //dummy data
-    NotificationModel(id: 'id', title: 'Your parcel is ready to be sent!', subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.', type: NotificationType.delivered,
-     createdAt: DateTime.now(), updatedAt: DateTime.now()),
-    NotificationModel(id: 'id', title: 'Your parcel is ready to be sent!', subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.', type: NotificationType.onTheWay,
-     createdAt: DateTime.now(), updatedAt: DateTime.now()),
-    NotificationModel(id: 'id', title: 'Your parcel is ready to be sent!', subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.', type: NotificationType.ready,
-     createdAt: DateTime.now(), updatedAt: DateTime.now()),
+  return [
+    //dummy data
+    NotificationModel(
+      id: 'id',
+      title: 'Your parcel is ready to be sent!',
+      subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.',
+      type: NotificationType.delivered,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    NotificationModel(
+      id: 'id',
+      title: 'Your parcel is ready to be sent!',
+      subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.',
+      type: NotificationType.onTheWay,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    NotificationModel(
+      id: 'id',
+      title: 'Your parcel is ready to be sent!',
+      subtitle: 'We’ve scheduled a pickup for June 24 at 10:00 AM.',
+      type: NotificationType.ready,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
   ];
   // }
 }

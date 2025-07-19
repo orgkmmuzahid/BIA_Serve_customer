@@ -4,34 +4,33 @@ import 'dart:convert';
 // File: place_order_model.dart
 
 class PlaceOrderModel {
+  String? fullName;
+  String? phone;
+  String? district;
+  String? city;
+  String? ward;
+  String? subWard;
+  String? plotApartment;
+  String? marchentPickupTime;
+  String? serviceType;
+  double? productWieght;
+  int? quantity;
+  String? itemDetails;
+  String? marchentAdressOnMap;
+  String? clientAdressOnMap;
 
-   String? fullName;
-   String? phone;
-   String? district;
-   String? city;
-   String? ward;
-   String? subWard;
-   String? plotApartment;
-   String? marchentPickupTime;
-   String? serviceType;
-   double? productWieght;
-   int?    quantity;
-   String? itemDetails;
-   String?  marchentAdressOnMap;
-   String?  clientAdressOnMap;
+  String? clientFullName;
+  String? clientPhone;
+  String? clientDistrict;
+  String? clientCity;
+  String? clientWard;
+  String? clientSubWard;
+  String? clientPlotApartment;
+  String? clientPickupTime;
+  String? clientServiceType;
+  double? clientProductWieght;
+  int? clientQuantity;
 
-   String? clientFullName;
-   String? clientPhone;
-   String? clientDistrict;
-   String? clientCity;
-   String? clientWard;
-   String? clientSubWard;
-   String? clientPlotApartment;
-   String? clientPickupTime;
-   String? clientServiceType;
-   double? clientProductWieght;
-   int?    clientQuantity;
-   
   PlaceOrderModel({
     this.fullName,
     this.phone,
@@ -154,31 +153,68 @@ class PlaceOrderModel {
       city: map['city'] != null ? map['city'] as String : null,
       ward: map['ward'] != null ? map['ward'] as String : null,
       subWard: map['subWard'] != null ? map['subWard'] as String : null,
-      plotApartment: map['plotApartment'] != null ? map['plotApartment'] as String : null,
-      marchentPickupTime: map['marchentPickupTime'] != null ? map['marchentPickupTime'] as String : null,
-      serviceType: map['serviceType'] != null ? map['serviceType'] as String : null,
-      productWieght: map['productWieght'] != null ? map['productWieght'] as double : null,
+      plotApartment:
+          map['plotApartment'] != null ? map['plotApartment'] as String : null,
+      marchentPickupTime:
+          map['marchentPickupTime'] != null
+              ? map['marchentPickupTime'] as String
+              : null,
+      serviceType:
+          map['serviceType'] != null ? map['serviceType'] as String : null,
+      productWieght:
+          map['productWieght'] != null ? map['productWieght'] as double : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
-      itemDetails: map['itemDetails'] != null ? map['itemDetails'] as String : null,
-      marchentAdressOnMap: map['marchentAdressOnMap'] != null ? map['marchentAdressOnMap'] as String : null,
-      clientAdressOnMap: map['clientAdressOnMap'] != null ? map['clientAdressOnMap'] as String : null,
-      clientFullName: map['clientFullName'] != null ? map['clientFullName'] as String : null,
-      clientPhone: map['clientPhone'] != null ? map['clientPhone'] as String : null,
-      clientDistrict: map['clientDistrict'] != null ? map['clientDistrict'] as String : null,
-      clientCity: map['clientCity'] != null ? map['clientCity'] as String : null,
-      clientWard: map['clientWard'] != null ? map['clientWard'] as String : null,
-      clientSubWard: map['clientSubWard'] != null ? map['clientSubWard'] as String : null,
-      clientPlotApartment: map['clientPlotApartment'] != null ? map['clientPlotApartment'] as String : null,
-      clientPickupTime: map['clientPickupTime'] != null ? map['clientPickupTime'] as String : null,
-      clientServiceType: map['clientServiceType'] != null ? map['clientServiceType'] as String : null,
-      clientProductWieght: map['clientProductWieght'] != null ? map['clientProductWieght'] as double : null,
-      clientQuantity: map['clientQuantity'] != null ? map['clientQuantity'] as int : null,
+      itemDetails:
+          map['itemDetails'] != null ? map['itemDetails'] as String : null,
+      marchentAdressOnMap:
+          map['marchentAdressOnMap'] != null
+              ? map['marchentAdressOnMap'] as String
+              : null,
+      clientAdressOnMap:
+          map['clientAdressOnMap'] != null
+              ? map['clientAdressOnMap'] as String
+              : null,
+      clientFullName:
+          map['clientFullName'] != null
+              ? map['clientFullName'] as String
+              : null,
+      clientPhone:
+          map['clientPhone'] != null ? map['clientPhone'] as String : null,
+      clientDistrict:
+          map['clientDistrict'] != null
+              ? map['clientDistrict'] as String
+              : null,
+      clientCity:
+          map['clientCity'] != null ? map['clientCity'] as String : null,
+      clientWard:
+          map['clientWard'] != null ? map['clientWard'] as String : null,
+      clientSubWard:
+          map['clientSubWard'] != null ? map['clientSubWard'] as String : null,
+      clientPlotApartment:
+          map['clientPlotApartment'] != null
+              ? map['clientPlotApartment'] as String
+              : null,
+      clientPickupTime:
+          map['clientPickupTime'] != null
+              ? map['clientPickupTime'] as String
+              : null,
+      clientServiceType:
+          map['clientServiceType'] != null
+              ? map['clientServiceType'] as String
+              : null,
+      clientProductWieght:
+          map['clientProductWieght'] != null
+              ? map['clientProductWieght'] as double
+              : null,
+      clientQuantity:
+          map['clientQuantity'] != null ? map['clientQuantity'] as int : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlaceOrderModel.fromJson(String source) => PlaceOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory PlaceOrderModel.fromJson(String source) =>
+      PlaceOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -188,61 +224,60 @@ class PlaceOrderModel {
   @override
   bool operator ==(covariant PlaceOrderModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.fullName == fullName &&
-      other.phone == phone &&
-      other.district == district &&
-      other.city == city &&
-      other.ward == ward &&
-      other.subWard == subWard &&
-      other.plotApartment == plotApartment &&
-      other.marchentPickupTime == marchentPickupTime &&
-      other.serviceType == serviceType &&
-      other.productWieght == productWieght &&
-      other.quantity == quantity &&
-      other.itemDetails == itemDetails &&
-      other.marchentAdressOnMap == marchentAdressOnMap &&
-      other.clientAdressOnMap == clientAdressOnMap &&
-      other.clientFullName == clientFullName &&
-      other.clientPhone == clientPhone &&
-      other.clientDistrict == clientDistrict &&
-      other.clientCity == clientCity &&
-      other.clientWard == clientWard &&
-      other.clientSubWard == clientSubWard &&
-      other.clientPlotApartment == clientPlotApartment &&
-      other.clientPickupTime == clientPickupTime &&
-      other.clientServiceType == clientServiceType &&
-      other.clientProductWieght == clientProductWieght &&
-      other.clientQuantity == clientQuantity;
+
+    return other.fullName == fullName &&
+        other.phone == phone &&
+        other.district == district &&
+        other.city == city &&
+        other.ward == ward &&
+        other.subWard == subWard &&
+        other.plotApartment == plotApartment &&
+        other.marchentPickupTime == marchentPickupTime &&
+        other.serviceType == serviceType &&
+        other.productWieght == productWieght &&
+        other.quantity == quantity &&
+        other.itemDetails == itemDetails &&
+        other.marchentAdressOnMap == marchentAdressOnMap &&
+        other.clientAdressOnMap == clientAdressOnMap &&
+        other.clientFullName == clientFullName &&
+        other.clientPhone == clientPhone &&
+        other.clientDistrict == clientDistrict &&
+        other.clientCity == clientCity &&
+        other.clientWard == clientWard &&
+        other.clientSubWard == clientSubWard &&
+        other.clientPlotApartment == clientPlotApartment &&
+        other.clientPickupTime == clientPickupTime &&
+        other.clientServiceType == clientServiceType &&
+        other.clientProductWieght == clientProductWieght &&
+        other.clientQuantity == clientQuantity;
   }
 
   @override
   int get hashCode {
     return fullName.hashCode ^
-      phone.hashCode ^
-      district.hashCode ^
-      city.hashCode ^
-      ward.hashCode ^
-      subWard.hashCode ^
-      plotApartment.hashCode ^
-      marchentPickupTime.hashCode ^
-      serviceType.hashCode ^
-      productWieght.hashCode ^
-      quantity.hashCode ^
-      itemDetails.hashCode ^
-      marchentAdressOnMap.hashCode ^
-      clientAdressOnMap.hashCode ^
-      clientFullName.hashCode ^
-      clientPhone.hashCode ^
-      clientDistrict.hashCode ^
-      clientCity.hashCode ^
-      clientWard.hashCode ^
-      clientSubWard.hashCode ^
-      clientPlotApartment.hashCode ^
-      clientPickupTime.hashCode ^
-      clientServiceType.hashCode ^
-      clientProductWieght.hashCode ^
-      clientQuantity.hashCode;
+        phone.hashCode ^
+        district.hashCode ^
+        city.hashCode ^
+        ward.hashCode ^
+        subWard.hashCode ^
+        plotApartment.hashCode ^
+        marchentPickupTime.hashCode ^
+        serviceType.hashCode ^
+        productWieght.hashCode ^
+        quantity.hashCode ^
+        itemDetails.hashCode ^
+        marchentAdressOnMap.hashCode ^
+        clientAdressOnMap.hashCode ^
+        clientFullName.hashCode ^
+        clientPhone.hashCode ^
+        clientDistrict.hashCode ^
+        clientCity.hashCode ^
+        clientWard.hashCode ^
+        clientSubWard.hashCode ^
+        clientPlotApartment.hashCode ^
+        clientPickupTime.hashCode ^
+        clientServiceType.hashCode ^
+        clientProductWieght.hashCode ^
+        clientQuantity.hashCode;
   }
 }

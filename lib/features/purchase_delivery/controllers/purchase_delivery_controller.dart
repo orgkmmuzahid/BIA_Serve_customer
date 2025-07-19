@@ -8,14 +8,17 @@ import 'package:get/get.dart';
 // Get.lazyPut(() => PurchaseDeliveryController(), fenix: true);
 
 class PurchaseDeliveryController extends GetxController {
-  PurchaseDeliveryModel purchaseDeliveryModel = PurchaseDeliveryModel(deliveryType: DeliveryType.insideTheCity, totalPay: 0);
-  
-  void onFormChange(PurchaseDeliveryModel model){
-     purchaseDeliveryModel = model;
+  PurchaseDeliveryModel purchaseDeliveryModel = PurchaseDeliveryModel(
+    deliveryType: DeliveryType.insideTheCity,
+    totalPay: 0,
+  );
+
+  void onFormChange(PurchaseDeliveryModel model) {
+    purchaseDeliveryModel = model;
   }
 
-  void onContinue(FormState? formState){
-    if(formState?.validate() == true){
+  void onContinue(FormState? formState) {
+    if (formState?.validate() == true) {
       //save form and process here
       //I used form save outside of it for ui phase
     }
@@ -24,5 +27,4 @@ class PurchaseDeliveryController extends GetxController {
 
     Get.toNamed(AppRoutes.payment);
   }
-  
 }

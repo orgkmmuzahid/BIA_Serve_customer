@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../../config/route/app_routes.dart';
+import '../../../../../utils/constants/app_colors.dart';
+import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/extensions/extension.dart';
 import '../../../component/button/common_button.dart';
 import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
-import '../controllers/change_password_controller.dart';
-import '../../../../../utils/constants/app_colors.dart';
-import '../../../../../utils/constants/app_string.dart';
 import '../../../utils/helpers/other_helper.dart';
+import '../controllers/change_password_controller.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});

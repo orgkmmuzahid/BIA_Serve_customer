@@ -11,7 +11,12 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/utils.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({super.key, required this.userName, required this.address, required this.controller});
+  const HomeDrawer({
+    required this.userName,
+    required this.address,
+    required this.controller,
+    super.key,
+  });
   final String userName;
   final String address;
   final HomeController controller;
@@ -19,12 +24,7 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.zero,
-          bottomRight: Radius.zero,
-        ),
-      ),
+      shape: const RoundedRectangleBorder(),
       child: Column(
         children: [
           // Drawer Header
@@ -49,55 +49,103 @@ class HomeDrawer extends StatelessWidget {
                   ),
                   10.height,
                   Row(
-                    children:  [
+                    children: [
                       CommonButton(
-                      titleText: AppString.viewProfile,
-                      buttonWidth: 90,
-                      buttonHeight: 24,
-                      titleSize: 10,
-                      titleColor: theme.colorScheme.onPrimary,
-                      titleWeight: FontWeight.w700,
-                      buttonRadius: 4,
-                      borderColor: theme.colorScheme.onPrimary,
-                      buttonColor: theme.colorScheme.primary,
-                    ),const Spacer(), ],
+                        titleText: AppString.viewProfile,
+                        buttonWidth: 90,
+                        buttonHeight: 24,
+                        titleSize: 10,
+                        titleColor: theme.colorScheme.onPrimary,
+                        buttonRadius: 4,
+                        borderColor: theme.colorScheme.onPrimary,
+                        buttonColor: theme.colorScheme.primary,
+                      ),
+                      const Spacer(),
+                    ],
                   ),
                 ],
               ),
             ),
           ),
+
           // Drawer Items
-      
-          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: controller.onDrawerReturnProduct),
-          _buildMenu(image: AppImages.drawerLoyaltyPoints, title: AppString.drawerLoyaltyPoints, onTap: controller.onDrawerLoyaltyPoints),
-          _buildMenu(image: AppImages.drawerMessage, title: AppString.drawerMessage, onTap: controller.onDrawerMessage),
-          _buildMenu(image: AppImages.drawerMyPayment, title: AppString.drawerMyPayment, onTap: controller.onDrawerMyPayment),
-          _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap: controller.onDrawerSupport),
-          _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap: controller.onDrawerLanguage),
-          _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){
-             DeleteAccountAlert();
-          }),
-      
-          SizedBox(height: 218,),
-          _buildMenu(image: AppImages.drawerLogout, title: AppString.logOut,style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.error ,fontWeight: FontWeight.w400) ,onTap: (){
-            CommonAlert(title: AppString.logoutMessage, onTap: controller.onDrawerLogout);
-          })
-      
-          
+          _buildMenu(
+            image: AppImages.drawerReturnProduct,
+            title: AppString.drawerReturnsProduct,
+            onTap: controller.onDrawerReturnProduct,
+          ),
+          _buildMenu(
+            image: AppImages.drawerLoyaltyPoints,
+            title: AppString.drawerLoyaltyPoints,
+            onTap: controller.onDrawerLoyaltyPoints,
+          ),
+          _buildMenu(
+            image: AppImages.drawerMessage,
+            title: AppString.drawerMessage,
+            onTap: controller.onDrawerMessage,
+          ),
+          _buildMenu(
+            image: AppImages.drawerMyPayment,
+            title: AppString.drawerMyPayment,
+            onTap: controller.onDrawerMyPayment,
+          ),
+          _buildMenu(
+            image: AppImages.drawerSupport,
+            title: AppString.drawerSupport,
+            onTap: controller.onDrawerSupport,
+          ),
+          _buildMenu(
+            image: AppImages.drawerLanguage,
+            title: AppString.drawerLanguage,
+            onTap: controller.onDrawerLanguage,
+          ),
+          _buildMenu(
+            image: AppImages.drawerDeleteAccount,
+            title: AppString.drawerDeleteAccount,
+            onTap: () {
+              DeleteAccountAlert();
+            },
+          ),
+
+          const SizedBox(height: 218),
+          _buildMenu(
+            image: AppImages.drawerLogout,
+            title: AppString.logOut,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: theme.colorScheme.error,
+              fontWeight: FontWeight.w400,
+            ),
+            onTap: () {
+              CommonAlert(
+                title: AppString.logoutMessage,
+                onTap: controller.onDrawerLogout,
+              );
+            },
+          ),
         ],
       ),
     );
   }
 
-
-  ListTile _buildMenu({required String image,required String title, TextStyle? style ,required Function() onTap}){
-    return ListTile(leading: CommonImage(imageSrc: image, size: 24,),
-     title: Text(title, style: style ??  theme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400)),
-     onTap: () {
-              Navigator.pop(Get.context!);
-              onTap();
-              // Handle logout logic
-            },
-     );
+  ListTile _buildMenu({
+    required String image,
+    required String title,
+    required Function() onTap,
+    TextStyle? style,
+  }) {
+    return ListTile(
+      leading: CommonImage(imageSrc: image, size: 24),
+      title: Text(
+        title,
+        style:
+            style ??
+            theme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400),
+      ),
+      onTap: () {
+        Navigator.pop(Get.context!);
+        onTap();
+        // Handle logout logic
+      },
+    );
   }
 }

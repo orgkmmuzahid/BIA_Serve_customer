@@ -1,14 +1,14 @@
-
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../../../../config/api/api_end_point.dart';
 import '../../../../component/common_bar/common_bottom_bar.dart';
 import '../../../../component/other_widgets/common_loader.dart';
 import '../../../../component/other_widgets/no_data.dart';
-import '../controller/notifications_controller.dart';
-import '../../../../../../config/api/api_end_point.dart';
 import '../../data/model/notification_model.dart';
+import '../controller/notifications_controller.dart';
 import '../widgets/notification_item.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -16,15 +16,17 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return GetBuilder<NotificationsController>(
       builder: (controller) {
         return Scaffold(
           /// App Bar Section starts here
-          appBar: CommonAppBar(title:ApiEndPoint.notifications, onBackPress: (){
-            controller.notifications.clear();
-          }),
-        
+          appBar: CommonAppBar(
+            title: ApiEndPoint.notifications,
+            onBackPress: () {
+              controller.notifications.clear();
+            },
+          ),
+
           /// Body Section starts here
           body: GetBuilder<NotificationsController>(
             builder: (controller) {
@@ -49,23 +51,22 @@ class NotificationScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       ///  Notification More Data Loading Bar
                       if (index > controller.notifications.length) {
-                        return CommonLoader(size: 40, strokeWidth: 2);
+                        return const CommonLoader(size: 40, strokeWidth: 2);
                       }
-                      NotificationModel item = controller.notifications[index];
-        
+                      final NotificationModel item =
+                          controller.notifications[index];
+
                       ///  Notification card item
                       return NotificationItem(item: item);
                     },
                   );
             },
           ),
-        
+
           /// Bottom Navigation Bar Section starts here
           bottomNavigationBar: const CommonBottomNavBar(),
         );
-      }
+      },
     );
   }
-
-  
 }

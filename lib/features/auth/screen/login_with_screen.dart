@@ -60,11 +60,11 @@ class LoginWithScreen extends StatelessWidget {
     titleSize: 12,
     titleWeight: FontWeight.w500,
     buttonColor: theme.scaffoldBackgroundColor,
-    titleColor: theme.textTheme.bodyLarge!.color!,
+    titleColor: theme.textTheme.bodyLarge!.color,
     borderColor: theme.colorScheme.outlineVariant,
     alignment: MainAxisAlignment.start,
     icon: Padding(
-      padding: EdgeInsets.only(left: 40.5, right: 20),
+      padding: const EdgeInsets.only(left: 40.5, right: 20),
       child: CommonImage(imageSrc: image),
     ),
   );

@@ -1,4 +1,3 @@
-
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -7,10 +6,10 @@ import 'package:flutter/material.dart';
 
 class CommonLanguageDropDown extends StatelessWidget {
   const CommonLanguageDropDown({
-    super.key,
     required this.slectedCountry,
     required this.availableCountries,
     required this.onCountryChange,
+    super.key,
   });
 
   final MapEntry<String, String> slectedCountry;
@@ -19,20 +18,18 @@ class CommonLanguageDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return DropdownButtonHideUnderline(
       child: DropdownButton2<MapEntry<String, String>>(
-        customButton: CommonImage(imageSrc: slectedCountry.value, size: 24,),
+        customButton: CommonImage(imageSrc: slectedCountry.value, size: 24),
         items: [
           ...availableCountries.entries.map((country) {
             return DropdownMenuItem<MapEntry<String, String>>(
               value: country,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: 118,
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
@@ -44,13 +41,22 @@ class CommonLanguageDropDown extends StatelessWidget {
                                 .color,
                       ),
                     ),
-                    child: Row(children: [ 
-                      CommonImage(imageSrc: country.value, size: 24, borderRadius: 24), 
-                      10.width,
-                      SizedBox(
-                        child: CommonText(text: country.key, style: theme.textTheme.bodyLarge,))
-                      ],)
-                       
+                    child: Row(
+                      children: [
+                        CommonImage(
+                          imageSrc: country.value,
+                          size: 24,
+                          borderRadius: 24,
+                        ),
+                        10.width,
+                        SizedBox(
+                          child: CommonText(
+                            text: country.key,
+                            style: theme.textTheme.bodyLarge,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -58,11 +64,10 @@ class CommonLanguageDropDown extends StatelessWidget {
           }),
         ],
         onChanged: (newCountry) {
-          if(newCountry != null){
-        
-         onCountryChange(newCountry);
-          
-        }},
+          if (newCountry != null) {
+            onCountryChange(newCountry);
+          }
+        },
         dropdownStyleData: DropdownStyleData(
           width: 150,
           maxHeight: 320,
@@ -70,7 +75,6 @@ class CommonLanguageDropDown extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             color: theme.scaffoldBackgroundColor,
           ),
-          offset: const Offset(0, 0), // Optional spacing below the button
         ),
       ),
     );

@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 
 class CommonMultilineTextField extends StatelessWidget {
   const CommonMultilineTextField({
-    super.key,
     required this.height,
     required this.onSave,
-    this.validator, this.initialText, this.readOnly = false, this.hintText
+    super.key,
+    this.validator,
+    this.initialText,
+    this.readOnly = false,
+    this.hintText,
   });
 
   final double height;
@@ -19,27 +22,31 @@ class CommonMultilineTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-height: height,
-child: TextFormField(
-  initialValue: initialText,
-  
-  onSaved: (newValue) {
-    if(newValue != null && newValue.isNotEmpty){
-      onSave(newValue);
-    }
-  } ,
-  readOnly: readOnly,
-  maxLines: null,
-  style: theme.textTheme.bodyMedium,
-  scrollPhysics: BouncingScrollPhysics(),
-  validator: validator,
-  expands: true, // expands to fill parent height
-  decoration: InputDecoration(
-    hintText: hintText,
-    enabledBorder: OutlineInputBorder(borderSide: theme.inputDecorationTheme.enabledBorder!.borderSide.copyWith(color: theme.dividerColor), borderRadius: BorderRadius.circular(10)),
-    contentPadding: EdgeInsets.all(12),
-  ),
-),
-);
+      height: height,
+      child: TextFormField(
+        initialValue: initialText,
+
+        onSaved: (newValue) {
+          if (newValue != null && newValue.isNotEmpty) {
+            onSave(newValue);
+          }
+        },
+        readOnly: readOnly,
+        maxLines: null,
+        style: theme.textTheme.bodyMedium,
+        scrollPhysics: const BouncingScrollPhysics(),
+        validator: validator,
+        expands: true, // expands to fill parent height
+        decoration: InputDecoration(
+          hintText: hintText,
+          enabledBorder: OutlineInputBorder(
+            borderSide: theme.inputDecorationTheme.enabledBorder!.borderSide
+                .copyWith(color: theme.dividerColor),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          contentPadding: const EdgeInsets.all(12),
+        ),
+      ),
+    );
   }
 }

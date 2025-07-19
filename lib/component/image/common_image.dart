@@ -5,16 +5,6 @@ import '../../../utils/constants/app_images.dart';
 import '../../../utils/log/error_log.dart';
 
 class CommonImage extends StatelessWidget {
-  final String imageSrc;
-  final String defaultImage;
-  final Color? imageColor;
-  final double? height;
-  final double? width;
-  final double borderRadius;
-  final double? size;
-
-  final BoxFit fill;
-
   const CommonImage({
     required this.imageSrc,
     this.imageColor,
@@ -26,14 +16,23 @@ class CommonImage extends StatelessWidget {
     this.defaultImage = AppImages.profile,
     super.key,
   });
+  final String imageSrc;
+  final String defaultImage;
+  final Color? imageColor;
+  final double? height;
+  final double? width;
+  final double borderRadius;
+  final double? size;
 
-  checkImageType() {}
+  final BoxFit fill;
+
+  void checkImageType() {}
 
   @override
   Widget build(BuildContext context) {
-    if (imageSrc.contains("assets/icons")) {
+    if (imageSrc.contains('assets/icons')) {
       return _buildSvgImage();
-    } else if (imageSrc.contains("assets/images")) {
+    } else if (imageSrc.contains('assets/images')) {
       return _buildPngImage();
     } else {
       return _buildNetworkImage();
@@ -50,16 +49,18 @@ class CommonImage extends StatelessWidget {
       width: size ?? width,
       imageUrl: imageSrc,
       fit: fill,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          image: DecorationImage(image: imageProvider, fit: fill),
-        ),
-      ),
-      progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator(value: downloadProgress.progress),
+      imageBuilder:
+          (context, imageProvider) => Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              image: DecorationImage(image: imageProvider, fit: fill),
+            ),
+          ),
+      progressIndicatorBuilder:
+          (context, url, downloadProgress) =>
+              CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) {
-        errorLog(error, source: "Common Image");
+        errorLog(error, source: 'Common Image');
 
         return _buildErrorWidget();
       },
@@ -69,7 +70,10 @@ class CommonImage extends StatelessWidget {
   Widget _buildSvgImage() {
     return SvgPicture.asset(
       imageSrc,
-      color: imageColor,
+      colorFilter:
+          imageColor != null
+              ? ColorFilter.mode(imageColor!, BlendMode.srcIn)
+              : null,
       height: size ?? height,
       width: size ?? width,
       fit: fill,
@@ -86,7 +90,7 @@ class CommonImage extends StatelessWidget {
         width: size ?? width,
         fit: fill,
         errorBuilder: (context, error, stackTrace) {
-          errorLog(error, source: "Common Image");
+          errorLog(error, source: 'Common Image');
           return _buildErrorWidget();
         },
       ),

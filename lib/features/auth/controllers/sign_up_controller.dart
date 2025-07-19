@@ -1,4 +1,3 @@
-
 import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +16,14 @@ class SignUpController extends GetxController {
   bool isPopUpOpen = false;
   bool isLoading = false;
 
-  List selectedOption = ["User", "Consultant"];
+  List selectedOption = ['User', 'Consultant'];
   PhoneNumber phoneNumber = PhoneNumber(
     countryISOCode: 'bd',
     countryCode: '+880',
     number: '1826405558',
   );
-  String selectRole = "User";
-  String countryCode = "+880";
+  String selectRole = 'User';
+  String countryCode = '+880';
   String? image;
 
   String signUpToken = '';
@@ -32,7 +31,7 @@ class SignUpController extends GetxController {
   static SignUpController get instance => Get.put(SignUpController());
 
   TextEditingController nameController = TextEditingController(
-    text: kDebugMode ? "Km M" : "",
+    text: kDebugMode ? 'Km M' : '',
   );
   TextEditingController passwordController = TextEditingController(
     text: kDebugMode ? 'hello123' : '',
@@ -45,34 +44,34 @@ class SignUpController extends GetxController {
     phoneNumber = value;
   }
 
-  setSelectedRole(value) {
+  void setSelectedRole(value) {
     selectRole = value;
     update();
   }
 
-  openGallery() async {
+  Future<void> openGallery() async {
     image = await OtherHelper.openGallery();
     update();
   }
 
-  signUpUser({required String phoneNumber}) async {
+  Future<void> signUpUser({required String phoneNumber}) async {
     if (!signUpFormKey.currentState!.validate()) return;
     Get.toNamed(AppRoutes.verifyUser);
     return;
     isLoading = true;
     update();
-    Map<String, String> body = {
-      "fullName": nameController.text,
-      "phoneNumber": phoneNumber,
-      "countryCode": countryCode,
-      "password": passwordController.text,
-      "role": selectRole.toLowerCase(),
+    final Map<String, String> body = {
+      'fullName': nameController.text,
+      'phoneNumber': phoneNumber,
+      'countryCode': countryCode,
+      'password': passwordController.text,
+      'role': selectRole.toLowerCase(),
     };
 
-    var response = await ApiService.post(ApiEndPoint.signUp, body: body);
+    final response = await ApiService.post(ApiEndPoint.signUp, body: body);
 
     if (response.statusCode == 200) {
-      var data = response.data;
+      final data = response.data;
       signUpToken = data['data']['signUpToken'];
       Get.toNamed(AppRoutes.verifyUser);
     } else {

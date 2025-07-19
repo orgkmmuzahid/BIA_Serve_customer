@@ -95,7 +95,8 @@ class OrderDetailsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory OrderDetailsModel.fromJson(String source) => OrderDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory OrderDetailsModel.fromJson(String source) =>
+      OrderDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -105,35 +106,34 @@ class OrderDetailsModel {
   @override
   bool operator ==(covariant OrderDetailsModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.orderCode == orderCode &&
-      other.customer == customer &&
-      other.phoneNumber == phoneNumber &&
-      other.shippingAddress == shippingAddress &&
-      other.productDetails == productDetails &&
-      other.weight == weight &&
-      other.quantity == quantity &&
-      other.orderDate == orderDate &&
-      other.orderStatus == orderStatus &&
-      other.totalPrice == totalPrice &&
-      other.deliveryCharge == deliveryCharge &&
-      other.discountPercentage == discountPercentage;
+
+    return other.orderCode == orderCode &&
+        other.customer == customer &&
+        other.phoneNumber == phoneNumber &&
+        other.shippingAddress == shippingAddress &&
+        other.productDetails == productDetails &&
+        other.weight == weight &&
+        other.quantity == quantity &&
+        other.orderDate == orderDate &&
+        other.orderStatus == orderStatus &&
+        other.totalPrice == totalPrice &&
+        other.deliveryCharge == deliveryCharge &&
+        other.discountPercentage == discountPercentage;
   }
 
   @override
   int get hashCode {
     return orderCode.hashCode ^
-      customer.hashCode ^
-      phoneNumber.hashCode ^
-      shippingAddress.hashCode ^
-      productDetails.hashCode ^
-      weight.hashCode ^
-      quantity.hashCode ^
-      orderDate.hashCode ^
-      orderStatus.hashCode ^
-      totalPrice.hashCode ^
-      deliveryCharge.hashCode ^
-      discountPercentage.hashCode;
+        customer.hashCode ^
+        phoneNumber.hashCode ^
+        shippingAddress.hashCode ^
+        productDetails.hashCode ^
+        weight.hashCode ^
+        quantity.hashCode ^
+        orderDate.hashCode ^
+        orderStatus.hashCode ^
+        totalPrice.hashCode ^
+        deliveryCharge.hashCode ^
+        discountPercentage.hashCode;
   }
 }

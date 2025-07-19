@@ -47,7 +47,8 @@ class ChatInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory ChatInfo.fromJson(String source) => ChatInfo.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ChatInfo.fromJson(String source) =>
+      ChatInfo.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -57,19 +58,18 @@ class ChatInfo {
   @override
   bool operator ==(covariant ChatInfo other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.chatId == chatId &&
-      other.chatName == chatName &&
-      other.status == status &&
-      other.image == image;
+
+    return other.chatId == chatId &&
+        other.chatName == chatName &&
+        other.status == status &&
+        other.image == image;
   }
 
   @override
   int get hashCode {
     return chatId.hashCode ^
-      chatName.hashCode ^
-      status.hashCode ^
-      image.hashCode;
+        chatName.hashCode ^
+        status.hashCode ^
+        image.hashCode;
   }
 }

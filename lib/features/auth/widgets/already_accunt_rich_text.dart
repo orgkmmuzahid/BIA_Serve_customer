@@ -22,7 +22,7 @@ class AlreadyAccountRichText extends StatelessWidget {
 
           /// Sign Up Button here
           TextSpan(
-            text: " ${AppString.signIn}",
+            text: ' ${AppString.signIn}',
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {

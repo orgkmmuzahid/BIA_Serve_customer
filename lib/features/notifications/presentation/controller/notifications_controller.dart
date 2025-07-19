@@ -23,12 +23,11 @@ class NotificationsController extends GetxController {
 
   /// page no here
   int page = 0;
-  
-  void onNotificationTap(){
+
+  void onNotificationTap() {
     Get.find<NotificationsController>().getNotificationsRepo();
     Get.toNamed(AppRoutes.notifications);
   }
-
 
   /// Notification Scroll Controller
   ScrollController scrollController = ScrollController();
@@ -43,7 +42,7 @@ class NotificationsController extends GetxController {
         isLoadingMore = true;
         update();
         page++;
-        List<NotificationModel> list = await notificationRepository(page);
+        final List<NotificationModel> list = await notificationRepository(page);
         if (list.isEmpty) {
           hasNoData = true;
         } else {
@@ -62,7 +61,7 @@ class NotificationsController extends GetxController {
     update();
 
     page++;
-    List<NotificationModel> list = await notificationRepository(page);
+    final List<NotificationModel> list = await notificationRepository(page);
     if (list.isEmpty) {
       hasNoData = true;
     } else {

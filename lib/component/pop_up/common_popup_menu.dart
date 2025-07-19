@@ -2,6 +2,20 @@ import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CommonPopupMenu extends StatefulWidget {
+  const CommonPopupMenu({
+    required this.items,
+    required this.onItemSelected,
+    super.key,
+    this.icons,
+    this.initialText,
+    this.textStyle,
+    this.showTextTrigger = true,
+    this.showIconTrigger = false,
+    this.triggerIcon = Icons.more_vert,
+  }) : assert(
+         icons == null || icons.length == items.length,
+         'If icons are provided, they must match the length of items',
+       );
   final List<String> items;
   final List<IconData>? icons;
   final void Function(String selectedItem) onItemSelected;
@@ -10,19 +24,6 @@ class CommonPopupMenu extends StatefulWidget {
   final bool showTextTrigger; // show main button with text
   final bool showIconTrigger; // show icon trigger
   final IconData triggerIcon;
-
-  const CommonPopupMenu({
-    super.key,
-    required this.items,
-    required this.onItemSelected,
-    this.icons,
-    this.initialText,
-    this.textStyle,
-    this.showTextTrigger = true,
-    this.showIconTrigger = false,
-    this.triggerIcon = Icons.more_vert,
-  }) : assert(icons == null || icons.length == items.length,
-          'If icons are provided, they must match the length of items');
 
   @override
   State<CommonPopupMenu> createState() => _SelectablePopupMenuState();
@@ -38,9 +39,14 @@ class _SelectablePopupMenuState extends State<CommonPopupMenu> {
   }
 
   void _showPopupMenu(BuildContext context, GlobalKey key) async {
-    final RenderBox button = key.currentContext!.findRenderObject() as RenderBox;
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
-    final Offset position = button.localToGlobal(Offset.zero, ancestor: overlay);
+    final RenderBox button =
+        key.currentContext!.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
+    final Offset position = button.localToGlobal(
+      Offset.zero,
+      ancestor: overlay,
+    );
 
     final selected = await showMenu<String>(
       context: context,
@@ -96,7 +102,9 @@ class _SelectablePopupMenuState extends State<CommonPopupMenu> {
                 children: [
                   Text(
                     selectedText ?? '',
-                    style: widget.textStyle ?? Theme.of(context).textTheme.bodyMedium,
+                    style:
+                        widget.textStyle ??
+                        Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(width: 8),
                   const Icon(Icons.arrow_drop_down),

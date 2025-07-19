@@ -12,13 +12,12 @@ import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
 class AllVendorsScreen extends StatelessWidget {
   const AllVendorsScreen({super.key});
 
-
-  
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CommonAppBar(title: AppString.allVendors),
-    body: Padding(padding: EdgeInsets.only(left: 16, right: 16), 
-     child: GetBuilder<VendorSourcingController>(
+    appBar: const CommonAppBar(title: AppString.allVendors),
+    body: Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: GetBuilder<VendorSourcingController>(
         builder: (vendorSourcingController) {
           return SingleChildScrollView(
             child: Column(
@@ -38,20 +37,23 @@ class AllVendorsScreen extends StatelessWidget {
                   nameBuilder: (value) => value,
                 ),
                 10.height,
-                  CommonText(
+                CommonText(
                   text: AppString.allVendors,
                   style: theme.textTheme.bodyLarge,
                   bottom: 10,
                 ),
                 StaggeredGridView.extentBuilder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   maxCrossAxisExtent: 90,
                   itemCount: vendorSourcingController.vendors.length,
-                 itemBuilder: (context, index) => VendorWidget(model: vendorSourcingController.vendors[index]),
-                  staggeredTileBuilder: (index) =>
-                  StaggeredTile.count(1,1.3)),
-
+                  itemBuilder:
+                      (context, index) => VendorWidget(
+                        model: vendorSourcingController.vendors[index],
+                      ),
+                  staggeredTileBuilder:
+                      (index) => const StaggeredTile.count(1, 1.3),
+                ),
               ],
             ),
           );

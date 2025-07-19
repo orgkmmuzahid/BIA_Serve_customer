@@ -47,7 +47,8 @@ class OrderTimelineModel {
 
   String toJson() => json.encode(toMap());
 
-  factory OrderTimelineModel.fromJson(String source) => OrderTimelineModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory OrderTimelineModel.fromJson(String source) =>
+      OrderTimelineModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -57,19 +58,18 @@ class OrderTimelineModel {
   @override
   bool operator ==(covariant OrderTimelineModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.time == time &&
-      other.isCleared == isCleared &&
-      other.title == title &&
-      other.subtitle == subtitle;
+
+    return other.time == time &&
+        other.isCleared == isCleared &&
+        other.title == title &&
+        other.subtitle == subtitle;
   }
 
   @override
   int get hashCode {
     return time.hashCode ^
-      isCleared.hashCode ^
-      title.hashCode ^
-      subtitle.hashCode;
+        isCleared.hashCode ^
+        title.hashCode ^
+        subtitle.hashCode;
   }
 }

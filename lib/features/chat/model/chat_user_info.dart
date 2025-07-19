@@ -5,18 +5,9 @@ class ChatUserInfo {
   String userId;
   String name;
   String image;
-  ChatUserInfo({
-    required this.userId,
-    required this.name,
-    required this.image,
-  });
-  
+  ChatUserInfo({required this.userId, required this.name, required this.image});
 
-  ChatUserInfo copyWith({
-    String? userId,
-    String? name,
-    String? image,
-  }) {
+  ChatUserInfo copyWith({String? userId, String? name, String? image}) {
     return ChatUserInfo(
       userId: userId ?? this.userId,
       name: name ?? this.name,
@@ -25,11 +16,7 @@ class ChatUserInfo {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'userId': userId,
-      'name': name,
-      'image': image,
-    };
+    return <String, dynamic>{'userId': userId, 'name': name, 'image': image};
   }
 
   factory ChatUserInfo.fromMap(Map<String, dynamic> map) {
@@ -42,19 +29,18 @@ class ChatUserInfo {
 
   String toJson() => json.encode(toMap());
 
-  factory ChatUserInfo.fromJson(String source) => ChatUserInfo.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ChatUserInfo.fromJson(String source) =>
+      ChatUserInfo.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ChatUserInfo(userId: $userId, name: $name, image: $image)';
+  String toString() =>
+      'ChatUserInfo(userId: $userId, name: $name, image: $image)';
 
   @override
   bool operator ==(covariant ChatUserInfo other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.userId == userId &&
-      other.name == name &&
-      other.image == image;
+
+    return other.userId == userId && other.name == name && other.image == image;
   }
 
   @override

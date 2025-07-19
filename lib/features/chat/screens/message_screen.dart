@@ -15,56 +15,87 @@ import 'package:get/get.dart';
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
 
-
-    @override
-  Widget build(BuildContext context) => Scaffold(appBar: CommonAppBar(title: AppString.drawerMessage), 
-    body: Padding(padding: EdgeInsets.only(left: 16, right: 16),
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: const CommonAppBar(title: AppString.drawerMessage),
+    body: Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
       child: GetBuilder<ChatController>(
         builder: (chatController) {
-          return Column(children: chatController.chatPersons.map((person)=> GestureDetector(
-            onTap: () {
-              Get.toNamed(AppRoutes.chat);
-            },
-            child: Card(color: AppColors.serfeceBG, child: _chatItem(person))) ).toList());
-        }
-      ))
-    );
- 
+          return Column(
+            children:
+                chatController.chatPersons
+                    .map(
+                      (person) => GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.chat);
+                        },
+                        child: Card(
+                          color: AppColors.serfeceBG,
+                          child: _chatItem(person),
+                        ),
+                      ),
+                    )
+                    .toList(),
+          );
+        },
+      ),
+    ),
+  );
+
   Widget _chatItem(MessageModel person) {
-     return Padding(
-       padding: const EdgeInsets.only(top: 10, bottom: 10),
-       child: Row(children: [
-         CommonImage(imageSrc: person.userImage, fill: BoxFit.fill, size: 30, borderRadius: 30), 
-         10.width, 
-         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          CommonText(text: person.userName, fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.primaryText),
-          CommonText(text: person.userStatus.displayName, fontSize: 10, fontWeight: FontWeight.w400, color: AppColors.primaryText),
-         ],),   
-         const Spacer(),            
-         Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-          CommonPopupMenu(
-            triggerIcon: Icons.more_vert,
-            showTextTrigger: false,
-            showIconTrigger: true,
-            items: [AppString.deleteUser, AppString.blockUser], icons: [
-            Icons.delete_outline,
-            Icons.block_outlined
-          ] , onItemSelected: (value){
-            if(value == AppString.deleteUser){
-              //delete user
-            }else if(value == AppString.blockUser){
-              //block user
-            }
-          }),
-          CommonText(text: Utils.formatTime(person.lastSendMessageTime), color: AppColors.disable, fontSize:  12,right: 15,),
-         ],)
-       ]),
-     );
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Row(
+        children: [
+          CommonImage(
+            imageSrc: person.userImage,
+            fill: BoxFit.fill,
+            size: 30,
+            borderRadius: 30,
+          ),
+          10.width,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CommonText(
+                text: person.userName,
+                fontWeight: FontWeight.w700,
+                color: AppColors.primaryText,
+              ),
+              CommonText(
+                text: person.userStatus.displayName,
+                fontSize: 10,
+                color: AppColors.primaryText,
+              ),
+            ],
+          ),
+          const Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              CommonPopupMenu(
+                showTextTrigger: false,
+                showIconTrigger: true,
+                items: const [AppString.deleteUser, AppString.blockUser],
+                icons: const [Icons.delete_outline, Icons.block_outlined],
+                onItemSelected: (value) {
+                  if (value == AppString.deleteUser) {
+                    //delete user
+                  } else if (value == AppString.blockUser) {
+                    //block user
+                  }
+                },
+              ),
+              CommonText(
+                text: Utils.formatTime(person.lastSendMessageTime),
+                color: AppColors.disable,
+                right: 15,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
-
-
 }

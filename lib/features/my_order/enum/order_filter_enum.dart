@@ -1,3 +1,1 @@
-enum OrderFilterEnum {
-  all, inProgress, delivered, cancel
-}
+enum OrderFilterEnum { all, inProgress, delivered, cancel }

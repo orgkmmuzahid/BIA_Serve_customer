@@ -7,24 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class DeleteAccountAlert{
-
-  DeleteAccountAlert(){
-      CommonAlert(title: AppString.accountDeleteMessage,
-             content: SizedBox(
-              height: 50,
-               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  /// current Password section
-                  CommonTextField(
-                    hintText: AppString.password,
-                    validator: OtherHelper.passwordValidator,
-                    isPassword: true,
-                    prefixIcon: Icon(Icons.lock, size: 20.sp),
-                  ),
-               ],),
-             ) , onTap: Get.find<HomeController>().onDrawerDeleteAccount);
+class DeleteAccountAlert {
+  DeleteAccountAlert() {
+    CommonAlert(
+      title: AppString.accountDeleteMessage,
+      content: SizedBox(
+        height: 50,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// current Password section
+            CommonTextField(
+              hintText: AppString.password,
+              validator: OtherHelper.passwordValidator,
+              isPassword: true,
+              prefixIcon: Icon(Icons.lock, size: 20.sp),
+            ),
+          ],
+        ),
+      ),
+      onTap: Get.find<HomeController>().onDrawerDeleteAccount,
+    );
   }
-
 }

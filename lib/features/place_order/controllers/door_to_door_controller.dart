@@ -8,12 +8,15 @@ class DoorToDoorController extends GetxController {
   PickupType? pickupType;
   DeliveryType deliveryType = DeliveryType.regular;
 
-  void onPickupTypeChange(PickupType pickupType){
-    this. pickupType = pickupType;
-    Get.toNamed(AppRoutes.placeOrder, arguments: {'title': AppString.homeDoorToDoorPickup});
+  void onPickupTypeChange(PickupType pickupType) {
+    this.pickupType = pickupType;
+    Get.toNamed(
+      AppRoutes.placeOrder,
+      arguments: {'title': AppString.homeDoorToDoorPickup},
+    );
   }
 
-  void onDeliveryTypeChange(DeliveryType deliveryType){
+  void onDeliveryTypeChange(DeliveryType deliveryType) {
     this.deliveryType = deliveryType;
     update();
   }

@@ -11,36 +11,43 @@ import 'package:get/get.dart';
 
 class LoyaltyPointsController extends GetxController {
   int loyaltyPoints = 500;
-  String rewardsLevel = "Cameron Williamson";
-  List<LoyaltyOfferModel> loyltyOffers = [LoyaltyOfferModel(title: "10% Discount", rewardPoints: 400), LoyaltyOfferModel(title: "Free Delivery", rewardPoints: 600)];
+  String rewardsLevel = 'Cameron Williamson';
+  List<LoyaltyOfferModel> loyltyOffers = [
+    LoyaltyOfferModel(title: '10% Discount', rewardPoints: 400),
+    LoyaltyOfferModel(title: 'Free Delivery', rewardPoints: 600),
+  ];
   String? offercode;
 
-
-  void onClaim(LoyaltyOfferModel claimedOffer){
+  void onClaim(LoyaltyOfferModel claimedOffer) {
     //afterClaiming
-    
-    offercode = "OFFERCODE";
 
-    if(Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap?.isEmpty == true 
-       || Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap == null){
-       Get.offNamedUntil(
-  AppRoutes.placeOrder,
-  ModalRoute.withName(AppRoutes.loyaltyPoints),
-); Get.toNamed(AppRoutes.placeOrder);
-    }else{
-       Get.until((route)=> route.settings.name == AppRoutes.pickupInformation);
+    offercode = 'OFFERCODE';
+
+    if (Get.find<PlaceOrderController>()
+                .placeOrderModel
+                .marchentAdressOnMap
+                ?.isEmpty ==
+            true ||
+        Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap ==
+            null) {
+      Get.offNamedUntil(
+        AppRoutes.placeOrder,
+        ModalRoute.withName(AppRoutes.loyaltyPoints),
+      );
+      Get.toNamed(AppRoutes.placeOrder);
+    } else {
+      Get.until((route) => route.settings.name == AppRoutes.pickupInformation);
     }
     update();
   }
 
-  void clean(){
+  void clean() {
     offercode = null;
   }
 
   @override
   void dispose() {
-    AppLogger.debug("Loyalty controller Disposed");
+    AppLogger.debug('Loyalty controller Disposed');
     super.dispose();
   }
-
 }

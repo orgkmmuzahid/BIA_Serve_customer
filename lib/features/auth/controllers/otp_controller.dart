@@ -15,9 +15,9 @@ class OtpController extends GetxController {
   Timer? _timer;
   int start = 0;
   bool isLoadingVerify = false;
-  String time = "";
+  String time = '';
   TextEditingController phoneController = TextEditingController(
-    text: kDebugMode ? "+123456789" : '',
+    text: kDebugMode ? '+123456789' : '',
   );
 
   TextEditingController otpController = TextEditingController(
@@ -33,7 +33,7 @@ class OtpController extends GetxController {
         final minutes = (start ~/ 60).toString().padLeft(2, '0');
         final seconds = (start % 60).toString().padLeft(2, '0');
 
-        time = "$minutes:$seconds";
+        time = '$minutes:$seconds';
 
         update();
       } else {
@@ -52,22 +52,22 @@ class OtpController extends GetxController {
 
     isLoadingVerify = true;
     update();
-    Map<String, String> body = {"otp": otpController.text};
+    final Map<String, String> body = {'otp': otpController.text};
     // Map<String, String> header = {"SignUpToken": "signUpToken $signUpToken"};
-    var response = await ApiService.post(
+    final response = await ApiService.post(
       ApiEndPoint.verifyEmail,
       body: body,
       // header: header,
     );
 
     if (response.statusCode == 200) {
-      var data = response.data;
+      final data = response.data;
 
-      LocalStorage.token = data['data']["accessToken"];
-      LocalStorage.userId = data['data']["attributes"]["_id"];
-      LocalStorage.myImage = data['data']["attributes"]["image"];
-      LocalStorage.myName = data['data']["attributes"]["fullName"];
-      LocalStorage.myEmail = data['data']["attributes"]["email"];
+      LocalStorage.token = data['data']['accessToken'];
+      LocalStorage.userId = data['data']['attributes']['_id'];
+      LocalStorage.myImage = data['data']['attributes']['image'];
+      LocalStorage.myName = data['data']['attributes']['fullName'];
+      LocalStorage.myEmail = data['data']['attributes']['email'];
       LocalStorage.isLogIn = true;
 
       LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);

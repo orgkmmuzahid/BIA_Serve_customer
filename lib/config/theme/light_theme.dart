@@ -2,7 +2,6 @@ import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
@@ -57,40 +56,42 @@ final ThemeData lightTheme = ThemeData(
   ),
 
   textTheme: TextTheme(
-    bodyLarge: TextStyle(
+    bodyLarge: const TextStyle(
       overflow: TextOverflow.fade,
       color: Color(0xFF333333),
       fontSize: 16,
       fontWeight: FontWeight.w600,
     ), // 📝 Primary body text, font size 16
     bodyMedium: GoogleFonts.dmSans(
-      textStyle: TextStyle(
-      overflow: TextOverflow.fade,
-      color: Color(0xFF333333),
-      fontSize: 12,
-      fontWeight: FontWeight.w400,)
+      textStyle: const TextStyle(
+        overflow: TextOverflow.fade,
+        color: Color(0xFF333333),
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+      ),
     ), // 📝 Secondary body text font size 14
     bodySmall: GoogleFonts.dmSans(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         overflow: TextOverflow.fade,
-      color: Color(0xFF858585),
-      fontSize: 10,
-      fontWeight: FontWeight.w400)
+        color: Color(0xFF858585),
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+      ),
     ), //font size 12
 
-    titleLarge: TextStyle(
+    titleLarge: const TextStyle(
       overflow: TextOverflow.fade,
       color: Color(0xFF333333),
       fontWeight: FontWeight.bold,
     ), // 🏷 Headings / Titles
 
     titleSmall: GoogleFonts.dmSans(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         overflow: TextOverflow.fade,
         color: Color(0xFF333333),
-      fontSize: 12,
-      fontWeight: FontWeight.w700,
-      )
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+      ),
     ),
   ),
 
@@ -98,7 +99,7 @@ final ThemeData lightTheme = ThemeData(
 
   dividerColor: const Color(0xFFCCCCCC), // ➖ Dividers
 
-  textSelectionTheme: TextSelectionThemeData(
+  textSelectionTheme: const TextSelectionThemeData(
     cursorColor: Color(0xFF0A6F77),
     selectionColor: Color.fromARGB(85, 44, 153, 153),
     selectionHandleColor: Color.fromARGB(255, 10, 119, 119),
@@ -112,8 +113,11 @@ final ThemeData lightTheme = ThemeData(
     focusedBorder: _buildBorder(color: AppColors.primaryColor),
     disabledBorder: _buildBorder(color: AppColors.disable),
     errorBorder: _buildBorder(color: AppColors.error),
-    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xFF979797)),
-    labelStyle: GoogleFonts.dmSans(fontSize: 14, color: Color(0xffBFBFBF)),
+    hintStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xFF979797)),
+    labelStyle: GoogleFonts.dmSans(
+      fontSize: 14,
+      color: const Color(0xffBFBFBF),
+    ),
   ),
 );
 

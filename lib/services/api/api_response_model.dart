@@ -1,10 +1,9 @@
 import 'package:bai_serve/utils/constants/app_string.dart';
 
 class ApiResponseModel {
+  ApiResponseModel(this._statusCode, this._data);
   final int? _statusCode;
   final Map? _data;
-
-  ApiResponseModel(this._statusCode, this._data);
 
   int get statusCode => _statusCode ?? 500;
 

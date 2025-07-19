@@ -6,14 +6,14 @@ import '../../config/route/app_routes.dart';
 import 'storage_keys.dart';
 
 class LocalStorage {
-  static String token = "";
-  static String cookie = "";
-  static String refreshToken = "";
+  static String token = '';
+  static String cookie = '';
+  static String refreshToken = '';
   static bool isLogIn = false;
-  static String userId = "";
-  static String myImage = "";
-  static String myName = "";
-  static String myEmail = "";
+  static String userId = '';
+  static String myImage = '';
+  static String myName = '';
+  static String myEmail = '';
 
   // Create Local Storage Instance
   static SharedPreferences? preferences;
@@ -28,16 +28,16 @@ class LocalStorage {
   static Future<void> getAllPrefData() async {
     final localStorage = await _getStorage();
 
-    token = localStorage.getString(LocalStorageKeys.token) ?? "";
-    cookie = localStorage.getString(LocalStorageKeys.cookie) ?? "";
-    refreshToken = localStorage.getString(LocalStorageKeys.refreshToken) ?? "";
+    token = localStorage.getString(LocalStorageKeys.token) ?? '';
+    cookie = localStorage.getString(LocalStorageKeys.cookie) ?? '';
+    refreshToken = localStorage.getString(LocalStorageKeys.refreshToken) ?? '';
     isLogIn = localStorage.getBool(LocalStorageKeys.isLogIn) ?? false;
-    userId = localStorage.getString(LocalStorageKeys.userId) ?? "";
-    myImage = localStorage.getString(LocalStorageKeys.myImage) ?? "";
-    myName = localStorage.getString(LocalStorageKeys.myName) ?? "";
-    myEmail = localStorage.getString(LocalStorageKeys.myEmail) ?? "";
+    userId = localStorage.getString(LocalStorageKeys.userId) ?? '';
+    myImage = localStorage.getString(LocalStorageKeys.myImage) ?? '';
+    myName = localStorage.getString(LocalStorageKeys.myName) ?? '';
+    myEmail = localStorage.getString(LocalStorageKeys.myEmail) ?? '';
 
-    AppLogger.info(userId, tag: "Local Storage");
+    AppLogger.info(userId, tag: 'Local Storage');
   }
 
   /// Remove All Data From SharedPreferences
@@ -52,13 +52,13 @@ class LocalStorage {
   // Reset LocalStorage Data
   static void _resetLocalStorageData() {
     final localStorage = preferences!;
-    localStorage.setString(LocalStorageKeys.token, "");
-    localStorage.setString(LocalStorageKeys.cookie, "");
-    localStorage.setString(LocalStorageKeys.refreshToken, "");
-    localStorage.setString(LocalStorageKeys.userId, "");
-    localStorage.setString(LocalStorageKeys.myImage, "");
-    localStorage.setString(LocalStorageKeys.myName, "");
-    localStorage.setString(LocalStorageKeys.myEmail, "");
+    localStorage.setString(LocalStorageKeys.token, '');
+    localStorage.setString(LocalStorageKeys.cookie, '');
+    localStorage.setString(LocalStorageKeys.refreshToken, '');
+    localStorage.setString(LocalStorageKeys.userId, '');
+    localStorage.setString(LocalStorageKeys.myImage, '');
+    localStorage.setString(LocalStorageKeys.myName, '');
+    localStorage.setString(LocalStorageKeys.myEmail, '');
     localStorage.setBool(LocalStorageKeys.isLogIn, false);
   }
 

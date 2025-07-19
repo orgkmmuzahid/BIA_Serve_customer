@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CommonText extends StatelessWidget {
   const CommonText({
+    required this.text,
     super.key,
     this.maxLines,
     this.textAlign = TextAlign.center,
@@ -14,7 +15,6 @@ class CommonText extends StatelessWidget {
     this.fontSize = 12,
     this.fontWeight = FontWeight.w400,
     this.color,
-    required this.text,
     this.style,
     this.overflow,
     this.enableBorder = false,
@@ -44,39 +44,33 @@ class CommonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return enableBorder == true ? _withBorder(context) : _withoutBorder(context);
+    return enableBorder == true || backgroundColor != null
+        ? _withBorder(context)
+        : _withoutBorder(context);
   }
 
   EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(
-        left: left.w,
-        right: right.w,
-        top: top.h,
-        bottom: bottom.h,
-      );
+    left: left.w,
+    right: right.w,
+    top: top.h,
+    bottom: bottom.h,
+  );
 
   Widget _withBorder(BuildContext context) => Container(
-        padding: _edgeInsetsBuilder(),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: borderRadius != null
-              ? BorderRadius.circular(borderRadius!)
-              : null,
-          border: Border.all(
-              color: borderColor ?? Theme.of(context).dividerColor),
-        ),
-        child: Align(
-          alignment: _convertAlignment(),
-          child: _textField(context),
-        ),
-      );
+    padding: _edgeInsetsBuilder(),
+    decoration: BoxDecoration(
+      color: backgroundColor,
+      borderRadius:
+          borderRadius != null ? BorderRadius.circular(borderRadius!) : null,
+      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor),
+    ),
+    child: Align(alignment: _convertAlignment(), child: _textField(context)),
+  );
 
   Widget _withoutBorder(BuildContext context) => Padding(
-        padding: _edgeInsetsBuilder(),
-        child: Align(
-          alignment: _convertAlignment(),
-          child: _textField(context),
-        ),
-      );
+    padding: _edgeInsetsBuilder(),
+    child: Align(alignment: _convertAlignment(), child: _textField(context)),
+  );
 
   Alignment _convertAlignment() {
     switch (alignment) {
@@ -97,8 +91,11 @@ class CommonText extends StatelessWidget {
       maxLines: maxLines,
       softWrap: true,
       overflow:
-          maxLines == null ? TextOverflow.visible : (overflow ?? TextOverflow.ellipsis),
-      style: style ??
+          maxLines == null
+              ? TextOverflow.visible
+              : (overflow ?? TextOverflow.ellipsis),
+      style:
+          style ??
           GoogleFonts.dmSans(
             fontSize: fontSize.sp,
             fontWeight: fontWeight,

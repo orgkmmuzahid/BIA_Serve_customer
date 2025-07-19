@@ -21,29 +21,28 @@ class OtherHelper {
   }
 
   static String? validateAmount(value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Amount is required';
+    if (value == null || value.trim().isEmpty) {
+      return 'Amount is required';
+    }
+
+    final parsed = double.tryParse(value);
+    if (parsed == null) {
+      return 'Enter a valid number';
+    }
+
+    if (parsed <= 0) {
+      return 'Amount must be greater than zero';
+    }
+
+    return null; // ✅ Valid input
   }
 
-  final parsed = double.tryParse(value);
-  if (parsed == null) {
-    return 'Enter a valid number';
-  }
-
-  if (parsed <= 0) {
-    return 'Amount must be greater than zero';
-  }
-
-  return null; // ✅ Valid input
-}
-
-
-  static String? requiredFieldValidator(value){
-        if (value == null || value.isEmpty) {
-          return AppString.thisFieldIsRequired;
-        } else {
-          return null;
-        }
+  static String? requiredFieldValidator(value) {
+    if (value == null || value.isEmpty) {
+      return AppString.thisFieldIsRequired;
+    } else {
+      return null;
+    }
   }
 
   static String? emailValidator(value) {
@@ -87,29 +86,29 @@ class OtherHelper {
     return null;
   }
 
- static String? validateDate(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Date is required';
-  }
-
-  final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
-  if (!regex.hasMatch(value)) {
-    return 'Enter date in YYYY-MM-DD format';
-  }
-
-  try {
-    final parsedDate = DateTime.parse(value);
-    // Optional: add range check
-    if (parsedDate.isBefore(DateTime(1900)) || parsedDate.isAfter(DateTime(2100))) {
-      return 'Date must be between 1900 and 2100';
+  static String? validateDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Date is required';
     }
-  } catch (_) {
-    return 'Invalid date';
+
+    final regex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
+    if (!regex.hasMatch(value)) {
+      return 'Enter date in YYYY-MM-DD format';
+    }
+
+    try {
+      final parsedDate = DateTime.parse(value);
+      // Optional: add range check
+      if (parsedDate.isBefore(DateTime(1900)) ||
+          parsedDate.isAfter(DateTime(2100))) {
+        return 'Date must be between 1900 and 2100';
+      }
+    } catch (_) {
+      return 'Invalid date';
+    }
+
+    return null; // valid
   }
-
-  return null; // valid
-}
-
 
   static Future<String> openDatePickerDialog(
     TextEditingController controller,
@@ -131,10 +130,10 @@ class OtherHelper {
     );
 
     if (picked != null) {
-      controller.text = "${picked.year}/${picked.month}/${picked.day}";
+      controller.text = '${picked.year}/${picked.month}/${picked.day}';
       return picked.toIso8601String();
     }
-    return "";
+    return '';
   }
 
   static Future<String?> openGallery() async {
@@ -153,7 +152,7 @@ class OtherHelper {
     if (pickedFile != null) {
       final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       );
 
       return croppedFile?.path;

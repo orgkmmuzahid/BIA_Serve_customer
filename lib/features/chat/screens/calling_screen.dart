@@ -8,16 +8,20 @@ import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 class CallingScreen extends StatelessWidget {
   const CallingScreen({super.key});
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox.expand(
-            child: CommonImage(imageSrc: AppImages.callingBackground, fill: BoxFit.cover),
+          const SizedBox.expand(
+            child: CommonImage(
+              imageSrc: AppImages.callingBackground,
+              fill: BoxFit.cover,
+            ),
           ),
 
           BackdropFilter(
@@ -31,37 +35,61 @@ class CallingScreen extends StatelessWidget {
         ],
       ),
     );
-}
+  }
 
- Padding _action({required bool isDailer}) {
-   return Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              150.height,
-              CommonImage(imageSrc: AppImages.homeBanner, fill: BoxFit.fill ,size: 150, borderRadius: 150),
-              10.height,
-              CommonText(text: 'Cameron Williamson', style: TextStyle(fontSize: 20 ,fontWeight: FontWeight.w700, color: AppColors.textWhite), alignment: MainAxisAlignment.center),
-              CommonText(text: 'Ringing....', style: TextStyle(fontSize: 16, color: AppColors.textWhite), alignment: MainAxisAlignment.center),
-               const Spacer(),
-              isDailer? SlideToActionButton(onAccept: (){
-                Get.back();
-              }, onReject: (){
-                Get.back();
-              }) : GestureDetector(
-                onTap: () {
-                   Get.back();
-                },
-                child: Container(
-                  decoration: BoxDecoration(color: AppColors.serfeceBG, borderRadius: BorderRadius.circular(50)),
-                  padding: EdgeInsets.only(left: 50, right: 50, top: 5, bottom: 5),
-                   child: Icon(Icons.call_end, color: AppColors.error, size: 50,)),
-              ) ,
-              80.height,
-            ],
+  Padding _action({required bool isDailer}) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: Column(
+        children: [
+          150.height,
+          const CommonImage(
+            imageSrc: AppImages.homeBanner,
+            fill: BoxFit.fill,
+            size: 150,
+            borderRadius: 150,
           ),
-        );
- }
-
+          10.height,
+          const CommonText(
+            text: 'Cameron Williamson',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: AppColors.textWhite,
+            ),
+            alignment: MainAxisAlignment.center,
+          ),
+          const CommonText(
+            text: 'Ringing....',
+            style: TextStyle(fontSize: 16, color: AppColors.textWhite),
+            alignment: MainAxisAlignment.center,
+          ),
+          const Spacer(),
+          isDailer
+              ? SlideToActionButton(onAccept: Get.back, onReject: Get.back)
+              : GestureDetector(
+                onTap: Get.back,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.serfeceBG,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  padding: const EdgeInsets.only(
+                    left: 50,
+                    right: 50,
+                    top: 5,
+                    bottom: 5,
+                  ),
+                  child: const Icon(
+                    Icons.call_end,
+                    color: AppColors.error,
+                    size: 50,
+                  ),
+                ),
+              ),
+          80.height,
+        ],
+      ),
+    );
+  }
 }

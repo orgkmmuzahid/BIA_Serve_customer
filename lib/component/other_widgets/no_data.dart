@@ -14,16 +14,8 @@ class NoData extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CommonImage(
-            imageSrc: AppImages.noData,
-            height: 70.sp,
-            width: 70.sp,
-          ),
-          const CommonText(
-            text: AppString.dataEmpty,
-            fontSize: 16,
-            top: 8,
-          )
+          CommonImage(imageSrc: AppImages.noData, height: 70.sp, width: 70.sp),
+          const CommonText(text: AppString.dataEmpty, fontSize: 16, top: 8),
         ],
       ),
     );

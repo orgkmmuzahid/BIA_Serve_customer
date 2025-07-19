@@ -21,62 +21,134 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CommonAppBar(title: AppString.account,leading: SizedBox(width: 0, height: 0),),
+    appBar: const CommonAppBar(
+      title: AppString.account,
+      leading: SizedBox(width: 0, height: 0),
+    ),
     body: SingleChildScrollView(
-      child: Padding(padding: EdgeInsetsGeometry.only(left: 16, right: 16), 
-       child: Column(children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(border: BoxBorder.all(width: 8 ,color: AppColors.secondaryColor,), shape: BoxShape.circle),
-          child: CommonImage(imageSrc: AppImages.homeBanner ,fill: BoxFit.fill,borderRadius: 130 ,width: 130, height: 130,).center),
-        10.height,
-        Text("Cameron Williamson", style: theme.textTheme.bodyLarge),
-        4.height,
-        Text("+123456789", style: TextStyle(color: AppColors.secondaryText, fontSize: 16, fontWeight: FontWeight.w700 )),
-        10.height,
-        
-        _buildMenu(leading: Icon(Icons.person_outline), title: AppString.changePersonalInfo, onTap:(){
-          Get.toNamed(AppRoutes.profileInfo);
-        }),
-        
-        _buildMenu(leading: Icon(Icons.payment), title: AppString.payment, onTap: Get.find<HomeController>().onDrawerMyPayment),
+      child: Padding(
+        padding: const EdgeInsetsGeometry.only(left: 16, right: 16),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: BoxBorder.all(
+                  width: 8,
+                  color: AppColors.secondaryColor,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child:
+                  const CommonImage(
+                    imageSrc: AppImages.homeBanner,
+                    fill: BoxFit.fill,
+                    borderRadius: 130,
+                    width: 130,
+                    height: 130,
+                  ).center,
+            ),
+            10.height,
+            Text('Cameron Williamson', style: theme.textTheme.bodyLarge),
+            4.height,
+            const Text(
+              '+123456789',
+              style: TextStyle(
+                color: AppColors.secondaryText,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            10.height,
 
-        _buildMenu(image: AppImages.drawerLanguage, title: AppString.drawerLanguage, onTap:(){
-          Get.toNamed(AppRoutes.language);
-        }),
-        _buildMenu(image: AppImages.drawerSupport, title: AppString.drawerSupport, onTap:Get.find<HomeController>().onDrawerSupport),
+            _buildMenu(
+              leading: const Icon(Icons.person_outline),
+              title: AppString.changePersonalInfo,
+              onTap: () {
+                Get.toNamed(AppRoutes.profileInfo);
+              },
+            ),
 
-         _buildMenu( leading: Icon(Icons.privacy_tip_outlined) , title: AppString.privacyPolicy, onTap:(){
-          Get.toNamed(AppRoutes.privacyPolicy);
-        }),
+            _buildMenu(
+              leading: const Icon(Icons.payment),
+              title: AppString.payment,
+              onTap: Get.find<HomeController>().onDrawerMyPayment,
+            ),
 
-         _buildMenu(leading: Icon(Icons.library_books_outlined), title: AppString.termsCondition, onTap:(){
-          Get.toNamed(AppRoutes.termsCondition);
-        }),
-      
-        _buildMenu(image: AppImages.drawerDeleteAccount, title: AppString.drawerDeleteAccount, onTap: (){
-             DeleteAccountAlert();
-            }),
+            _buildMenu(
+              image: AppImages.drawerLanguage,
+              title: AppString.drawerLanguage,
+              onTap: () {
+                Get.toNamed(AppRoutes.language);
+              },
+            ),
+            _buildMenu(
+              image: AppImages.drawerSupport,
+              title: AppString.drawerSupport,
+              onTap: Get.find<HomeController>().onDrawerSupport,
+            ),
 
-            SizedBox(height: 50,),
-            _buildMenu(image: AppImages.drawerLogout, enableTrailing: false,title: AppString.logOut,onTap: (){
-              CommonAlert(title: AppString.logoutMessage, onTap: Get.find<HomeController>().onDrawerLogout);
-            })
-        
-      
-       ]),
+            _buildMenu(
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title: AppString.privacyPolicy,
+              onTap: () {
+                Get.toNamed(AppRoutes.privacyPolicy);
+              },
+            ),
+
+            _buildMenu(
+              leading: const Icon(Icons.library_books_outlined),
+              title: AppString.termsCondition,
+              onTap: () {
+                Get.toNamed(AppRoutes.termsCondition);
+              },
+            ),
+
+            _buildMenu(
+              image: AppImages.drawerDeleteAccount,
+              title: AppString.drawerDeleteAccount,
+              onTap: () {
+                DeleteAccountAlert();
+              },
+            ),
+
+            const SizedBox(height: 50),
+            _buildMenu(
+              image: AppImages.drawerLogout,
+              enableTrailing: false,
+              title: AppString.logOut,
+              onTap: () {
+                CommonAlert(
+                  title: AppString.logoutMessage,
+                  onTap: Get.find<HomeController>().onDrawerLogout,
+                );
+              },
+            ),
+          ],
+        ),
       ),
-    ), bottomNavigationBar: CommonBottomNavBar());
+    ),
+    bottomNavigationBar: const CommonBottomNavBar(),
+  );
 
-  
-  ListTile _buildMenu({ String? image, Widget? leading  ,required String title,required Function() onTap, bool enableTrailing = true}){
-    return ListTile(leading: leading ?? CommonImage(imageSrc: image!, size: 24,), trailing: enableTrailing? Icon(Icons.arrow_forward_ios) : null,
-     title: Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
-     onTap: () {
-              onTap();
-              // Handle logout logic
-            },
-     );
+  ListTile _buildMenu({
+    required String title,
+    required Function() onTap,
+    String? image,
+    Widget? leading,
+    bool enableTrailing = true,
+  }) {
+    return ListTile(
+      leading: leading ?? CommonImage(imageSrc: image!, size: 24),
+      trailing: enableTrailing ? const Icon(Icons.arrow_forward_ios) : null,
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+      ),
+      onTap: () {
+        onTap();
+        // Handle logout logic
+      },
+    );
   }
-
 }

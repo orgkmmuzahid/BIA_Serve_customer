@@ -36,7 +36,7 @@ class AppLogger {
         levelColor = _yellow;
         break;
       case 'ERROR':
-        levelEmoji = '❌';
+        levelEmoji = '❌❌';
         levelColor = _red;
         break;
       case 'DEBUG':
@@ -48,7 +48,7 @@ class AppLogger {
         levelColor = _reset;
     }
 
-    final levelText = '$levelEmoji ${_bold}${levelColor}$level$_reset';
+    final levelText = '$levelEmoji $_bold$levelColor$level$_reset';
     final coloredMessage = '$levelColor$message$_reset';
 
     final formatted = '$coloredTime [$levelText] $coloredTag$coloredMessage';

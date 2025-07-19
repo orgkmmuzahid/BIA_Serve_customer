@@ -15,57 +15,57 @@ class ApiService {
   /// ========== [ HTTP METHODS ] ========== ///
   static Future<ApiResponseModel> post(
     String url, {
-    dynamic body,
+    body,
     Map<String, String>? header,
-  }) => _request(url, "POST", body: body, header: header);
+  }) => _request(url, 'POST', body: body, header: header);
 
   static Future<ApiResponseModel> get(
     String url, {
     Map<String, String>? header,
-  }) => _request(url, "GET", header: header);
+  }) => _request(url, 'GET', header: header);
 
   static Future<ApiResponseModel> put(
     String url, {
-    dynamic body,
+    body,
     Map<String, String>? header,
-  }) => _request(url, "PUT", body: body, header: header);
+  }) => _request(url, 'PUT', body: body, header: header);
 
   static Future<ApiResponseModel> patch(
     String url, {
-    dynamic body,
+    body,
     Map<String, String>? header,
-  }) => _request(url, "PATCH", body: body, header: header);
+  }) => _request(url, 'PATCH', body: body, header: header);
 
   static Future<ApiResponseModel> delete(
     String url, {
-    dynamic body,
+    body,
     Map<String, String>? header,
-  }) => _request(url, "DELETE", body: body, header: header);
+  }) => _request(url, 'DELETE', body: body, header: header);
 
   static Future<ApiResponseModel> multipart(
     String url, {
     Map<String, String> header = const {},
     Map<String, String> body = const {},
-    String method = "POST",
+    String method = 'POST',
     String imageName = 'image',
     String? imagePath,
   }) async {
-    FormData formData = FormData();
+    final FormData formData = FormData();
     if (imagePath != null && imagePath.isNotEmpty) {
-      File file = File(imagePath);
-      String extension = file.path.split('.').last.toLowerCase();
-      String? mimeType = lookupMimeType(imagePath);
+      final File file = File(imagePath);
+      final String extension = file.path.split('.').last.toLowerCase();
+      final String? mimeType = lookupMimeType(imagePath);
 
       formData.files.add(
         MapEntry(
           imageName,
           await MultipartFile.fromFile(
             imagePath,
-            filename: "$imageName.$extension",
+            filename: '$imageName.$extension',
             contentType:
                 mimeType != null
                     ? DioMediaType.parse(mimeType)
-                    : DioMediaType.parse("image/jpeg"),
+                    : DioMediaType.parse('image/jpeg'),
           ),
         ),
       );
@@ -75,7 +75,7 @@ class ApiService {
       formData.fields.add(MapEntry(key, value));
     });
 
-    header['Content-Type'] = "multipart/form-data";
+    header['Content-Type'] = 'multipart/form-data';
 
     return _request(url, method, body: formData, header: header);
   }
@@ -84,7 +84,7 @@ class ApiService {
   static Future<ApiResponseModel> _request(
     String url,
     String method, {
-    dynamic body,
+    body,
     Map<String, String>? header,
   }) async {
     try {
@@ -106,7 +106,7 @@ class ApiService {
     return ApiResponseModel(response.statusCode, response.data);
   }
 
-  static ApiResponseModel _handleError(dynamic error) {
+  static ApiResponseModel _handleError(error) {
     try {
       if (error is DioException) {
         return _handleDioException(error);
@@ -127,10 +127,10 @@ class ApiService {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.receiveTimeout:
       case DioExceptionType.sendTimeout:
-        return ApiResponseModel(408, {"message": AppString.requestTimeOut});
+        return ApiResponseModel(408, {'message': AppString.requestTimeOut});
       case DioExceptionType.connectionError:
         return ApiResponseModel(503, {
-          "message": AppString.noInternetConnection,
+          'message': AppString.noInternetConnection,
         });
 
       default:
@@ -138,13 +138,13 @@ class ApiService {
     }
   }
 
-  static ApiResponseModel _handleOtherErrors(dynamic error) {
+  static ApiResponseModel _handleOtherErrors(error) {
     if (error is SocketException) {
-      return ApiResponseModel(503, {"message": AppString.noInternetConnection});
+      return ApiResponseModel(503, {'message': AppString.noInternetConnection});
     } else if (error is FormatException) {
-      return ApiResponseModel(400, {"message": AppString.badResponseRequest});
+      return ApiResponseModel(400, {'message': AppString.badResponseRequest});
     } else if (error is TimeoutException) {
-      return ApiResponseModel(408, {"message": AppString.requestTimeOut});
+      return ApiResponseModel(408, {'message': AppString.requestTimeOut});
     } else {
       return ApiResponseModel(500, {});
     }
@@ -153,24 +153,24 @@ class ApiService {
 
 /// ========== [ DIO INSTANCE WITH INTERCEPTORS ] ========== ///
 Dio _getMyDio() {
-  Dio dio = Dio();
+  final Dio dio = Dio();
 
   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) {
         final stopwatch = Stopwatch()..start();
         options
-          ..headers["Authorization"] ??= "Bearer ${LocalStorage.token}"
-          ..headers["Content-Type"] ??= "application/json"
+          ..headers['Authorization'] ??= 'Bearer ${LocalStorage.token}'
+          ..headers['Content-Type'] ??= 'application/json'
           ..sendTimeout = const Duration(seconds: 30)
           ..receiveTimeout = const Duration(seconds: 30)
           ..baseUrl =
-              options.baseUrl.startsWith("http") ? "" : ApiEndPoint.baseUrl
-          ..extra["stopwatch"] = stopwatch;
+              options.baseUrl.startsWith('http') ? '' : ApiEndPoint.baseUrl
+          ..extra['stopwatch'] = stopwatch;
 
-        String storedCookies = LocalStorage.cookie;
+        final String storedCookies = LocalStorage.cookie;
         if (storedCookies.isNotEmpty) {
-          List<String> cookiesList = storedCookies.split('; ');
+          final List<String> cookiesList = storedCookies.split('; ');
           options.headers['Cookie'] = cookiesList;
         }
 
@@ -179,21 +179,21 @@ Dio _getMyDio() {
       },
       onResponse: (response, handler) {
         final stopwatch =
-            response.requestOptions.extra["stopwatch"] as Stopwatch?;
+            response.requestOptions.extra['stopwatch'] as Stopwatch?;
         stopwatch?.stop();
 
         apiResponseLog(response, stopwatch ?? Stopwatch());
-        List cookies = response.headers['set-cookie'] ?? [];
+        final List cookies = response.headers['set-cookie'] ?? [];
 
         if (cookies.isNotEmpty) {
-          String cookieString = cookies.join('; ');
+          final String cookieString = cookies.join('; ');
           LocalStorage.cookie = cookieString;
           LocalStorage.setString(LocalStorageKeys.cookie, cookieString);
         }
         handler.next(response);
       },
       onError: (error, handler) {
-        final stopwatch = error.requestOptions.extra["stopwatch"] as Stopwatch?;
+        final stopwatch = error.requestOptions.extra['stopwatch'] as Stopwatch?;
         stopwatch?.stop();
         apiErrorLog(error, stopwatch ?? Stopwatch());
         handler.next(error);

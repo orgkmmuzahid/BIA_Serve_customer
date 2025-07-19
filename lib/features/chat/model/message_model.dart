@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-enum UserStatus{online, offline}
+enum UserStatus { online, offline }
+
 class MessageModel {
   String messageId;
   String userImage;
@@ -49,13 +50,16 @@ class MessageModel {
       userImage: map['userImage'] as String,
       userName: map['userName'] as String,
       userStatus: UserStatus.values[map['userStatus'] as int],
-      lastSendMessageTime: DateTime.fromMillisecondsSinceEpoch(map['lastSendMessageTime'] as int),
+      lastSendMessageTime: DateTime.fromMillisecondsSinceEpoch(
+        map['lastSendMessageTime'] as int,
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory MessageModel.fromJson(String source) => MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MessageModel.fromJson(String source) =>
+      MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -65,21 +69,20 @@ class MessageModel {
   @override
   bool operator ==(covariant MessageModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.messageId == messageId &&
-      other.userImage == userImage &&
-      other.userName == userName &&
-      other.userStatus == userStatus &&
-      other.lastSendMessageTime == lastSendMessageTime;
+
+    return other.messageId == messageId &&
+        other.userImage == userImage &&
+        other.userName == userName &&
+        other.userStatus == userStatus &&
+        other.lastSendMessageTime == lastSendMessageTime;
   }
 
   @override
   int get hashCode {
     return messageId.hashCode ^
-      userImage.hashCode ^
-      userName.hashCode ^
-      userStatus.hashCode ^
-      lastSendMessageTime.hashCode;
+        userImage.hashCode ^
+        userName.hashCode ^
+        userStatus.hashCode ^
+        lastSendMessageTime.hashCode;
   }
 }

@@ -1,4 +1,1 @@
-enum PickupType {
-  pickupFromMe, 
-  pickupFromVendor
-}
+enum PickupType { pickupFromMe, pickupFromVendor }

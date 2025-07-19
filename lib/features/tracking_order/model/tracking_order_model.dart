@@ -3,14 +3,13 @@
 
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:bai_serve/features/home/model/order_list_model.dart';
 import 'package:bai_serve/features/tracking_order/model/order_timeline_model.dart';
+import 'package:flutter/foundation.dart';
 
 class TrackingOrderModel {
   String trackingId;
-  String senderName; 
+  String senderName;
   String phoneNumber;
 
   String reciverName;
@@ -21,7 +20,7 @@ class TrackingOrderModel {
 
   //duration
   Duration estimatedDeliveryTime;
-  
+
   int stepNumber;
 
   String image;
@@ -62,7 +61,8 @@ class TrackingOrderModel {
       reciverPhoneNumber: reciverPhoneNumber ?? this.reciverPhoneNumber,
       address: address ?? this.address,
       status: status ?? this.status,
-      estimatedDeliveryTime: estimatedDeliveryTime ?? this.estimatedDeliveryTime,
+      estimatedDeliveryTime:
+          estimatedDeliveryTime ?? this.estimatedDeliveryTime,
       stepNumber: stepNumber ?? this.stepNumber,
       image: image ?? this.image,
       timeline: timeline ?? this.timeline,
@@ -94,16 +94,23 @@ class TrackingOrderModel {
       reciverPhoneNumber: map['reciverPhoneNumber'] as String,
       address: map['address'] as String,
       status: DeliveryStatus.values[map['status'] as int],
-      estimatedDeliveryTime:  Duration(milliseconds: map['estimatedDeliveryTime']),
+      estimatedDeliveryTime: Duration(
+        milliseconds: map['estimatedDeliveryTime'],
+      ),
       stepNumber: map['stepNumber'] as int,
       image: map['image'] as String,
-      timeline: List<OrderTimelineModel>.from((map['timeline'] as List<int>).map<OrderTimelineModel>((x) => OrderTimelineModel.fromMap(x as Map<String,dynamic>),),),
+      timeline: List<OrderTimelineModel>.from(
+        (map['timeline'] as List<int>).map<OrderTimelineModel>(
+          (x) => OrderTimelineModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TrackingOrderModel.fromJson(String source) => TrackingOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TrackingOrderModel.fromJson(String source) =>
+      TrackingOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -113,33 +120,32 @@ class TrackingOrderModel {
   @override
   bool operator ==(covariant TrackingOrderModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.trackingId == trackingId &&
-      other.senderName == senderName &&
-      other.phoneNumber == phoneNumber &&
-      other.reciverName == reciverName &&
-      other.reciverPhoneNumber == reciverPhoneNumber &&
-      other.address == address &&
-      other.status == status &&
-      other.estimatedDeliveryTime == estimatedDeliveryTime &&
-      other.stepNumber == stepNumber &&
-      other.image == image &&
-      listEquals(other.timeline, timeline);
+
+    return other.trackingId == trackingId &&
+        other.senderName == senderName &&
+        other.phoneNumber == phoneNumber &&
+        other.reciverName == reciverName &&
+        other.reciverPhoneNumber == reciverPhoneNumber &&
+        other.address == address &&
+        other.status == status &&
+        other.estimatedDeliveryTime == estimatedDeliveryTime &&
+        other.stepNumber == stepNumber &&
+        other.image == image &&
+        listEquals(other.timeline, timeline);
   }
 
   @override
   int get hashCode {
     return trackingId.hashCode ^
-      senderName.hashCode ^
-      phoneNumber.hashCode ^
-      reciverName.hashCode ^
-      reciverPhoneNumber.hashCode ^
-      address.hashCode ^
-      status.hashCode ^
-      estimatedDeliveryTime.hashCode ^
-      stepNumber.hashCode ^
-      image.hashCode ^
-      timeline.hashCode;
+        senderName.hashCode ^
+        phoneNumber.hashCode ^
+        reciverName.hashCode ^
+        reciverPhoneNumber.hashCode ^
+        address.hashCode ^
+        status.hashCode ^
+        estimatedDeliveryTime.hashCode ^
+        stepNumber.hashCode ^
+        image.hashCode ^
+        timeline.hashCode;
   }
 }

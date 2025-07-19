@@ -5,18 +5,12 @@ import 'package:get/get.dart';
 // Get.lazyPut(() => PaymentController(), fenix: true);
 
 class PaymentController extends GetxController {
-    String? selectedPayment;
+  String? selectedPayment;
 
-    
-  void onPaymentChange(String newPayment){
-           selectedPayment = newPayment;
-           update();
+  void onPaymentChange(String newPayment) {
+    selectedPayment = newPayment;
+    update();
   }
 
-
-  void processPayment()async{
-    
-  }
-
-  
+  void processPayment() async {}
 }

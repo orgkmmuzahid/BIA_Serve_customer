@@ -13,53 +13,109 @@ class BulkOrderDetailsScreen extends StatelessWidget {
   const BulkOrderDetailsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: Text(AppString.orderDetails)), 
-   body: Padding(
-     padding: const EdgeInsets.only(right: 16, left: 16),
-     child: GetBuilder<BulkOrderController>(
-       builder: (bulkOrderController) {
-         return Column(children: [
-          CommonText(text: AppString.orderSummery, style: theme.textTheme.bodyLarge).start,
-          CommonMultilineTextField(initialText: bulkOrderController.negotiationMessage, readOnly: true ,height: 200, onSave: (String p1) {  },), 
-          20.height,
-          if( bulkOrderController.bulkOrderDetailsModel == null)
-          CommonTextField(onSubmitted: bulkOrderController.onPromoSubmit, hintText: AppString.submitPromoCode, borderRadius: 4, paddingVertical: 20,
-           borderColor: theme.inputDecorationTheme.disabledBorder?.borderSide.color,),
-          if( bulkOrderController.bulkOrderDetailsModel != null)
-           ..._promoFeedBack(bulkOrderController),
-           20.height,
-           CommonButton(titleText: AppString.continues, onTap: () {
-             Get.toNamed(AppRoutes.payment);
-           },),
-         ]);
-       }
-     ),
-   ),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text(AppString.orderDetails)),
+    body: Padding(
+      padding: const EdgeInsets.only(right: 16, left: 16),
+      child: GetBuilder<BulkOrderController>(
+        builder: (bulkOrderController) {
+          return Column(
+            children: [
+              CommonText(
+                text: AppString.orderSummery,
+                style: theme.textTheme.bodyLarge,
+              ).start,
+              CommonMultilineTextField(
+                initialText: bulkOrderController.negotiationMessage,
+                readOnly: true,
+                height: 200,
+                onSave: (String p1) {},
+              ),
+              20.height,
+              if (bulkOrderController.bulkOrderDetailsModel == null)
+                CommonTextField(
+                  onSubmitted: bulkOrderController.onPromoSubmit,
+                  hintText: AppString.submitPromoCode,
+                  borderRadius: 4,
+                  paddingVertical: 20,
+                  borderColor:
+                      theme
+                          .inputDecorationTheme
+                          .disabledBorder
+                          ?.borderSide
+                          .color,
+                ),
+              if (bulkOrderController.bulkOrderDetailsModel != null)
+                ..._promoFeedBack(bulkOrderController),
+              20.height,
+              CommonButton(
+                titleText: AppString.continues,
+                onTap: () {
+                  Get.toNamed(AppRoutes.payment);
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    ),
   );
 
-  List<Widget> _promoFeedBack(BulkOrderController controller){
+  List<Widget> _promoFeedBack(BulkOrderController controller) {
     return [
       Table(
         columnWidths: const {
           0: FlexColumnWidth(.9),
-             1: FlexColumnWidth(0.5),
-             2: FlexColumnWidth(3),
-           } ,
+          1: FlexColumnWidth(0.5),
+          2: FlexColumnWidth(3),
+        },
         children: [
-          _rowBuilder(AppString.totalAmount, 'TSH ${controller.bulkOrderDetailsModel?.totalAmount.toString()}'),
-          _rowBuilder(AppString.discount, 'TSH ${controller.bulkOrderDetailsModel?.discountedAmount.toString()}'),
-          _rowBuilder(AppString.totalPay, 'TSH ${controller.bulkOrderDetailsModel?.totalPayable.toString()}'),
-        ])
+          _rowBuilder(
+            AppString.totalAmount,
+            'TSH ${controller.bulkOrderDetailsModel?.totalAmount.toString()}',
+          ),
+          _rowBuilder(
+            AppString.discount,
+            'TSH ${controller.bulkOrderDetailsModel?.discountedAmount.toString()}',
+          ),
+          _rowBuilder(
+            AppString.totalPay,
+            'TSH ${controller.bulkOrderDetailsModel?.totalPayable.toString()}',
+          ),
+        ],
+      ),
     ];
   }
 
-  
-   TableRow _rowBuilder(String title, String data){
-    return TableRow(children: [
-      CommonText(text: title, textAlign: TextAlign.start, top: 10, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),), 
-       Center(child: CommonText(text: ':', top: 10, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400))),
-      CommonText(text: data, textAlign: TextAlign.start, top: 10, style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400))
-    ]);
+  TableRow _rowBuilder(String title, String data) {
+    return TableRow(
+      children: [
+        CommonText(
+          text: title,
+          textAlign: TextAlign.start,
+          top: 10,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        Center(
+          child: CommonText(
+            text: ':',
+            top: 10,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+        CommonText(
+          text: data,
+          textAlign: TextAlign.start,
+          top: 10,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
+    );
   }
-
 }

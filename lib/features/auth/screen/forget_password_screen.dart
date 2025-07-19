@@ -26,7 +26,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(),
-                  CommonLogo().center,
+                  const CommonLogo().center,
                   50.height,
 
                   /// User Password here

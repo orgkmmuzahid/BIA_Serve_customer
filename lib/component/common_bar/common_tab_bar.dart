@@ -2,6 +2,20 @@ import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CommonTabBar extends StatefulWidget {
+  const CommonTabBar({
+    required this.tabs,
+    required this.tabViews,
+    super.key,
+    this.selectedStyle,
+    this.unselectedStyle,
+    this.onTabChange,
+    this.selectedTextStyle,
+    this.spaceing = 8,
+    this.unselectedTextStyle,
+  }) : assert(
+         tabs.length == tabViews.length,
+         'Tabs and TabViews count must match',
+       );
   final List<String> tabs;
   final List<Widget> tabViews;
 
@@ -13,23 +27,12 @@ class CommonTabBar extends StatefulWidget {
   final Function(int index)? onTabChange;
   final double spaceing;
 
-  const CommonTabBar({
-    super.key,
-    required this.tabs,
-    required this.tabViews,
-    this.selectedStyle,
-    this.unselectedStyle,
-    this.onTabChange,
-    this.selectedTextStyle,
-    this.spaceing = 8,
-    this.unselectedTextStyle,
-  }) : assert(tabs.length == tabViews.length, 'Tabs and TabViews count must match');
-
   @override
   State<CommonTabBar> createState() => _CommonTabBarState();
 }
 
-class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMixin {
+class _CommonTabBarState extends State<CommonTabBar>
+    with TickerProviderStateMixin {
   late TabController _controller;
 
   @override
@@ -79,7 +82,7 @@ class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMix
                   fontWeight: FontWeight.bold,
                 );
 
-                final defaultUnselectedTextStyle = TextStyle(
+                final defaultUnselectedTextStyle = const TextStyle(
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.bold,
                 );
@@ -93,19 +96,25 @@ class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMix
                       }
                     },
                     child: Container(
-                      decoration: isSelected
-                          ? (widget.selectedStyle ?? defaultSelectedStyle)
-                          : (widget.unselectedStyle ?? defaultUnselectedStyle),
+                      decoration:
+                          isSelected
+                              ? (widget.selectedStyle ?? defaultSelectedStyle)
+                              : (widget.unselectedStyle ??
+                                  defaultUnselectedStyle),
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      margin: tabIndex < widget.tabs.length - 1
-                          ? EdgeInsets.only(right: widget.spaceing)
-                          : null,
+                      margin:
+                          tabIndex < widget.tabs.length - 1
+                              ? EdgeInsets.only(right: widget.spaceing)
+                              : null,
                       alignment: Alignment.center,
                       child: Text(
                         widget.tabs[tabIndex],
-                        style: isSelected
-                            ? (widget.selectedTextStyle ?? defaultSelectedTextStyle)
-                            : (widget.unselectedTextStyle ?? defaultUnselectedTextStyle),
+                        style:
+                            isSelected
+                                ? (widget.selectedTextStyle ??
+                                    defaultSelectedTextStyle)
+                                : (widget.unselectedTextStyle ??
+                                    defaultUnselectedTextStyle),
                       ),
                     ),
                   ),
@@ -120,10 +129,9 @@ class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMix
             duration: const Duration(milliseconds: 300),
             switchInCurve: Curves.easeIn,
             switchOutCurve: Curves.easeOut,
-            transitionBuilder: (child, animation) => FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
+            transitionBuilder:
+                (child, animation) =>
+                    FadeTransition(opacity: animation, child: child),
             child: Container(
               key: ValueKey<int>(index),
               child: widget.tabViews[index],

@@ -1,4 +1,3 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -103,61 +102,66 @@ class _CommonTextFieldState extends State<CommonTextField> {
         : theme.colorScheme.outline;
   }
 
-@override
-Widget build(BuildContext context) {
-  return TextFormField(
-    controller: _controller,
-    focusNode: _focusNode,
-    obscureText: _obscureText,
-    readOnly: widget.isReadOnly,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    keyboardType: widget.keyboardType,
-    textInputAction: widget.textInputAction,
-    onSaved: widget.onSaved == null ? null : (v) => widget.onSaved!(v ?? ''),
-    maxLength: widget.mexLength,
-    inputFormatters: widget.inputFormatters,
-    onFieldSubmitted: widget.onSubmitted,
-    onTap: widget.onTap,
-    validator: widget.validator,
-    style: theme.textTheme.bodyLarge!.copyWith(
-      fontWeight: FontWeight.w500,
-      fontSize: 12.sp,
-    ),
-    decoration: InputDecoration(
-      filled: true,
-      counterText: '',
-      errorMaxLines: 2,
-      prefixIcon: widget.prefixText?.isNotEmpty == true
-          ? Padding(
-              padding: EdgeInsets.only(left: 10, right: 5), // add some right padding to allow hint space
-              child: CommonText(
-                text: widget.prefixText!,
-                fontWeight: FontWeight.w400,
-                color: _iconColor(),
-              ),
-            )
-          : widget.prefixIcon,
-      prefixIconConstraints: BoxConstraints(maxWidth: 40),
-      suffixIcon: widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
-      prefixIconColor: _iconColor(),
-      suffixIconColor: _iconColor(),
-      enabledBorder: widget.borderColor != null
-          ? theme.inputDecorationTheme.enabledBorder?.copyWith(
-              borderSide: theme.inputDecorationTheme.enabledBorder?.borderSide
-                      .copyWith(color: widget.borderColor!) ??
-                  BorderSide(color: widget.borderColor!),
-            )
-          : theme.inputDecorationTheme.enabledBorder,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: widget.paddingHorizontal.w,
-        vertical: widget.paddingVertical.h,
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: _controller,
+      focusNode: _focusNode,
+      obscureText: _obscureText,
+      readOnly: widget.isReadOnly,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      onSaved: widget.onSaved == null ? null : (v) => widget.onSaved!(v ?? ''),
+      maxLength: widget.mexLength,
+      inputFormatters: widget.inputFormatters,
+      onFieldSubmitted: widget.onSubmitted,
+      onTap: widget.onTap,
+      validator: widget.validator,
+      style: theme.textTheme.bodyLarge!.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: 12.sp,
       ),
-      hintText: widget.hintText,
-      labelText: widget.labelText,
-    ),
-  );
-}
-
+      decoration: InputDecoration(
+        filled: true,
+        counterText: '',
+        errorMaxLines: 2,
+        prefixIcon:
+            widget.prefixText?.isNotEmpty == true
+                ? Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 5,
+                  ), // add some right padding to allow hint space
+                  child: CommonText(
+                    text: widget.prefixText!,
+                    color: _iconColor(),
+                  ),
+                )
+                : widget.prefixIcon,
+        prefixIconConstraints: const BoxConstraints(maxWidth: 40),
+        suffixIcon:
+            widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
+        prefixIconColor: _iconColor(),
+        suffixIconColor: _iconColor(),
+        enabledBorder:
+            widget.borderColor != null
+                ? theme.inputDecorationTheme.enabledBorder?.copyWith(
+                  borderSide:
+                      theme.inputDecorationTheme.enabledBorder?.borderSide
+                          .copyWith(color: widget.borderColor) ??
+                      BorderSide(color: widget.borderColor!),
+                )
+                : theme.inputDecorationTheme.enabledBorder,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: widget.paddingHorizontal.w,
+          vertical: widget.paddingVertical.h,
+        ),
+        hintText: widget.hintText,
+        labelText: widget.labelText,
+      ),
+    );
+  }
 
   Widget _buildPasswordSuffixIcon() {
     return GestureDetector(

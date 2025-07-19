@@ -13,8 +13,6 @@ class AppColors {
   // static const Color textFiledBorder = Color.fromRGBO(8, 89, 95, 1);
   // static const Color disableColor = Color.fromRGBO(194, 194, 194, 1);
 
-
-
   // static const blueLight = Color(0xffe8e8f5);
 
   //app color

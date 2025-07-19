@@ -7,20 +7,20 @@ class TokenServices {
 
   static bool get isLogIn => myEmail.isNotEmpty;
 
-  static String get myNames => _getDecodedToken()['fullName'] ?? "";
+  static String get myNames => _getDecodedToken()['fullName'] ?? '';
 
-  static String get myEmail => _getDecodedToken()['email'] ?? "";
+  static String get myEmail => _getDecodedToken()['email'] ?? '';
 
-  static String get myUserId => _getDecodedToken()['userId'] ?? "";
+  static String get myUserId => _getDecodedToken()['userId'] ?? '';
 
-  static String get myRole => _getDecodedToken()['role'] ?? "";
+  static String get myRole => _getDecodedToken()['role'] ?? '';
 
   static bool isTokenExpired() {
     try {
-      bool value = JwtDecoder.isExpired(LocalStorage.token);
+      final bool value = JwtDecoder.isExpired(LocalStorage.token);
       return value;
     } catch (e) {
-      errorLog(e, source: "Token Service");
+      errorLog(e, source: 'Token Service');
       return false;
     }
   }
@@ -30,7 +30,7 @@ class TokenServices {
       decodedToken ??= JwtDecoder.decode(LocalStorage.token);
       return decodedToken!;
     } catch (e) {
-      errorLog(e, source: "Token Service");
+      errorLog(e, source: 'Token Service');
       return {};
     }
   }

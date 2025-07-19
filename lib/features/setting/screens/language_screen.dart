@@ -11,41 +11,50 @@ class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title:  Text(AppString.drawerLanguage), centerTitle: true,),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: const Text(AppString.drawerLanguage),
+      centerTitle: true,
+    ),
     body: Column(
       children: [
-           CommonButton(
-            buttonWidth: 287,
-              titleText: AppString.langEnglish,
-              buttonColor: theme.scaffoldBackgroundColor,
-              titleColor: theme.textTheme.bodyLarge!.color!,
-              borderColor: theme.colorScheme.outlineVariant,
-              icon: Padding(
-                padding: EdgeInsetsGeometry.only(right: 17.9),
-                child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
-              ),
-              onTap: (){
-                Get.find<HomeController>().onCountryChange( Get.find<HomeController>().availableCountries.entries.first);
-                Get.back();
-              } ,
-            ).center,
-            18.height,
+        CommonButton(
+          buttonWidth: 287,
+          titleText: AppString.langEnglish,
+          buttonColor: theme.scaffoldBackgroundColor,
+          titleColor: theme.textTheme.bodyLarge!.color,
+          borderColor: theme.colorScheme.outlineVariant,
+          icon: const Padding(
+            padding: EdgeInsetsGeometry.only(right: 17.9),
+            child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
+          ),
+          onTap: () {
+            Get.find<HomeController>().onCountryChange(
+              Get.find<HomeController>().availableCountries.entries.first,
+            );
+            Get.back();
+          },
+        ).center,
+        18.height,
 
-            CommonButton(
-              buttonWidth: 287,
-              titleText: AppString.langSwahili,
-              buttonColor: theme.scaffoldBackgroundColor,
-              titleColor: theme.textTheme.bodyLarge!.color!,
-              borderColor: theme.colorScheme.outlineVariant,
-              icon: Padding(
-                padding: EdgeInsetsGeometry.only(right: 17.9),
-                child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
-              ),
-              onTap: () {
-                  Get.find<HomeController>().onCountryChange( Get.find<HomeController>().availableCountries.entries.last);
-                Get.back();
-              },
-            ).center,
-    ],),
+        CommonButton(
+          buttonWidth: 287,
+          titleText: AppString.langSwahili,
+          buttonColor: theme.scaffoldBackgroundColor,
+          titleColor: theme.textTheme.bodyLarge!.color,
+          borderColor: theme.colorScheme.outlineVariant,
+          icon: const Padding(
+            padding: EdgeInsetsGeometry.only(right: 17.9),
+            child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
+          ),
+          onTap: () {
+            Get.find<HomeController>().onCountryChange(
+              Get.find<HomeController>().availableCountries.entries.last,
+            );
+            Get.back();
+          },
+        ).center,
+      ],
+    ),
   );
 }

@@ -4,6 +4,18 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 class CommonGradientButton extends StatelessWidget {
+  const CommonGradientButton({
+    required this.titleText,
+    required this.isLoading,
+    super.key,
+    this.onTap,
+    this.icon,
+    this.buttonHeight,
+    this.buttonWidth,
+    this.titleSize = 16,
+    this.titleWeight = FontWeight.w700,
+    this.titleColor = AppColors.secondaryColor,
+  });
   final VoidCallback? onTap;
   final String titleText;
   final bool isLoading;
@@ -13,26 +25,11 @@ class CommonGradientButton extends StatelessWidget {
   final double titleSize;
   final FontWeight titleWeight;
   final Color titleColor;
-
-  const CommonGradientButton({
-    super.key,
-    this.onTap,
-    required this.titleText,
-    required this.isLoading,
-    this.icon,
-    this.buttonHeight,
-    this.buttonWidth,
-    this.titleSize = 16,
-    this.titleWeight = FontWeight.w700,
-    this.titleColor = AppColors.secondaryColor,
-  });
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [Color(0xff034045), theme.colorScheme.primary],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
+        colors: [const Color(0xff034045), theme.colorScheme.primary],
       ),
       borderRadius: BorderRadius.circular(04),
     ),

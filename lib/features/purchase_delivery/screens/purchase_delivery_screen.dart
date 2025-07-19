@@ -17,117 +17,209 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 // static const String purchaseDelivery = "/purchase_delivery_screen.dart";
 // GetPage(name: purchaseDelivery, page: () => const PurchaseDeliveryScreen()),
 
-
 final _formKey = GlobalKey<FormState>();
+
 class PurchaseDeliveryScreen extends StatelessWidget {
   const PurchaseDeliveryScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: Text(AppString.homePurchaseDelivery),),
-    body: Padding(padding: EdgeInsetsGeometry.only(left: 16, right: 16), 
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text(AppString.homePurchaseDelivery)),
+    body: Padding(
+      padding: const EdgeInsetsGeometry.only(left: 16, right: 16),
       child: GetBuilder<PurchaseDeliveryController>(
         builder: (purchaseDeliveryController) {
           return SingleChildScrollView(
             child: Form(
-              child: Column(children: [
-                CommonText(text: AppString.vendorName, style: theme.textTheme.bodyLarge).start,
-                10.height,
-                CommonTextField(hintText: AppString.vendorName,validator: OtherHelper.requiredFieldValidator ,onSaved: (value) {
-                  purchaseDeliveryController.onFormChange(
-                    purchaseDeliveryController.purchaseDeliveryModel.copyWith(name: value)
-                  );
-                },),
-                10.height,
-                CommonTextField(hintText: AppString.vendorId,validator: OtherHelper.requiredFieldValidator, onSaved: (value) {
-                  purchaseDeliveryController.onFormChange(
-                    purchaseDeliveryController.purchaseDeliveryModel.copyWith(vendorId: value)
-                  );
-                },),
-                10.height,
-            
-                 CommonTextField(hintText: AppString.phoneNumber,validator: OtherHelper.phoneValidator , onSaved: (value) {
-                  purchaseDeliveryController.onFormChange(
-                    purchaseDeliveryController.purchaseDeliveryModel.copyWith(phoneNumber: value)
-                  );
-                },),
-                10.height,
-            
-                CommonMultiimagePicker(),
-            
-                CommonText(text: AppString.productAmount, style: theme.textTheme.bodyLarge).start,
-                10.height,
-                 CommonTextField(hintText: AppString.productAmount, 
-                 prefixText:  AppString.monySign,
-                validator: OtherHelper.validateAmount,
-                 keyboardType: TextInputType.number, onSaved: (value) {
-                  purchaseDeliveryController.onFormChange(
-                    purchaseDeliveryController.purchaseDeliveryModel.copyWith(amount: double.tryParse(value))
-                  );
-                },),
-                10.height,
-            
-                 CommonText(text: AppString.deliveryType, style: theme.textTheme.bodyLarge).start,
-                10.height,
-                CommonDropDown<DeliveryType>(hint: AppString.deliveryType,
-                    items: DeliveryType.values, 
-                    onChanged: (value){
-                      purchaseDeliveryController.onFormChange(purchaseDeliveryController.purchaseDeliveryModel.copyWith(deliveryType: value));
-                    }, nameBuilder: (DeliveryType value)=> value.displayName,),
-            
-                10.height,
-                CommonText(text: AppString.deliveryAddress, style: theme.textTheme.bodyLarge).start,
-                10.height,
-                CommonMultilineTextField( hintText: AppString.deliveryAddress,height: 80, onSave: (value){
-                    purchaseDeliveryController.onFormChange(purchaseDeliveryController.purchaseDeliveryModel.copyWith(deliveryAddress: value)); 
-                }),
-                10.height,
-                CommonText(text: AppString.productDescription, style: theme.textTheme.bodyLarge).start,
-                10.height,
-                CommonMultilineTextField( hintText: AppString.productDescription,height: 80, onSave: (value){
-                    purchaseDeliveryController.onFormChange(purchaseDeliveryController.purchaseDeliveryModel.copyWith(productDescription: value)); 
-                }),
-                10.height,
-                Row(children: [
-                  Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                    CommonText(text: AppString.serviceFee, style: theme.textTheme.bodyLarge, bottom: 10,), 
-                    CommonText(text: AppString.totalAmount, style: theme.textTheme.bodyLarge, top: 15,), 
-                  ],),
-                  10.width,
-                  Column(children: [
-                    SizedBox(width: 182 ,child: CommonText( 
-                      enableBorder: true,
-                      top: 10,
-                      bottom: 10,
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                      left: 10,
-                      alignment: MainAxisAlignment.center,
-                      text: '${AppString.monySign} ${purchaseDeliveryController.purchaseDeliveryModel.serviceFee}')),
-                      10.height,
-                    SizedBox(width: 182, child: CommonText( 
-                      backgroundColor: AppColors.primaryColor2,
-                      style: TextStyle(color: AppColors.textWhite, fontSize: 16, fontWeight: FontWeight.w700),
-                      enableBorder: true,
-                      top: 10,
-                      bottom: 10,
-                      left: 10,
-                      alignment: MainAxisAlignment.center,
-                      text: '${AppString.monySign} ${purchaseDeliveryController.purchaseDeliveryModel.totalPay}')
-,)                  ],)
-                ]),
-                10.height,
-                CommonButton(titleText: AppString.continues,   onTap: () {
-                  purchaseDeliveryController.onContinue(_formKey.currentState);
-                },),
+              child: Column(
+                children: [
+                  CommonText(
+                    text: AppString.vendorName,
+                    style: theme.textTheme.bodyLarge,
+                  ).start,
+                  10.height,
+                  CommonTextField(
+                    hintText: AppString.vendorName,
+                    validator: OtherHelper.requiredFieldValidator,
+                    onSaved: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(name: value),
+                      );
+                    },
+                  ),
+                  10.height,
+                  CommonTextField(
+                    hintText: AppString.vendorId,
+                    validator: OtherHelper.requiredFieldValidator,
+                    onSaved: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(vendorId: value),
+                      );
+                    },
+                  ),
+                  10.height,
 
-                20.height
-              ],),
+                  CommonTextField(
+                    hintText: AppString.phoneNumber,
+                    validator: OtherHelper.phoneValidator,
+                    onSaved: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(phoneNumber: value),
+                      );
+                    },
+                  ),
+                  10.height,
+
+                  const CommonMultiimagePicker(),
+
+                  CommonText(
+                    text: AppString.productAmount,
+                    style: theme.textTheme.bodyLarge,
+                  ).start,
+                  10.height,
+                  CommonTextField(
+                    hintText: AppString.productAmount,
+                    prefixText: AppString.monySign,
+                    validator: OtherHelper.validateAmount,
+                    keyboardType: TextInputType.number,
+                    onSaved: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(amount: double.tryParse(value)),
+                      );
+                    },
+                  ),
+                  10.height,
+
+                  CommonText(
+                    text: AppString.deliveryType,
+                    style: theme.textTheme.bodyLarge,
+                  ).start,
+                  10.height,
+                  CommonDropDown<DeliveryType>(
+                    hint: AppString.deliveryType,
+                    items: DeliveryType.values,
+                    onChanged: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(deliveryType: value),
+                      );
+                    },
+                    nameBuilder: (DeliveryType value) => value.displayName,
+                  ),
+
+                  10.height,
+                  CommonText(
+                    text: AppString.deliveryAddress,
+                    style: theme.textTheme.bodyLarge,
+                  ).start,
+                  10.height,
+                  CommonMultilineTextField(
+                    hintText: AppString.deliveryAddress,
+                    height: 80,
+                    onSave: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(deliveryAddress: value),
+                      );
+                    },
+                  ),
+                  10.height,
+                  CommonText(
+                    text: AppString.productDescription,
+                    style: theme.textTheme.bodyLarge,
+                  ).start,
+                  10.height,
+                  CommonMultilineTextField(
+                    hintText: AppString.productDescription,
+                    height: 80,
+                    onSave: (value) {
+                      purchaseDeliveryController.onFormChange(
+                        purchaseDeliveryController.purchaseDeliveryModel
+                            .copyWith(productDescription: value),
+                      );
+                    },
+                  ),
+                  10.height,
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonText(
+                            text: AppString.serviceFee,
+                            style: theme.textTheme.bodyLarge,
+                            bottom: 10,
+                          ),
+                          CommonText(
+                            text: AppString.totalAmount,
+                            style: theme.textTheme.bodyLarge,
+                            top: 15,
+                          ),
+                        ],
+                      ),
+                      10.width,
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: 182,
+                            child: CommonText(
+                              enableBorder: true,
+                              top: 10,
+                              bottom: 10,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                              left: 10,
+                              alignment: MainAxisAlignment.center,
+                              text:
+                                  '${AppString.monySign} ${purchaseDeliveryController.purchaseDeliveryModel.serviceFee}',
+                            ),
+                          ),
+                          10.height,
+                          SizedBox(
+                            width: 182,
+                            child: CommonText(
+                              backgroundColor: AppColors.primaryColor2,
+                              style: const TextStyle(
+                                color: AppColors.textWhite,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              enableBorder: true,
+                              top: 10,
+                              bottom: 10,
+                              left: 10,
+                              alignment: MainAxisAlignment.center,
+                              text:
+                                  '${AppString.monySign} ${purchaseDeliveryController.purchaseDeliveryModel.totalPay}',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  10.height,
+                  CommonButton(
+                    titleText: AppString.continues,
+                    onTap: () {
+                      purchaseDeliveryController.onContinue(
+                        _formKey.currentState,
+                      );
+                    },
+                  ),
+
+                  20.height,
+                ],
+              ),
             ),
           );
-        }
+        },
       ),
     ),
   );
-
 }

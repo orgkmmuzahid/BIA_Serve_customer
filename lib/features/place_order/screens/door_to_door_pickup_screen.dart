@@ -11,22 +11,33 @@ class DoorToDoorPickupScreen extends StatelessWidget {
   const DoorToDoorPickupScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: Text(AppString.homeDoorToDoorPickup)), 
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text(AppString.homeDoorToDoorPickup)),
     body: GetBuilder<DoorToDoorController>(
       builder: (controller) {
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
           children: [
-          CommonButton(titleText: AppString.pickupFromMe, buttonWidth: 200, 
-          buttonColor: AppColors.primaryColor2, borderColor: AppColors.primaryColor2,
-          onTap: ()=> controller.onPickupTypeChange(PickupType.pickupFromMe) ,
-          ).center,
-          10.height,
-          CommonButton( onTap: ()=> controller.onPickupTypeChange(PickupType.pickupFromVendor) ,titleText: AppString.pickupFromVendor, buttonWidth: 200 ),
-        ],);
-      }
+            CommonButton(
+              titleText: AppString.pickupFromMe,
+              buttonWidth: 200,
+              buttonColor: AppColors.primaryColor2,
+              borderColor: AppColors.primaryColor2,
+              onTap:
+                  () => controller.onPickupTypeChange(PickupType.pickupFromMe),
+            ).center,
+            10.height,
+            CommonButton(
+              onTap:
+                  () => controller.onPickupTypeChange(
+                    PickupType.pickupFromVendor,
+                  ),
+              titleText: AppString.pickupFromVendor,
+              buttonWidth: 200,
+            ),
+          ],
+        );
+      },
     ),
   );
 }

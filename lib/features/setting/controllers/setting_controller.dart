@@ -4,6 +4,4 @@ import 'package:get/get.dart';
 
 // Get.lazyPut(() => SettingController(), fenix: true);
 
-class SettingController extends GetxController {
-  
-}
+class SettingController extends GetxController {}

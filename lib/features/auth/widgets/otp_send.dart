@@ -12,10 +12,10 @@ import 'package:get/get.dart';
 
 class OtpSend extends StatelessWidget {
   const OtpSend({
-    super.key,
-    this.title = "",
-    this.subtitle = "",
     required this.controller,
+    super.key,
+    this.title = '',
+    this.subtitle = '',
   });
   final String title;
   final String subtitle;
@@ -26,12 +26,19 @@ class OtpSend extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 58.w, vertical: 24.h),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CommonLogo().center,
+          const CommonLogo().center,
           50.height,
-          CommonText(text: title, style: theme.textTheme.bodyLarge, alignment: MainAxisAlignment.center,),
-          CommonText(text: subtitle, style: theme.textTheme.bodyMedium, alignment: MainAxisAlignment.center),
+          CommonText(
+            text: title,
+            style: theme.textTheme.bodyLarge,
+            alignment: MainAxisAlignment.center,
+          ),
+          CommonText(
+            text: subtitle,
+            style: theme.textTheme.bodyMedium,
+            alignment: MainAxisAlignment.center,
+          ),
           20.height,
           CommonPhoneNumberTextFiled(
             controller: Get.find<OtpController>().phoneController,

@@ -41,21 +41,25 @@ class BulkOrderDetailsModel {
 
   String toJson() => json.encode(toMap());
 
-  factory BulkOrderDetailsModel.fromJson(String source) => BulkOrderDetailsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory BulkOrderDetailsModel.fromJson(String source) =>
+      BulkOrderDetailsModel.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+      );
 
   @override
-  String toString() => 'BulkOrderDetailsModel(totalAmount: $totalAmount, discountedAmount: $discountedAmount, totalPayable: $totalPayable)';
+  String toString() =>
+      'BulkOrderDetailsModel(totalAmount: $totalAmount, discountedAmount: $discountedAmount, totalPayable: $totalPayable)';
 
   @override
   bool operator ==(covariant BulkOrderDetailsModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.totalAmount == totalAmount &&
-      other.discountedAmount == discountedAmount &&
-      other.totalPayable == totalPayable;
+
+    return other.totalAmount == totalAmount &&
+        other.discountedAmount == discountedAmount &&
+        other.totalPayable == totalPayable;
   }
 
   @override
-  int get hashCode => totalAmount.hashCode ^ discountedAmount.hashCode ^ totalPayable.hashCode;
+  int get hashCode =>
+      totalAmount.hashCode ^ discountedAmount.hashCode ^ totalPayable.hashCode;
 }

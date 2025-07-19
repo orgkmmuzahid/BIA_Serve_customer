@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
@@ -7,9 +6,7 @@ import 'package:flutter/foundation.dart';
 
 import 'error_log.dart';
 
-
 void apiRequestLog(RequestOptions options) {
-
   try {
     if (kDebugMode) {
       log("""
@@ -25,15 +22,14 @@ void apiRequestLog(RequestOptions options) {
 """);
     }
   } catch (e) {
-    errorLog(e, source: "API Request Info");
+    errorLog(e, source: 'API Request Info');
   }
 }
 
 void apiResponseLog(Response response, Stopwatch stopwatch) {
-
   try {
     if (kDebugMode) {
-      log("""
+      log('''
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    ==========> ✅️🎉💪🎯🥇 API Response Info ✅️🎉💪🎯🥇
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -45,15 +41,14 @@ void apiResponseLog(Response response, Stopwatch stopwatch) {
 📄 Data: ${response.data.toString()}  
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-""");
+''');
     }
   } catch (e) {
-    errorLog(e, source: "API Response Info");
+    errorLog(e, source: 'API Response Info');
   }
 }
 
 void apiErrorLog(DioException error, Stopwatch stopwatch) {
-
   try {
     if (kDebugMode) {
       log("""
@@ -70,7 +65,6 @@ void apiErrorLog(DioException error, Stopwatch stopwatch) {
 """);
     }
   } catch (e) {
-    errorLog(e, source: "API Error Info");
+    errorLog(e, source: 'API Error Info');
   }
 }
-

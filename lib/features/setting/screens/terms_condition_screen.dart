@@ -6,6 +6,6 @@ class TermsConditionScreen extends StatelessWidget {
   const TermsConditionScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: CommonAppBar(title: AppString.termsCondition),);
-  
+  Widget build(BuildContext context) =>
+      const Scaffold(appBar: CommonAppBar(title: AppString.termsCondition));
 }

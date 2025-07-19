@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../services/api/api_service.dart';
 import '../../../config/api/api_end_point.dart';
+import '../../../services/api/api_service.dart';
 import '../../../utils/app_utils.dart';
 
 class ChangePasswordController extends GetxController {
@@ -22,11 +22,11 @@ class ChangePasswordController extends GetxController {
     isLoading = true;
     update();
 
-    Map<String, String> body = {
-      "oldPassword": currentPasswordController.text,
-      "newPassword": newPasswordController.text,
+    final Map<String, String> body = {
+      'oldPassword': currentPasswordController.text,
+      'newPassword': newPasswordController.text,
     };
-    var response = await ApiService.patch(
+    final response = await ApiService.patch(
       ApiEndPoint.changePassword,
       body: body,
     );

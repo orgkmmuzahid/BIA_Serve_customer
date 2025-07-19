@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-enum NotificationType{ready, delivered, onTheWay}
+enum NotificationType { ready, delivered, onTheWay }
+
 class NotificationModel {
   final String id;
   final String title;
@@ -18,7 +19,6 @@ class NotificationModel {
     required this.createdAt,
     required this.updatedAt,
   });
- 
 
   NotificationModel copyWith({
     String? id,
@@ -62,7 +62,8 @@ class NotificationModel {
 
   String toJson() => json.encode(toMap());
 
-  factory NotificationModel.fromJson(String source) => NotificationModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory NotificationModel.fromJson(String source) =>
+      NotificationModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -72,23 +73,22 @@ class NotificationModel {
   @override
   bool operator ==(covariant NotificationModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.title == title &&
-      other.subtitle == subtitle &&
-      other.type == type &&
-      other.createdAt == createdAt &&
-      other.updatedAt == updatedAt;
+
+    return other.id == id &&
+        other.title == title &&
+        other.subtitle == subtitle &&
+        other.type == type &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      subtitle.hashCode ^
-      type.hashCode ^
-      createdAt.hashCode ^
-      updatedAt.hashCode;
+        title.hashCode ^
+        subtitle.hashCode ^
+        type.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }

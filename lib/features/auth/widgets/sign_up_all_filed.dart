@@ -2,14 +2,19 @@ import 'package:bai_serve/component/text_field/common_date_input_text_field.dart
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/helpers/other_helper.dart';
+
 import '../../../../utils/constants/app_string.dart';
+import '../../../../utils/helpers/other_helper.dart';
 import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_up_controller.dart';
 
 class SignUpAllField extends StatelessWidget {
-  const SignUpAllField({super.key, required this.controller, required this.formKey});
+  const SignUpAllField({
+    required this.controller,
+    required this.formKey,
+    super.key,
+  });
 
   final SignUpController controller;
 
@@ -41,9 +46,7 @@ class SignUpAllField extends StatelessWidget {
 
           ///Date of Birth here
           const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
-          CommonDateInputTextField(onSave: (date) {
-            
-          },),
+          CommonDateInputTextField(onSave: (date) {}),
 
           /// User Password here
           const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
