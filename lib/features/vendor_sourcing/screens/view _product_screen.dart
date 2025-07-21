@@ -30,7 +30,7 @@ class ViewProductScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CommonImage(
-                    imageSrc: productController.productDetailsModel?.image ?? '',
+                    imageSrc: productController.productDetailsModel.data?.image ?? '',
                     height: 227,
                     fill: BoxFit.fill,
                   ),
@@ -38,13 +38,13 @@ class ViewProductScreen extends StatelessWidget {
                   13.height,
                   _nameBuilder(productController),
                   CommonText(
-                    text: productController.productDetailsModel?.description ?? '',
+                    text: productController.productDetailsModel.data?.description ?? '',
                     textAlign: TextAlign.justify,
                     fontSize: 13,
                   ),
                   20.height,
                   CommonText(
-                    text: '${AppString.monySign} ${productController.productDetailsModel?.price}',
+                    text: '${AppString.monySign} ${productController.productDetailsModel.data?.price}',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: AppColors.primaryColor3,
@@ -98,7 +98,7 @@ class ViewProductScreen extends StatelessWidget {
     return SizedBox(
       height: 30,
       child: ListView.builder(
-        itemCount: productController.productDetailsModel?.availableSizes.length ?? 0,
+        itemCount: productController.productDetailsModel.data?.availableSizes.length ?? 0,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         itemBuilder: (_, index){
@@ -116,7 +116,7 @@ class ViewProductScreen extends StatelessWidget {
                 borderColor: AppColors.serfeceBG,
                color: isSelected? AppColors.textWhite : AppColors.primaryText,
                backgroundColor: isSelected? AppColors.primaryColor : AppColors.cartBG ,
-                        text: Utils.formatDouble(productController.productDetailsModel?.availableSizes[index] ?? 0),
+                        text: Utils.formatDouble(productController.productDetailsModel.data?.availableSizes[index] ?? 0),
                          fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
@@ -129,7 +129,7 @@ class ViewProductScreen extends StatelessWidget {
     return SizedBox(
       height: 30,
       child: ListView.builder(
-        itemCount: productController.productDetailsModel?.availableColors.length ?? 0,
+        itemCount: productController.productDetailsModel.data?.availableColors.length ?? 0,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         itemBuilder: (_, index){
@@ -145,7 +145,7 @@ class ViewProductScreen extends StatelessWidget {
               child: Container(
                 width: 20,
                 height: 20,
-                decoration: BoxDecoration(color: productController.productDetailsModel?.availableColors[index],
+                decoration: BoxDecoration(color: productController.productDetailsModel.data?.availableColors[index],
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [BoxShadow(color: AppColors.primaryColor3, blurRadius: isSelected? 10: 0)]
                  ),
@@ -177,7 +177,7 @@ class ViewProductScreen extends StatelessWidget {
     return Row(
       children: [
         CommonText(
-          text: productController.productDetailsModel?.name ?? '',
+          text: productController.productDetailsModel.data?.name ?? '',
           style: theme.textTheme.bodyLarge,
           fontSize: 20,
           bottom: 10,
@@ -185,7 +185,7 @@ class ViewProductScreen extends StatelessWidget {
         const Spacer(),
         GestureDetector(
           onTap: () {
-            SharePlus.instance.share(ShareParams(title:  productController.productDetailsModel?.name, 
+            SharePlus.instance.share(ShareParams(title:  productController.productDetailsModel.data?.name, 
                text: 'url here',
              ));
           },

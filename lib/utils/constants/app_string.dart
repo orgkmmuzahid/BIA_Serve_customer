@@ -239,6 +239,7 @@ class AppString {
   static const screenshot = 'Screenshot';
   static const availableColor = 'Available Color';
   static const availableSize = 'Available Size';
+  static const trendingProduct  = 'Trending Product ';
 
   static String loaltyClaimingMessage(String value) =>
       'You’ve received a $value on your next order! Don’t miss out ';

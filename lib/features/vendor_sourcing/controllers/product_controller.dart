@@ -1,53 +1,39 @@
+import 'package:bai_serve/config/network/request_state.dart';
 import 'package:bai_serve/features/vendor_sourcing/model/product_details_model.dart';
 import 'package:bai_serve/features/vendor_sourcing/model/product_model.dart';
-import 'package:bai_serve/features/vendor_sourcing/model/products_filter_model.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:flutter/material.dart';
+import 'package:bai_serve/features/vendor_sourcing/repository/vendor_sourcing_repository.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController{
+
+  VendorSourcingRepository vendorSourcingRepository = Get.find();
    
   int selectedColorIndex = 0;
   int selectedAvailableSizeIndex = 0;
 
-    ProductFilterModel productFilterModel = ProductFilterModel(productFilters:  [
-    'All Category',
-    'Man Fashion',
-    'Watch',
-    'Beauty',
-    'T-shirt',
-    'Stationary',
-    'Electronics',
-    'Shoes',
-    'Fashion Bag',
-  ], selectedFilter: 'All Category');
+  RequestState<List<String>> categories = RequestState();
+  String selectedCategory = '';
 
-    ProductDetailsModel? productDetailsModel = ProductDetailsModel(
-    id: 'id',
-    name: 'Premium Quality Stylish Woman Shoes',
-    description:
-        'Step into elegance with our premium quality stylish women’s shoes — crafted for comfort, designed for impact. Perfect for any occasion, these shoes combine timeless fashion with lasting durability.',
-    price: 1200,
-    status: 'In Stock',
-    availableSizes: [36, 37, 38, 39, 40],
-    availableColors: [Colors.red, Colors.yellow, Colors.black, Colors.green, Colors.blue, Colors.amber],
-    image: AppImages.homeBanner,
-  );
+  RequestState<ProductDetailsModel> productDetailsModel = RequestState();
 
-  List<ProductModel> products = [
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-    ProductModel(id: 'id', name: 'Premium Quality Stylish Woman Shoes', image: AppImages.homeBanner, price: 1200),
-  ];
+  RequestState<List<ProductModel>> products = RequestState() ;
 
-  void onProductFilterSelectionChange(int index){
-    productFilterModel = productFilterModel.copyWith(selectedFilter: productFilterModel.productFilters[index]);
+  void fetchProduct()async{
+    vendorSourcingRepository.products(onStateChange: (state){
+      products = state;
+      update();
+    });
+  }
+
+  void fetchProductCategories()async{
+    vendorSourcingRepository.productCategories(onStateChange: (state){
+      categories = state;
+      update();
+    });
+  }
+
+  void onProductFilterSelectionChange(String value){
+    selectedCategory = value;
     update();
   }
 
@@ -59,6 +45,13 @@ class ProductController extends GetxController{
   void onAvailableSizeChange(int index) {
     selectedAvailableSizeIndex = index;
     update();
+  }
+
+  @override
+  void onInit() {
+    fetchProduct();
+    fetchProductCategories();
+    super.onInit();
   }
 
 }

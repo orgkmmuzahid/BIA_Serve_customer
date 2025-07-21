@@ -49,16 +49,16 @@ class VendorSourcingCategoryScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemCount:
-                        vendorSourcingController.vendors.length > 6
+                        (vendorSourcingController.vendors.data?.length ??0) > 6
                             ? 6
-                            : vendorSourcingController.vendors.length,
+                            : vendorSourcingController.vendors.data?.length ?? 0,
                     itemBuilder:
                         (_, index) => SizedBox(
                           width: 70,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: VendorWidget(
-                              model: vendorSourcingController.vendors[index],
+                              model: vendorSourcingController.vendors.data![index],
                             ),
                           ),
                         ),

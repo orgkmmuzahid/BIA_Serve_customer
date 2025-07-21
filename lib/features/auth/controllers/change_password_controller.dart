@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../config/api/api_end_point.dart';
-import '../../../services/api/api_service.dart';
-import '../../../utils/app_utils.dart';
-
 class ChangePasswordController extends GetxController {
   bool isLoading = false;
   final formKey = GlobalKey<FormState>();
@@ -19,31 +15,6 @@ class ChangePasswordController extends GetxController {
     if (!formKey.currentState!.validate()) return;
     Get.back();
     return;
-    isLoading = true;
-    update();
-
-    final Map<String, String> body = {
-      'oldPassword': currentPasswordController.text,
-      'newPassword': newPasswordController.text,
-    };
-    final response = await ApiService.patch(
-      ApiEndPoint.changePassword,
-      body: body,
-    );
-
-    if (response.statusCode == 200) {
-      Utils.successSnackBar(response.statusCode.toString(), response.message);
-
-      currentPasswordController.clear();
-      newPasswordController.clear();
-      confirmPasswordController.clear();
-
-      Get.back();
-    } else {
-      Get.snackbar(response.statusCode.toString(), response.message);
-    }
-    isLoading = false;
-    update();
   }
 
   /// dispose Controller

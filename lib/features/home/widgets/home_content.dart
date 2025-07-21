@@ -1,4 +1,5 @@
 import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/image/common_rotating_image_banner.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
@@ -8,8 +9,6 @@ import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/utils.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({required this.homeController, super.key});
@@ -20,7 +19,7 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) => SingleChildScrollView(child: Column(children: [
     _topItems(),
     20.height,
-    const ProductGridviewWidget(),
+    const ProductGridviewWidget(isDropdownFilter: true),
   ]));
 
   Widget _topItems() {
@@ -35,12 +34,7 @@ class HomeContent extends StatelessWidget {
           controller: homeController.searchController,
         ),
         20.height,
-        CommonImage(
-          imageSrc: AppImages.homeBanner,
-          height: (MediaQuery.of(Get.context!).size.width - 32) / 2.38,
-          width: MediaQuery.of(Get.context!).size.width - 32,
-          fill: BoxFit.fill,
-        ),
+        CommonRotatingImageBanner(imageUrls: homeController.bannerUrls.data ?? [], currentIndex: homeController.currentIndex),
         20.height,
 
         //midle content
@@ -95,22 +89,6 @@ class HomeContent extends StatelessWidget {
           ),
         ),
 
-        //
-        // Row(
-        //   children: [
-        //     CommonText(
-        //       text: AppString.myOrder,
-        //       style: theme.textTheme.bodyLarge,
-        //     ),
-        //     const Spacer(),
-        //     TextButton(
-        //       onPressed: () {
-        //         homeController.onNavMenuChange(1);
-        //       },
-        //       child: const CommonText(text: '${AppString.seeAll} \u2192'),
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }

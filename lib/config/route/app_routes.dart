@@ -131,5 +131,9 @@ class AppRoutes {
     //----------------------
     GetPage(name: changePassword, page: ChangePasswordScreen.new),
     GetPage(name: notifications, page: () => const NotificationScreen()),
+
+    
   ];
+
+  
 }

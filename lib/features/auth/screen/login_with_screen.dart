@@ -19,6 +19,7 @@ class LoginWithScreen extends StatelessWidget {
       child: GetBuilder<LoginWithController>(
         builder:
             (controller) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 180.height,
                 const Center(

@@ -5,9 +5,6 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field_v2/phone_number.dart';
 
 import '../../../config/route/app_routes.dart';
-import '../../../services/api/api_service.dart';
-import '../../../config/api/api_end_point.dart';
-import '../../../utils/app_utils.dart';
 
 class SignUpController extends GetxController {
   /// Sign Up Form Key
@@ -58,26 +55,5 @@ class SignUpController extends GetxController {
     if (!signUpFormKey.currentState!.validate()) return;
     Get.toNamed(AppRoutes.verifyUser);
     return;
-    isLoading = true;
-    update();
-    final Map<String, String> body = {
-      'fullName': nameController.text,
-      'phoneNumber': phoneNumber,
-      'countryCode': countryCode,
-      'password': passwordController.text,
-      'role': selectRole.toLowerCase(),
-    };
-
-    final response = await ApiService.post(ApiEndPoint.signUp, body: body);
-
-    if (response.statusCode == 200) {
-      final data = response.data;
-      signUpToken = data['data']['signUpToken'];
-      Get.toNamed(AppRoutes.verifyUser);
-    } else {
-      Utils.errorSnackBar(response.statusCode.toString(), response.message);
-    }
-    isLoading = false;
-    update();
   }
 }

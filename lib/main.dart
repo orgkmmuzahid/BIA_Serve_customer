@@ -6,10 +6,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
-import 'services/notification/notification_service.dart';
-import 'services/socket/socket_service.dart';
-import 'services/storage/storage_services.dart';
-
 //create a new feature through
 // mason make getx_feature --name packageName
 
@@ -27,14 +23,11 @@ Future<void> main() async {
 
 Future<void> init() async {
   _diInit();
-  SocketServices.connectToSocket();
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
     // Optionally log or report errors
   };
   await Future.wait([
-    LocalStorage.getAllPrefData(),
-    NotificationService.initLocalNotification(),
     dotenv.load(),
   ]);
 }
@@ -42,6 +35,5 @@ Future<void> init() async {
 void _diInit() {
   final DependencyInjection dI = DependencyInjection();
   dI.dependencies();
-  Get.find<ThemeController>().initTheme();
   AppLifeCycleManagement();
 }

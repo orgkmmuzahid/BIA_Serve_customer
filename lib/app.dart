@@ -25,28 +25,33 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       designSize: const Size(428, 926),
 
-      child: GetMaterialApp(
-        scrollBehavior: CustomScrollBehavior(),
-        debugShowCheckedModeBanner: false,
-        navigatorKey: Get.key,
-        defaultTransition: Transition.fadeIn,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: Get.find<ThemeController>().themeMode,
-        transitionDuration: const Duration(milliseconds: 300),
-        initialRoute: AppRoutes.splash,
-        getPages: AppRoutes.routes,
-        // locale: Locale('en'), // Swedish
-        // supportedLocales: [
-        //   Locale('en'), // English
-        //   Locale('sv'), // Swedish
-        // ],
-        // localizationsDelegates: [
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        //   // your custom localization delegate
-        // ],
+      child: GetBuilder<ThemeController>(
+        builder: (themeController) {
+          themeController.initTheme(context);
+          return GetMaterialApp(
+            scrollBehavior: CustomScrollBehavior(),
+            debugShowCheckedModeBanner: false,
+            navigatorKey: Get.key,
+            defaultTransition: Transition.fadeIn,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeController.themeMode,
+            transitionDuration: const Duration(milliseconds: 300),
+            initialRoute: AppRoutes.splash,
+            getPages: AppRoutes.routes,
+            // locale: Locale('en'), // Swedish
+            // supportedLocales: [
+            //   Locale('en'), // English
+            //   Locale('sv'), // Swedish
+            // ],
+            // localizationsDelegates: [
+            //   GlobalMaterialLocalizations.delegate,
+            //   GlobalWidgetsLocalizations.delegate,
+            //   GlobalCupertinoLocalizations.delegate,
+            //   // your custom localization delegate
+            // ],
+          );
+        }
       ),
     );
   }

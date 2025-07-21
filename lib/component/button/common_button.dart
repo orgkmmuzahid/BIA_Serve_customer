@@ -100,7 +100,6 @@ class _CommonButtonState extends State<CommonButton>
                   vertical: 6.0,
                 ),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: widget.alignment,
                   children: [
                     if (widget.icon != null) ...[

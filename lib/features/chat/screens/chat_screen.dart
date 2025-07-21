@@ -6,10 +6,10 @@ import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/storage/storage_service.dart';
 import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve/features/chat/model/chat_model.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/services/storage/storage_services.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +109,7 @@ class ChatScreen extends StatelessWidget {
   }
 
   Widget _chatItem(ChatModel model) {
-    final bool isMe = model.userInfo.userId == LocalStorage.userId;
+    final bool isMe = model.userInfo.userId == Get.find<StorageService>().userLoginInfoModel.id;
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child:

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:bai_serve/component/image/common_image.dart';
+import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/vendor_sourcing/controllers/product_controller.dart';
@@ -13,56 +14,88 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductGridviewWidget extends StatelessWidget {
-  const ProductGridviewWidget({super.key, this.limit = 0, this.showFilter = true});
+  const ProductGridviewWidget({super.key, this.limit = 0, this.showFilter = true, this.isDropdownFilter = false});
 
   final int limit;
   final bool showFilter;
+  final bool isDropdownFilter;
   @override
   Widget build(BuildContext context) => GetBuilder<ProductController>(
     builder: (productController) {
       return Column(
         children: [
-          if(showFilter)
-          SizedBox(
-            height: 30,
-            child: ListView.builder(
-              itemCount: productController.productFilterModel.productFilters.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, index){
-                final item = productController.productFilterModel.productFilters[index];
-                final bool isSelected = item == productController.productFilterModel.selectedFilter;
-                return Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    productController.onProductFilterSelectionChange(index);
-                  },
-                  child: CommonText(
-                    enableBorder: isSelected? false : true,
-                    borderRadius: 8,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: isSelected? AppColors.primaryColor : AppColors.serfeceBG,
-                    color: isSelected? AppColors.textWhite : AppColors.primaryText,
-                    left: 10, right: 10,
-                    text: item),
-                ),
-              );
-              }),
-          ),
+          if (showFilter && isDropdownFilter == false) _horizontalFilter(productController),
+          if (showFilter && isDropdownFilter == true)
+            SizedBox(
+                height: 35,
+              child: Row(
+                children: [
+                  CommonText(text: AppString.trendingProduct, style: theme.textTheme.bodyLarge),
+                  50.width,
+                  Expanded(
+                    child: CommonDropDown<String>(
+                      hint: '',
+                      borderColor: AppColors.secondaryText,
+                      initailItem:
+                          productController.categories.data?.isNotEmpty == true
+                              ? productController.categories.data!.first
+                              : null,
+                      items: productController.categories.data ?? [],
+                      onChanged: (value) {
+                        productController.onProductFilterSelectionChange(value!);
+                      },
+                      nameBuilder: (value) => value,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
           10.height,
           StaggeredGridView.extentBuilder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             maxCrossAxisExtent: 200,
-            itemCount: limit == 0 ? productController.products.length : min(productController.products.length, limit),
-            itemBuilder: (context, index) => _productBuilder(productController.products[index]),
+            itemCount: limit == 0 ? productController.products.data?.length ?? 0 : min(productController.products.data?.length ?? 0, limit),
+            itemBuilder: (context, index) => _productBuilder(productController.products.data![index]),
             staggeredTileBuilder: (index) => const StaggeredTile.count(1, 1),
           ),
         ],
       );
     },
   );
+
+  SizedBox _horizontalFilter(ProductController productController) {
+    return SizedBox(
+      height: 30,
+      child: ListView.builder(
+        itemCount: productController.categories.data?.length ?? 0,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (_, index) {
+          final item = productController.categories.data![index];
+          final bool isSelected = item == productController.selectedCategory;
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () {
+                productController.onProductFilterSelectionChange(item);
+              },
+              child: CommonText(
+                enableBorder: isSelected ? false : true,
+                borderRadius: 8,
+                fontWeight: FontWeight.bold,
+                backgroundColor: isSelected ? AppColors.primaryColor : AppColors.serfeceBG,
+                color: isSelected ? AppColors.textWhite : AppColors.primaryText,
+                left: 10,
+                right: 10,
+                text: item,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _productBuilder(ProductModel product) => GestureDetector(
     onTap: () {

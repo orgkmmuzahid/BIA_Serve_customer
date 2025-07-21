@@ -11,11 +11,13 @@ class CommonDropDown<T> extends StatelessWidget {
     required this.nameBuilder,
     super.key,
     this.validator,
+    this.borderColor,
     this.initailItem,
   });
 
   final String hint;
   final List<T> items;
+  final Color? borderColor;
   final Function(T? value) onChanged;
   final String Function(T value) nameBuilder;
   final String? Function(String? value)? validator;
@@ -31,15 +33,17 @@ class CommonDropDown<T> extends StatelessWidget {
                   : validator!(nameBuilder(value)),
       value: this.initailItem,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 14,
-        ),
+        contentPadding: const EdgeInsets.only(left: 10, right: 2),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: theme.dividerColor),
           borderRadius: BorderRadius.circular(8),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: borderColor ?? theme.inputDecorationTheme.enabledBorder?.borderSide.color ?? theme.disabledColor),
+          borderRadius: BorderRadius.circular(8),
+        )
       ),
       hint: CommonText(text: hint),
       icon: const Icon(Icons.arrow_drop_down),

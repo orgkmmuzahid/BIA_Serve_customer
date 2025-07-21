@@ -9,8 +9,8 @@ class ThemeController extends GetxController {
   ThemeMode themeMode = ThemeMode.light; //ThemeMode.System;
   late Enum selectedTheme;
 
-  void initTheme() {
-    selectedTheme = MediaQuery.of(Get.context!).platformBrightness;
+  void initTheme(BuildContext context) {
+    selectedTheme = MediaQuery.of(context).platformBrightness;
     super.onInit();
   }
 
@@ -19,4 +19,5 @@ class ThemeController extends GetxController {
     selectedTheme = brightness;
     Get.changeTheme(themeMode == ThemeMode.light ? lightTheme : darkTheme);
   }
+  
 }

@@ -1,6 +1,12 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  plugins:
+    - dart_code_metrics
+  code-style:
+    format:
+      line-length: 140  # or 150, 180, etc.
+
   errors:
     missing_return: error
     dead_code: warning
@@ -19,6 +25,7 @@ analyzer:
 
 linter:
   rules:
+    lines_longer_than_80_chars: false
     # Style
     always_declare_return_types: true
     always_put_control_body_on_new_line: true

@@ -46,10 +46,10 @@ class AllVendorsScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   maxCrossAxisExtent: 90,
-                  itemCount: vendorSourcingController.vendors.length,
+                  itemCount: vendorSourcingController.vendors?.data?.length ?? 0,
                   itemBuilder:
                       (context, index) => VendorWidget(
-                        model: vendorSourcingController.vendors[index],
+                        model: vendorSourcingController.vendors!.data![index],
                       ),
                   staggeredTileBuilder:
                       (index) => const StaggeredTile.count(1, 1.3),
