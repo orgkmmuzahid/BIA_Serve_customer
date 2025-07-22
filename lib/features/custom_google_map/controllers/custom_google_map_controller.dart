@@ -13,82 +13,113 @@ import 'package:permission_handler/permission_handler.dart';
 
 class CustomGoogleMapController extends GetxController {
   Set<Polyline> mapRoute = {};
-  TravelMode _mode = TravelMode.driving;
-  final String _mapKey = 'AIzaSyAJrp3VvbO4E4jo7HRgqsk7EP8mPIZStxQ';
-  LatLng startLocation = const LatLng(23.798440, 90.412663);
-  LatLng endLocation = const LatLng(23.803544, 90.415371);
+  Set<Marker> markers = {};
   late GoogleMapController mapController;
 
-  Set<Marker> markers = {};
+  TravelMode _mode = TravelMode.driving;
+  final String _mapKey = 'AIzaSyAJrp3VvbO4E4jo7HRgqsk7EP8mPIZStxQ';
 
-  void onMapCreated(GoogleMapController controller) async {
-    mapController = controller;
-    const PermissionHandlerHelper(
-      permission: Permission.location,
-    ).getStatus().then((status) {
-      if (status) {
-        Geolocator.getCurrentPosition().then((position) async {
-          startLocation = LatLng(position.latitude, position.longitude);
-          markers.addAll({
-            Marker(
-              markerId: const MarkerId('start'),
-              icon: await Utils.bitmapDescriptorFromIconData(
-                Icons.gps_fixed_sharp,
-                size: 30,
-                color: Colors.blue,
-              ),
-              position: startLocation,
-              infoWindow: const InfoWindow(title: 'Start'),
-            ),
-            Marker(
-              markerId: const MarkerId('end'),
-              position: endLocation,
-              infoWindow: const InfoWindow(title: 'Destination'),
-            ),
-          });
+  LatLng startLocation = const LatLng(23.798440, 90.412663);
+  LatLng endLocation = const LatLng(23.803544, 90.415371);
 
-          mapController.animateCamera(
-            CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: startLocation,
-                zoom: 18, // You can adjust zoom level
-              ),
-            ),
-          );
+  bool _initialized = false;
 
-          AppLogger.info('Initial position set', tag: 'Map');
-
-          getPolylinePoints(startLocation, endLocation);
-
-          update();
-        });
-      }
-    });
+  @override
+  void onClose() {
+    mapRoute.clear();
+    markers.clear();
+    _initialized = false;
+    super.onClose();
   }
 
   void onTravelModeChange(TravelMode mode) {
     _mode = mode;
+    getPolylinePoints(startLocation, endLocation);
+  }
+
+  void onMapCreated(GoogleMapController controller) async {
+    if (_initialized) return;
+    mapController = controller;
+    _initialized = true;
+
+    final isPermitted = await const PermissionHandlerHelper(
+      permission: Permission.location,
+    ).getStatus();
+
+    if (!isPermitted || !Get.isRegistered<CustomGoogleMapController>()) return;
+
+    try {
+      final position = await Geolocator.getCurrentPosition();
+      if (!Get.isPrepared<CustomGoogleMapController>()) return;
+
+      startLocation = LatLng(position.latitude, position.longitude);
+
+      final startMarker = Marker(
+        markerId: const MarkerId('start'),
+        icon: await Utils.bitmapDescriptorFromIconData(
+          Icons.gps_fixed_sharp,
+          size: 30,
+          color: Colors.blue,
+        ),
+        position: startLocation,
+        infoWindow: const InfoWindow(title: 'Start'),
+      );
+
+      final endMarker = Marker(
+        markerId: const MarkerId('end'),
+        position: endLocation,
+        infoWindow: const InfoWindow(title: 'Destination'),
+      );
+
+      markers.addAll({startMarker, endMarker});
+
+      try {
+        await mapController.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: startLocation, zoom: 18),
+          ),
+        );
+      } catch (_) {
+        AppLogger.warning('Failed to animate camera');
+      }
+
+      await getPolylinePoints(startLocation, endLocation);
+
+      if (Get.isPrepared<CustomGoogleMapController>()) update();
+    } catch (e) {
+      AppLogger.error(e.toString() ,tag:  'Map initialization failed', );
+    }
   }
 
   Future<void> getPolylinePoints(LatLng start, LatLng end) async {
     startLocation = start;
     endLocation = end;
 
-    final PolylinePoints polylinePoints = PolylinePoints();
-    final List<LatLng> polylineCoordinates = [];
+    try {
+      final polylinePoints = PolylinePoints();
+      final List<LatLng> polylineCoordinates = [];
 
-    //need api key with route enable.
+      // Uncomment and provide valid key and route APIs if needed
+      // final result = await polylinePoints.getRouteBetweenCoordinates(
+      //   _mapKey,
+      //   PointLatLng(start.latitude, start.longitude),
+      //   PointLatLng(end.latitude, end.longitude),
+      //   travelMode: _mode,
+      // );
 
-    // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-    //  googleApiKey:  _mapKey, request: PolylineRequest(origin: start.pointLatLng, destination: end.pointLatLng, mode: _mode),
-    // );
+      // if (result.points.isNotEmpty) {
+      //   polylineCoordinates.addAll(
+      //     result.points.map((p) => LatLng(p.latitude, p.longitude)),
+      //   );
+      //   _drawPolyline(polylineCoordinates);
+      // }
 
-    // if (result.points.isNotEmpty) {
-    //   for (var point in result.points) {
-    //     polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-    //   }
-    //   _drawPolyline(polylineCoordinates);
-    // }
+      // Simulated straight-line polyline for demo/testing
+      polylineCoordinates.addAll([start, end]);
+      _drawPolyline(polylineCoordinates);
+    } catch (e) {
+      AppLogger.error(e.toString(), tag: 'Map Polyline Error');
+    }
   }
 
   void _drawPolyline(List<LatLng> points) {
@@ -102,6 +133,8 @@ class CustomGoogleMapController extends GetxController {
       ),
     );
 
-    update();
+    if (Get.isPrepared<CustomGoogleMapController>()) {
+      update();
+    }
   }
 }

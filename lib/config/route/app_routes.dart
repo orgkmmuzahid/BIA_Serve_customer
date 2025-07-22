@@ -26,11 +26,12 @@ import 'package:bai_serve/features/setting/screens/setting_screen.dart';
 import 'package:bai_serve/features/setting/screens/terms_condition_screen.dart';
 import 'package:bai_serve/features/tracking_order/screens/tracking_order_screen.dart';
 import 'package:bai_serve/features/vendor_sourcing/screens/all_product_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/all_vendors_screen.dart';
 import 'package:bai_serve/features/vendor_sourcing/screens/vendor_details_screen.dart';
 import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_category_screen.dart';
 import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_screen.dart';
 import 'package:bai_serve/features/vendor_sourcing/screens/view%20_product_screen.dart';
+import 'package:bai_serve/features/verify_vendor/screens/vendor_verify_form_screen.dart';
+import 'package:bai_serve/features/verify_vendor/screens/verify_vendor_screen.dart';
 import 'package:get/get.dart';
 
 import '../../features/auth/screen/change_password_screen.dart';
@@ -78,10 +79,11 @@ class AppRoutes {
   static const String calling = '/calling_screen.dart';
   static const String vendorSourcing = '/vendor_sourcing_screen.dart';
   static const String allProducts = '/all_product_screen.dart';
-  static const String allVendors = '/all_vendors_screen.dart';
   static const String vendorSourcingCategory = '/vendor_sourcing_category_screen.dart';
   static const String viewProduct = '/view_product_screen.dart';
   static const String vendorDetails = '/vendor_details_screen.dart';
+  static const String verifyVendor = '/verify_vendor_screen.dart';
+  static const String vendorVerifyForm = '/vendor_verify_form_screen.dart';
 
   //---------------------
   static const String changePassword = '/change_password_screen.dart';
@@ -123,17 +125,14 @@ class AppRoutes {
     GetPage(name: calling, page: () => const CallingScreen()),
     GetPage(name: vendorSourcing, page: () => const VendorSourcingScreen()),
     GetPage(name: allProducts, page: () => const AllProductScreen()),
-    GetPage(name: allVendors, page: () => const AllVendorsScreen()),
     GetPage(name: vendorSourcingCategory, page: () => const VendorSourcingCategoryScreen()),
     GetPage(name: viewProduct, page: () => const ViewProductScreen()),
     GetPage(name: vendorDetails, page: () => const VendorDetailsScreen()),
+    GetPage(name: verifyVendor, page: () => const VerifyVendorScreen()),
+    GetPage(name: vendorVerifyForm, page: () => const VendorVerifyFormScreen()),
 
     //----------------------
     GetPage(name: changePassword, page: ChangePasswordScreen.new),
     GetPage(name: notifications, page: () => const NotificationScreen()),
-
-    
   ];
-
-  
 }

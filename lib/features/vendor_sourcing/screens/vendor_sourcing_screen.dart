@@ -6,6 +6,7 @@ import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/vendor_sourcing/controllers/product_controller.dart';
 import 'package:bai_serve/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -34,14 +35,7 @@ class VendorSourcingScreen extends StatelessWidget {
                   style: theme.textTheme.bodyLarge,
                   bottom: 10,
                 ),
-                CommonDropDown<String>(
-                  hint: AppString.productCategory,
-                  items: vendorSourcingController.vendorCategories,
-                  onChanged:
-                      (value) => vendorSourcingController
-                          .onVendorCategoryChange(value ?? ''),
-                  nameBuilder: (value) => value,
-                ),
+                _productCategory(),
 
                 CommonText(
                   text: AppString.numberOfVendor,
@@ -115,6 +109,22 @@ class VendorSourcingScreen extends StatelessWidget {
       ),
     ),
   );
+
+  GetBuilder<ProductController> _productCategory() {
+    return GetBuilder<ProductController>(
+      builder: (productController) {
+        return CommonDropDown<String>(
+                    hint: AppString.productCategory,
+                    initailItem: productController.selectedCategory,
+                    items: productController.categories.data ?? [],
+                    onChanged:
+                        (value) => productController
+                            .onCategorySelection(value ?? ''),
+                    nameBuilder: (value) => value,
+                  );
+      }
+    );
+  }
 
   SizedBox _vendorsServiceList(
     VendorSourcingController vendorSourcingController,

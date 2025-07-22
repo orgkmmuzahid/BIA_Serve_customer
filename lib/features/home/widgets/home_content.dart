@@ -30,7 +30,7 @@ class HomeContent extends StatelessWidget {
             icon: const Icon(Icons.search),
             onPressed: homeController.onSearch,
           ),
-          hintText: AppString.trackingID,
+          hintText: AppString.searchProduct,
           controller: homeController.searchController,
         ),
         20.height,
@@ -103,7 +103,7 @@ class HomeContent extends StatelessWidget {
       onTap: onTap,
       child: SizedBox(
         width: size,
-        height: size,
+        height: size+10,
         child: Card(
           elevation: 2,
           shadowColor:

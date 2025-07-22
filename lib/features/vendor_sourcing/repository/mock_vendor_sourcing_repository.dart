@@ -18,7 +18,7 @@ class MockVendorSourcingRepository implements VendorSourcingRepository {
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Courtney Henry', image: AppImages.loyaltyPonitsBackground),
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
-          VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
+          VendorModel(verificationStatus: 'newVendor', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Courtney Henry', image: AppImages.loyaltyPonitsBackground),
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
           VendorModel(verificationStatus: 'Verified', id: 'id', name: 'Kathryn Murphy', image: AppImages.homeBanner),
@@ -70,7 +70,7 @@ class MockVendorSourcingRepository implements VendorSourcingRepository {
   Future<void> productCategories({required OnRequestStateChange<List<String>> onStateChange}) async {
     onStateChange(
       RequestState(
-        data: ['All Category', 'Man Fashion', 'Watch', 'Beauty', 'T-shirt', 'Stationary', 'Electronics', 'Shoes', 'Fashion Bag'],
+        data: [ 'Man Fashion', 'Watch', 'Beauty', 'T-shirt', 'Stationary', 'Electronics', 'Shoes', 'Fashion Bag'],
       ),
     );
   }

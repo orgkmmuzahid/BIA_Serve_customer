@@ -14,11 +14,18 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProductGridviewWidget extends StatelessWidget {
-  const ProductGridviewWidget({super.key, this.limit = 0, this.showFilter = true, this.isDropdownFilter = false});
+  const ProductGridviewWidget({
+    super.key,
+    this.limit = 0,
+    this.showFilter = true,
+    this.isDropdownFilter = false,
+    this.enableProductScrolling = false,
+  });
 
   final int limit;
   final bool showFilter;
   final bool isDropdownFilter;
+  final bool enableProductScrolling;
   @override
   Widget build(BuildContext context) => GetBuilder<ProductController>(
     builder: (productController) {
@@ -27,22 +34,19 @@ class ProductGridviewWidget extends StatelessWidget {
           if (showFilter && isDropdownFilter == false) _horizontalFilter(productController),
           if (showFilter && isDropdownFilter == true)
             SizedBox(
-                height: 35,
+              height: 35,
               child: Row(
                 children: [
-                  CommonText(text: AppString.trendingProduct, style: theme.textTheme.bodyLarge),
+                  CommonText(text: AppString.allProducts, style: theme.textTheme.bodyLarge),
                   50.width,
                   Expanded(
                     child: CommonDropDown<String>(
                       hint: '',
                       borderColor: AppColors.secondaryText,
-                      initailItem:
-                          productController.categories.data?.isNotEmpty == true
-                              ? productController.categories.data!.first
-                              : null,
+                      initailItem: productController.categories.data?.isNotEmpty == true ? productController.categories.data!.first : null,
                       items: productController.categories.data ?? [],
                       onChanged: (value) {
-                        productController.onProductFilterSelectionChange(value!);
+                        productController.onCategorySelection(value!);
                       },
                       nameBuilder: (value) => value,
                     ),
@@ -52,18 +56,23 @@ class ProductGridviewWidget extends StatelessWidget {
             ),
 
           10.height,
-          StaggeredGridView.extentBuilder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            maxCrossAxisExtent: 200,
-            itemCount: limit == 0 ? productController.products.data?.length ?? 0 : min(productController.products.data?.length ?? 0, limit),
-            itemBuilder: (context, index) => _productBuilder(productController.products.data![index]),
-            staggeredTileBuilder: (index) => const StaggeredTile.count(1, 1),
-          ),
+          enableProductScrolling ? Expanded(child: _products(productController)) : _products(productController),
         ],
       );
     },
   );
+
+  StaggeredGridView _products(ProductController productController) {
+    return StaggeredGridView.extentBuilder(
+      shrinkWrap: !enableProductScrolling,
+      padding: const EdgeInsets.only(top: 10),
+      physics: enableProductScrolling ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
+      maxCrossAxisExtent: 200,
+      itemCount: limit == 0 ? productController.products.data?.length ?? 0 : min(productController.products.data?.length ?? 0, limit),
+      itemBuilder: (context, index) => _productBuilder(productController.products.data![index]),
+      staggeredTileBuilder: (index) => const StaggeredTile.count(1, 1),
+    );
+  }
 
   SizedBox _horizontalFilter(ProductController productController) {
     return SizedBox(
@@ -78,7 +87,7 @@ class ProductGridviewWidget extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
               onTap: () {
-                productController.onProductFilterSelectionChange(item);
+                productController.onCategorySelection(item);
               },
               child: CommonText(
                 enableBorder: isSelected ? false : true,
@@ -115,13 +124,7 @@ class ProductGridviewWidget extends StatelessWidget {
                   fill: BoxFit.fill,
                 ),
                 const Spacer(),
-                CommonText(
-                  text: product.name,
-                  textAlign: TextAlign.start,
-                  style: theme.textTheme.titleSmall,
-                  left: 5,
-                  right: 5,
-                ),
+                CommonText(text: product.name, textAlign: TextAlign.start, style: theme.textTheme.titleSmall, left: 5, right: 5),
                 CommonText(
                   text: '${AppString.monySign} ${product.price}',
                   style: theme.textTheme.titleSmall?.copyWith(color: AppColors.primaryColor3),

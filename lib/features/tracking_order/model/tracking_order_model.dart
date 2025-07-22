@@ -3,9 +3,11 @@
 
 import 'dart:convert';
 
-import 'package:bai_serve/features/home/model/order_list_model.dart';
-import 'package:bai_serve/features/tracking_order/model/order_timeline_model.dart';
 import 'package:flutter/foundation.dart';
+
+import '../../home/model/order_list_model.dart' show DeliveryStatus;
+import 'order_timeline_model.dart';
+import 'rider_info_model.dart';
 
 class TrackingOrderModel {
   String trackingId;
@@ -26,6 +28,8 @@ class TrackingOrderModel {
   String image;
 
   List<OrderTimelineModel> timeline;
+
+  RiderInfoModel riderInfo;
   TrackingOrderModel({
     required this.trackingId,
     required this.senderName,
@@ -38,6 +42,7 @@ class TrackingOrderModel {
     required this.stepNumber,
     required this.image,
     required this.timeline,
+    required this.riderInfo,
   });
 
   TrackingOrderModel copyWith({
@@ -52,6 +57,7 @@ class TrackingOrderModel {
     int? stepNumber,
     String? image,
     List<OrderTimelineModel>? timeline,
+    RiderInfoModel? riderInfo,
   }) {
     return TrackingOrderModel(
       trackingId: trackingId ?? this.trackingId,
@@ -61,11 +67,11 @@ class TrackingOrderModel {
       reciverPhoneNumber: reciverPhoneNumber ?? this.reciverPhoneNumber,
       address: address ?? this.address,
       status: status ?? this.status,
-      estimatedDeliveryTime:
-          estimatedDeliveryTime ?? this.estimatedDeliveryTime,
+      estimatedDeliveryTime: estimatedDeliveryTime ?? this.estimatedDeliveryTime,
       stepNumber: stepNumber ?? this.stepNumber,
       image: image ?? this.image,
       timeline: timeline ?? this.timeline,
+      riderInfo: riderInfo ?? this.riderInfo,
     );
   }
 
@@ -82,6 +88,7 @@ class TrackingOrderModel {
       'stepNumber': stepNumber,
       'image': image,
       'timeline': timeline.map((x) => x.toMap()).toList(),
+      'riderInfo': riderInfo.toMap(),
     };
   }
 
@@ -94,27 +101,23 @@ class TrackingOrderModel {
       reciverPhoneNumber: map['reciverPhoneNumber'] as String,
       address: map['address'] as String,
       status: DeliveryStatus.values[map['status'] as int],
-      estimatedDeliveryTime: Duration(
-        milliseconds: map['estimatedDeliveryTime'],
-      ),
+      estimatedDeliveryTime: Duration(milliseconds: map['estimatedDeliveryTime']),
       stepNumber: map['stepNumber'] as int,
       image: map['image'] as String,
       timeline: List<OrderTimelineModel>.from(
-        (map['timeline'] as List<int>).map<OrderTimelineModel>(
-          (x) => OrderTimelineModel.fromMap(x as Map<String, dynamic>),
-        ),
+        (map['timeline'] as List<int>).map<OrderTimelineModel>((x) => OrderTimelineModel.fromMap(x as Map<String, dynamic>)),
       ),
+      riderInfo: RiderInfoModel.fromMap(map['riderInfo'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TrackingOrderModel.fromJson(String source) =>
-      TrackingOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TrackingOrderModel.fromJson(String source) => TrackingOrderModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'TrackingOrderModel(trackingId: $trackingId, senderName: $senderName, phoneNumber: $phoneNumber, reciverName: $reciverName, reciverPhoneNumber: $reciverPhoneNumber, address: $address, status: $status, estimatedDeliveryTime: $estimatedDeliveryTime, stepNumber: $stepNumber, image: $image, timeline: $timeline)';
+    return 'TrackingOrderModel(trackingId: $trackingId, senderName: $senderName, phoneNumber: $phoneNumber, reciverName: $reciverName, reciverPhoneNumber: $reciverPhoneNumber, address: $address, status: $status, estimatedDeliveryTime: $estimatedDeliveryTime, stepNumber: $stepNumber, image: $image, timeline: $timeline, riderInfo: $riderInfo)';
   }
 
   @override
@@ -131,7 +134,8 @@ class TrackingOrderModel {
         other.estimatedDeliveryTime == estimatedDeliveryTime &&
         other.stepNumber == stepNumber &&
         other.image == image &&
-        listEquals(other.timeline, timeline);
+        listEquals(other.timeline, timeline) &&
+        other.riderInfo == riderInfo;
   }
 
   @override
@@ -146,6 +150,7 @@ class TrackingOrderModel {
         estimatedDeliveryTime.hashCode ^
         stepNumber.hashCode ^
         image.hashCode ^
-        timeline.hashCode;
+        timeline.hashCode ^
+        riderInfo.hashCode;
   }
 }

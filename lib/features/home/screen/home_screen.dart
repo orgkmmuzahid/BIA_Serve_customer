@@ -38,12 +38,11 @@ class HomeScreen extends StatelessWidget {
       children: [
         Text(
           controller.name,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: theme.textTheme.titleMedium?.copyWith(
             color: theme.primaryColor,
-            fontWeight: FontWeight.w700,
           ),
         ),
-        Text(controller.address, style: theme.textTheme.bodySmall),
+        Text(controller.address, style: theme.textTheme.bodyMedium),
       ],
     );
   }

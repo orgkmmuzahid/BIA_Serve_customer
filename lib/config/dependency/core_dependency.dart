@@ -1,3 +1,4 @@
+import 'package:bai_serve/component/image/image_picker/common_image_picker_controller.dart';
 import 'package:bai_serve/config/network/dio_service.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/config/storage/storage_service.dart';
@@ -21,6 +22,8 @@ class CoreDependency {
         },
       );
     });
+
+     Get.lazyPut(CommonImagePickerController.new, fenix: true);
 
     AppLogger.debug('Core dependency initalized', tag: 'dependency');
   }

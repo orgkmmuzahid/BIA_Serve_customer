@@ -17,6 +17,7 @@ import 'package:bai_serve/features/setting/controllers/setting_controller.dart';
 import 'package:bai_serve/features/tracking_order/controllers/tracking_order_controller.dart';
 import 'package:bai_serve/features/vendor_sourcing/controllers/product_controller.dart';
 import 'package:bai_serve/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
+import 'package:bai_serve/features/verify_vendor/controllers/verify_vendor_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +51,7 @@ class StateDependency {
     Get.lazyPut(PaymentController.new, fenix: true);
     Get.lazyPut(VendorSourcingController.new, fenix: true);
     Get.lazyPut(ProductController.new, fenix: true);
+    Get.lazyPut(VerifyVendorController.new, fenix: true);
 
     //commponent
     Get.lazyPut(CommonMultiimagePickerController.new, fenix: true);

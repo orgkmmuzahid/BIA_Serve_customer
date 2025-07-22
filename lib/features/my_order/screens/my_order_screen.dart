@@ -4,6 +4,7 @@ import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_rich_text.dart';
+import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/config/api/server_request.dart';
 import 'package:bai_serve/features/home/model/order_list_model.dart';
@@ -51,9 +52,12 @@ class MyOrderScreen extends StatelessWidget {
               ),
               10.height,
               _filters(myOrderController),
-
+              10.height,
               if (myOrderController.orderList.data?.isNotEmpty == true)
-                ...myOrderController.orderList.data!.map(_orderListItem),
+                Expanded(child: ListView.builder(
+                  itemCount: myOrderController.orderList.data?.length ?? 0,
+                  shrinkWrap: true,
+                  itemBuilder: (_,index)=> _orderListItem(myOrderController.orderList.data![index]))),
               if (myOrderController.orderList.requestStatus ==
                   RequestStatus.requesting)
                 const Padding(
@@ -69,27 +73,38 @@ class MyOrderScreen extends StatelessWidget {
   );
 
   Widget _filters(MyOrderController controller) {
-    final double buttonWidth = ((Utils.deviceSize.width - 32) / 4) - 5;
+    // final double buttonWidth = ((Utils.deviceSize.width - 32) / 4) - 5;
     return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Row(
         children:
             OrderFilterEnum.values
                 .map(
                   (value) => Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: CommonButton(
-                      titleText: value.displayName,
-                      borderColor: AppColors.serfeceBG,
-                      titleSize: 12,
-                      buttonColor:
-                          controller.orderFilterEnum == value
-                              ? AppColors.lightRead
-                              : AppColors.cartBG,
-                      titleColor: AppColors.primaryText,
-                      buttonWidth: buttonWidth,
-                      onTap: () {
-                        controller.onFilterOrderList(value);
-                      },
+                    padding: const EdgeInsets.only(right: 5,),
+                    child: GestureDetector(
+                       onTap: () {
+                          controller.onFilterOrderList(value);
+                        },
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          minWidth: 90,
+                        ),
+                        child: CommonText(
+                          text: value.displayName,
+                          borderColor: AppColors.serfeceBG,
+                          top: 10, bottom: 10, left: 10,right: 10,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          alignment: MainAxisAlignment.center,
+                          backgroundColor:
+                              controller.orderFilterEnum == value
+                                  ? AppColors.lightRead
+                                  : AppColors.cartBG,
+                          color: AppColors.primaryText,
+                          // buttonWidth: buttonWidth,
+                        ),
+                      ),
                     ),
                   ),
                 )
@@ -111,8 +126,9 @@ class MyOrderScreen extends StatelessWidget {
               ? AppColors.cartBG4
               : AppColors.cartBG2,
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 10, top: 10),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonImage(
               imageSrc: AppImages.appsIcon,
@@ -181,7 +197,7 @@ class MyOrderScreen extends StatelessWidget {
 
             if (model.deliveryStatus == DeliveryStatus.cancel ||
                 model.deliveryStatus == DeliveryStatus.delivered)
-              const Icon(Icons.more_vert).start,
+              const Icon(Icons.more_vert),
           ],
         ),
       ),

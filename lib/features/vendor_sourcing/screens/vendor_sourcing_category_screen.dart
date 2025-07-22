@@ -2,9 +2,10 @@ import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/features/vendor_sourcing/controllers/product_controller.dart';
 import 'package:bai_serve/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve/features/vendor_sourcing/widgets/product_gridview_widget.dart';
-import 'package:bai_serve/features/vendor_sourcing/widgets/vendor_widget.dart';
+import 'package:bai_serve/features/verify_vendor/widgets/vendor_widget.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
@@ -24,24 +25,24 @@ class VendorSourcingCategoryScreen extends StatelessWidget {
             child: Column(
               children: [
                 CommonText(
-                  text: AppString.productCategory,
+                  text: AppString.myVendors,
                   style: theme.textTheme.bodyLarge,
                   bottom: 10,
                 ),
-                CommonDropDown<String>(
-                  hint: AppString.productCategory,
-                  items: vendorSourcingController.vendorCategories,
-                  initailItem: vendorSourcingController.selectedVendorCategory,
-                  onChanged:
-                      (value) => vendorSourcingController
-                          .onVendorCategoryChange(value ?? ''),
-                  nameBuilder: (value) => value,
-                ),
-                _showMoreBuilder(
-                  vendorSourcingController: vendorSourcingController,
-                  route: AppRoutes.allVendors,
-                  title: AppString.allVendors,
-                ),
+                // CommonDropDown<String>(
+                //   hint: AppString.productCategory,
+                //   items: vendorSourcingController.vendorCategories,
+                //   initailItem: vendorSourcingController.selectedVendorCategory,
+                //   onChanged:
+                //       (value) => vendorSourcingController
+                //           .onVendorCategoryChange(value ?? ''),
+                //   nameBuilder: (value) => value,
+                // ),
+                // _showMoreBuilder(
+                //   vendorSourcingController: vendorSourcingController,
+                //   route: AppRoutes.allVendors,
+                //   title: AppString.allVendors,
+                // ),
 
                 SizedBox(
                   height: 100,
@@ -67,7 +68,7 @@ class VendorSourcingCategoryScreen extends StatelessWidget {
                 _showMoreBuilder(
                   vendorSourcingController: vendorSourcingController,
                   route: AppRoutes.allProducts,
-                  title: vendorSourcingController.selectedVendorCategory,
+                  title: Get.find<ProductController>().selectedCategory,
                 ),
 
                 const ProductGridviewWidget(showFilter: false, limit: 6),

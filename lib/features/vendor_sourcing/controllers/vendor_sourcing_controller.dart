@@ -15,9 +15,6 @@ class VendorSourcingController extends GetxController {
 
   MapEntry<String, double> selectedServiceFee = const MapEntry('1-3', 1000.5);
 
-  List<String> vendorCategories = ['Woman Shoes', 'Men Shoes'];
-
-  String selectedVendorCategory = 'Woman Shoes';
 
   VendorModel? selectedVendor;
   
@@ -45,11 +42,6 @@ class VendorSourcingController extends GetxController {
 
   void onProductCategoryFetch() async {
 
-  }
-
-  void onVendorCategoryChange(String vendorCategory) {
-    selectedVendorCategory = vendorCategory;
-    update();
   }
 
   @override

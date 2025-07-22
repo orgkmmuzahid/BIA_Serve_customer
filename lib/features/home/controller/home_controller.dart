@@ -6,11 +6,11 @@ import 'package:bai_serve/features/home/repository/home_repository.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-
   HomeRepository homeRepository = Get.find();
 
   RequestState<List<String>> bannerUrls = RequestState();
@@ -21,33 +21,42 @@ class HomeController extends GetxController {
   int selectedNavMenu = 0;
 
   TextEditingController searchController = TextEditingController();
-  MapEntry<String, String> selectedCountry = const MapEntry(
-    AppString.langEnglish,
-    AppImages.langEnglish,
-  );
+  MapEntry<String, String> selectedCountry = const MapEntry(AppString.langEnglish, AppImages.langEnglish);
 
-  Map<String, String> availableCountries = {
-    AppString.langEnglish: AppImages.langEnglish,
-    AppString.langSwahili: AppImages.langSwahili,
-  };
+  Map<String, String> availableCountries = {AppString.langEnglish: AppImages.langEnglish, AppString.langSwahili: AppImages.langSwahili};
 
   int currentIndex = 0;
+
   Timer? _timer;
 
-
   void _startTimer() {
-    if (bannerUrls.data == null || bannerUrls.data?.isEmpty == true) return;
-    _timer = Timer.periodic(const Duration(seconds: 3), (_) {
-      currentIndex = (currentIndex + 1) % bannerUrls.data!.length;
-      update(); // causes GetBuilder to rebuild
+    if (bannerUrls.data == null || bannerUrls.data?.isEmpty == true) {
+      return;
+    }
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      _timer = timer;
+
+      if (currentIndex < (bannerUrls.data?.length ?? 0) - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      if (Get.currentRoute == AppRoutes.home) {
+        update();
+      }
     });
   }
 
-  void fetchBannerUrls()async{
-    homeRepository.bannerUrls(onStateChange: (state){
-      bannerUrls = state;
-      update();
-    });
+  void fetchBannerUrls() async {
+    homeRepository.bannerUrls(
+      onStateChange: (state) {
+        bannerUrls = state;
+        _timer?.cancel();
+        _timer = null;
+        _startTimer();
+        update();
+      },
+    );
   }
 
   void onCountryChange(MapEntry<String, String> country) {
@@ -56,7 +65,9 @@ class HomeController extends GetxController {
   }
 
   void onNavMenuChange(int index) {
-    if (index == selectedNavMenu) return;
+    if (index == selectedNavMenu) {
+      return;
+    }
     if (index == 0) {
       goToScreen(AppRoutes.home);
     } else if (index == 1) {
@@ -88,7 +99,9 @@ class HomeController extends GetxController {
     Get.toNamed(AppRoutes.bulkOrder);
   }
 
-  void onVerifyVendor() {}
+  void onVerifyVendor() {
+    Get.toNamed(AppRoutes.verifyVendor);
+  }
 
   void onDoorToDoorPickup() {
     Get.toNamed(AppRoutes.doorToDoorPickup);
@@ -122,14 +135,21 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     searchController.dispose();
-    // _timer?.cancel();
     super.onClose();
   }
 
   @override
   void onInit() {
     fetchBannerUrls();
-     _startTimer();
+    AppLogger.debug('Home controller init', tag: 'Banner timer.');
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _timer = null;
+    AppLogger.debug('Home controller disposed', tag: 'Banner timer.');
+    super.dispose();
   }
 }

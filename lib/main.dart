@@ -1,19 +1,21 @@
 import 'package:bai_serve/config/app_life_cycle_management.dart';
-import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get/get.dart';
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
 //create a new feature through
 // mason make getx_feature --name packageName
+//emulator -list-avds 
+//emulator -avd Pixel_9a
+
 
 Future<void> main() async {
-  FlutterError.onError = (FlutterErrorDetails details) {
-    debugPrint('Flutter error caught: ${details.exceptionAsString()}');
-    FlutterError.presentError(details);
-  };
+ErrorWidget.builder = (FlutterErrorDetails details) {
+  debugPrint('Flutter error: ${details.exception}');
+  return const Center(child: Text('Oops, something went wrong'));
+};
+
 
   WidgetsFlutterBinding.ensureInitialized();
   await init.tryCatch();
@@ -23,10 +25,6 @@ Future<void> main() async {
 
 Future<void> init() async {
   _diInit();
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    // Optionally log or report errors
-  };
   await Future.wait([
     dotenv.load(),
   ]);

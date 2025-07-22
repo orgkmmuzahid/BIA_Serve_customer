@@ -34,6 +34,7 @@ class AppString {
   static const String resendCodeIn = 'Resend code in';
   static const String minute = 'minute';
   static const String verify = 'Verify';
+  static const String verifyVendor = 'Verify Vendor';
   static const String logIntoYourAccount = 'Login to Your Account';
   static const String forgotThePassword = 'Forgot Password';
   static const String signIn = 'Sign in';
@@ -44,9 +45,9 @@ class AppString {
   static const String createYourAccount = 'Create Your Account';
   static const String otpVerify = 'OTP Verify';
   static const String inbox = 'Inbox';
-  static const String searchDoctor = 'search a doctor';
+  static const String searchProduct = 'Search product';
   static const String activeNow = 'Active Now';
-  static const String messageHere = 'message here';
+  static const String message = 'message';
   static const String notifications = 'Notifications';
   static const String contact = 'Contact';
   static const String dateOfBirth = 'Date of birth';
@@ -203,6 +204,8 @@ class AppString {
   static const vendorName = 'Vendors Name';
 
   static const vendorId = 'Vendor ID';
+  static const vendorLocation = 'Vendor Location';
+  static const uplaodScreenshot = 'Upload Screenshot';
   static const vendorContactNumber = 'Vendor Contact Number';
   static const productAmount = 'Product Amount';
   static const deliveryType = 'Delivery Type';
@@ -239,7 +242,9 @@ class AppString {
   static const screenshot = 'Screenshot';
   static const availableColor = 'Available Color';
   static const availableSize = 'Available Size';
-  static const trendingProduct  = 'Trending Product ';
+  static const riderDetails  = 'Rider Details';
+  static const callNow  = 'Call Now';
+  static const myVendors  = 'My Vendors';
 
   static String loaltyClaimingMessage(String value) =>
       'You’ve received a $value on your next order! Don’t miss out ';

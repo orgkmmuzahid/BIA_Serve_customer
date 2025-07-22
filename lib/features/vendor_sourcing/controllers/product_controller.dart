@@ -28,11 +28,14 @@ class ProductController extends GetxController{
   void fetchProductCategories()async{
     vendorSourcingRepository.productCategories(onStateChange: (state){
       categories = state;
+      if(state.data?.isNotEmpty == true){
+        selectedCategory = state.data!.first;
+      }
       update();
     });
   }
 
-  void onProductFilterSelectionChange(String value){
+  void onCategorySelection(String value){
     selectedCategory = value;
     update();
   }

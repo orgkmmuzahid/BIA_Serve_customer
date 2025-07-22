@@ -1,6 +1,7 @@
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -44,7 +45,7 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
-            padding: EdgeInsets.all(12.sp),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
             decoration: BoxDecoration(
               color: theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.only(
@@ -74,44 +75,51 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       },
     );
   }
-
-  Widget _buildIcon(
+Widget _buildIcon(
     MapEntry<String, String> navIcon,
     int index,
     HomeController controller,
   ) {
-    return Column(
-      children: [
-        CircleAvatar(
-          backgroundColor:
-              _isSelected(index, controller)
-                  ? selectedIconBackgroundColor
-                  : theme.scaffoldBackgroundColor,
-          radius: 20,
-          child: CommonImage(
+    final bool isSelected = _isSelected(index, controller);
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: EdgeInsets.symmetric(
+        horizontal: isSelected ? 16.w : 8.w,
+        vertical: 8.h,
+      ),
+      decoration: BoxDecoration(
+        color: isSelected ? selectedIconBackgroundColor: Colors.transparent,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: isSelected
+            ? [
+                BoxShadow(
+                  color: selectedIconBackgroundColor,
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : null,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CommonImage(
             imageSrc: navIcon.value,
-            size: 24,
-            imageColor:
-                _isSelected(index, controller)
-                    ? selectedIconIconColor
-                    : unselectedColor,
+            size: 28,
+            imageColor: isSelected ? selectedIconIconColor : AppColors.iconColorBlack,
           ),
-        ),
-        CommonText(
-          text: navIcon.key,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color:
-                _isSelected(index, controller)
-                    ? selectedIconBackgroundColor
-                    : unselectedColor,
-            fontSize: _isSelected(index, controller) ? 12 : 10,
-            fontWeight:
-                _isSelected(index, controller)
-                    ? FontWeight.w700
-                    : FontWeight.w400,
+          SizedBox(height: 4.h),
+          CommonText(
+            text: navIcon.key,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: isSelected ? selectedIconIconColor : unselectedColor,
+              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+              fontSize: isSelected ? 14.sp : 12.sp,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
