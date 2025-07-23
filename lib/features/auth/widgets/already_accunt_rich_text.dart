@@ -17,7 +17,7 @@ class AlreadyAccountRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: AppString.doNotHaveAccount,
-            style: theme.textTheme.titleSmall,
+            style: getTheme.textTheme.titleSmall,
           ),
 
           /// Sign Up Button here
@@ -31,7 +31,7 @@ class AlreadyAccountRichText extends StatelessWidget {
                     );
                   },
             style: GoogleFonts.dmSans(
-              color: theme.colorScheme.primary,
+              color: getTheme.colorScheme.primary,
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),

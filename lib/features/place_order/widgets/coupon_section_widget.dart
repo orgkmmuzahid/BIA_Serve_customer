@@ -30,9 +30,9 @@ class CouponSectionWidget extends StatelessWidget {
                 ),
               right: CommonButton(
                   titleText: AppString.noCouponCode,
-                  buttonColor: theme.scaffoldBackgroundColor,
-                  borderColor: theme.dividerColor,
-                  titleColor: theme.textTheme.bodySmall!.color,
+                  buttonColor: getTheme.scaffoldBackgroundColor,
+                  borderColor: getTheme.dividerColor,
+                  titleColor: getTheme.textTheme.bodySmall!.color,
                   onTap: placeOrderController.onNoCoupon,
                 ),
                 space: 20,
@@ -49,8 +49,8 @@ class CouponSectionWidget extends StatelessWidget {
               ),
             10.height,
             CommonButton(
-              buttonColor: theme.colorScheme.secondary.withAlpha(20),
-              titleColor: theme.textTheme.bodyMedium?.color,
+              buttonColor: getTheme.colorScheme.secondary.withAlpha(20),
+              titleColor: getTheme.textTheme.bodyMedium?.color,
               titleText:
                   '${AppString.totalPrice}: Tsh ${placeOrderController.orderDetailsModel.totalPrice}',
             ),

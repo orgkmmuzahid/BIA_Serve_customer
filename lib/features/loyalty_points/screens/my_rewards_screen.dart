@@ -40,7 +40,7 @@ class MyRewardsScreen extends StatelessWidget {
                           children: [
                             CommonText(
                               text: loyaltyController.rewardsLevel,
-                              color: theme.colorScheme.onSecondary,
+                              color: getTheme.colorScheme.onSecondary,
                               fontWeight: FontWeight.bold,
                             ),
                             20.height,
@@ -53,7 +53,7 @@ class MyRewardsScreen extends StatelessWidget {
                         20.width,
                         CommonText(
                           text: loyaltyController.loyaltyPoints.toString(),
-                          color: theme.colorScheme.onSecondary,
+                          color: getTheme.colorScheme.onSecondary,
                           fontSize: 64,
                           fontWeight: FontWeight.bold,
                         ),
@@ -85,7 +85,7 @@ class MyRewardsScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary.withValues(alpha: .1),
+        color: getTheme.colorScheme.primary.withValues(alpha: .1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -94,10 +94,10 @@ class MyRewardsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText(text: model.title, style: theme.textTheme.bodyLarge),
+                CommonText(text: model.title, style: getTheme.textTheme.bodyLarge),
                 CommonText(
                   text: '${model.rewardPoints} ${AppString.points}',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     color: AppColors.primaryColor2,
                     fontWeight: FontWeight.bold,
                   ),
@@ -114,12 +114,12 @@ class MyRewardsScreen extends StatelessWidget {
                   context: Get.context!,
                   builder:
                       (context) => AlertDialog(
-                        backgroundColor: theme.scaffoldBackgroundColor,
+                        backgroundColor: getTheme.scaffoldBackgroundColor,
                         content: IntrinsicHeight(
                           child: CommonText(
                             text: AppString.loaltyClaimingMessage(model.title),
                             maxLines: 5,
-                            style: theme.textTheme.bodyLarge?.copyWith(
+                            style: getTheme.textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -131,7 +131,7 @@ class MyRewardsScreen extends StatelessWidget {
                               controller.onClaim(model);
                             },
                             titleText: AppString.continues,
-                            buttonColor: theme.colorScheme.secondary,
+                            buttonColor: getTheme.colorScheme.secondary,
                             buttonWidth: 100,
                           ),
                         ],
@@ -144,8 +144,8 @@ class MyRewardsScreen extends StatelessWidget {
               titleText: AppString.claim,
               buttonColor:
                   controller.loyaltyPoints >= model.rewardPoints
-                      ? theme.colorScheme.error
-                      : theme.dividerColor,
+                      ? getTheme.colorScheme.error
+                      : getTheme.dividerColor,
             ),
           ),
         ],

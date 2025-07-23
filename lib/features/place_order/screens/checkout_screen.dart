@@ -29,7 +29,7 @@ class CheckoutScreen extends StatelessWidget {
             children: [
               CommonText(
                 text: AppString.productDetails,
-                style: theme.textTheme.titleMedium,
+                style: getTheme.textTheme.titleMedium,
               ).start,
               _orderListItem(orderController),
               _middleCard(orderController),
@@ -66,13 +66,13 @@ class CheckoutScreen extends StatelessWidget {
 
               20.height,
               CommonText(
-                style: theme.textTheme.titleMedium,
+                style: getTheme.textTheme.titleMedium,
                 text: orderController.orderDetailsModel.orderStatus,
                 top: 10,
                 bottom: 10,
                 left: 20,
                 enableBorder: true,
-                backgroundColor: theme.colorScheme.secondary.withAlpha(30),
+                backgroundColor: getTheme.colorScheme.secondary.withAlpha(30),
               ),
               20.height,
 
@@ -99,20 +99,20 @@ class CheckoutScreen extends StatelessWidget {
   }) => Container(
     padding: const EdgeInsets.only(bottom: 5, top: 5),
     decoration: BoxDecoration(
-      border: Border(bottom: BorderSide(color: theme.scaffoldBackgroundColor)),
+      border: Border(bottom: BorderSide(color: getTheme.scaffoldBackgroundColor)),
     ),
     child: Row(
       children: [
         CommonText(
           text: title,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: getTheme.textTheme.bodyMedium?.copyWith(
             fontWeight: isBold ? FontWeight.bold : null,
           ),
         ),
         const Spacer(),
         CommonText(
           text: data,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: getTheme.textTheme.bodyMedium?.copyWith(
             fontWeight: isBold ? FontWeight.bold : null,
           ),
         ),
@@ -124,22 +124,22 @@ class CheckoutScreen extends StatelessWidget {
     return _card([
       Container(
         decoration: BoxDecoration(
-          color: theme.primaryColor,
+          color: getTheme.primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(10),
         child: Row(
           children: [
-            Icon(Icons.home, color: theme.colorScheme.onPrimary),
+            Icon(Icons.home, color: getTheme.colorScheme.onPrimary),
             CommonText(
               text: AppString.shippingAddress,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onSecondary,
+              style: getTheme.textTheme.bodyLarge?.copyWith(
+                color: getTheme.colorScheme.onSecondary,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const Spacer(),
-            Icon(Icons.edit_square, color: theme.colorScheme.onPrimary),
+            Icon(Icons.edit_square, color: getTheme.colorScheme.onPrimary),
           ],
         ),
       ),
@@ -172,10 +172,10 @@ class CheckoutScreen extends StatelessWidget {
 
   Card _card(List<Widget> list) {
     return Card(
-      color: theme.primaryColor.withAlpha(15),
+      color: getTheme.primaryColor.withAlpha(15),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: theme.dividerColor),
+          border: Border.all(color: getTheme.dividerColor),
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(10),
@@ -201,14 +201,14 @@ class CheckoutScreen extends StatelessWidget {
               richTextContent: [
                 CommonSimpleRichTextContent(
                   text: '#${orderController.orderDetailsModel.orderCode}\n',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.primaryColor,
+                  style: getTheme.textTheme.bodyLarge?.copyWith(
+                    color: getTheme.primaryColor,
                   ),
                 ),
                 CommonSimpleRichTextContent(
                   text:
                       'Order Placed – ${Utils.formatDateTime(orderController.orderDetailsModel.orderDate)}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -216,7 +216,7 @@ class CheckoutScreen extends StatelessWidget {
                 CommonSimpleRichTextContent(
                   text:
                       'Parcel Picked Up – ${orderController.placeOrderModel.clientPickupTime}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -224,7 +224,7 @@ class CheckoutScreen extends StatelessWidget {
                 CommonSimpleRichTextContent(
                   text:
                       'Quantity – ${orderController.placeOrderModel.quantity}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -232,7 +232,7 @@ class CheckoutScreen extends StatelessWidget {
                 CommonSimpleRichTextContent(
                   text:
                       'Total Price – ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),

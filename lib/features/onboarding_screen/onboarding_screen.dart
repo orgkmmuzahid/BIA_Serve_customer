@@ -33,9 +33,9 @@ class OnboardingScreen extends StatelessWidget {
             10.height,
             CommonButton(
               titleText: AppString.langEnglish,
-              buttonColor: theme.scaffoldBackgroundColor,
-              titleColor: theme.textTheme.bodyLarge!.color,
-              borderColor: theme.colorScheme.outlineVariant,
+              buttonColor: getTheme.scaffoldBackgroundColor,
+              titleColor: getTheme.textTheme.bodyLarge!.color,
+              borderColor: getTheme.colorScheme.outlineVariant,
               icon: const Padding(
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
@@ -46,9 +46,9 @@ class OnboardingScreen extends StatelessWidget {
 
             CommonButton(
               titleText: AppString.langSwahili,
-              buttonColor: theme.scaffoldBackgroundColor,
-              titleColor: theme.textTheme.bodyLarge!.color,
-              borderColor: theme.colorScheme.outlineVariant,
+              buttonColor: getTheme.scaffoldBackgroundColor,
+              titleColor: getTheme.textTheme.bodyLarge!.color,
+              borderColor: getTheme.colorScheme.outlineVariant,
               icon: const Padding(
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),

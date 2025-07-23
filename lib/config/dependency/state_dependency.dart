@@ -1,4 +1,3 @@
-import 'package:bai_serve/component/image/common_multiImage_picker_controller.dart';
 import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
@@ -53,8 +52,8 @@ class StateDependency {
     Get.lazyPut(ProductController.new, fenix: true);
     Get.lazyPut(VerifyVendorController.new, fenix: true);
 
-    //commponent
-    Get.lazyPut(CommonMultiimagePickerController.new, fenix: true);
+    
+    //
 
     Get.lazyPut(NotificationsController.new, fenix: true);
     Get.lazyPut(ChatController.new, fenix: true);

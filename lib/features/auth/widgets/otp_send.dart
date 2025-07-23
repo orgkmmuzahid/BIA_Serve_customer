@@ -31,12 +31,12 @@ class OtpSend extends StatelessWidget {
           50.height,
           CommonText(
             text: title,
-            style: theme.textTheme.bodyLarge,
+            style: getTheme.textTheme.bodyLarge,
             alignment: MainAxisAlignment.center,
           ),
           CommonText(
             text: subtitle,
-            style: theme.textTheme.bodyMedium,
+            style: getTheme.textTheme.bodyMedium,
             alignment: MainAxisAlignment.center,
           ),
           20.height,
@@ -50,7 +50,7 @@ class OtpSend extends StatelessWidget {
           CommonGradientButton(
             titleText: AppString.otpSendButton,
             isLoading: false,
-            buttonWidth: 132,
+            buttonWidth: 140,
             buttonHeight: 32,
             titleSize: 12,
             titleWeight: FontWeight.w500,

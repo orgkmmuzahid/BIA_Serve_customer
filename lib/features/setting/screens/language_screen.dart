@@ -21,9 +21,9 @@ class LanguageScreen extends StatelessWidget {
         CommonButton(
           buttonWidth: 287,
           titleText: AppString.langEnglish,
-          buttonColor: theme.scaffoldBackgroundColor,
-          titleColor: theme.textTheme.bodyLarge!.color,
-          borderColor: theme.colorScheme.outlineVariant,
+          buttonColor: getTheme.scaffoldBackgroundColor,
+          titleColor: getTheme.textTheme.bodyLarge!.color,
+          borderColor: getTheme.colorScheme.outlineVariant,
           icon: const Padding(
             padding: EdgeInsetsGeometry.only(right: 17.9),
             child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
@@ -40,9 +40,9 @@ class LanguageScreen extends StatelessWidget {
         CommonButton(
           buttonWidth: 287,
           titleText: AppString.langSwahili,
-          buttonColor: theme.scaffoldBackgroundColor,
-          titleColor: theme.textTheme.bodyLarge!.color,
-          borderColor: theme.colorScheme.outlineVariant,
+          buttonColor: getTheme.scaffoldBackgroundColor,
+          titleColor: getTheme.textTheme.bodyLarge!.color,
+          borderColor: getTheme.colorScheme.outlineVariant,
           icon: const Padding(
             padding: EdgeInsetsGeometry.only(right: 17.9),
             child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),

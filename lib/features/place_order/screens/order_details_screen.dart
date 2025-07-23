@@ -115,18 +115,18 @@ class OrderDetailsScreen extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: theme.colorScheme.secondary.withAlpha(20),
+        color: getTheme.colorScheme.secondary.withAlpha(20),
       ),
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
       child: CommonRichText(
         richTextContent: [
           CommonSimpleRichTextContent(
             text: title,
-            style: theme.textTheme.titleMedium,
+            style: getTheme.textTheme.titleMedium,
           ),
           CommonSimpleRichTextContent(
             text: '\nTSH $price',
-            style: theme.textTheme.bodyLarge?.copyWith(fontSize: 24),
+            style: getTheme.textTheme.bodyLarge?.copyWith(fontSize: 24),
           ),
         ],
       ),
@@ -140,7 +140,7 @@ class OrderDetailsScreen extends StatelessWidget {
           text: title,
           textAlign: TextAlign.start,
           top: 10,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: getTheme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -148,7 +148,7 @@ class OrderDetailsScreen extends StatelessWidget {
           child: CommonText(
             text: ':',
             top: 10,
-            style: theme.textTheme.bodyLarge?.copyWith(
+            style: getTheme.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -157,7 +157,7 @@ class OrderDetailsScreen extends StatelessWidget {
           text: data,
           textAlign: TextAlign.start,
           top: 10,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: getTheme.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w400,
           ),
         ),

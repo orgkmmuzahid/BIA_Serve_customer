@@ -29,22 +29,22 @@ class HomeDrawer extends StatelessWidget {
         children: [
           // Drawer Header
           DrawerHeader(
-            decoration: BoxDecoration(color: theme.primaryColor),
+            decoration: BoxDecoration(color: getTheme.primaryColor),
             child: SizedBox(
               height: 146,
               child: ListView(
                 children: [
                   Text(
                     userName,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onPrimary,
+                    style: getTheme.textTheme.bodyLarge?.copyWith(
+                      color: getTheme.colorScheme.onPrimary,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   Text(
                     address,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onPrimary,
+                    style: getTheme.textTheme.bodySmall?.copyWith(
+                      color: getTheme.colorScheme.onPrimary,
                     ),
                   ),
                   10.height,
@@ -55,10 +55,10 @@ class HomeDrawer extends StatelessWidget {
                         buttonWidth: 90,
                         buttonHeight: 24,
                         titleSize: 10,
-                        titleColor: theme.colorScheme.onPrimary,
+                        titleColor: getTheme.colorScheme.onPrimary,
                         buttonRadius: 4,
-                        borderColor: theme.colorScheme.onPrimary,
-                        buttonColor: theme.colorScheme.primary,
+                        borderColor: getTheme.colorScheme.onPrimary,
+                        buttonColor: getTheme.colorScheme.primary,
                       ),
                       const Spacer(),
                     ],
@@ -111,8 +111,8 @@ class HomeDrawer extends StatelessWidget {
           _buildMenu(
             image: AppImages.drawerLogout,
             title: AppString.logOut,
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.error,
+            style: getTheme.textTheme.labelMedium?.copyWith(
+              color: getTheme.colorScheme.error,
               fontWeight: FontWeight.w400,
             ),
             onTap: () {
@@ -139,7 +139,7 @@ class HomeDrawer extends StatelessWidget {
         title,
         style:
             style ??
-            theme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400),
+            getTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400),
       ),
       onTap: () {
         Navigator.pop(Get.context!);

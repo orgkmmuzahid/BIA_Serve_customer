@@ -23,7 +23,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
             children: [
               CommonText(
                 text: AppString.orderSummery,
-                style: theme.textTheme.bodyLarge,
+                style: getTheme.textTheme.bodyLarge,
               ).start,
               CommonMultilineTextField(
                 initialText: bulkOrderController.negotiationMessage,
@@ -39,7 +39,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
                   borderRadius: 4,
                   paddingVertical: 20,
                   borderColor:
-                      theme
+                      getTheme
                           .inputDecorationTheme
                           .disabledBorder
                           ?.borderSide
@@ -94,7 +94,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
           text: title,
           textAlign: TextAlign.start,
           top: 10,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: getTheme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -102,7 +102,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
           child: CommonText(
             text: ':',
             top: 10,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: getTheme.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -111,7 +111,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
           text: data,
           textAlign: TextAlign.start,
           top: 10,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: getTheme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w400,
           ),
         ),

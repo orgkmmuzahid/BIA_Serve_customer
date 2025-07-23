@@ -44,7 +44,7 @@ class ProfileInfoScreen extends StatelessWidget {
                 ).center,
           ),
           10.height,
-          Text('Cameron Williamson', style: theme.textTheme.bodyLarge),
+          Text('Cameron Williamson', style: getTheme.textTheme.bodyLarge),
           10.height,
           Expanded(
             child: CommonTabBar(

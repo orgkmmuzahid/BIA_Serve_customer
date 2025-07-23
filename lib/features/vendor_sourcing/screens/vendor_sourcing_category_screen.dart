@@ -26,7 +26,7 @@ class VendorSourcingCategoryScreen extends StatelessWidget {
               children: [
                 CommonText(
                   text: AppString.myVendors,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                   bottom: 10,
                 ),
                 // CommonDropDown<String>(
@@ -89,7 +89,7 @@ class VendorSourcingCategoryScreen extends StatelessWidget {
     children: [
       CommonText(
         text: title,
-        style: theme.textTheme.bodyLarge,
+        style: getTheme.textTheme.bodyLarge,
         bottom: 10,
         top: 10,
       ),

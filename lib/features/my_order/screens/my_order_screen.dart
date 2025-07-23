@@ -139,17 +139,17 @@ class MyOrderScreen extends StatelessWidget {
               richTextContent: [
                 CommonSimpleRichTextContent(
                   text: '#${model.orderNumber}\n',
-                  style: theme.textTheme.bodyLarge?.copyWith(
+                  style: getTheme.textTheme.bodyLarge?.copyWith(
                     color:
                         model.deliveryStatus == DeliveryStatus.cancel
                             ? AppColors.error
-                            : theme.primaryColor,
+                            : getTheme.primaryColor,
                   ),
                 ),
                 CommonSimpleRichTextContent(
                   text:
                       'Order Placed – ${Utils.formatDateTime(model.orderPlacedDate)}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -157,7 +157,7 @@ class MyOrderScreen extends StatelessWidget {
                 CommonSimpleRichTextContent(
                   text:
                       'Parcel Picked Up – ${Utils.formatDateTime(model.percelPickedUp)}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -165,7 +165,7 @@ class MyOrderScreen extends StatelessWidget {
                 CommonSimpleRichTextContent(
                   text:
                       'In Transit – ${Utils.formatDateTime(model.inTransition)}\n',
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
@@ -175,7 +175,7 @@ class MyOrderScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Delivered – ',
-                        style: theme.textTheme.bodyMedium?.copyWith(
+                        style: getTheme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
@@ -183,7 +183,7 @@ class MyOrderScreen extends StatelessWidget {
 
                       TextSpan(
                         text: '${model.deliveryStatus.name}\n',
-                        style: theme.textTheme.bodyMedium?.copyWith(
+                        style: getTheme.textTheme.bodyMedium?.copyWith(
                           color: const Color(0xffFFA500),
                           fontWeight: FontWeight.bold,
                           fontSize: 14,

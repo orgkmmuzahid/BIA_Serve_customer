@@ -13,7 +13,7 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-    color: theme.scaffoldBackgroundColor,
+    color: getTheme.scaffoldBackgroundColor,
     child: Padding(
       padding: const EdgeInsetsGeometry.all(10),
       child: Row(
@@ -21,21 +21,21 @@ class NotificationItem extends StatelessWidget {
           CommonImage(
             imageSrc: _getImage(),
             size: 26,
-            imageColor: theme.primaryColor,
+            imageColor: getTheme.primaryColor,
           ),
           10.width,
           CommonRichText(
             richTextContent: [
               CommonSimpleRichTextContent(
                 text: item.title.newLine,
-                style: theme.textTheme.bodyMedium?.copyWith(
+                style: getTheme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               CommonSimpleRichTextContent(
                 text: item.subtitle,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.textTheme.bodySmall?.color,
+                style: getTheme.textTheme.bodyMedium?.copyWith(
+                  color: getTheme.textTheme.bodySmall?.color,
                 ),
               ),
             ],

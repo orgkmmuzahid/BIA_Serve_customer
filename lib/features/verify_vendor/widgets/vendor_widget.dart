@@ -30,7 +30,7 @@ class VendorWidget extends StatelessWidget {
           ),
           CommonText(
             text: model.name,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: getTheme.textTheme.bodyMedium?.copyWith(
               color: AppColors.primaryText,
               fontWeight: FontWeight.bold,
             ),

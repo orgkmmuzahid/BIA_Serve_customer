@@ -36,12 +36,12 @@ class CommonDropDown<T> extends StatelessWidget {
         contentPadding: const EdgeInsets.only(left: 10, right: 2),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: theme.dividerColor),
+          borderSide: BorderSide(color: getTheme.dividerColor),
           borderRadius: BorderRadius.circular(8),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: borderColor ?? theme.inputDecorationTheme.enabledBorder?.borderSide.color ?? theme.disabledColor),
+            color: borderColor ?? getTheme.inputDecorationTheme.enabledBorder?.borderSide.color ?? getTheme.disabledColor),
           borderRadius: BorderRadius.circular(8),
         )
       ),

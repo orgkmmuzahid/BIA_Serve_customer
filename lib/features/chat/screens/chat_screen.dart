@@ -53,7 +53,7 @@ class ChatScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            color: theme.colorScheme.onSecondary,
+                            color: getTheme.colorScheme.onSecondary,
                             child: _inputField(chatController),
                           ),
                         ),
@@ -64,11 +64,11 @@ class ChatScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: theme.colorScheme.onSecondary,
+                              color: getTheme.colorScheme.onSecondary,
                             ),
                             child: Icon(
                               Icons.send,
-                              color: theme.textTheme.bodyLarge?.color,
+                              color: getTheme.textTheme.bodyLarge?.color,
                             ),
                           ),
                         ),
@@ -104,7 +104,7 @@ class ChatScreen extends StatelessWidget {
             onTap: chatController.pickImage,
             child: const Icon(Icons.attach_file),
           ),
-          borderColor: theme.colorScheme.onSecondary,
+          borderColor: getTheme.colorScheme.onSecondary,
         );
   }
 
@@ -131,8 +131,8 @@ class ChatScreen extends StatelessWidget {
               : Card(
                 color:
                     isMe
-                        ? theme.colorScheme.outlineVariant
-                        : theme.dividerColor.withAlpha(20),
+                        ? getTheme.colorScheme.outlineVariant
+                        : getTheme.dividerColor.withAlpha(20),
                 child: SizedBox(
                   width: chatIemWidth,
                   child: Padding(
@@ -148,15 +148,15 @@ class ChatScreen extends StatelessWidget {
                                 Icons.call_missed_rounded,
                                 color:
                                     isMe
-                                        ? theme.textTheme.bodySmall?.color
-                                        : theme.colorScheme.error,
+                                        ? getTheme.textTheme.bodySmall?.color
+                                        : getTheme.colorScheme.error,
                               ),
                               CommonText(
                                 text: 'Voice Call',
                                 color:
                                     isMe
-                                        ? theme.textTheme.bodySmall?.color
-                                        : theme.colorScheme.error,
+                                        ? getTheme.textTheme.bodySmall?.color
+                                        : getTheme.colorScheme.error,
                               ),
                             ],
                           ),
@@ -182,7 +182,7 @@ class ChatScreen extends StatelessWidget {
 
   AppBar _appBar(ChatController chatController) {
     return AppBar(
-      backgroundColor: theme.colorScheme.outlineVariant,
+      backgroundColor: getTheme.colorScheme.outlineVariant,
       title: Row(
         children: [
           CommonImage(
@@ -197,7 +197,7 @@ class ChatScreen extends StatelessWidget {
             children: [
               CommonText(
                 text: chatController.chatInfo.chatName,
-                style: theme.textTheme.titleSmall,
+                style: getTheme.textTheme.titleSmall,
               ),
               CommonText(text: chatController.chatInfo.status),
             ],
@@ -223,7 +223,7 @@ class ChatScreen extends StatelessWidget {
               },
               child: Icon(
                 Icons.call_rounded,
-                color: theme.primaryColor,
+                color: getTheme.primaryColor,
                 size: 27,
               ),
             ).paddingOnly(right: 10),

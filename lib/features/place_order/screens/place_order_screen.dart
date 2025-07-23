@@ -42,7 +42,7 @@ class PlaceOrderScreen extends StatelessWidget {
                   onTap: () => controller.showInformationForm(title),
                   buttonColor:
                       controller.marchentAddressTextEditController.text.isEmpty
-                          ? theme.disabledColor
+                          ? getTheme.disabledColor
                           : null,
                 ),
               ],
@@ -54,25 +54,25 @@ class PlaceOrderScreen extends StatelessWidget {
   Widget _map() => const Card(child: CustomGoogleMap());
 
   Widget _header(PlaceOrderController controller) => Card(
-    color: theme.scaffoldBackgroundColor,
+    color: getTheme.scaffoldBackgroundColor,
     elevation: 2,
-    shadowColor: theme.dividerColor,
+    shadowColor: getTheme.dividerColor,
     child: Column(
       children: [
         20.height,
         CommonText(
           text: AppString.setPickupDeliveryLocation,
-          style: theme.textTheme.bodyLarge,
+          style: getTheme.textTheme.bodyLarge,
         ),
         CommonTextField(
-          prefixIcon: Icon(Icons.my_location, color: theme.primaryColor),
+          prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
           controller: controller.clientAddressTextEditController,
-          borderColor: theme.dividerColor,
+          borderColor: getTheme.dividerColor,
         ).paddingOnly(top: 10, left: 20, right: 20),
         CommonTextField(
           prefixIcon: const Icon(Icons.place),
           controller: controller.marchentAddressTextEditController,
-          borderColor: theme.dividerColor,
+          borderColor: getTheme.dividerColor,
         ).paddingOnly(top: 10, left: 20, right: 20),
         20.height,
       ],
@@ -86,7 +86,7 @@ class PlaceOrderScreen extends StatelessWidget {
         34.height,
         CommonText(
           text: AppString.recentSearch,
-          style: theme.textTheme.bodyLarge,
+          style: getTheme.textTheme.bodyLarge,
         ).paddingOnly(bottom: 10),
         ...List.generate(controller.recentSearch.length, (index) {
           final String text = controller.recentSearch[index];
@@ -99,7 +99,7 @@ class PlaceOrderScreen extends StatelessWidget {
               left: 10,
               text: text,
               enableBorder: true,
-              style: theme.textTheme.bodyLarge!.copyWith(
+              style: getTheme.textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w500,
                 fontSize: 12,
               ),

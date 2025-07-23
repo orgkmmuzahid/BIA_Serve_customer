@@ -38,14 +38,14 @@ class TrackingOrderScreen extends StatelessWidget {
                 10.height,
                 CommonText( 
                   text: '${AppString.trackingID} #${trackingOrderController.trackingOrderDetails.data?.trackingId}',
-                    style: theme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor2),),
+                    style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor2),),
 
                 CommonText(
                   alignment: MainAxisAlignment.center,
                   text: Utils.formatDurationToHms(trackingOrderController.trackingOrderDetails.data?.estimatedDeliveryTime ?? const Duration()),
                   style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.primaryText),
                 ),
-                CommonText(alignment: MainAxisAlignment.center, text: AppString.estimatedDeliveryTime, style: theme.textTheme.bodyMedium),
+                CommonText(alignment: MainAxisAlignment.center, text: AppString.estimatedDeliveryTime, style: getTheme.textTheme.bodyMedium),
                 if(trackingOrderController.trackingOrderDetails.data != null)
                 TrackingProgressWidget(trackingOrderModel:  trackingOrderController.trackingOrderDetails.data!),
                 10.height,

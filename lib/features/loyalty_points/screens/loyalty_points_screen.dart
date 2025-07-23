@@ -21,8 +21,8 @@ class LoyaltyPointsScreen extends StatelessWidget {
     appBar: AppBar(
       title: Text(
         AppString.regularCustomersLoyaltyPoints,
-        style: theme.textTheme.bodyLarge?.copyWith(
-          color: theme.colorScheme.primary,
+        style: getTheme.textTheme.bodyLarge?.copyWith(
+          color: getTheme.colorScheme.primary,
         ),
       ),
     ),
@@ -35,12 +35,12 @@ class LoyaltyPointsScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: BoxBorder.all(color: theme.dividerColor),
+                  border: BoxBorder.all(color: getTheme.dividerColor),
                 ),
                 padding: const EdgeInsets.all(10),
                 child: CommonText(
                   text: AppString.regularCustomersLoyaltyPointsMessage,
-                  style: theme.textTheme.bodyLarge?.copyWith(
+                  style: getTheme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w400,
                   ),
                   maxLines: 4,
@@ -58,7 +58,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     child: Icon(
                       Icons.star,
                       size: 50,
-                      color: theme.colorScheme.onSecondary,
+                      color: getTheme.colorScheme.onSecondary,
                     ),
                   ),
 
@@ -67,10 +67,10 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     left: 50,
                     child: CommonText(
                       text: controller.loyaltyPoints.toString(),
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
-                        color: theme.colorScheme.onSecondary,
+                        color: getTheme.colorScheme.onSecondary,
                       ),
                     ),
                   ),
@@ -80,10 +80,10 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     left: 55,
                     child: CommonText(
                       text: AppString.points,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 30,
                         fontWeight: FontWeight.w500,
-                        color: theme.colorScheme.onSecondary,
+                        color: getTheme.colorScheme.onSecondary,
                       ),
                     ),
                   ),
@@ -93,7 +93,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
               20.height,
 
               Container(
-                color: theme.primaryColor.withValues(alpha: .2),
+                color: getTheme.primaryColor.withValues(alpha: .2),
                 padding: const EdgeInsets.only(
                   left: 10,
                   right: 10,
@@ -106,7 +106,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     10.width,
                     CommonText(
                       text: AppString.freeDelivery,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -114,7 +114,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     const Spacer(),
                     CommonText(
                       text: AppString.points10000,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -124,7 +124,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
               ),
               10.height,
               Container(
-                color: theme.primaryColor.withValues(alpha: .2),
+                color: getTheme.primaryColor.withValues(alpha: .2),
                 padding: const EdgeInsets.only(
                   left: 10,
                   right: 10,
@@ -137,7 +137,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     10.width,
                     CommonText(
                       text: AppString.off_10,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -145,7 +145,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
                     const Spacer(),
                     CommonText(
                       text: AppString.points1000,
-                      style: theme.textTheme.bodyMedium?.copyWith(
+                      style: getTheme.textTheme.bodyMedium?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

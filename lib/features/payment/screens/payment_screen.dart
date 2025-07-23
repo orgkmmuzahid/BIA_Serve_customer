@@ -32,13 +32,13 @@ class PaymentScreen extends StatelessWidget {
                       border: BoxBorder.all(
                         color:
                             paymentController.selectedPayment == payment.key
-                                ? theme.primaryColor
-                                : theme.dividerColor,
+                                ? getTheme.primaryColor
+                                : getTheme.dividerColor,
                       ),
                       color:
                           paymentController.selectedPayment == payment.key
-                              ? theme.colorScheme.primary.withAlpha(20)
-                              : theme.scaffoldBackgroundColor,
+                              ? getTheme.colorScheme.primary.withAlpha(20)
+                              : getTheme.scaffoldBackgroundColor,
                     ),
                     child: Row(
                       children: [
@@ -48,8 +48,8 @@ class PaymentScreen extends StatelessWidget {
                               : Icons.radio_button_unchecked,
                           color:
                               paymentController.selectedPayment == payment.key
-                                  ? theme.colorScheme.primary
-                                  : theme.dividerColor,
+                                  ? getTheme.colorScheme.primary
+                                  : getTheme.dividerColor,
                         ),
                         CommonImage(
                           imageSrc: payment.value,

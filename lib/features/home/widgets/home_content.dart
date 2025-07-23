@@ -107,8 +107,8 @@ class HomeContent extends StatelessWidget {
         child: Card(
           elevation: 2,
           shadowColor:
-              theme.inputDecorationTheme.disabledBorder?.borderSide.color,
-          color: theme.scaffoldBackgroundColor,
+              getTheme.inputDecorationTheme.disabledBorder?.borderSide.color,
+          color: getTheme.scaffoldBackgroundColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -119,7 +119,7 @@ class HomeContent extends StatelessWidget {
                 child: CommonText(
                   text: titte,
                   maxLines: 2,
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

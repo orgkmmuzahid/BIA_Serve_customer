@@ -32,14 +32,14 @@ class VendorSourcingScreen extends StatelessWidget {
               children: [
                 CommonText(
                   text: AppString.productCategory,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                   bottom: 10,
                 ),
                 _productCategory(),
 
                 CommonText(
                   text: AppString.numberOfVendor,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                   bottom: 10,
                   top: 10,
                 ),
@@ -48,7 +48,7 @@ class VendorSourcingScreen extends StatelessWidget {
 
                 CommonText(
                   text: AppString.budget,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                   bottom: 10,
                   top: 10,
                 ),
@@ -59,7 +59,7 @@ class VendorSourcingScreen extends StatelessWidget {
 
                 CommonText(
                   text: AppString.specialInstruction,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                   bottom: 10,
                   top: 10,
                 ),
@@ -73,7 +73,7 @@ class VendorSourcingScreen extends StatelessWidget {
                   children: [
                     CommonText(
                       text: AppString.serviceFee,
-                      style: theme.textTheme.bodyLarge,
+                      style: getTheme.textTheme.bodyLarge,
                       bottom: 10,
                       top: 10,
                     ),
@@ -81,7 +81,7 @@ class VendorSourcingScreen extends StatelessWidget {
                     CommonText(
                       text:
                           '${AppString.monySign} ${vendorSourcingController.selectedServiceFee.value}',
-                      style: theme.textTheme.titleMedium?.copyWith(
+                      style: getTheme.textTheme.titleMedium?.copyWith(
                         color: AppColors.primaryColor,
                       ),
                       enableBorder: true,

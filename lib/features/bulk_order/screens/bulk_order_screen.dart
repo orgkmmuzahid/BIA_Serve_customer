@@ -34,7 +34,7 @@ class BulkOrderScreen extends StatelessWidget {
               children: [
                 CommonText(
                   text: AppString.listOfSupplier,
-                  style: theme.textTheme.bodyLarge,
+                  style: getTheme.textTheme.bodyLarge,
                 ).start,
 
                 ...List.generate(
@@ -44,7 +44,7 @@ class BulkOrderScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: CommonTextField(
                         hintText: AppString.itemDetails,
-                        borderColor: theme.dividerColor,
+                        borderColor: getTheme.dividerColor,
                         validator: OtherHelper.requiredFieldValidator,
                         onSaved: (value) {
                           final item = bulkOrderController
@@ -77,7 +77,7 @@ class BulkOrderScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: theme.colorScheme.surfaceContainerLowest,
+                      color: getTheme.colorScheme.surfaceContainerLowest,
                     ),
                     height: 150,
                     child: const Center(

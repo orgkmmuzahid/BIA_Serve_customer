@@ -63,7 +63,7 @@ class CommonText extends StatelessWidget {
       // boxShadow: [
       //   BoxShadow(color: borderColor ?? Theme.of(context).dividerColor, blurRadius: 3, spreadRadius: 1)
       // ],
-      color: backgroundColor ?? theme.scaffoldBackgroundColor,
+      color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
       border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, ),
     ),
     child: Align(alignment: _convertAlignment(), child: _textField(context)),

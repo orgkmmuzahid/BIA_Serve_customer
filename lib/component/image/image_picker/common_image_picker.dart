@@ -1,16 +1,29 @@
 import 'dart:io';
+
 import 'package:bai_serve/component/image/image_picker/common_image_picker_controller.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+
 
 class CommonImagePicker extends StatelessWidget {
-
-  CommonImagePicker({super.key, this.isMulti = false}){
-    Get.find<CommonImagePickerController>().onPickerChange(isMulti: isMulti);
+  CommonImagePicker({
+    super.key,
+    this.width = 160,
+    this.height = 160,
+    this.borderRadious = 10,
+    this.pickerIcon = Icons.image,
+  }) {
+    Get.find<CommonImagePickerController>().onPickerChange(isMulti: false);
   }
-  final bool isMulti;
+
+  final double width;
+  final double height;
+  final double borderRadious;
+  final IconData pickerIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -18,116 +31,69 @@ class CommonImagePicker extends StatelessWidget {
       builder: (controller) {
         final images = controller.selectedImages;
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (isMulti)
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  // All selected images
-                  for (int i = 0; i < images.length; i++)
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.file(
-                            File(images[i].path),
-                            width: 90,
-                            height: 90,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: () => controller.removeImage(i),
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: Colors.black54,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(Icons.close, size: 16, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                  // Add image placeholder
-                  GestureDetector(
-                    onTap: controller.pickImage,
-                    child: Container(
-                      width: 90,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: theme.colorScheme.surfaceContainerLowest,
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.add_a_photo, size: 28),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            else
-              Center(
-                child: Column(
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Container(
-                            width: 160,
-                            height: 160,
-                            color: theme.colorScheme.surfaceContainerLowest,
-                            child: images.isNotEmpty
-                                ? Image.file(
-                                    File(images.first.path),
-                                    fit: BoxFit.cover,
-                                  )
-                                : const Icon(Icons.image, size: 60),
-                          ),
-                        ),
-                        if (images.isNotEmpty)
-                          Positioned(
-                            bottom: 8,
-                            right: 8,
-                            child: GestureDetector(
-                              onTap: controller.pickImage,
-                              child: Container(
-                                padding: const EdgeInsets.all(6),
-                                decoration: const BoxDecoration(
-                                  color: Colors.black54,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(Icons.edit, color: Colors.white, size: 20),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    if (images.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: ElevatedButton.icon(
-                          onPressed: controller.pickImage,
-                          icon: const Icon(Icons.add_photo_alternate_outlined),
-                          label: const Text(AppString.addImage),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-          ],
-        );
+        return _singleImage(images, controller);
       },
     );
   }
+
+  Center _singleImage(List<XFile> images, CommonImagePickerController controller) {
+    // Shift the camera icon more inward when the image becomes circular
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(borderRadious),
+                child: Container(
+                  width: width,
+                  height: height,
+                  color: getTheme.colorScheme.surfaceContainerLowest,
+                  child: images.isNotEmpty
+                      ? Image.file(File(images.first.path), fit: BoxFit.fill)
+                      :  Icon(pickerIcon, size: width/1.8, color:  getTheme.primaryColor),
+                ),
+              ),
+
+              _buildCameraIcon(controller)
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Positioned _buildCameraIcon( CommonImagePickerController controller) {
+  final isCircular = borderRadious >= width / 2;
+  double right = 8;
+  double bottom = 8;
+
+  if (isCircular) {
+    final radius = width / 2;
+    final offset = radius * 0.120; // ≈ 29.3% inward from the edge for diagonal safety
+    right = offset;
+    bottom = offset;
+  }
+
+  return Positioned(
+    bottom: bottom,
+    right: right,
+    child: GestureDetector(
+      onTap: controller.pickImage,
+      child: Container(
+        height: 30,
+        width: 30,
+        padding: const EdgeInsets.all(3),
+        decoration:  BoxDecoration(
+          color: getTheme.primaryColor,
+          borderRadius: const BorderRadius.all(Radius.circular(18)),
+        ),
+        child: const Icon(Icons.camera_alt, color: AppColors.iconColorWhite, size: 18),
+      ),
+    ),
+  );
+}
+
 }

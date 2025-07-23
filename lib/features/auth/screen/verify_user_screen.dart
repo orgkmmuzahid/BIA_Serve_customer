@@ -59,7 +59,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                   CommonText(
                     alignment: MainAxisAlignment.center,
                     text: AppString.enterVerifyCode,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ),
                   20.height,
 
@@ -119,7 +119,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
           TextSpan(
             text: AppString.didntReciveCode,
             style: GoogleFonts.dmSans(
-              color: theme.textTheme.bodySmall?.color,
+              color: getTheme.textTheme.bodySmall?.color,
               fontSize: 12,
               fontWeight: FontWeight.w400,
             ),
@@ -134,7 +134,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                     if (controller.time == '00:00') controller.startTimer();
                   },
             style: GoogleFonts.lato(
-              color: theme.colorScheme.primary,
+              color: getTheme.colorScheme.primary,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -152,10 +152,10 @@ class _VerifyUserState extends State<VerifyUserScreen> {
         controller: controller.otpController,
         autoDisposeControllers: false,
 
-        cursorColor: theme.textSelectionTheme.cursorColor,
-        textStyle: theme.textTheme.bodyMedium?.copyWith(
+        cursorColor: getTheme.textSelectionTheme.cursorColor,
+        textStyle: getTheme.textTheme.bodyMedium?.copyWith(
           fontSize: 25,
-          color: theme.inputDecorationTheme.enabledBorder?.borderSide.color,
+          color: getTheme.inputDecorationTheme.enabledBorder?.borderSide.color,
         ),
         appContext: (context),
         autoFocus: true,
@@ -168,9 +168,9 @@ class _VerifyUserState extends State<VerifyUserScreen> {
           selectedFillColor: AppColors.transparent,
           inactiveFillColor: AppColors.transparent,
           borderWidth: 0.1,
-          selectedColor: theme.primaryColor,
-          activeColor: theme.primaryColor,
-          inactiveColor: theme.colorScheme.outline,
+          selectedColor: getTheme.primaryColor,
+          activeColor: getTheme.primaryColor,
+          inactiveColor: getTheme.colorScheme.outline,
         ),
         length: 6,
         keyboardType: TextInputType.number,

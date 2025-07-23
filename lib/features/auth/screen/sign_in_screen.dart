@@ -88,7 +88,7 @@ class SignInScreen extends StatelessWidget {
                       isLoading: controller.isLoading,
                       onTap: controller.signInUser,
                       buttonWidth: 132,
-                      buttonHeight: 32,
+                      buttonHeight: 40,
                     ),
                   ),
                   142.height,

@@ -50,7 +50,7 @@ class VendorDetailsScreen extends StatelessWidget {
         CommonImage(imageSrc: vendorController.selectedVendor?.image ?? '', size: 90, borderRadius: 90, fill: BoxFit.fill).center,
         CommonText(
           text: vendorController.selectedVendor?.name ?? '',
-          style: theme.textTheme.titleMedium,
+          style: getTheme.textTheme.titleMedium,
           alignment: MainAxisAlignment.center,
         ),
         CommonText(

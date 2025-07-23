@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 
-ThemeData get theme => Theme.of(Get.context!);
+ThemeData get getTheme => Theme.of(Get.context!);
 
 extension EnumDisplayName on Enum {
   String get displayName {

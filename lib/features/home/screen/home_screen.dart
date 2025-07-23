@@ -38,11 +38,11 @@ class HomeScreen extends StatelessWidget {
       children: [
         Text(
           controller.name,
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: theme.primaryColor,
+          style: getTheme.textTheme.titleMedium?.copyWith(
+            color: getTheme.primaryColor,
           ),
         ),
-        Text(controller.address, style: theme.textTheme.bodyMedium),
+        Text(controller.address, style: getTheme.textTheme.bodyMedium),
       ],
     );
   }
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
     return Builder(
       builder:
           (context) => IconButton(
-            icon: Icon(Icons.menu, color: theme.textTheme.bodyMedium?.color),
+            icon: Icon(Icons.menu, color: getTheme.textTheme.bodyMedium?.color),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
     );

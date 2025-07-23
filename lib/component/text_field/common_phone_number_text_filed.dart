@@ -20,7 +20,7 @@ class CommonPhoneNumberTextFiled extends StatelessWidget {
       initialCountryCode: 'SE',
       controller: controller,
       validator: OtherHelper.phoneValidator,
-      style: theme.textTheme.bodyMedium?.copyWith(
+      style: getTheme.textTheme.bodyMedium?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 12,
       ),
@@ -36,7 +36,7 @@ class CommonPhoneNumberTextFiled extends StatelessWidget {
       ),
       flagsButtonPadding: const EdgeInsets.only(left: 8, right: 8),
       dropdownIconPosition: IconPosition.trailing,
-      dropdownTextStyle: theme.textTheme.bodyMedium?.copyWith(
+      dropdownTextStyle: getTheme.textTheme.bodyMedium?.copyWith(
         fontWeight: FontWeight.w500,
         fontSize: 12,
       ),

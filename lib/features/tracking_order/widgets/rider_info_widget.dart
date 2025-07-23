@@ -20,7 +20,7 @@ class RiderInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CommonText(text: AppString.riderDetails, style: theme.textTheme.bodyLarge),
+        CommonText(text: AppString.riderDetails, style: getTheme.textTheme.bodyLarge),
         10.height,
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,12 +32,12 @@ class RiderInfoWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonText(text: riderInfo.name, style: theme.textTheme.titleMedium),
+                    CommonText(text: riderInfo.name, style: getTheme.textTheme.titleMedium),
                     CommonRatingBar(rating: riderInfo.ratting, allowHalf: true, totalCount: riderInfo.totalCount, size: 15, spacing: 0),
                     10.height,
-                    CommonText(text: riderInfo.bio, style: theme.textTheme.bodyMedium, textAlign: TextAlign.justify),
+                    CommonText(text: riderInfo.bio, style: getTheme.textTheme.bodyMedium, textAlign: TextAlign.justify),
                     20.height,
-                    CommonText(text: '${AppString.phoneNumber} : ${riderInfo.phoneNumber}', style: theme.textTheme.titleSmall),
+                    CommonText(text: '${AppString.phoneNumber} : ${riderInfo.phoneNumber}', style: getTheme.textTheme.titleSmall),
                     20.height,
                     Row(
                       children: [

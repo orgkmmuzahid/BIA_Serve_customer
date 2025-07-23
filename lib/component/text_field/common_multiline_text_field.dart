@@ -33,15 +33,15 @@ class CommonMultilineTextField extends StatelessWidget {
         },
         readOnly: readOnly,
         maxLines: null,
-        style: theme.textTheme.bodyMedium,
+        style: getTheme.textTheme.bodyMedium,
         scrollPhysics: const BouncingScrollPhysics(),
         validator: validator,
         expands: true, // expands to fill parent height
         decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
-            borderSide: theme.inputDecorationTheme.enabledBorder!.borderSide
-                .copyWith(color: theme.dividerColor),
+            borderSide: getTheme.inputDecorationTheme.enabledBorder!.borderSide
+                .copyWith(color: getTheme.dividerColor),
             borderRadius: BorderRadius.circular(10),
           ),
           contentPadding: const EdgeInsets.all(12),

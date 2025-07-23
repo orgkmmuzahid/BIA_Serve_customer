@@ -24,7 +24,7 @@ class NegotiationAssistanceScreen extends StatelessWidget {
           children: [
             CommonText(
               text: AppString.negotiationAssistance,
-              style: theme.textTheme.bodyLarge,
+              style: getTheme.textTheme.bodyLarge,
             ).start,
             const CommonText(
               text: AppString.negotiationAssistanceSubTitle,
@@ -53,13 +53,13 @@ class NegotiationAssistanceScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(right: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: theme.colorScheme.secondary,
+                          color: getTheme.colorScheme.secondary,
                         ),
                         alignment: Alignment.center,
                         child: Text(
                           AppString.sentOrder,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSecondary,
+                          style: getTheme.textTheme.bodyLarge?.copyWith(
+                            color: getTheme.colorScheme.onSecondary,
                           ),
                         ),
                       ),

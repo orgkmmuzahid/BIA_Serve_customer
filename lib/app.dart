@@ -12,6 +12,11 @@ class CustomScrollBehavior extends MaterialScrollBehavior {
   ScrollPhysics getScrollPhysics(BuildContext context) {
     return const BouncingScrollPhysics(); // or ClampingScrollPhysics, etc.
   }
+
+    @override
+    ScrollViewKeyboardDismissBehavior getKeyboardDismissBehavior(BuildContext context) {
+    return  ScrollViewKeyboardDismissBehavior.onDrag;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -30,6 +35,7 @@ class MyApp extends StatelessWidget {
           themeController.initTheme(context);
           return GetMaterialApp(
             scrollBehavior: CustomScrollBehavior(),
+            
             debugShowCheckedModeBanner: false,
             navigatorKey: Get.key,
             defaultTransition: Transition.fadeIn,

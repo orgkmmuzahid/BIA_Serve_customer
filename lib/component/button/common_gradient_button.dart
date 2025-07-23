@@ -29,7 +29,7 @@ class CommonGradientButton extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [const Color(0xff034045), theme.colorScheme.primary],
+        colors: [const Color(0xff034045), getTheme.colorScheme.primary],
       ),
       borderRadius: BorderRadius.circular(04),
     ),

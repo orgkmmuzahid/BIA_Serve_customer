@@ -37,7 +37,7 @@ class ProductGridviewWidget extends StatelessWidget {
               height: 35,
               child: Row(
                 children: [
-                  CommonText(text: AppString.allProducts, style: theme.textTheme.bodyLarge),
+                  CommonText(text: AppString.allProducts, style: getTheme.textTheme.bodyLarge),
                   50.width,
                   Expanded(
                     child: CommonDropDown<String>(
@@ -124,10 +124,10 @@ class ProductGridviewWidget extends StatelessWidget {
                   fill: BoxFit.fill,
                 ),
                 const Spacer(),
-                CommonText(text: product.name, textAlign: TextAlign.start, style: theme.textTheme.titleSmall, left: 5, right: 5),
+                CommonText(text: product.name, textAlign: TextAlign.start, style: getTheme.textTheme.titleSmall, left: 5, right: 5),
                 CommonText(
                   text: '${AppString.monySign} ${product.price}',
-                  style: theme.textTheme.titleSmall?.copyWith(color: AppColors.primaryColor3),
+                  style: getTheme.textTheme.titleSmall?.copyWith(color: AppColors.primaryColor3),
                   left: 5,
                 ),
                 5.height,

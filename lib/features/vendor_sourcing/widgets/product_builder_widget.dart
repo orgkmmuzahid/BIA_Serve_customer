@@ -35,13 +35,13 @@ class ProductBuilderWidget extends StatelessWidget {
                 CommonText(
                   text: product.name,
                   textAlign: TextAlign.start,
-                  style: theme.textTheme.titleSmall,
+                  style: getTheme.textTheme.titleSmall,
                   left: 5,
                   right: 5,
                 ),
                 CommonText(
                   text: '${AppString.monySign} ${product.price}',
-                  style: theme.textTheme.titleSmall?.copyWith(
+                  style: getTheme.textTheme.titleSmall?.copyWith(
                     color: AppColors.primaryColor3,
                   ),
                   left: 5,

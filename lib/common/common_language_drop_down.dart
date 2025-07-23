@@ -34,7 +34,7 @@ class CommonLanguageDropDown extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
                         color:
-                            theme
+                            getTheme
                                 .inputDecorationTheme
                                 .disabledBorder!
                                 .borderSide
@@ -52,7 +52,7 @@ class CommonLanguageDropDown extends StatelessWidget {
                         SizedBox(
                           child: CommonText(
                             text: country.key,
-                            style: theme.textTheme.bodyLarge,
+                            style: getTheme.textTheme.bodyLarge,
                           ),
                         ),
                       ],
@@ -73,7 +73,7 @@ class CommonLanguageDropDown extends StatelessWidget {
           maxHeight: 320,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: theme.scaffoldBackgroundColor,
+            color: getTheme.scaffoldBackgroundColor,
           ),
         ),
       ),

@@ -17,11 +17,11 @@ class CommonBottomNavBar extends StatefulWidget {
 }
 
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
-  final selectedIconBackgroundColor = theme.colorScheme.primary;
-  final selectedIconIconColor = theme.colorScheme.onSecondary;
+  final selectedIconBackgroundColor = getTheme.colorScheme.primary;
+  final selectedIconIconColor = getTheme.colorScheme.onSecondary;
 
-  final unselectedColor = theme.textTheme.bodyMedium!.color;
-  final unselectedBackgroundColor = theme.textTheme.bodyMedium!.color;
+  final unselectedColor = getTheme.textTheme.bodyMedium!.color;
+  final unselectedBackgroundColor = getTheme.textTheme.bodyMedium!.color;
 
   Map<String, String> iconList = {
     //"title": "image url"
@@ -47,7 +47,7 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
             decoration: BoxDecoration(
-              color: theme.scaffoldBackgroundColor,
+              color: getTheme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.r),
                 topRight: Radius.circular(20.r),
@@ -112,7 +112,7 @@ Widget _buildIcon(
           SizedBox(height: 4.h),
           CommonText(
             text: navIcon.key,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: getTheme.textTheme.bodyMedium?.copyWith(
               color: isSelected ? selectedIconIconColor : unselectedColor,
               fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
               fontSize: isSelected ? 14.sp : 12.sp,

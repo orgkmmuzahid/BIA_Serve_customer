@@ -19,7 +19,7 @@ class DoNotHaveAccount extends StatelessWidget {
         children: [
           TextSpan(
             text: AppString.doNotHaveAccount,
-            style: theme.textTheme.titleSmall,
+            style: getTheme.textTheme.titleSmall,
           ),
 
           /// Sign Up Button here
@@ -32,7 +32,7 @@ class DoNotHaveAccount extends StatelessWidget {
                     Get.toNamed(AppRoutes.otpSend);
                   },
             style: GoogleFonts.dmSans(
-              color: theme.colorScheme.primary,
+              color: getTheme.colorScheme.primary,
               fontSize: 12,
               fontWeight: FontWeight.w700,
             ),

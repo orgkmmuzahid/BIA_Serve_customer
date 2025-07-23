@@ -1,6 +1,7 @@
 import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/component/image/image_picker/common_image_picker.dart';
+import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/config/route/app_routes.dart';
-import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -17,10 +18,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// App Bar Section Starts Here
       appBar: AppBar(),
-
-      /// Body Section Starts Here
       body: GetBuilder<SignUpController>(
         builder: (controller) {
           return SingleChildScrollView(
@@ -29,33 +27,31 @@ class SignUpScreen extends StatelessWidget {
               key: controller.signUpFormKey,
               child: Column(
                 children: [
-                  //logo
-                  const CommonLogo().center,
-                  50.height,
+                  20.height,
+                  //upload image
+                  CommonImagePicker(width: 150, height: 150, borderRadious: 150, pickerIcon: Icons.person),
+                  10.height,
+                  CommonText(text: AppString.profilePhoto, style: getTheme.textTheme.titleMedium, alignment: MainAxisAlignment.center),
 
-                  /// All Text Filed here
+                  // All Text Filed here
                   SignUpAllField(controller: controller, formKey: _formKey),
                   20.height,
 
-                  /// Submit Button Here
+                  // Submit Button Here
                   CommonGradientButton(
                     titleText: AppString.signUp,
                     isLoading: controller.isLoading,
                     onTap: () {
                       //on success
                       if (_formKey.currentState!.validate()) {
-                        Get.until(
-                          (route) => route.settings.name == AppRoutes.signIn,
-                        );
+                        Get.until((route) => route.settings.name == AppRoutes.signIn);
                       }
 
                       //remove it on release
-                      Get.until(
-                        (route) => route.settings.name == AppRoutes.signIn,
-                      );
+                      Get.until((route) => route.settings.name == AppRoutes.signIn);
                     },
                     buttonWidth: 132,
-                    buttonHeight: 32,
+                    buttonHeight: 40,
                   ),
                   60.height,
 

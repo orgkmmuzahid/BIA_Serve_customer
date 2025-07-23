@@ -36,7 +36,7 @@ class CommonRichText extends StatelessWidget {
           final rContent = richTextContent[index];
 
           if (rContent is CommonSimpleRichTextContent) {
-            final style = rContent.style ?? theme.textTheme.bodyMedium!;
+            final style = rContent.style ?? getTheme.textTheme.bodyMedium!;
             return TextSpan(
               text: rContent.text,
               style: style,

@@ -49,7 +49,7 @@ class SettingScreen extends StatelessWidget {
                   ).center,
             ),
             10.height,
-            Text('Cameron Williamson', style: theme.textTheme.bodyLarge),
+            Text('Cameron Williamson', style: getTheme.textTheme.bodyLarge),
             4.height,
             const Text(
               '+123456789',

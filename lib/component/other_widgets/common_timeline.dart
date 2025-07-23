@@ -24,7 +24,7 @@ class CommonTimeline extends StatelessWidget {
             children: [
               CommonText(
                 text: Utils.formatDateToShortMonth(value.time),
-                style: theme.textTheme.titleMedium?.copyWith(
+                style: getTheme.textTheme.titleMedium?.copyWith(
                   color:
                       value.isCleared
                           ? AppColors.primaryText
@@ -33,7 +33,7 @@ class CommonTimeline extends StatelessWidget {
               ),
               CommonText(
                 text: Utils.formatTime(value.time),
-                style: theme.textTheme.bodyMedium?.copyWith(
+                style: getTheme.textTheme.bodyMedium?.copyWith(
                   color: AppColors.secondaryText,
                 ),
               ),
@@ -53,7 +53,7 @@ class CommonTimeline extends StatelessWidget {
               children: [
                 CommonText(
                   text: value.title,
-                  style: theme.textTheme.titleSmall?.copyWith(
+                  style: getTheme.textTheme.titleSmall?.copyWith(
                     color:
                         value.isCleared
                             ? AppColors.primaryColor
@@ -64,7 +64,7 @@ class CommonTimeline extends StatelessWidget {
                 ),
                 CommonText(
                   text: value.subtitle,
-                  style: theme.textTheme.bodyMedium?.copyWith(
+                  style: getTheme.textTheme.bodyMedium?.copyWith(
                     color:
                         value.isCleared
                             ? AppColors.primaryText

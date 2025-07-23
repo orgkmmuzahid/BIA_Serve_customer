@@ -18,7 +18,7 @@ class CommonAlert {
       context: Get.context!,
       builder:
           (c) => AlertDialog(
-            title: Text(title, style: theme.textTheme.titleMedium),
+            title: Text(title, style: getTheme.textTheme.titleMedium),
             actionsAlignment: MainAxisAlignment.center,
             content: content,
             actions: [

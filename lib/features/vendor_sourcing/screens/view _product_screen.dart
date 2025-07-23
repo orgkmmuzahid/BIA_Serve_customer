@@ -50,7 +50,7 @@ class ViewProductScreen extends StatelessWidget {
                     color: AppColors.primaryColor3,
                   ),
                   20.height,
-                  CommonText(text: AppString.productDetails, style: theme.textTheme.bodyLarge),
+                  CommonText(text: AppString.productDetails, style: getTheme.textTheme.bodyLarge),
                   20.height,
                   _pickers(productController),
                   30.height,
@@ -178,7 +178,7 @@ class ViewProductScreen extends StatelessWidget {
       children: [
         CommonText(
           text: productController.productDetailsModel.data?.name ?? '',
-          style: theme.textTheme.bodyLarge,
+          style: getTheme.textTheme.bodyLarge,
           fontSize: 20,
           bottom: 10,
         ),

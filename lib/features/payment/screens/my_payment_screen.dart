@@ -30,7 +30,7 @@ class MyPaymentScreen extends StatelessWidget {
               10.width,
               CommonText(
                 text: 'Cameron Williamson',
-                style: theme.textTheme.bodyLarge,
+                style: getTheme.textTheme.bodyLarge,
               ),
             ],
           ),
@@ -50,7 +50,7 @@ class MyPaymentScreen extends StatelessWidget {
                   30.width,
                   CommonText(
                     text: '${AppString.monySign} 3500',
-                    style: theme.textTheme.bodyLarge?.copyWith(
+                    style: getTheme.textTheme.bodyLarge?.copyWith(
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textWhite,

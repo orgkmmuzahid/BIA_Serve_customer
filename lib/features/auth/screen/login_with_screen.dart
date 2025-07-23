@@ -60,9 +60,9 @@ class LoginWithScreen extends StatelessWidget {
     onTap: onTap,
     titleSize: 12,
     titleWeight: FontWeight.w500,
-    buttonColor: theme.scaffoldBackgroundColor,
-    titleColor: theme.textTheme.bodyLarge!.color,
-    borderColor: theme.colorScheme.outlineVariant,
+    buttonColor: getTheme.scaffoldBackgroundColor,
+    titleColor: getTheme.textTheme.bodyLarge!.color,
+    borderColor: getTheme.colorScheme.outlineVariant,
     alignment: MainAxisAlignment.start,
     icon: Padding(
       padding: const EdgeInsets.only(left: 40.5, right: 20),

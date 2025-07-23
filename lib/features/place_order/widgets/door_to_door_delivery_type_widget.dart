@@ -22,7 +22,7 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
                 onTap: () {
                   doorToDoorConroller.onDeliveryTypeChange(DeliveryType.urgent);
                 },
-                buttonColor: theme.scaffoldBackgroundColor,
+                buttonColor: getTheme.scaffoldBackgroundColor,
                 borderColor: _getRadioColor(
                   doorToDoorConroller,
                   DeliveryType.urgent,
@@ -38,8 +38,8 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
                       : Icons.radio_button_unchecked,
                   color:
                       doorToDoorConroller.deliveryType == DeliveryType.urgent
-                          ? theme.colorScheme.primary
-                          : theme.dividerColor,
+                          ? getTheme.colorScheme.primary
+                          : getTheme.dividerColor,
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
                   doorToDoorConroller,
                   DeliveryType.regular,
                 ),
-                buttonColor: theme.scaffoldBackgroundColor,
+                buttonColor: getTheme.scaffoldBackgroundColor,
                 titleColor: _getRadioColor(
                   doorToDoorConroller,
                   DeliveryType.regular,
@@ -67,8 +67,8 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
                       : Icons.radio_button_unchecked,
                   color:
                       doorToDoorConroller.deliveryType == DeliveryType.regular
-                          ? theme.colorScheme.primary
-                          : theme.dividerColor,
+                          ? getTheme.colorScheme.primary
+                          : getTheme.dividerColor,
                 ),
               ),
             ),
@@ -83,7 +83,7 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
     DeliveryType buttonType,
   ) =>
       doorToDoorConroller.deliveryType == buttonType
-          ? theme.colorScheme.primary
-          : theme.disabledColor;
+          ? getTheme.colorScheme.primary
+          : getTheme.disabledColor;
   
 }

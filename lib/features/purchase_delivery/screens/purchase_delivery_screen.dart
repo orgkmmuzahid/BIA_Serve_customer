@@ -1,6 +1,6 @@
 // File: purchase_delivery_screen.dart
 import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/image/common_multiImage_picker.dart';
+import 'package:bai_serve/component/image/image_picker/common_multi_image_picker.dart';
 import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
@@ -35,7 +35,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                 children: [
                   CommonText(
                     text: AppString.vendorName,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ).start,
                   10.height,
                   CommonTextField(
@@ -73,11 +73,11 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   ),
                   10.height,
 
-                  const CommonMultiimagePicker(),
+                   CommonMultiImagePicker(),
 
                   CommonText(
                     text: AppString.productAmount,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ).start,
                   10.height,
                   CommonTextField(
@@ -96,7 +96,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
 
                   CommonText(
                     text: AppString.deliveryType,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ).start,
                   10.height,
                   CommonDropDown<DeliveryType>(
@@ -114,7 +114,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   10.height,
                   CommonText(
                     text: AppString.deliveryAddress,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ).start,
                   10.height,
                   CommonMultilineTextField(
@@ -130,7 +130,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   10.height,
                   CommonText(
                     text: AppString.productDescription,
-                    style: theme.textTheme.bodyLarge,
+                    style: getTheme.textTheme.bodyLarge,
                   ).start,
                   10.height,
                   CommonMultilineTextField(
@@ -151,12 +151,12 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                         children: [
                           CommonText(
                             text: AppString.serviceFee,
-                            style: theme.textTheme.bodyLarge,
+                            style: getTheme.textTheme.bodyLarge,
                             bottom: 10,
                           ),
                           CommonText(
                             text: AppString.totalAmount,
-                            style: theme.textTheme.bodyLarge,
+                            style: getTheme.textTheme.bodyLarge,
                             top: 15,
                           ),
                         ],

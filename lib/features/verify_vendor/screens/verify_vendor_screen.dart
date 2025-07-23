@@ -46,7 +46,7 @@ class VerifyVendorScreen extends StatelessWidget {
   Column _content(VerifyVendorController verifyVendorController) {
     return Column(
       children: [
-        CommonText(text: AppString.productCategory, style: theme.textTheme.bodyLarge, bottom: 10),
+        CommonText(text: AppString.productCategory, style: getTheme.textTheme.bodyLarge, bottom: 10),
         CommonDropDown<String>(
           hint: AppString.productCategory,
           items: verifyVendorController.vendorCategories,
