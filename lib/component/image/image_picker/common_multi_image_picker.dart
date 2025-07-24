@@ -8,9 +8,11 @@ import 'package:image_picker/image_picker.dart';
 
 class CommonMultiImagePicker extends StatelessWidget {
 
-  CommonMultiImagePicker({super.key}){
-    Get.find<CommonImagePickerController>().onPickerChange(isMulti: true);
+  CommonMultiImagePicker({super.key, this.isMulti = true}){
+    Get.find<CommonImagePickerController>().onPickerChange(isMulti: isMulti);
   }
+
+  final bool isMulti;
 
   @override
   Widget build(BuildContext context) {

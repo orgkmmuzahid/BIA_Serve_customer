@@ -3,7 +3,7 @@ import 'package:bai_serve/component/image/common_rotating_image_banner.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/features/vendor_sourcing/widgets/product_gridview_widget.dart';
+import 'package:bai_serve/features/vendor/vendor_details/widgets/product_gridview_widget.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';

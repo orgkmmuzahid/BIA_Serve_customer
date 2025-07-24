@@ -2,7 +2,7 @@
 
 import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/loyalty_points/model/loyalty_offer_model.dart';
-import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

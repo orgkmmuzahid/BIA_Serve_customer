@@ -1,7 +1,9 @@
 // File: {{name.snakeCase()}}_screen.dart
 import 'package:flutter/material.dart';
 
-// static const String {{name.camelCase()}} = "/{{name.snakeCase()}}_screen.dart";
+
+/// Navigate to: `{{name.pascalCase()}}Screen`
+// static const String {{name.camelCase()}} = '/{{name.snakeCase()}}_screen.dart';
 // GetPage(name: {{name.camelCase()}}, page: () => const {{name.pascalCase()}}Screen()),
 
 class {{name.pascalCase()}}Screen extends StatelessWidget {

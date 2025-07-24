@@ -1,6 +1,7 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/pop_up/common_alert.dart';
+import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
@@ -80,6 +81,13 @@ class HomeDrawer extends StatelessWidget {
             onTap: controller.onDrawerLoyaltyPoints,
           ),
           _buildMenu(
+            image: AppImages.myVendors,
+            title: AppString.myVendors,
+            onTap: (){
+              Get.toNamed(AppRoutes.myVendors);
+            },
+          ),
+          _buildMenu(
             image: AppImages.drawerMessage,
             title: AppString.drawerMessage,
             onTap: controller.onDrawerMessage,
@@ -107,7 +115,7 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 218),
+          const SizedBox(height: 150),
           _buildMenu(
             image: AppImages.drawerLogout,
             title: AppString.logOut,

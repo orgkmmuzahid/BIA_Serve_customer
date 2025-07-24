@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   HomeRepository homeRepository = Get.find();
 
-  RequestState<List<String>> bannerUrls = RequestState();
+  RequestState<List<String>> bannerUrls = RequestState(data: []);
 
   String name = 'Km Muzahid';
   String address = '1901 Thornridge Cir. Shiloh, Hawaii 81063';
@@ -30,13 +30,13 @@ class HomeController extends GetxController {
   Timer? _timer;
 
   void _startTimer() {
-    if (bannerUrls.data == null || bannerUrls.data?.isEmpty == true) {
+    if (bannerUrls.data.isEmpty == true) {
       return;
     }
     Timer.periodic(const Duration(seconds: 3), (timer) {
       _timer = timer;
 
-      if (currentIndex < (bannerUrls.data?.length ?? 0) - 1) {
+      if (currentIndex < (bannerUrls.data.length) - 1) {
         currentIndex++;
       } else {
         currentIndex = 0;

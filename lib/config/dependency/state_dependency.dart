@@ -7,16 +7,17 @@ import 'package:bai_serve/features/custom_google_map/controllers/custom_google_m
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/home/controller/home_order_conroller.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
-import 'package:bai_serve/features/my_order/controllers/my_order_controller.dart';
+import 'package:bai_serve/features/order/my_order/controllers/my_order_controller.dart';
 import 'package:bai_serve/features/payment/controllers/payment_controller.dart';
-import 'package:bai_serve/features/place_order/controllers/door_to_door_controller.dart';
-import 'package:bai_serve/features/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/features/order/place_order/controllers/door_to_door_controller.dart';
+import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve/features/setting/controllers/setting_controller.dart';
-import 'package:bai_serve/features/tracking_order/controllers/tracking_order_controller.dart';
-import 'package:bai_serve/features/vendor_sourcing/controllers/product_controller.dart';
-import 'package:bai_serve/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
-import 'package:bai_serve/features/verify_vendor/controllers/verify_vendor_controller.dart';
+import 'package:bai_serve/features/order/tracking_order/controllers/tracking_order_controller.dart';
+import 'package:bai_serve/features/vendor/vendor_details/controllers/vendor_details_controller.dart';
+import 'package:bai_serve/features/vendor/vendor_details/controllers/product_controller.dart';
+import 'package:bai_serve/features/vendor/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
+import 'package:bai_serve/features/vendor/verify_vendor/controllers/verify_vendor_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
@@ -51,6 +52,7 @@ class StateDependency {
     Get.lazyPut(VendorSourcingController.new, fenix: true);
     Get.lazyPut(ProductController.new, fenix: true);
     Get.lazyPut(VerifyVendorController.new, fenix: true);
+    Get.lazyPut(VendorDetailsController.new, fenix: true);
 
     
     //

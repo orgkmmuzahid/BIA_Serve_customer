@@ -1,5 +1,5 @@
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/features/tracking_order/model/order_timeline_model.dart';
+import 'package:bai_serve/features/order/tracking_order/model/order_timeline_model.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';

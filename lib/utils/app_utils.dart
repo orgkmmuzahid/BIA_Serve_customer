@@ -23,6 +23,10 @@ void goToScreen(String route) {
   });
 }
 
+ dynamic getArgument({required String name}) => (Get.arguments == null
+              ? {}
+              : Get.arguments as Map<String, dynamic>)[name]; 
+
 class Utils {
   static late Size deviceSize;
 

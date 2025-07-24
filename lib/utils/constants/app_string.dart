@@ -34,6 +34,7 @@ class AppString {
   static const String resendCodeIn = 'Resend code in';
   static const String minute = 'minute';
   static const String verify = 'Verify';
+  static const String verifyNow = 'Verify Now';
   static const String verifyVendor = 'Verify Vendor';
   static const String logIntoYourAccount = 'Login to Your Account';
   static const String forgotThePassword = 'Forgot Password';
@@ -246,6 +247,7 @@ class AppString {
   static const riderDetails  = 'Rider Details';
   static const callNow  = 'Call Now';
   static const myVendors  = 'My Vendors';
+  static const vendorVerificationRequestMessage  = 'Your Vendor Verify Request has been submitted. Our team will get back to you shortly.';
 
   static String loaltyClaimingMessage(String value) =>
       'You’ve received a $value on your next order! Don’t miss out ';

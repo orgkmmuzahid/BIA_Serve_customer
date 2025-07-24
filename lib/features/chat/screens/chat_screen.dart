@@ -20,10 +20,7 @@ import 'package:get/get.dart';
 
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key})
-    : action =
-          (Get.arguments == null
-              ? {}
-              : Get.arguments as Map<String, dynamic>)['action'],
+    : action = getArgument(name: 'action'),
       chatIemWidth = (Utils.deviceSize.width - 32) * .7;
   final Widget? action;
   final double chatIemWidth;

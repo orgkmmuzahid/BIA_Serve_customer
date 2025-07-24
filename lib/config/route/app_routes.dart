@@ -11,27 +11,27 @@ import 'package:bai_serve/features/chat/screens/message_screen.dart';
 import 'package:bai_serve/features/home/screen/home_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/loyalty_points_screen.dart';
 import 'package:bai_serve/features/loyalty_points/screens/my_rewards_screen.dart';
-import 'package:bai_serve/features/my_order/screens/my_order_screen.dart';
+import 'package:bai_serve/features/order/my_order/screens/my_order_screen.dart';
+import 'package:bai_serve/features/order/place_order/screens/checkout_screen.dart';
+import 'package:bai_serve/features/order/place_order/screens/door_to_door_pickup_screen.dart';
+import 'package:bai_serve/features/order/place_order/screens/order_details_screen.dart';
+import 'package:bai_serve/features/order/place_order/screens/pick_up_information_screen.dart';
+import 'package:bai_serve/features/order/place_order/screens/place_order_screen.dart';
+import 'package:bai_serve/features/order/tracking_order/screens/tracking_order_screen.dart';
 import 'package:bai_serve/features/payment/screens/my_payment_screen.dart';
 import 'package:bai_serve/features/payment/screens/payment_screen.dart';
-import 'package:bai_serve/features/place_order/screens/checkout_screen.dart';
-import 'package:bai_serve/features/place_order/screens/door_to_door_pickup_screen.dart';
-import 'package:bai_serve/features/place_order/screens/order_details_screen.dart';
-import 'package:bai_serve/features/place_order/screens/pick_up_information_screen.dart';
-import 'package:bai_serve/features/place_order/screens/place_order_screen.dart';
 import 'package:bai_serve/features/purchase_delivery/screens/purchase_delivery_screen.dart';
 import 'package:bai_serve/features/setting/screens/language_screen.dart';
 import 'package:bai_serve/features/setting/screens/privacy_policy_screen.dart';
 import 'package:bai_serve/features/setting/screens/setting_screen.dart';
 import 'package:bai_serve/features/setting/screens/terms_condition_screen.dart';
-import 'package:bai_serve/features/tracking_order/screens/tracking_order_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/all_product_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/vendor_details_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_category_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/vendor_sourcing_screen.dart';
-import 'package:bai_serve/features/vendor_sourcing/screens/view%20_product_screen.dart';
-import 'package:bai_serve/features/verify_vendor/screens/vendor_verify_form_screen.dart';
-import 'package:bai_serve/features/verify_vendor/screens/verify_vendor_screen.dart';
+import 'package:bai_serve/features/vendor/vendor_details/screens/all_product_screen.dart';
+import 'package:bai_serve/features/vendor/vendor_details/screens/view%20_product_screen.dart';
+import 'package:bai_serve/features/vendor/vendor_details/widgets/vendor_details_screen.dart';
+import 'package:bai_serve/features/vendor/vendor_sourcing/screens/vendor_sourcing_screen.dart';
+import 'package:bai_serve/features/vendor/verify_vendor/screens/my_vendors_screen.dart';
+import 'package:bai_serve/features/vendor/verify_vendor/screens/vendor_verify_form_screen.dart';
+import 'package:bai_serve/features/vendor/verify_vendor/screens/verify_vendor_screen.dart';
 import 'package:get/get.dart';
 
 import '../../features/auth/screen/change_password_screen.dart';
@@ -59,11 +59,12 @@ class AppRoutes {
   static const String loyaltyPoints = '/loyalty_points_screen.dart';
   static const String myRewards = '/my_rewards_screen.dart';
   static const String orderDetails = '/order_details_screen.dart';
-  static const String payment = '/payment_screen.dart';
   static const String checkout = '/checkout_screen.dart';
   static const String bulkOrder = '/bulk_order_screen.dart';
   static const String doorToDoorPickup = '/door_to_door_pickup_screen.dart';
   static const String negotiationAssistance = '/negotiation_assistance_screen.dart';
+  /// **Arguments:**
+  /// -`final Widget? action` - action widget in the app bar
   static const String chat = '/chat_screen.dart';
   static const String bulkOrderDetails = '/bulk_order_details_screen.dart';
   static const String purchaseDelivery = '/purchase_delivery_screen.dart';
@@ -74,16 +75,31 @@ class AppRoutes {
   static const String termsCondition = '/terms_condition_screen.dart';
   static const String privacyPolicy = '/privacy_policy_screen.dart';
   static const String profileInfo = '/profile_info_screen.dart';
+
+  static const String payment = '/payment_screen.dart';
   static const String myPayment = '/my_payment_screen.dart';
+  
   static const String messageScreen = '/message_screen.dart';
   static const String calling = '/calling_screen.dart';
   static const String vendorSourcing = '/vendor_sourcing_screen.dart';
   static const String allProducts = '/all_product_screen.dart';
-  static const String vendorSourcingCategory = '/vendor_sourcing_category_screen.dart';
   static const String viewProduct = '/view_product_screen.dart';
-  static const String vendorDetails = '/vendor_details_screen.dart';
+
+/// Navigate to: `VendorDetailsScreen`
+///  **arguments**
+///    `VendorModel? vendorModel` - pass it to show vendor details
+static const String vendorDetails = '/vendor_details_screen.dart';
+
+  
   static const String verifyVendor = '/verify_vendor_screen.dart';
+
+/// Navigate to: `VendorVerifyFormScreen`
+///
+/// **Arguments:**
+/// - `VendorModel? vendorModel` – The vendor data to verify
   static const String vendorVerifyForm = '/vendor_verify_form_screen.dart';
+
+  static const String myVendors = '/my_vendors_screen.dart';
 
   //---------------------
   static const String changePassword = '/change_password_screen.dart';
@@ -125,11 +141,11 @@ class AppRoutes {
     GetPage(name: calling, page: () => const CallingScreen()),
     GetPage(name: vendorSourcing, page: () => const VendorSourcingScreen()),
     GetPage(name: allProducts, page: () => const AllProductScreen()),
-    GetPage(name: vendorSourcingCategory, page: () => const VendorSourcingCategoryScreen()),
     GetPage(name: viewProduct, page: () => const ViewProductScreen()),
-    GetPage(name: vendorDetails, page: () => const VendorDetailsScreen()),
+    GetPage(name: vendorDetails, page: VendorDetailsScreen.new),
     GetPage(name: verifyVendor, page: () => const VerifyVendorScreen()),
-    GetPage(name: vendorVerifyForm, page: () => const VendorVerifyFormScreen()),
+    GetPage(name: vendorVerifyForm, page: VendorVerifyFormScreen.new),
+    GetPage(name: myVendors, page: MyVendorScreen.new),
 
     //----------------------
     GetPage(name: changePassword, page: ChangePasswordScreen.new),
