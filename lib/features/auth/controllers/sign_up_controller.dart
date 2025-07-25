@@ -1,10 +1,10 @@
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field_v2/phone_number.dart';
-
-import '../../../config/route/app_routes.dart';
 
 class SignUpController extends GetxController {
   /// Sign Up Form Key
@@ -53,7 +53,7 @@ class SignUpController extends GetxController {
 
   Future<void> signUpUser({required String phoneNumber}) async {
     if (!signUpFormKey.currentState!.validate()) return;
-    Get.toNamed(AppRoutes.verifyUser);
+    appRouter.push(const VerifyUserRoute());
     return;
   }
 }

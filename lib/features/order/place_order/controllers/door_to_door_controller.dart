@@ -1,7 +1,5 @@
-import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/order/place_order/enum/delivery_type.dart';
 import 'package:bai_serve/features/order/place_order/enum/pickup_type.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:get/get.dart';
 
 class DoorToDoorController extends GetxController {
@@ -10,10 +8,6 @@ class DoorToDoorController extends GetxController {
 
   void onPickupTypeChange(PickupType pickupType) {
     this.pickupType = pickupType;
-    Get.toNamed(
-      AppRoutes.placeOrder,
-      arguments: {'title': AppString.homeDoorToDoorPickup},
-    );
   }
 
   void onDeliveryTypeChange(DeliveryType deliveryType) {

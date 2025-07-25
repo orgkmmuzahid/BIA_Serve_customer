@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../../config/route/app_routes.dart';
 import '../../../../../utils/constants/app_colors.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/extensions/extension.dart';
@@ -12,6 +13,8 @@ import '../../../component/text_field/common_text_field.dart';
 import '../../../utils/helpers/other_helper.dart';
 import '../controllers/change_password_controller.dart';
 
+
+@RoutePage()
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
 
@@ -83,7 +86,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
-                      onTap: () => Get.toNamed(AppRoutes.forgotPassword),
+                      onTap: () => appRouter.push(const ForgetPasswordRoute()),
                       child: CommonText(
                         text: AppString.forgotPassword,
                         color: AppColors.primaryColor,

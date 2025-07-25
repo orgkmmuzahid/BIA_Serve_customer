@@ -1,7 +1,8 @@
 import 'package:bai_serve/component/button/common_gradient_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_phone_number_text_filed.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -54,7 +55,7 @@ class OtpSend extends StatelessWidget {
             buttonHeight: 32,
             titleSize: 12,
             titleWeight: FontWeight.w500,
-            onTap: () => Get.toNamed(AppRoutes.verifyUser),
+            onTap: () => appRouter.push(const VerifyUserRoute()),
           ),
         ],
       ),

@@ -1,6 +1,8 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/other_widgets/dual_field_row_widget.dart';
 import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -26,7 +28,7 @@ class CouponSectionWidget extends StatelessWidget {
               DualFieldRow(
                left:  CommonButton(
                   titleText: AppString.couponCode,
-                  onTap: placeOrderController.onCoupon,
+                  onTap: ()=> appRouter.push(const MyRewardsRoute()),
                 ),
               right: CommonButton(
                   titleText: AppString.noCouponCode,

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/common_bar/common_tab_bar.dart';
@@ -17,6 +18,8 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 final _form1 = GlobalKey<FormState>();
 
+
+@RoutePage()
 class ProfileInfoScreen extends StatelessWidget {
   const ProfileInfoScreen({super.key});
 

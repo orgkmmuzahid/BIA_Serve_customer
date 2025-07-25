@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -41,8 +43,12 @@ class OtpController extends GetxController {
     this.otpFor = otpFor;
   }
 
-  Future<void> verifyOtpRepo(String route) async {
-    Get.toNamed(route);
+  Future<void> verifyOtpRepo() async {
+    if(otpFor == OtpFor.signup){
+      appRouter.push(const SignUpRoute());
+    }else if(otpFor == OtpFor.forgetPassword){
+      appRouter.push(const ForgetPasswordRoute());
+    }
     return;
 
   }

@@ -1,4 +1,5 @@
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -26,9 +27,7 @@ class AlreadyAccountRichText extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    Get.until(
-                      (route) => route.settings.name == AppRoutes.loginWith,
-                    );
+                    appRouter.popUntilRouteWithName(LoginOptionsRoute.name);
                   },
             style: GoogleFonts.dmSans(
               color: getTheme.colorScheme.primary,

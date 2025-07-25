@@ -15,75 +15,23 @@ class MockVerifyVendorRepository implements VerifyVendorRepository {
     required OnRequestStateChange<List<VendorModel>> onStateChange,
     VendorFetchType vendorFetchType = VendorFetchType.allVendor,
   }) async {
+    onStateChange(RequestState(data: [], isRequesting: true));
+    await Future.delayed(const Duration(seconds: 1));
     onStateChange(
       RequestState(
         data: [
+          for(int i =0; i<5; i++)
           VendorModel(
-            id: 'id',
+            id: '522654s54f54',
             name: 'Kathryn Murphy',
             image: AppImages.homeBanner,
             verificationStatus: VerificationStatus.verified,
             phoneNumber: '',
           ),
-          VendorModel(
-            verificationStatus: VerificationStatus.verified,
-            id: 'id',
-            name: 'Courtney Henry',
-            image: AppImages.loyaltyPonitsBackground,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.verified,
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.verified,
-            id: 'id',
-            name: 'Courtney Henry',
-            image: AppImages.loyaltyPonitsBackground,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.verified,
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-          ),
+          for(int i =0; i<5; i++)
           VendorModel(
             verificationStatus: VerificationStatus.unverified,
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.unverified,
-            id: 'id',
-            name: 'Courtney Henry',
-            image: AppImages.loyaltyPonitsBackground,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.unverified,
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.unverified,
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-          ),
-          VendorModel(
-            verificationStatus: VerificationStatus.unverified,
-            id: 'id',
+            id: '45564sdfwsadfg4',
             name: 'Kathryn Murphy',
             image: AppImages.homeBanner,
             phoneNumber: '',
@@ -97,11 +45,12 @@ class MockVerifyVendorRepository implements VerifyVendorRepository {
   Future<void> myVendors({required OnRequestStateChange<List<MyVendorModel>> onStateChange}) async {
     
     onStateChange(RequestState(data: [], isRequesting: true));
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     
     onStateChange(
       RequestState(
         data: [
+          for(int i =0; i<5; i++)
           MyVendorModel(
             id: 'id',
             name: 'Kathryn Murphy',
@@ -111,6 +60,7 @@ class MockVerifyVendorRepository implements VerifyVendorRepository {
             applyDate: DateTime.now(),
             verifyStatus: VerifyStatus.pending,
           ),
+          for(int i =0; i<5; i++)
           MyVendorModel(
             id: 'id',
             name: 'Kathryn Murphy',
@@ -120,42 +70,7 @@ class MockVerifyVendorRepository implements VerifyVendorRepository {
             applyDate: DateTime.now(),
             verifyStatus: VerifyStatus.verified,
           ),
-          MyVendorModel(
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-            address: 'Dar es salaam',
-            applyDate: DateTime.now(),
-            verifyStatus: VerifyStatus.pending,
-          ),
-          MyVendorModel(
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-            address: 'Dar es salaam',
-            applyDate: DateTime.now(),
-            verifyStatus: VerifyStatus.verified,
-          ),
-          MyVendorModel(
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-            address: 'Dar es salaam',
-            applyDate: DateTime.now(),
-            verifyStatus: VerifyStatus.pending,
-          ),
-          MyVendorModel(
-            id: 'id',
-            name: 'Kathryn Murphy',
-            image: AppImages.homeBanner,
-            phoneNumber: '',
-            address: 'Dar es salaam',
-            applyDate: DateTime.now(),
-            verifyStatus: VerifyStatus.verified,
-          ),
+        
         ],
       ),
     );

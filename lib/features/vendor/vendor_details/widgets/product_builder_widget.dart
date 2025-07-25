@@ -1,12 +1,12 @@
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/vendor/vendor_details/model/product_model.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ProductBuilderWidget extends StatelessWidget {
   const ProductBuilderWidget({required this.product, super.key});
@@ -16,7 +16,7 @@ class ProductBuilderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
     onTap: () {
-      Get.toNamed(AppRoutes.viewProduct);
+      appRouter.push(const ViewProductRoute());
     },
     child: LayoutBuilder(
       builder:

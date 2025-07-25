@@ -1,9 +1,9 @@
 import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/config/route/app_router.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CommonAlert {
   CommonAlert({required this.title, required this.onTap, this.content}) {
@@ -15,7 +15,7 @@ class CommonAlert {
 
   Future<dynamic> _alertBuilder() {
     return showDialog(
-      context: Get.context!,
+      context: navigatorRouterKey.currentContext!,
       builder:
           (c) => AlertDialog(
             title: Text(title, style: getTheme.textTheme.titleMedium),
@@ -25,21 +25,19 @@ class CommonAlert {
               CommonButton(
                 titleText: AppString.no,
                 buttonWidth: 70,
-                buttonHeight: 30,
+                buttonHeight: 35,
                 buttonColor: AppColors.primaryColor3,
                 titleColor: AppColors.textWhite,
-                onTap: () {
-                  Navigator.pop(Get.context!);
-                },
+                onTap: appRouter.pop,
               ),
               CommonButton(
                 titleText: AppString.yes,
                 buttonWidth: 70,
-                buttonHeight: 30,
+                buttonHeight: 35,
                 buttonColor: AppColors.success,
                 titleColor: AppColors.textWhite,
                 onTap: () {
-                  Navigator.pop(Get.context!);
+                  appRouter.pop();
                   onTap();
                 },
               ),

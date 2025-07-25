@@ -5,6 +5,7 @@
 /// @desc [description]
 library;
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
@@ -17,6 +18,7 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+@RoutePage()
 class MyRewardsScreen extends StatelessWidget {
   const MyRewardsScreen({super.key});
 

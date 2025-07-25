@@ -2,7 +2,8 @@ import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/other_widgets/common_ratting_bar.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/order/tracking_order/model/rider_info_model.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -47,8 +48,7 @@ class RiderInfoWidget extends StatelessWidget {
                           icon: const Icon(Icons.call, color: AppColors.iconColorWhite),
                           buttonWidth: 130,
                           onTap: () {
-                            Get.toNamed(AppRoutes.calling);
-                          },
+                            appRouter.push(const CallingRoute());                          },
                         ),
                         10.width,
                         CommonButton(
@@ -57,7 +57,7 @@ class RiderInfoWidget extends StatelessWidget {
                           icon: const Icon(Icons.message, color: AppColors.iconColorWhite),
                           buttonWidth: 130,
                           onTap: () {
-                            Get.toNamed(AppRoutes.chat);
+                            appRouter.push(ChatRoute());
                           },
                         ),
                       ],

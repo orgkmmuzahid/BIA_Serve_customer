@@ -1,9 +1,10 @@
-import 'package:bai_serve/config/app_life_cycle_management.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
+//flutter pub run build_runner build --delete-conflicting-outputs
+//dart run build_runner watch
 //create a new feature through
 // mason make getx_feature --name packageName
 //emulator -list-avds 
@@ -33,5 +34,4 @@ Future<void> init() async {
 void _diInit() {
   final DependencyInjection dI = DependencyInjection();
   dI.dependencies();
-  AppLifeCycleManagement();
 }

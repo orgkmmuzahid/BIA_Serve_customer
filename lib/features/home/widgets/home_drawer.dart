@@ -1,29 +1,24 @@
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/pop_up/common_alert.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/utils.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({
-    required this.userName,
-    required this.address,
-    required this.controller,
-    super.key,
-  });
+  const HomeDrawer({required this.userName, required this.address, required this.controller, super.key});
   final String userName;
   final String address;
   final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       shape: const RoundedRectangleBorder(),
       child: Column(
@@ -34,6 +29,7 @@ class HomeDrawer extends StatelessWidget {
             child: SizedBox(
               height: 146,
               child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Text(
                     userName,
@@ -42,19 +38,15 @@ class HomeDrawer extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  Text(
-                    address,
-                    style: getTheme.textTheme.bodySmall?.copyWith(
-                      color: getTheme.colorScheme.onPrimary,
-                    ),
-                  ),
+                  Text(address, style: getTheme.textTheme.bodySmall?.copyWith(color: getTheme.colorScheme.onPrimary)),
                   10.height,
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CommonButton(
                         titleText: AppString.viewProfile,
-                        buttonWidth: 90,
-                        buttonHeight: 24,
+                        buttonWidth: 100,
+                        buttonHeight: 30,
                         titleSize: 10,
                         titleColor: getTheme.colorScheme.onPrimary,
                         buttonRadius: 4,
@@ -70,42 +62,36 @@ class HomeDrawer extends StatelessWidget {
           ),
 
           // Drawer Items
-          _buildMenu(
-            image: AppImages.drawerReturnProduct,
-            title: AppString.drawerReturnsProduct,
-            onTap: controller.onDrawerReturnProduct,
-          ),
+          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: () {}),
           _buildMenu(
             image: AppImages.drawerLoyaltyPoints,
             title: AppString.drawerLoyaltyPoints,
-            onTap: controller.onDrawerLoyaltyPoints,
+            onTap: () => appRouter.push(const LoyaltyPointsRoute()),
           ),
           _buildMenu(
             image: AppImages.myVendors,
             title: AppString.myVendors,
-            onTap: (){
-              Get.toNamed(AppRoutes.myVendors);
-            },
+            onTap: () => appRouter.push(const MyVendorRoute()),
           ),
           _buildMenu(
             image: AppImages.drawerMessage,
             title: AppString.drawerMessage,
-            onTap: controller.onDrawerMessage,
+            onTap: () => appRouter.push(const MessageRoute()),
           ),
           _buildMenu(
             image: AppImages.drawerMyPayment,
             title: AppString.drawerMyPayment,
-            onTap: controller.onDrawerMyPayment,
+            onTap: () => appRouter.push(const MyPaymentRoute()),
           ),
           _buildMenu(
             image: AppImages.drawerSupport,
             title: AppString.drawerSupport,
-            onTap: controller.onDrawerSupport,
+            onTap: () => appRouter.push(ChatRoute()),
           ),
           _buildMenu(
             image: AppImages.drawerLanguage,
             title: AppString.drawerLanguage,
-            onTap: controller.onDrawerLanguage,
+            onTap: () => appRouter.push(const LanguageRoute()),
           ),
           _buildMenu(
             image: AppImages.drawerDeleteAccount,
@@ -126,7 +112,9 @@ class HomeDrawer extends StatelessWidget {
             onTap: () {
               CommonAlert(
                 title: AppString.logoutMessage,
-                onTap: controller.onDrawerLogout,
+                onTap: () {
+                  //logout action.
+                },
               );
             },
           ),
@@ -135,22 +123,12 @@ class HomeDrawer extends StatelessWidget {
     );
   }
 
-  ListTile _buildMenu({
-    required String image,
-    required String title,
-    required Function() onTap,
-    TextStyle? style,
-  }) {
+  ListTile _buildMenu({required String image, required String title, required Function() onTap, TextStyle? style}) {
     return ListTile(
       leading: CommonImage(imageSrc: image, size: 24),
-      title: Text(
-        title,
-        style:
-            style ??
-            getTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400),
-      ),
+      title: Text(title, style: style ?? getTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400)),
       onTap: () {
-        Navigator.pop(Get.context!);
+        appRouter.pop();
         onTap();
         // Handle logout logic
       },

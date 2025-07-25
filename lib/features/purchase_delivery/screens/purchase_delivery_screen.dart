@@ -1,10 +1,13 @@
 // File: purchase_delivery_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/image_picker/common_multi_image_picker.dart';
 import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve/features/purchase_delivery/model/purchase_delivery_model.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
@@ -14,11 +17,10 @@ import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
-// static const String purchaseDelivery = "/purchase_delivery_screen.dart";
-// GetPage(name: purchaseDelivery, page: () => const PurchaseDeliveryScreen()),
-
 final _formKey = GlobalKey<FormState>();
 
+
+@RoutePage()
 class PurchaseDeliveryScreen extends StatelessWidget {
   const PurchaseDeliveryScreen({super.key});
 
@@ -207,9 +209,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   CommonButton(
                     titleText: AppString.continues,
                     onTap: () {
-                      purchaseDeliveryController.onContinue(
-                        _formKey.currentState,
-                      );
+                      appRouter.push(const PaymentRoute());
                     },
                   ),
 

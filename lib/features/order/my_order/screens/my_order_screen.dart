@@ -1,4 +1,5 @@
 // File: my_order_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
@@ -18,9 +19,9 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-// static const String myOrder = "/my_order_screen.dart";
-// GetPage(name: myOrder, page: () => const MyOrderScreen()),
 
+
+@RoutePage()
 class MyOrderScreen extends StatelessWidget {
   MyOrderScreen({super.key})
     : orderListWidth = Utils.deviceSize.width - 32,

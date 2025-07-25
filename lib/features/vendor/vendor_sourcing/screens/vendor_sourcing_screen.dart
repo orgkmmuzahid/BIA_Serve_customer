@@ -1,11 +1,13 @@
 // File: vendor_sourcing_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/vendor/vendor_details/controllers/product_controller.dart';
 import 'package:bai_serve/features/vendor/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
@@ -14,9 +16,8 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// static const String vendorSourcing = "/vendor_sourcing_screen.dart";
-// GetPage(name: vendorSourcing, page: () => const VendorSourcingScreen()),
 
+@RoutePage()
 class VendorSourcingScreen extends StatelessWidget {
   const VendorSourcingScreen({super.key});
 
@@ -84,8 +85,7 @@ class VendorSourcingScreen extends StatelessWidget {
                               CommonButton(
                                 titleText: AppString.done,
                                 onTap: () {
-                                  //should send in verified vendor screen.
-                                  Get.until((route) => route.settings.name == AppRoutes.home);
+                                   appRouter.popUntilRouteWithName(HomeRoute.name);
                                 },
                               ),
                             ],

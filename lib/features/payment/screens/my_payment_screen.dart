@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
@@ -8,6 +9,8 @@ import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
+
+@RoutePage()
 class MyPaymentScreen extends StatelessWidget {
   const MyPaymentScreen({super.key});
 
@@ -65,7 +68,7 @@ class MyPaymentScreen extends StatelessWidget {
 
           const CommonButton(
             titleText: AppString.withdraw,
-            buttonWidth: 100,
+            buttonWidth: 120,
           ).center,
         ],
       ),

@@ -1,18 +1,16 @@
 import 'package:bai_serve/component/pop_up/common_alert.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
-import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class DeleteAccountAlert {
   DeleteAccountAlert() {
     CommonAlert(
       title: AppString.accountDeleteMessage,
       content: SizedBox(
-        height: 50,
+        height: 60,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -26,7 +24,7 @@ class DeleteAccountAlert {
           ],
         ),
       ),
-      onTap: Get.find<HomeController>().onDrawerDeleteAccount,
+      onTap: (){},
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/bulk_order/model/bulk_order_details_model.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
@@ -52,12 +51,6 @@ Available Variants (if any): [colors, sizes, types, etc.]''';
     update();
   }
 
-  void continueToAddress() {
-    Get.toNamed(
-      AppRoutes.placeOrder,
-      arguments: {'title': AppString.homeBulkOrderAgents},
-    );
-  }
 
   void increaseItemField() {
     final String key = 'Item${productItemDetails.length}';

@@ -1,10 +1,12 @@
 // File: verify_vendor_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/common/vendor_avater_widget.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/vendor/verify_vendor/controllers/verify_vendor_controller.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
@@ -16,9 +18,8 @@ import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../repository/verify_vendor_repository.dart';
 
-// static const String verifyVendor = "/verify_vendor_screen.dart";
-// GetPage(name: verifyVendor, page: () => const VerifyVendorScreen()),
 
+@RoutePage()
 class VerifyVendorScreen extends StatelessWidget {
   const VerifyVendorScreen({super.key});
 
@@ -43,7 +44,7 @@ class VerifyVendorScreen extends StatelessWidget {
                     titleText: AppString.verifyVendor,
                     buttonWidth: 150,
                     onTap: () {
-                      Get.toNamed(AppRoutes.vendorVerifyForm);
+                      appRouter.push(VendorVerifyFormRoute());
                     },
                   ),
                 ),

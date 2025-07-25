@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/model/notification_model.dart';
@@ -26,7 +25,6 @@ class NotificationsController extends GetxController {
 
   void onNotificationTap() {
     Get.find<NotificationsController>().getNotificationsRepo();
-    Get.toNamed(AppRoutes.notifications);
   }
 
   /// Notification Scroll Controller

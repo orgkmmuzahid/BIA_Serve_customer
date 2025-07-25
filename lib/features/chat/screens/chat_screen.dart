@@ -1,11 +1,13 @@
 // File: chat_screen.dart
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/common_language_drop_down.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/config/storage/storage_service.dart';
 import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve/features/chat/model/chat_model.dart';
@@ -15,13 +17,11 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// static const String chat = "/chat_screen.dart";
-// GetPage(name: chat, page: () => const ChatScreen()),
 
+@RoutePage()
 class ChatScreen extends StatelessWidget {
-  ChatScreen({super.key})
-    : action = getArgument(name: 'action'),
-      chatIemWidth = (Utils.deviceSize.width - 32) * .7;
+  ChatScreen({super.key, this.action})
+    : chatIemWidth = (Utils.deviceSize.width - 32) * .7;
   final Widget? action;
   final double chatIemWidth;
 
@@ -203,7 +203,7 @@ class ChatScreen extends StatelessWidget {
       ),
       leadingWidth: 40,
       leading: GestureDetector(
-        onTap: Get.back,
+        onTap: appRouter.pop,
         child: const Padding(
           padding: EdgeInsets.only(left: 10),
           child: Icon(Icons.arrow_back_ios),
@@ -216,7 +216,7 @@ class ChatScreen extends StatelessWidget {
             ? action!
             : GestureDetector(
               onTap: () {
-                Get.toNamed(AppRoutes.calling);
+                appRouter.push(const CallingRoute());
               },
               child: Icon(
                 Icons.call_rounded,

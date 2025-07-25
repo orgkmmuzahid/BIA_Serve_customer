@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -8,9 +10,9 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-class LoginWithScreen extends StatelessWidget {
-  const LoginWithScreen({super.key});
+@RoutePage()
+class LoginOptionsScreen extends StatelessWidget {
+  const LoginOptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -33,7 +35,7 @@ class LoginWithScreen extends StatelessWidget {
                 leftAlignButton(
                   tilte: AppString.loginWithContactNumber,
                   image: AppImages.iconContact,
-                  onTap: () => Get.toNamed(AppRoutes.signIn),
+                  onTap: () => appRouter.push(const SignInRoute()),
                 ),
                 20.height,
                 leftAlignButton(

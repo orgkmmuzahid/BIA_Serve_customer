@@ -1,11 +1,9 @@
+import 'package:bai_serve/config/route/app_router.dart';
 import 'package:bai_serve/config/theme/dark_theme.dart';
-import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
-import 'config/route/app_routes.dart';
 import 'config/theme/light_theme.dart';
+
 
 class CustomScrollBehavior extends MaterialScrollBehavior {
   @override
@@ -21,44 +19,24 @@ class CustomScrollBehavior extends MaterialScrollBehavior {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
+    
     return ScreenUtilInit(
       ensureScreenSize: true,
       minTextAdapt: true,
       splitScreenMode: true,
-      designSize: const Size(428, 926),
-
-      child: GetBuilder<ThemeController>(
-        builder: (themeController) {
-          themeController.initTheme(context);
-          return GetMaterialApp(
+      // designSize: const Size(428, 926),
+      builder:(context,child)=> MaterialApp.router(
             scrollBehavior: CustomScrollBehavior(),
-            
             debugShowCheckedModeBanner: false,
-            navigatorKey: Get.key,
-            defaultTransition: Transition.fadeIn,
+            routerConfig: appRouter.config(),
             theme: lightTheme,
             darkTheme: darkTheme,
-            themeMode: themeController.themeMode,
-            transitionDuration: const Duration(milliseconds: 300),
-            initialRoute: AppRoutes.splash,
-            getPages: AppRoutes.routes,
-            // locale: Locale('en'), // Swedish
-            // supportedLocales: [
-            //   Locale('en'), // English
-            //   Locale('sv'), // Swedish
-            // ],
-            // localizationsDelegates: [
-            //   GlobalMaterialLocalizations.delegate,
-            //   GlobalWidgetsLocalizations.delegate,
-            //   GlobalCupertinoLocalizations.delegate,
-            //   // your custom localization delegate
-            // ],
-          );
-        }
-      ),
+            themeMode: ThemeMode.light,
+          ),
     );
+      
   }
 }

@@ -14,18 +14,6 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-void goToScreen(String route) {
-  // if (_navigating) return;
-
-  // _navigating = true;
-  Get.toNamed(route)?.then((_) {
-    // _navigating = false;
-  });
-}
-
- dynamic getArgument({required String name}) => (Get.arguments == null
-              ? {}
-              : Get.arguments as Map<String, dynamic>)[name]; 
 
 class Utils {
   static late Size deviceSize;

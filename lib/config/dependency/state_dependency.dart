@@ -1,4 +1,3 @@
-import 'package:bai_serve/config/theme/theme_controller.dart';
 import 'package:bai_serve/features/auth/controllers/login_with_controller.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/bulk_order/controllers/bulk_order_controller.dart';
@@ -8,14 +7,14 @@ import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/home/controller/home_order_conroller.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/features/order/my_order/controllers/my_order_controller.dart';
-import 'package:bai_serve/features/payment/controllers/payment_controller.dart';
 import 'package:bai_serve/features/order/place_order/controllers/door_to_door_controller.dart';
 import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve/features/order/tracking_order/controllers/tracking_order_controller.dart';
+import 'package:bai_serve/features/payment/controllers/payment_controller.dart';
 import 'package:bai_serve/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve/features/setting/controllers/setting_controller.dart';
-import 'package:bai_serve/features/order/tracking_order/controllers/tracking_order_controller.dart';
-import 'package:bai_serve/features/vendor/vendor_details/controllers/vendor_details_controller.dart';
 import 'package:bai_serve/features/vendor/vendor_details/controllers/product_controller.dart';
+import 'package:bai_serve/features/vendor/vendor_details/controllers/vendor_details_controller.dart';
 import 'package:bai_serve/features/vendor/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve/features/vendor/verify_vendor/controllers/verify_vendor_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
@@ -37,7 +36,6 @@ class StateDependency {
     Get.lazyPut(LoginWithController.new, fenix: true);
     Get.lazyPut(HomeController.new, fenix: true);
     Get.lazyPut(HomeOrderConroller.new, fenix: true);
-    Get.lazyPut(ThemeController.new, fenix: true);
     Get.lazyPut(DoorToDoorController.new, fenix: true);
     Get.lazyPut(BulkOrderController.new, fenix: true);
 

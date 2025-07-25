@@ -1,5 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_gradient_button.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/already_accunt_rich_text.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
@@ -14,6 +14,7 @@ import '../../../../../utils/constants/app_colors.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../component/text/common_text.dart';
 
+@RoutePage()
 class VerifyUserScreen extends StatefulWidget {
   const VerifyUserScreen({super.key});
 
@@ -79,9 +80,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         controller.verifyOtpRepo(
-                          controller.otpFor == OtpFor.signup
-                              ? AppRoutes.signUp
-                              : AppRoutes.forgotPassword,
+                          
                         );
                       }
                     },

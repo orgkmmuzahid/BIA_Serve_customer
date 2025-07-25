@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
@@ -14,6 +15,8 @@ import 'package:share_plus/share_plus.dart';
 
 final GlobalKey _previewContainerKey = GlobalKey();
 
+
+@RoutePage()
 class ViewProductScreen extends StatelessWidget {
   const ViewProductScreen({super.key});
 

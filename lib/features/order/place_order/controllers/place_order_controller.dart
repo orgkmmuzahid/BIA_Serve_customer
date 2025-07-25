@@ -1,9 +1,8 @@
 // File: place_order_controller.dart
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/order/place_order/model/order_details_model.dart';
 import 'package:bai_serve/features/order/place_order/model/place_order_model.dart';
-import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,13 +45,7 @@ class PlaceOrderController extends GetxController {
 
   void placeOrderNow() async {
     //on order success;
-    Get.toNamed(AppRoutes.orderDetails);
-    // Get.find<LoyaltyPointsController>().clean();
-    // Get.until((route)=> Get.currentRoute == AppRoutes.placeOrder);
-  }
-
-  void onCoupon() {
-    goToScreen(AppRoutes.myRewards);
+    appRouter.push(const OrderDetailsRoute());
   }
 
   void onNoCoupon() {
@@ -72,18 +65,6 @@ class PlaceOrderController extends GetxController {
     placeOrderModel = placeOrderModel.copyWith(marchentAdressOnMap: text);
     marchentAddressTextEditController.text = text;
     update();
-  }
-
-  void showInformationForm(String pageTitle) {
-    if (pageTitle == AppString.homeBulkOrderAgents) {
-      //send to negotiation assistance.
-      Get.toNamed(AppRoutes.negotiationAssistance);
-      return;
-    }
-    if (placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
-        placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
-      Get.toNamed(AppRoutes.pickupInformation, arguments: {'title': pageTitle});
-    }
   }
 
   @override

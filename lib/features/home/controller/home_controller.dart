@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/config/network/request_state.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/home/repository/home_repository.dart';
-import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
@@ -41,7 +42,7 @@ class HomeController extends GetxController {
       } else {
         currentIndex = 0;
       }
-      if (Get.currentRoute == AppRoutes.home) {
+      if (appRouter.current.name == HomeRoute.name) {
         update();
       }
     });
@@ -69,68 +70,31 @@ class HomeController extends GetxController {
       return;
     }
     if (index == 0) {
-      goToScreen(AppRoutes.home);
+      appRouter.popUntilRouteWithName( HomeRoute.name);
     } else if (index == 1) {
-      goToScreen(AppRoutes.myOrder);
+      _routeNav(MyOrderRoute());
     } else if (index == 2) {
-      goToScreen(AppRoutes.trackingOrder);
+      _routeNav(const TrackingOrderRoute());
     } else if (index == 3) {
-      goToScreen(AppRoutes.setting);
+      _routeNav(const SettingRoute());
     }
     selectedNavMenu = index;
     update();
   }
 
+  void _routeNav(PageRouteInfo page){
+    if(appRouter.current.name == HomeRoute.name){
+      appRouter.push(page);
+    }else{
+      appRouter.replace(page);
+    }
+  }
+
   void onSearch() {}
 
-  void onPlaceOrder() {
-    goToScreen(AppRoutes.placeOrder);
-  }
-
-  void onVendorSourcing() {
-    Get.toNamed(AppRoutes.vendorSourcing);
-  }
-
-  void onPurchaseAndDelivery() {
-    Get.toNamed(AppRoutes.purchaseDelivery);
-  }
-
-  void onBulkOrderAgents() {
-    Get.toNamed(AppRoutes.bulkOrder);
-  }
-
-  void onVerifyVendor() {
-    Get.toNamed(AppRoutes.verifyVendor);
-  }
-
-  void onDoorToDoorPickup() {
-    Get.toNamed(AppRoutes.doorToDoorPickup);
-  }
-
   //drawer
-  void onDrawerReturnProduct() {}
-  void onDrawerLoyaltyPoints() {
-    goToScreen(AppRoutes.loyaltyPoints);
-  }
 
-  void onDrawerMessage() {
-    Get.toNamed(AppRoutes.messageScreen);
-  }
 
-  void onDrawerMyPayment() {
-    Get.toNamed(AppRoutes.myPayment);
-  }
-
-  void onDrawerSupport() {
-    Get.toNamed(AppRoutes.chat);
-  }
-
-  void onDrawerLanguage() {
-    Get.toNamed(AppRoutes.language);
-  }
-
-  void onDrawerDeleteAccount() {}
-  void onDrawerLogout() {}
 
   @override
   void onClose() {

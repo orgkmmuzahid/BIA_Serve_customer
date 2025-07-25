@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/pop_up/common_popup_menu.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve/features/chat/model/message_model.dart';
 import 'package:bai_serve/utils/app_utils.dart';
@@ -12,6 +14,8 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
+@RoutePage()
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
 
@@ -28,7 +32,7 @@ class MessageScreen extends StatelessWidget {
                     .map(
                       (person) => GestureDetector(
                         onTap: () {
-                          Get.toNamed(AppRoutes.chat);
+                          appRouter.push(ChatRoute());
                         },
                         child: Card(
                           color: AppColors.serfeceBG,

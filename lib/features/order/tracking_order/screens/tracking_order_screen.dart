@@ -1,4 +1,5 @@
 // File: tracking_order_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/component/other_widgets/common_timeline.dart';
@@ -14,9 +15,9 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-// static const String trackingOrder = "/tracking_order_screen.dart";
-// GetPage(name: trackingOrder, page: () => const TrackingOrderScreen()),
 
+
+@RoutePage()
 class TrackingOrderScreen extends StatelessWidget {
   const TrackingOrderScreen({super.key});
 

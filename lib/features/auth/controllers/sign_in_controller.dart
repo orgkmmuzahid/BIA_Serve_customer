@@ -1,7 +1,8 @@
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import '../../../config/route/app_routes.dart';
 
 class SignInController extends GetxController {
   /// Sign in Button Loading variable
@@ -22,7 +23,7 @@ class SignInController extends GetxController {
 
   Future<void> signInUser() async {
     if (!formKey.currentState!.validate()) return;
-    Get.offAllNamed(AppRoutes.home);
+    appRouter.replaceAll([const HomeRoute()]);
     return;
   }
 }

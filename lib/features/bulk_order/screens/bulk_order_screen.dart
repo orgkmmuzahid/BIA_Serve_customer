@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/bulk_order/controllers/bulk_order_controller.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -12,6 +15,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 final _formKey = GlobalKey<FormState>();
 
+@RoutePage()
 class BulkOrderScreen extends StatelessWidget {
   const BulkOrderScreen({super.key});
 
@@ -128,7 +132,7 @@ class BulkOrderScreen extends StatelessWidget {
                   titleText: AppString.continues,
                   onTap: () {
                     _formKey.currentState?.save();
-                    bulkOrderController.continueToAddress();
+                    appRouter.push(PlaceOrderRoute(title:  AppString.homeBulkOrderAgents));
                   },
                 ),
               ],

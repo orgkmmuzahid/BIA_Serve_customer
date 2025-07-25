@@ -1,8 +1,10 @@
 // File: loyalty_points_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -10,9 +12,7 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// static const String loyaltyPoints = "/loyalty_points_screen.dart";
-// GetPage(name: loyaltyPoints, page: () => const LoyaltyPointsScreen()),
-
+@RoutePage()
 class LoyaltyPointsScreen extends StatelessWidget {
   const LoyaltyPointsScreen({super.key});
 
@@ -157,7 +157,7 @@ class LoyaltyPointsScreen extends StatelessWidget {
               CommonButton(
                 titleText: AppString.viewRewards,
                 onTap: () {
-                  Get.toNamed(AppRoutes.myRewards);
+                  appRouter.push(const MyRewardsRoute());
                 },
               ),
             ],

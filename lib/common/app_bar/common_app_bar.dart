@@ -1,5 +1,7 @@
 import 'package:bai_serve/common/common_language_drop_down.dart';
 import 'package:bai_serve/component/text/common_text.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
 import 'package:bai_serve/features/notifications/presentation/controller/notifications_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
@@ -34,8 +36,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         leading ??
         IconButton(
           onPressed: () {
-            if (onBackPress != null) onBackPress!();
-            Get.back();
+            if (onBackPress != null) {
+              onBackPress!();
+            }
+            appRouter.pop();
           },
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
         ),
@@ -45,7 +49,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         CommonText(
           text: title ?? '',
           fontWeight: FontWeight.w600,
-          fontSize: 24.sp,
+          fontSize: 18.sp,
         ),
   );
 
@@ -53,7 +57,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     GetBuilder<NotificationsController>(
       builder:
           (controller) => GestureDetector(
-            onTap: controller.onNotificationTap,
+            onTap: (){
+               controller.onNotificationTap();
+               appRouter.push(const NotificationRoute());
+            },
             child: _buildNotificationIcon(
               notificationCount: controller.totalUnreadNotification,
             ),

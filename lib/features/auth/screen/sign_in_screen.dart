@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_gradient_button.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../../config/route/app_routes.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../../../utils/extensions/extension.dart';
 import '../../../../../utils/helpers/other_helper.dart';
@@ -14,6 +15,8 @@ import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_in_controller.dart';
 import '../widgets/do_not_account.dart';
 
+
+@RoutePage()
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
@@ -71,7 +74,7 @@ class SignInScreen extends StatelessWidget {
                         Get.find<OtpController>().changeOtpFor(
                           OtpFor.forgetPassword,
                         );
-                        Get.toNamed(AppRoutes.otpSend);
+                        appRouter.push(const OtpSendRoute());
                       },
                       child: const CommonText(
                         text: AppString.forgotThePassword,

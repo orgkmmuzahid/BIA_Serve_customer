@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/button/common_gradient_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
@@ -9,15 +10,18 @@ import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+ 
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+@RoutePage()
 class ForgetPasswordScreen extends StatelessWidget {
-  ForgetPasswordScreen({super.key});
-  final formKey = GlobalKey<FormState>();
+ const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(),
     body: Form(
-      key: formKey,
+      key: _formKey,
       child: Padding(
         padding: const EdgeInsets.only(left: 58, right: 58),
         child: GetBuilder<ForgetPasswordController>(
@@ -67,7 +71,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     buttonWidth: 132,
                     buttonHeight: 32,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         controller.resetPasswordRepo();
                       }
                     },

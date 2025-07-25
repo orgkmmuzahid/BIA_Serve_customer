@@ -1,16 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_routes.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/widgets/common_logo.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 import '../../../../utils/constants/app_images.dart';
 import '../../../../utils/extensions/extension.dart';
 import '../../component/button/common_button.dart';
 import '../../component/image/common_image.dart';
 
+@RoutePage()
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
 
@@ -40,7 +42,7 @@ class OnboardingScreen extends StatelessWidget {
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
               ),
-              onTap: () => Get.toNamed(AppRoutes.loginWith),
+              onTap: () => appRouter.push(const LoginOptionsRoute()),
             ),
             18.height,
 

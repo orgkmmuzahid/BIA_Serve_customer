@@ -1,24 +1,21 @@
 // File: place_order_screen.dart
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve/component/button/common_button.dart';
 import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/component/text_field/common_text_field.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/custom_google_map/widgets/custom_google_map.dart';
 import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// static const String placeOrder = "/place_order_screen.dart";
-// GetPage(name: placeOrder, page: () => const PlaceOrderScreen()),
-
-
-///argument String title;
+@RoutePage()
 class PlaceOrderScreen extends StatelessWidget {
-  PlaceOrderScreen({super.key})
-    : title = getArgument(name: 'title') ?? AppString.placeOrder;
+  const PlaceOrderScreen({required this.title, super.key});
 
   final String title;
 
@@ -32,17 +29,24 @@ class PlaceOrderScreen extends StatelessWidget {
             child: Column(
               children: [
                 _header(controller),
-                if (controller.recentSearch.isNotEmpty)
-                  _recentSearch(controller).start,
+                if (controller.recentSearch.isNotEmpty) _recentSearch(controller).start,
                 Expanded(child: _map()),
 
                 CommonButton(
                   titleText: AppString.continues,
-                  onTap: () => controller.showInformationForm(title),
+                  onTap: () {
+                    if (title == AppString.homeBulkOrderAgents) {
+                      //send to negotiation assistance.
+                      appRouter.push(const NegotiationAssistanceRoute());
+                      return;
+                    }
+                    if (controller.placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
+                        controller.placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
+                      appRouter.push(PickUpInformationRoute(title: title));
+                    }
+                  },
                   buttonColor:
-                      controller.marchentAddressTextEditController.text.isEmpty
-                          ? getTheme.disabledColor
-                          : null,
+                      controller.marchentAddressTextEditController.text.isEmpty ? getTheme.disabledColor : null,
                 ),
               ],
             ),
@@ -59,10 +63,7 @@ class PlaceOrderScreen extends StatelessWidget {
     child: Column(
       children: [
         20.height,
-        CommonText(
-          text: AppString.setPickupDeliveryLocation,
-          style: getTheme.textTheme.bodyLarge,
-        ),
+        CommonText(text: AppString.setPickupDeliveryLocation, style: getTheme.textTheme.bodyLarge),
         CommonTextField(
           prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
           controller: controller.clientAddressTextEditController,
@@ -83,10 +84,7 @@ class PlaceOrderScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         34.height,
-        CommonText(
-          text: AppString.recentSearch,
-          style: getTheme.textTheme.bodyLarge,
-        ).paddingOnly(bottom: 10),
+        CommonText(text: AppString.recentSearch, style: getTheme.textTheme.bodyLarge).paddingOnly(bottom: 10),
         ...List.generate(controller.recentSearch.length, (index) {
           final String text = controller.recentSearch[index];
           return GestureDetector(
@@ -98,10 +96,7 @@ class PlaceOrderScreen extends StatelessWidget {
               left: 10,
               text: text,
               enableBorder: true,
-              style: getTheme.textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-              ),
+              style: getTheme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 12),
             ),
           );
         }),

@@ -1,3 +1,5 @@
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,8 +7,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../config/route/app_routes.dart';
 import '../../../../utils/constants/app_string.dart';
 
 class DoNotHaveAccount extends StatelessWidget {
@@ -29,7 +29,7 @@ class DoNotHaveAccount extends StatelessWidget {
                 TapGestureRecognizer()
                   ..onTap = () {
                     Get.find<OtpController>().changeOtpFor(OtpFor.signup);
-                    Get.toNamed(AppRoutes.otpSend);
+                    appRouter.push(const OtpSendRoute());
                   },
             style: GoogleFonts.dmSans(
               color: getTheme.colorScheme.primary,
