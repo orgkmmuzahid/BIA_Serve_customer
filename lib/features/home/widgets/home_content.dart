@@ -5,7 +5,7 @@ import 'package:bai_serve/component/text_field/common_text_field.dart';
 import 'package:bai_serve/config/route/app_router.dart';
 import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/features/vendor/vendor_details/widgets/product_gridview_widget.dart';
+import 'package:bai_serve/features/vendor/features/vendor_details/widgets/product_gridview_widget.dart';
 import 'package:bai_serve/utils/app_utils.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
@@ -31,10 +31,7 @@ class HomeContent extends StatelessWidget {
           controller: homeController.searchController,
         ),
         20.height,
-        CommonRotatingImageBanner(
-          imageUrls: homeController.bannerUrls.data,
-          currentIndex: homeController.currentIndex,
-        ),
+        CommonRotatingImageBanner(imageUrls: homeController.bannerUrls.data, currentIndex: homeController.currentIndex),
         20.height,
 
         //midle content
@@ -52,7 +49,7 @@ class HomeContent extends StatelessWidget {
                   _homeImageButton(
                     image: AppImages.homeBulkOrderAgents,
                     titte: AppString.homeBulkOrderAgents,
-                    onTap:  ()=> appRouter.push(const BulkOrderRoute()),
+                    onTap: () => appRouter.push(const BulkOrderRoute()),
                   ),
                 ],
               ),
@@ -61,12 +58,12 @@ class HomeContent extends StatelessWidget {
                   _homeImageButton(
                     image: AppImages.homeVendorSourcing,
                     titte: AppString.homeVendorSourcing,
-                    onTap:  ()=> appRouter.push(const VendorSourcingRoute()),
+                    onTap: () => appRouter.push(const VendorSourcingRoute()),
                   ),
                   _homeImageButton(
                     image: AppImages.homeVerifyVendor,
                     titte: AppString.homeVerifyVendor,
-                    onTap:  ()=> appRouter.push(const VerifyVendorRoute()),
+                    onTap: () => appRouter.push(const VerifyVendorRoute()),
                   ),
                 ],
               ),
@@ -75,12 +72,12 @@ class HomeContent extends StatelessWidget {
                   _homeImageButton(
                     image: AppImages.homePurchaseDelivery,
                     titte: AppString.homePurchaseDelivery,
-                    onTap:  ()=> appRouter.push(const PurchaseDeliveryRoute()),
+                    onTap: () => appRouter.push(const PurchaseDeliveryRoute()),
                   ),
                   _homeImageButton(
                     image: AppImages.homeDoorToDoorPickup,
                     titte: AppString.homeDoorToDoorPickup,
-                    onTap:  ()=> appRouter.push(const DoorToDoorPickupRoute()),
+                    onTap: () => appRouter.push(const DoorToDoorPickupRoute()),
                   ),
                 ],
               ),

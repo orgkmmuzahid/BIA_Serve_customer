@@ -14,7 +14,6 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class Utils {
   static late Size deviceSize;
 
@@ -157,7 +156,7 @@ class Utils {
     return BitmapDescriptor.bytes(pngBytes);
   }
 
- static String formatDouble(double value) {
+  static String formatDouble(double value) {
     final double rounded = double.parse(value.toStringAsFixed(1));
     if (rounded == rounded.toInt()) {
       return rounded.toInt().toString();

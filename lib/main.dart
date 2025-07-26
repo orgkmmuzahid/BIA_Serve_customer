@@ -1,5 +1,7 @@
+import 'package:bai_serve/config/bloc/app_bloc_observer.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'app.dart';
 import 'config/dependency/dependency_injection.dart';
@@ -12,6 +14,10 @@ import 'config/dependency/dependency_injection.dart';
 
 
 Future<void> main() async {
+
+//can be comment it in release mode.
+Bloc.observer = AppBlocObserver.instance;
+
 ErrorWidget.builder = (FlutterErrorDetails details) {
   debugPrint('Flutter error: ${details.exception}');
   return const Center(child: Text('Oops, something went wrong'));

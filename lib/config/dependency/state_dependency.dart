@@ -13,10 +13,9 @@ import 'package:bai_serve/features/order/tracking_order/controllers/tracking_ord
 import 'package:bai_serve/features/payment/controllers/payment_controller.dart';
 import 'package:bai_serve/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve/features/setting/controllers/setting_controller.dart';
-import 'package:bai_serve/features/vendor/vendor_details/controllers/product_controller.dart';
-import 'package:bai_serve/features/vendor/vendor_details/controllers/vendor_details_controller.dart';
-import 'package:bai_serve/features/vendor/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
-import 'package:bai_serve/features/vendor/verify_vendor/controllers/verify_vendor_controller.dart';
+import 'package:bai_serve/features/vendor/features/vendor_details/controllers/product_controller.dart';
+import 'package:bai_serve/features/vendor/features/vendor_details/controllers/vendor_details_controller.dart';
+import 'package:bai_serve/features/vendor/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
@@ -49,16 +48,14 @@ class StateDependency {
     Get.lazyPut(PaymentController.new, fenix: true);
     Get.lazyPut(VendorSourcingController.new, fenix: true);
     Get.lazyPut(ProductController.new, fenix: true);
-    Get.lazyPut(VerifyVendorController.new, fenix: true);
     Get.lazyPut(VendorDetailsController.new, fenix: true);
 
-    
     //
 
     Get.lazyPut(NotificationsController.new, fenix: true);
     Get.lazyPut(ChatController.new, fenix: true);
     Get.lazyPut(CustomGoogleMapController.new, fenix: true);
 
-     AppLogger.debug('State dependency initalized', tag: 'dependency');
+    AppLogger.debug('State dependency initalized', tag: 'dependency');
   }
 }

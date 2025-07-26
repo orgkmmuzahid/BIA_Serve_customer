@@ -10,8 +10,7 @@ class AppString {
   static const String enterYouPassword = 'Enter you password';
   static const String cancel = 'Cancel';
   static const String done = 'Done';
-  static const String deleteDetails =
-      'All your changes will be deleted and you will no longer be able to access them.';
+  static const String deleteDetails = 'All your changes will be deleted and you will no longer be able to access them.';
 
   static const String someThingWrong = 'Some Thing Wrong';
   static const String tryAgain = 'Try Again';
@@ -84,18 +83,14 @@ class AppString {
 
   ///otp
   static const String otpTitleSignup = "What's Your Mobile Number?";
-  static const String otpSubtitleSignup =
-      'Code sent to your mobile. Please enter it below.';
+  static const String otpSubtitleSignup = 'Code sent to your mobile. Please enter it below.';
 
-  static const String otpTitleForgetPass =
-      'How would you like to get your code?';
+  static const String otpTitleForgetPass = 'How would you like to get your code?';
 
-  static const String otpSubTitleForgetPass =
-      'How would you like to get your code?';
+  static const String otpSubTitleForgetPass = 'How would you like to get your code?';
 
   static const String otpSendButton = 'Send Code Via SMS';
-  static const String enterVerifyCode =
-      'Enter the code to verify your account.';
+  static const String enterVerifyCode = 'Enter the code to verify your account.';
   static const String didntReciveCode = 'If you didn’t receive a code.';
 
   static const String save = 'Save';
@@ -131,8 +126,7 @@ class AppString {
 
   //place order screen
   static const String placeOrder = 'Place Order';
-  static const String setPickupDeliveryLocation =
-      'Set Pickup & Delivery Location';
+  static const String setPickupDeliveryLocation = 'Set Pickup & Delivery Location';
   static const String recentSearch = 'Recent Search';
   static const String pickupInformation = 'Pickup Information';
 
@@ -155,8 +149,7 @@ class AppString {
   static const String noCouponCode = 'No Coupon Code';
 
   //loyalty points
-  static const String regularCustomersLoyaltyPoints =
-      'Loyalty Points for Regular Customers';
+  static const String regularCustomersLoyaltyPoints = 'Loyalty Points for Regular Customers';
   static const String regularCustomersLoyaltyPointsMessage =
       '''The more you use the app, the more rewards you earn! Loyalty points, promo codes, and special discounts await our active users.''';
   static const String points = 'Points';
@@ -198,8 +191,7 @@ class AppString {
   static const addProduct = '+ Add Product';
   static const negotiationAssistance = 'Negotiation Assistance';
   static const messageRequest = 'Message Request';
-  static const negotiationAssistanceSubTitle =
-      'Request negotiation help from admin for better pricing.';
+  static const negotiationAssistanceSubTitle = 'Request negotiation help from admin for better pricing.';
   static const sentOrder = 'Sent Order';
   static const orderSummery = 'Order Summery';
   static const submitPromoCode = 'Submit Promo Code';
@@ -219,8 +211,7 @@ class AppString {
   static const account = 'Account';
   static const searchForOrder = 'Search For Order';
   static const logoutMessage = 'Are you sure you want to log out?';
-  static const accountDeleteMessage =
-      'Are you sure you want to delete your account?';
+  static const accountDeleteMessage = 'Are you sure you want to delete your account?';
   static const termsCondition = 'Terms & Condition';
   static const changePersonalInfo = 'Change Personal Info';
   static const profileInfo = 'Profile Info';
@@ -244,13 +235,14 @@ class AppString {
   static const screenshot = 'Screenshot';
   static const availableColor = 'Available Color';
   static const availableSize = 'Available Size';
-  static const riderDetails  = 'Rider Details';
-  static const callNow  = 'Call Now';
-  static const myVendors  = 'My Vendors';
-  static const VerifyApplyDate  = 'Verify Apply Date';
-  static const verificationStatus  = 'Verification Status';
-  static const vendorVerificationRequestMessage  = 'Your Vendor Verify Request has been submitted. Our team will get back to you shortly.';
+  static const riderDetails = 'Rider Details';
+  static const callNow = 'Call Now';
+  static const myVendors = 'My Vendors';
+  static const VerifyApplyDate = 'Verify Apply Date';
+  static const verificationStatus = 'Verification Status';
+  static const vendorFilters = ['All Vendor', 'Verified', 'New Vendor'];
+  static const vendorVerificationRequestMessage =
+      'Your Vendor Verify Request has been submitted. Our team will get back to you shortly.';
 
-  static String loaltyClaimingMessage(String value) =>
-      'You’ve received a $value on your next order! Don’t miss out ';
+  static String loaltyClaimingMessage(String value) => 'You’ve received a $value on your next order! Don’t miss out ';
 }

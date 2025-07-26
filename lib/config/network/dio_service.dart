@@ -150,9 +150,10 @@ class DioService extends GetxService {
     }
   }
 
-
   Future<void> _saveTokens(String access, String refresh) async {
-    await _storageService.saveUserInfo(_storageService.userLoginInfoModel.copyWith(accessToken: access, refreshToken: refresh));
+    await _storageService.saveUserInfo(
+      _storageService.userLoginInfoModel.copyWith(accessToken: access, refreshToken: refresh),
+    );
   }
 
   Future<void> clearTokens() async {
@@ -160,16 +161,13 @@ class DioService extends GetxService {
     AppLogger.apiDebug('Tokens cleared.', tag: 'Auth');
   }
 
-  Future<void> request<T>({
+  Future<T> request<T>({
     required RequestInput input,
     required T Function(dynamic data) responseBuilder,
-    required OnRequestStateChange<T> onStateChange,
-    required RequestState<T> requestState,
     int retryCount = 0,
     int maxRetry = 2,
   }) async {
     final cancelToken = CancelToken(); // Use provided token or create new
-    onStateChange(requestState.copyWith(isRequesting: true, cancelToken: cancelToken));
 
     try {
       final requestOptions = await _buildRequestOptions(input);
@@ -188,11 +186,10 @@ class DioService extends GetxService {
       );
 
       final parsed = responseBuilder(response.data);
-      onStateChange(requestState.copyWith(data: parsed)); // Request completed
+      return parsed;
     } on DioException catch (e) {
       if (e.type == DioExceptionType.cancel) {
         AppLogger.apiDebug('Request cancelled: ${e.message}', tag: input.endpoint);
-        onStateChange(requestState.copyWith(error: 'Request cancelled.'));
         rethrow; // Re-throw to propagate cancellation if needed
       }
 
@@ -212,20 +209,16 @@ class DioService extends GetxService {
           // Recursive call to retry
           input: input,
           responseBuilder: responseBuilder,
-          onStateChange: onStateChange,
           retryCount: retryCount + 1,
           maxRetry: maxRetry,
-          requestState: requestState
         );
       }
 
       final err = _parseError(e);
-      onStateChange(requestState.copyWith(error: err)); // Request completed with error
       AppLogger.apiError('Request failed: $err', tag: input.endpoint);
       rethrow; // Re-throw the error for higher-level handling
     } catch (e) {
       final err = e.toString();
-      onStateChange(requestState.copyWith(error: err)); // Request completed with error
       AppLogger.apiError('Unknown error occurred: $err', tag: input.endpoint);
       rethrow; // Re-throw for higher-level handling
     }
@@ -277,7 +270,8 @@ class DioService extends GetxService {
     input.pathParams?.forEach((k, v) => url = url.replaceAll('{$k}', Uri.encodeComponent(v.toString())));
 
     final headers = {
-      if (input.requiresToken && _storageService.userLoginInfoModel.accessToken.isNotEmpty) 'Authorization': 'Bearer ${_storageService.userLoginInfoModel.accessToken}',
+      if (input.requiresToken && _storageService.userLoginInfoModel.accessToken.isNotEmpty)
+        'Authorization': 'Bearer ${_storageService.userLoginInfoModel.accessToken}',
       ...?input.headers,
     };
 

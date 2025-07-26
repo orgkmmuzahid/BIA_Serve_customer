@@ -67,23 +67,23 @@ import 'package:bai_serve/features/setting/screens/setting_screen.dart' as _i30;
 import 'package:bai_serve/features/setting/screens/terms_condition_screen.dart'
     as _i34;
 import 'package:bai_serve/features/splash/splash_screen.dart' as _i33;
-import 'package:bai_serve/features/vendor/vendor_details/model/vendor_model.dart'
+import 'package:bai_serve/features/vendor/common_model/vendor_model.dart'
     as _i45;
-import 'package:bai_serve/features/vendor/vendor_details/screens/all_product_screen.dart'
+import 'package:bai_serve/features/vendor/features/vendor_details/screens/all_product_screen.dart'
     as _i1;
-import 'package:bai_serve/features/vendor/vendor_details/screens/view%20_product_screen.dart'
+import 'package:bai_serve/features/vendor/features/vendor_details/screens/view%20_product_screen.dart'
     as _i42;
-import 'package:bai_serve/features/vendor/vendor_details/widgets/vendor_details_screen.dart'
+import 'package:bai_serve/features/vendor/features/vendor_details/widgets/vendor_details_screen.dart'
     as _i36;
-import 'package:bai_serve/features/vendor/vendor_sourcing/screens/vendor_sourcing_screen.dart'
+import 'package:bai_serve/features/vendor/features/vendor_sourcing/screens/vendor_sourcing_screen.dart'
     as _i37;
-import 'package:bai_serve/features/vendor/verify_vendor/screens/my_vendors_screen.dart'
+import 'package:bai_serve/features/vendor/features/verify_vendor/screens/my_vendors_screen.dart'
     as _i18;
-import 'package:bai_serve/features/vendor/verify_vendor/screens/vendor_verify_form_screen.dart'
+import 'package:bai_serve/features/vendor/features/verify_vendor/screens/vendor_verify_form_screen.dart'
     as _i38;
-import 'package:bai_serve/features/vendor/verify_vendor/screens/verification_status_screen.dart'
+import 'package:bai_serve/features/vendor/features/verify_vendor/screens/verification_status_screen.dart'
     as _i39;
-import 'package:bai_serve/features/vendor/verify_vendor/screens/verify_vendor_screen.dart'
+import 'package:bai_serve/features/vendor/features/verify_vendor/screens/verify_vendor_screen.dart'
     as _i41;
 import 'package:flutter/material.dart' as _i44;
 

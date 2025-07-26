@@ -1,68 +1,86 @@
 import 'package:flutter/material.dart';
 
-class SmartListLoader extends StatelessWidget {
+class SmartListLoader extends StatefulWidget {
   const SmartListLoader({
-    required this.scrollController, required this.itemCount, required this.itemBuilder, super.key,
+    required this.itemCount,
+    required this.itemBuilder,
     this.onRefresh,
     this.onLoadMore,
     this.isLoading = false,
     this.isLoadDone = false,
     this.padding,
+    super.key,
   });
 
-  final ScrollController scrollController;
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
-  final Future<void> Function()? onRefresh;
-  final Future<void> Function()? onLoadMore;
+  final Function()? onRefresh;
+  final Function()? onLoadMore;
   final bool isLoading;
   final bool isLoadDone;
   final EdgeInsetsGeometry? padding;
 
-  bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification.metrics.pixels >= notification.metrics.maxScrollExtent - 100 &&
-        onLoadMore != null &&
-        !isLoading &&
-        !isLoadDone) {
-      onLoadMore!();
-      return true;
+  @override
+  State<SmartListLoader> createState() => _SmartListLoaderState();
+}
+
+class _SmartListLoaderState extends State<SmartListLoader> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100 &&
+        widget.onLoadMore != null &&
+        !widget.isLoading &&
+        !widget.isLoadDone) {
+      widget.onLoadMore!();
     }
-    return false;
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-final list = NotificationListener<ScrollNotification>(
-  onNotification: _handleScrollNotification,
-  child: ListView.builder(
-    controller: scrollController,
-    physics: const AlwaysScrollableScrollPhysics(), // Add this
-    padding: padding,
-    itemCount: itemCount + 1,
-    itemBuilder: (context, index) {
-      if (index < itemCount) {
-        return itemBuilder(context, index);
-      } else if (isLoading) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 16),
-          child: Center(child: CircularProgressIndicator()),
-        );
-      } else if (isLoadDone) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(vertical: 16),
-          child: Center(child: Text('All data loaded')),
-        );
-      } else {
-        return const SizedBox.shrink();
-      }
-    },
-  ),
-);
+    final list = ListView.builder(
+      controller: _scrollController,
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: widget.padding,
+      itemCount: widget.itemCount + 1,
+      itemBuilder: (context, index) {
+        if (index < widget.itemCount) {
+          return widget.itemBuilder(context, index);
+        } else if (widget.isLoading) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        } else if (widget.isLoadDone) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Center(child: Text('All data loaded')),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
+    );
 
-
-    if (onRefresh != null) {
+    if (widget.onRefresh != null) {
       return RefreshIndicator(
-        onRefresh: onRefresh!,
+        onRefresh: () async {
+          widget.onRefresh!();
+        },
         child: list,
       );
     }
