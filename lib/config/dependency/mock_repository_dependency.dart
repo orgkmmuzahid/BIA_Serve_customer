@@ -3,6 +3,8 @@ import 'package:bai_serve/features/home/repository/home_repository.dart';
 import 'package:bai_serve/features/home/repository/mock_home_repository.dart';
 import 'package:bai_serve/features/order/tracking_order/repository/mock_tracking_order_repository.dart';
 import 'package:bai_serve/features/order/tracking_order/repository/tracking_order_repository.dart';
+import 'package:bai_serve/features/return_product/repository/mock_return_product_repository.dart';
+import 'package:bai_serve/features/return_product/repository/return_product_repository.dart';
 import 'package:bai_serve/features/vendor/common_widget/category_selector/category_selctor_repository.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/repository/mock_vendor_details_repository.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
@@ -23,6 +25,7 @@ class MockRepositoryDependency {
     //get it
     getIt.registerLazySingleton<VerifyVendorRepository>(MockVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(MockCategorySelctorRepository.new);
+    getIt.registerLazySingleton<ReturnProductRepository>(MockReturnProductRepository.new);
 
     AppLogger.debug('Mock repository dependency initalized', tag: 'dependency');
   }

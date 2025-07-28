@@ -9,20 +9,17 @@ import 'config/dependency/dependency_injection.dart';
 //dart run build_runner watch
 //create a new feature through
 // mason make getx_feature --name packageName
-//emulator -list-avds 
+//emulator -list-avds
 //emulator -avd Pixel_9a
 
-
 Future<void> main() async {
+  //can be comment it in release mode.
+  Bloc.observer = AppBlocObserver();
 
-//can be comment it in release mode.
-Bloc.observer = AppBlocObserver.instance;
-
-ErrorWidget.builder = (FlutterErrorDetails details) {
-  debugPrint('Flutter error: ${details.exception}');
-  return const Center(child: Text('Oops, something went wrong'));
-};
-
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    debugPrint('Flutter error: ${details.exception}');
+    return const Center(child: Text('Oops, something went wrong'));
+  };
 
   WidgetsFlutterBinding.ensureInitialized();
   await init.tryCatch();
@@ -32,9 +29,7 @@ ErrorWidget.builder = (FlutterErrorDetails details) {
 
 Future<void> init() async {
   _diInit();
-  await Future.wait([
-    dotenv.load(),
-  ]);
+  await Future.wait([dotenv.load()]);
 }
 
 void _diInit() {

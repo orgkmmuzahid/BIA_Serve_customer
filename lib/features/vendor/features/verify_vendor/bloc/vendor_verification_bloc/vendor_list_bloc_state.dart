@@ -4,21 +4,20 @@ part of 'vendor_list_bloc.dart';
 ///VendorListInital
 ///VendorListLoading
 ///VendorListLoadingSuccess
-sealed class VendorListBlocState {}
 
-final class VendorListInital extends VendorListBlocState {}
-
-final class VendorListLoading extends VendorListBlocState {}
-
-class VendorListLoadingSuccess extends Equatable implements VendorListBlocState {
-  const VendorListLoadingSuccess(this.vendors);
+class VendorListBlocState extends Equatable {
+  const VendorListBlocState(this.vendors, this.isLoading, this.filters);
 
   final List<VendorModel> vendors;
 
-  @override
-  List<Object> get props => [vendors];
+  final bool isLoading;
 
-  VendorListLoadingSuccess copyWith({List<VendorModel>? vendors}) {
-    return VendorListLoadingSuccess(vendors ?? this.vendors);
+  final List<VerificationStatus>? filters;
+
+  @override
+  List<Object> get props => [vendors, isLoading, filters ?? []];
+
+  VendorListBlocState copyWith({List<VendorModel>? vendors, bool? isLoading, List<VerificationStatus>? filters}) {
+    return VendorListBlocState(vendors ?? this.vendors, isLoading ?? this.isLoading, filters ?? this.filters);
   }
 }

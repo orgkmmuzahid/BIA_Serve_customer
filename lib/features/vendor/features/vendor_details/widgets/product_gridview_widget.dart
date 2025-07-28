@@ -34,7 +34,7 @@ class ProductGridviewWidget extends StatelessWidget {
           if (showFilter && isDropdownFilter == false) _horizontalFilter(productController),
           if (showFilter && isDropdownFilter == true)
             SizedBox(
-              height: 35,
+              height: 60,
               child: Row(
                 children: [
                   CommonText(text: AppString.allProducts, style: getTheme.textTheme.bodyLarge),
@@ -43,10 +43,6 @@ class ProductGridviewWidget extends StatelessWidget {
                     child: CommonDropDown<String>(
                       hint: '',
                       borderColor: AppColors.secondaryText,
-                      initailItem:
-                          productController.categories.data.isNotEmpty == true
-                              ? productController.categories.data.first
-                              : null,
                       items: productController.categories.data,
                       onChanged: (value) {
                         productController.onCategorySelection(value!);
@@ -59,7 +55,13 @@ class ProductGridviewWidget extends StatelessWidget {
             ),
 
           10.height,
-          enableProductScrolling ? Expanded(child: _products(productController)) : _products(productController),
+          GetBuilder<ProductController>(
+            builder:
+                (productController) =>
+                    enableProductScrolling
+                        ? Expanded(child: _products(productController))
+                        : _products(productController),
+          ),
         ],
       );
     },

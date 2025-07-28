@@ -2,42 +2,27 @@ import 'package:bai_serve/utils/log/app_log.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
-    AppBlocObserver._internal() {
-    AppLogger.info('BlocObserver initialized ✅', tag: 'BLOC INIT');
-  }
-
-  static final AppBlocObserver instance = AppBlocObserver._internal();
-
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
-    AppLogger.debug(
-      'Created → ${bloc.runtimeType}',
-      tag: 'BLOC',
-    );
+    AppLogger.debug('Created → ${bloc.runtimeType}', tag: 'BLOC');
   }
 
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    AppLogger.info(
-      'Event → ${event.runtimeType}',
-      tag: bloc.runtimeType.toString(),
-    );
+    AppLogger.info('Event → ${event.runtimeType}', tag: bloc.runtimeType.toString());
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    AppLogger.debug(
-      '''
+    AppLogger.debug('''
 Transition:
   ➤ Event     : ${transition.event}
   ➤ From State: ${transition.currentState}
   ➤ To State  : ${transition.nextState}
-''',
-      tag: bloc.runtimeType.toString(),
-    );
+''', tag: bloc.runtimeType.toString());
   }
 
   @override
@@ -52,9 +37,6 @@ Transition:
   @override
   void onClose(BlocBase bloc) {
     super.onClose(bloc);
-    AppLogger.warning(
-      'Closed → ${bloc.runtimeType}',
-      tag: 'BLOC',
-    );
+    AppLogger.warning('Closed → ${bloc.runtimeType}', tag: 'BLOC');
   }
 }

@@ -12,10 +12,7 @@ class CommonTabBar extends StatefulWidget {
     this.selectedTextStyle,
     this.spaceing = 8,
     this.unselectedTextStyle,
-  }) : assert(
-         tabs.length == tabViews.length,
-         'Tabs and TabViews count must match',
-       );
+  });
   final List<String> tabs;
   final List<Widget> tabViews;
 
@@ -31,8 +28,7 @@ class CommonTabBar extends StatefulWidget {
   State<CommonTabBar> createState() => _CommonTabBarState();
 }
 
-class _CommonTabBarState extends State<CommonTabBar>
-    with TickerProviderStateMixin {
+class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMixin {
   late TabController _controller;
 
   @override
@@ -77,10 +73,7 @@ class _CommonTabBarState extends State<CommonTabBar>
                   borderRadius: BorderRadius.circular(8),
                 );
 
-                final defaultSelectedTextStyle = const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                );
+                final defaultSelectedTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
 
                 final defaultUnselectedTextStyle = const TextStyle(
                   color: AppColors.primaryColor,
@@ -99,22 +92,16 @@ class _CommonTabBarState extends State<CommonTabBar>
                       decoration:
                           isSelected
                               ? (widget.selectedStyle ?? defaultSelectedStyle)
-                              : (widget.unselectedStyle ??
-                                  defaultUnselectedStyle),
+                              : (widget.unselectedStyle ?? defaultUnselectedStyle),
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      margin:
-                          tabIndex < widget.tabs.length - 1
-                              ? EdgeInsets.only(right: widget.spaceing)
-                              : null,
+                      margin: tabIndex < widget.tabs.length - 1 ? EdgeInsets.only(right: widget.spaceing) : null,
                       alignment: Alignment.center,
                       child: Text(
                         widget.tabs[tabIndex],
                         style:
                             isSelected
-                                ? (widget.selectedTextStyle ??
-                                    defaultSelectedTextStyle)
-                                : (widget.unselectedTextStyle ??
-                                    defaultUnselectedTextStyle),
+                                ? (widget.selectedTextStyle ?? defaultSelectedTextStyle)
+                                : (widget.unselectedTextStyle ?? defaultUnselectedTextStyle),
                       ),
                     ),
                   ),
@@ -129,12 +116,13 @@ class _CommonTabBarState extends State<CommonTabBar>
             duration: const Duration(milliseconds: 300),
             switchInCurve: Curves.easeIn,
             switchOutCurve: Curves.easeOut,
-            transitionBuilder:
-                (child, animation) =>
-                    FadeTransition(opacity: animation, child: child),
+            transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
             child: Container(
               key: ValueKey<int>(index),
-              child: widget.tabViews[index],
+              child:
+                  widget.tabViews.isNotEmpty
+                      ? widget.tabViews[index >= widget.tabViews.length ? widget.tabViews.length - 1 : index]
+                      : const SizedBox(), // fallback if no tabViews at all
             ),
           ),
         ),

@@ -9,17 +9,17 @@ abstract class VendorListBlocEvent {}
 
 class VendorListFetched extends Equatable implements VendorListBlocEvent {
   final CategoryModel? categoryModel;
-  final VerificationStatus? filterByVerification;
-  const VendorListFetched({this.categoryModel, this.filterByVerification});
+  final List<VerificationStatus>? filters;
+  const VendorListFetched({this.categoryModel, this.filters});
   @override
-  List<Object?> get props => [categoryModel, filterByVerification];
+  List<Object?> get props => [categoryModel, filters];
 }
 
 class VendorListLoadMoreRequested extends Equatable implements VendorListBlocEvent {
   final CategoryModel? categoryModel;
-  final VerificationStatus? filterByVerification;
-  const VendorListLoadMoreRequested({this.categoryModel, this.filterByVerification});
+  final List<VerificationStatus>? filters;
+  const VendorListLoadMoreRequested({this.categoryModel, this.filters});
 
   @override
-  List<Object?> get props => [categoryModel, filterByVerification];
+  List<Object?> get props => [categoryModel, filters];
 }

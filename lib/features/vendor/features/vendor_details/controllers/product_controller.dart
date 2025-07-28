@@ -26,6 +26,15 @@ class ProductController extends GetxController {
     );
   }
 
+  void fetchProductDetails() async {
+    vendorDetailsRepository.productDetails(
+      onStateChange: (state) {
+        productDetailsModel = state;
+        update();
+      },
+    );
+  }
+
   void fetchProductCategories() async {
     vendorDetailsRepository.productCategories(
       onStateChange: (state) {

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCateogryWidget extends StatelessWidget {
   const ProductCateogryWidget({required this.onChange, super.key});
-  final Function(CategoryModel categoryModel) onChange;
+  final Function(BuildContext context, CategoryModel categoryModel) onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ProductCateogryWidget extends StatelessWidget {
               items: state is CategorySelectorLoaded ? state.category : [],
               onChanged: (data) {
                 if (data != null) {
-                  onChange(data);
+                  onChange(context, data);
                 }
               },
               nameBuilder: (value) => value.name,

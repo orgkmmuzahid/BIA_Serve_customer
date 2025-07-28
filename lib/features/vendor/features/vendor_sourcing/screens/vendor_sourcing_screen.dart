@@ -105,7 +105,6 @@ class VendorSourcingScreen extends StatelessWidget {
       builder: (productController) {
         return CommonDropDown<String>(
           hint: AppString.productCategory,
-          initailItem: productController.selectedCategory,
           items: productController.categories.data,
           onChanged: (value) => productController.onCategorySelection(value ?? ''),
           nameBuilder: (value) => value,

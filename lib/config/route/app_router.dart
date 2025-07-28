@@ -33,11 +33,10 @@ class AuthGuard extends AutoRouteGuard {
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
-  AppRouter():super(navigatorKey: navigatorRouterKey);
+  AppRouter() : super(navigatorKey: navigatorRouterKey);
   @override
   List<AutoRouteGuard> get guards => [AuthGuard()];
 
-  
   @override
   RouteType get defaultRouteType =>
       CustomRouteType(transitionsBuilder: TransitionsBuilders.fadeIn, duration: const Duration(milliseconds: 300));
@@ -86,5 +85,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: ChangePasswordRoute.page),
     AutoRoute(page: NotificationRoute.page),
     AutoRoute(page: VerificationStatusRoute.page),
+    AutoRoute(page: ReturnProductRoute.page),
+    AutoRoute(page: ReturnProductDetailsRoute.page),
   ];
 }

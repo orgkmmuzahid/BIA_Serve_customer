@@ -57,8 +57,7 @@ class CommonImage extends StatelessWidget {
             ),
           ),
       progressIndicatorBuilder:
-          (context, url, downloadProgress) =>
-              CircularProgressIndicator(value: downloadProgress.progress),
+          (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
       errorWidget: (context, url, error) {
         errorLog(error, source: 'Common Image');
 
@@ -70,10 +69,7 @@ class CommonImage extends StatelessWidget {
   Widget _buildSvgImage() {
     return SvgPicture.asset(
       imageSrc,
-      colorFilter:
-          imageColor != null
-              ? ColorFilter.mode(imageColor!, BlendMode.srcIn)
-              : null,
+      colorFilter: imageColor != null ? ColorFilter.mode(imageColor!, BlendMode.srcIn) : null,
       height: size ?? height,
       width: size ?? width,
       fit: fill,

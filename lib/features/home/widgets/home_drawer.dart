@@ -18,7 +18,6 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
       shape: const RoundedRectangleBorder(),
       child: Column(
@@ -62,7 +61,11 @@ class HomeDrawer extends StatelessWidget {
           ),
 
           // Drawer Items
-          _buildMenu(image: AppImages.drawerReturnProduct, title: AppString.drawerReturnsProduct, onTap: () {}),
+          _buildMenu(
+            image: AppImages.drawerReturnProduct,
+            title: AppString.drawerReturnsProduct,
+            onTap: () => appRouter.push(const ReturnProductRoute()),
+          ),
           _buildMenu(
             image: AppImages.drawerLoyaltyPoints,
             title: AppString.drawerLoyaltyPoints,

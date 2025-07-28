@@ -28,4 +28,4 @@ environment:
 vars:
   name:
     type: string
-    description: Feature name.
+    description: The name of the feature (e.g., PlaceOrder)  

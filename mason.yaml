@@ -1,3 +1,5 @@
 bricks:
   getx_feature:
     path: getx_feature
+  bloc_feature:
+    path: bloc_feature

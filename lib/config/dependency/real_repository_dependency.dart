@@ -3,6 +3,8 @@ import 'package:bai_serve/features/home/repository/home_repository.dart';
 import 'package:bai_serve/features/home/repository/real_home_repository.dart';
 import 'package:bai_serve/features/order/tracking_order/repository/real_tracking_order_repository.dart';
 import 'package:bai_serve/features/order/tracking_order/repository/tracking_order_repository.dart';
+import 'package:bai_serve/features/return_product/repository/real_return_product_repository.dart';
+import 'package:bai_serve/features/return_product/repository/return_product_repository.dart';
 import 'package:bai_serve/features/vendor/common_widget/category_selector/category_selctor_repository.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/repository/real_vendor_details_repository.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
@@ -23,6 +25,7 @@ class RealRepositoryDependency {
     //getit
     getIt.registerLazySingleton<VerifyVendorRepository>(RealVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(RealCategorySelctorRepository.new);
+    getIt.registerLazySingleton<ReturnProductRepository>(RealReturnProductRepository.new);
 
     AppLogger.debug('Real repository dependency initalized', tag: 'dependency');
   }

@@ -238,8 +238,11 @@ class AppString {
   static const riderDetails = 'Rider Details';
   static const callNow = 'Call Now';
   static const myVendors = 'My Vendors';
-  static const VerifyApplyDate = 'Verify Apply Date';
+  static const VerifyApplyDate = 'Apply Date';
   static const verificationStatus = 'Verification Status';
+  static const verificationFee = 'Verification Fee';
+  static const inTransit = 'In Transit';
+
   static const vendorFilters = ['All Vendor', 'Verified', 'New Vendor'];
   static const vendorVerificationRequestMessage =
       'Your Vendor Verify Request has been submitted. Our team will get back to you shortly.';
