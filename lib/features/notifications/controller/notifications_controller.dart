@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/model/notification_model.dart';
-import '../../repository/notification_repository.dart';
+import '../model/notification_model.dart';
+import '../repository/notification_repository.dart';
 
 class NotificationsController extends GetxController {
   /// Notification List
@@ -34,8 +34,7 @@ class NotificationsController extends GetxController {
 
   void moreNotification() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
         if (isLoadingMore || hasNoData) return;
         isLoadingMore = true;
         update();
@@ -70,8 +69,7 @@ class NotificationsController extends GetxController {
   }
 
   /// Notification Controller Instance create here
-  static NotificationsController get instance =>
-      Get.put(NotificationsController());
+  static NotificationsController get instance => Get.put(NotificationsController());
 
   /// Controller on Init
   @override

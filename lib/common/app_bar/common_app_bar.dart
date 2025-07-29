@@ -3,7 +3,7 @@ import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/config/route/app_router.dart';
 import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/features/notifications/presentation/controller/notifications_controller.dart';
+import 'package:bai_serve/features/notifications/controller/notifications_controller.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,26 +44,18 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.arrow_back_ios_new_sharp),
         ),
     actions: actions ?? _appBarActions(),
-    title:
-        titleWidget ??
-        CommonText(
-          text: title ?? '',
-          fontWeight: FontWeight.w600,
-          fontSize: 18.sp,
-        ),
+    title: titleWidget ?? CommonText(text: title ?? '', fontWeight: FontWeight.w600, fontSize: 18.sp),
   );
 
   List<Widget> _appBarActions() => [
     GetBuilder<NotificationsController>(
       builder:
           (controller) => GestureDetector(
-            onTap: (){
-               controller.onNotificationTap();
-               appRouter.push(const NotificationRoute());
+            onTap: () {
+              controller.onNotificationTap();
+              appRouter.push(const NotificationRoute());
             },
-            child: _buildNotificationIcon(
-              notificationCount: controller.totalUnreadNotification,
-            ),
+            child: _buildNotificationIcon(notificationCount: controller.totalUnreadNotification),
           ),
     ),
     12.width,
@@ -78,19 +70,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     16.width,
   ];
 
-  Widget _buildNotificationIcon({
-    required int notificationCount,
-    double iconSize = 24,
-    Color? iconColor,
-  }) {
+  Widget _buildNotificationIcon({required int notificationCount, double iconSize = 24, Color? iconColor}) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        Icon(
-          Icons.notifications_none,
-          color: iconColor ?? Colors.black,
-          size: iconSize,
-        ),
+        Icon(Icons.notifications_none, color: iconColor ?? Colors.black, size: iconSize),
         if (notificationCount > 0)
           Positioned(
             right: -4,
@@ -98,18 +82,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Container(
               padding: const EdgeInsets.all(2),
               constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
+              decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
               alignment: Alignment.center,
               child: Text(
                 notificationCount > 99 ? '99+' : '$notificationCount',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
               ),
             ),
           ),

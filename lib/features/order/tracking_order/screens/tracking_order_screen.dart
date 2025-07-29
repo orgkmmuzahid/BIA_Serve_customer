@@ -15,11 +15,11 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
-
-
 @RoutePage()
 class TrackingOrderScreen extends StatelessWidget {
-  const TrackingOrderScreen({super.key});
+  const TrackingOrderScreen({required this.commonBottomNavBar, super.key});
+
+  final CommonBottomNavBar commonBottomNavBar;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -32,38 +32,45 @@ class TrackingOrderScreen extends StatelessWidget {
             child: Column(
               children: [
                 CommonTextField(
-                  prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: trackingOrderController.onOrderTrackingFetch),
+                  prefixIcon: IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: trackingOrderController.onOrderTrackingFetch,
+                  ),
                   hintText: AppString.trackingID,
                   controller: trackingOrderController.searchController,
                 ),
                 10.height,
-                CommonText( 
+                CommonText(
                   text: '${AppString.trackingID} #${trackingOrderController.trackingOrderDetails.data?.trackingId}',
-                    style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor2),),
+                  style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor2),
+                ),
 
                 CommonText(
                   alignment: MainAxisAlignment.center,
-                  text: Utils.formatDurationToHms(trackingOrderController.trackingOrderDetails.data?.estimatedDeliveryTime ?? const Duration()),
+                  text: Utils.formatDurationToHms(
+                    trackingOrderController.trackingOrderDetails.data?.estimatedDeliveryTime ?? const Duration(),
+                  ),
                   style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700, color: AppColors.primaryText),
                 ),
-                CommonText(alignment: MainAxisAlignment.center, text: AppString.estimatedDeliveryTime, style: getTheme.textTheme.bodyMedium),
-                if(trackingOrderController.trackingOrderDetails.data != null)
-                TrackingProgressWidget(trackingOrderModel:  trackingOrderController.trackingOrderDetails.data!),
+                CommonText(
+                  alignment: MainAxisAlignment.center,
+                  text: AppString.estimatedDeliveryTime,
+                  style: getTheme.textTheme.bodyMedium,
+                ),
+                if (trackingOrderController.trackingOrderDetails.data != null)
+                  TrackingProgressWidget(trackingOrderModel: trackingOrderController.trackingOrderDetails.data!),
                 10.height,
-                if(trackingOrderController.trackingOrderDetails.data != null)
-                CommonTimeline(timeline: trackingOrderController.trackingOrderDetails.data!.timeline),
+                if (trackingOrderController.trackingOrderDetails.data != null)
+                  CommonTimeline(timeline: trackingOrderController.trackingOrderDetails.data!.timeline),
                 20.height,
-                if(trackingOrderController.trackingOrderDetails.data != null)
-                RiderInfoWidget(riderInfo: trackingOrderController.trackingOrderDetails.data!.riderInfo)
+                if (trackingOrderController.trackingOrderDetails.data != null)
+                  RiderInfoWidget(riderInfo: trackingOrderController.trackingOrderDetails.data!.riderInfo),
               ],
             ),
           ),
         );
       },
     ),
-    bottomNavigationBar: const CommonBottomNavBar(),
+    bottomNavigationBar: commonBottomNavBar,
   );
-
-
-
 }

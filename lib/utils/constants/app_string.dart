@@ -127,6 +127,7 @@ class AppString {
   //place order screen
   static const String placeOrder = 'Place Order';
   static const String setPickupDeliveryLocation = 'Set Pickup & Delivery Location';
+  static const String pickupAddress = 'Pickup Address';
   static const String recentSearch = 'Recent Search';
   static const String pickupInformation = 'Pickup Information';
 
@@ -211,6 +212,7 @@ class AppString {
   static const account = 'Account';
   static const searchForOrder = 'Search For Order';
   static const logoutMessage = 'Are you sure you want to log out?';
+  static const productReturnSuccessMessage = 'Return Request Successful.';
   static const accountDeleteMessage = 'Are you sure you want to delete your account?';
   static const termsCondition = 'Terms & Condition';
   static const changePersonalInfo = 'Change Personal Info';
@@ -242,8 +244,17 @@ class AppString {
   static const verificationStatus = 'Verification Status';
   static const verificationFee = 'Verification Fee';
   static const inTransit = 'In Transit';
+  static const vendorProof = 'Vendor Proof';
+  static const profileLink = 'Profile Link';
+  static const adminProof = 'Admin Proof';
+  static const vendor = 'Vendor';
+  static const status = 'status';
 
   static const vendorFilters = ['All Vendor', 'Verified', 'New Vendor'];
+  static const addMoreDetails = 'Add more details';
+  static const noDetailsAvailableForThisNotification = 'This notification has no further information.';
+  static const returnTypes = ['Replacement', 'Return Product'];
+  static const returnReason = ['Vendor sent wrong', 'Damaged item', 'Delivery rider made a mistake', 'Other'];
   static const vendorVerificationRequestMessage =
       'Your Vendor Verify Request has been submitted. Our team will get back to you shortly.';
 

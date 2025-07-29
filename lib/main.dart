@@ -1,4 +1,7 @@
+import 'package:bai_serve/component/text/common_text.dart';
 import 'package:bai_serve/config/bloc/app_bloc_observer.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,4 +38,14 @@ Future<void> init() async {
 void _diInit() {
   final DependencyInjection dI = DependencyInjection();
   dI.dependencies();
+}
+
+void showSnackBar(String text) {
+  ScaffoldMessenger.of(appRouter.navigatorKey.currentContext!).showSnackBar(
+    SnackBar(
+      duration: const Duration(milliseconds: 800),
+      backgroundColor: AppColors.primaryColor,
+      content: CommonText(text: text, color: AppColors.textWhite, fontWeight: FontWeight.bold),
+    ),
+  );
 }

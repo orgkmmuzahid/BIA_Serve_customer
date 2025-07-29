@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
-
+  const SettingScreen({required this.commonBottomNavBar, super.key});
+  final CommonBottomNavBar commonBottomNavBar;
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: const CommonAppBar(title: AppString.account, leading: SizedBox(width: 0, height: 0)),
@@ -117,7 +117,7 @@ class SettingScreen extends StatelessWidget {
         ),
       ),
     ),
-    bottomNavigationBar: const CommonBottomNavBar(),
+    bottomNavigationBar: commonBottomNavBar,
   );
 
   ListTile _buildMenu({

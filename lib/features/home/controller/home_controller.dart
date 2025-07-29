@@ -24,7 +24,10 @@ class HomeController extends GetxController {
   TextEditingController searchController = TextEditingController();
   MapEntry<String, String> selectedCountry = const MapEntry(AppString.langEnglish, AppImages.langEnglish);
 
-  Map<String, String> availableCountries = {AppString.langEnglish: AppImages.langEnglish, AppString.langSwahili: AppImages.langSwahili};
+  Map<String, String> availableCountries = {
+    AppString.langEnglish: AppImages.langEnglish,
+    AppString.langSwahili: AppImages.langSwahili,
+  };
 
   int currentIndex = 0;
 
@@ -65,36 +68,9 @@ class HomeController extends GetxController {
     update();
   }
 
-  void onNavMenuChange(int index) {
-    if (index == selectedNavMenu) {
-      return;
-    }
-    if (index == 0) {
-      appRouter.popUntilRouteWithName( HomeRoute.name);
-    } else if (index == 1) {
-      _routeNav(MyOrderRoute());
-    } else if (index == 2) {
-      _routeNav(const TrackingOrderRoute());
-    } else if (index == 3) {
-      _routeNav(const SettingRoute());
-    }
-    selectedNavMenu = index;
-    update();
-  }
-
-  void _routeNav(PageRouteInfo page){
-    if(appRouter.current.name == HomeRoute.name){
-      appRouter.push(page);
-    }else{
-      appRouter.replace(page);
-    }
-  }
-
   void onSearch() {}
 
   //drawer
-
-
 
   @override
   void onClose() {

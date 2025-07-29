@@ -60,7 +60,7 @@ class VendorVerifyFormScreen extends StatelessWidget {
               CommonMultilineTextField(height: 100, hintText: AppString.vendorLocation, onSave: (value) {}),
 
               CommonText(text: AppString.uplaodScreenshot, style: getTheme.textTheme.titleMedium, top: 5, bottom: 5),
-              CommonMultiImagePicker(isMulti: false),
+              CommonMultiImagePickerFormField(isMulti: false, onSaved: (newValue) {}),
 
               10.height,
               DualFieldRow(

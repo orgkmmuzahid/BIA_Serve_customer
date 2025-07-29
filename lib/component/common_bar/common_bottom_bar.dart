@@ -1,30 +1,34 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/features/home/controller/home_controller.dart';
+import 'package:bai_serve/config/route/app_router.dart';
+import 'package:bai_serve/config/route/app_router.gr.dart';
 import 'package:bai_serve/utils/constants/app_colors.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class CommonBottomNavBar extends StatefulWidget {
-  const CommonBottomNavBar({super.key});
+  const CommonBottomNavBar({super.key, this.onTap, this.initialIndex = 0});
+  final void Function(int index)? onTap;
+  final int initialIndex;
 
   @override
   State<CommonBottomNavBar> createState() => _CommonBottomNavBarState();
 }
 
 class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
+  int selectedIndex = 0;
+
   final selectedIconBackgroundColor = getTheme.colorScheme.primary;
   final selectedIconIconColor = getTheme.colorScheme.onSecondary;
 
   final unselectedColor = getTheme.textTheme.bodyMedium!.color;
   final unselectedBackgroundColor = getTheme.textTheme.bodyMedium!.color;
 
-  Map<String, String> iconList = {
-    //"title": "image url"
+  final Map<String, String> iconList = {
     AppString.navHome: AppImages.navHome,
     AppString.navMyOrder: AppImages.navMyOrder,
     AppString.navTrackingOrder: AppImages.navTrackingOrder,
@@ -33,73 +37,78 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
 
   @override
   void initState() {
+    selectedIndex = widget.initialIndex;
     super.initState();
+  }
+
+  void _onItemTapped(int index) {
+    onNavMenuChange(index);
+    widget.onTap?.call(index);
+  }
+
+  void onNavMenuChange(int index) {
+    if (index == selectedIndex) {
+      return;
+    }
+    if (index == 0) {
+      appRouter.popUntilRouteWithName(HomeRoute.name);
+      selectedIndex = 0;
+      setState(() {});
+    } else if (index == 1) {
+      _routeNav(MyOrderRoute(commonBottomNavBar: const CommonBottomNavBar(initialIndex: 1)));
+    } else if (index == 2) {
+      _routeNav(TrackingOrderRoute(commonBottomNavBar: const CommonBottomNavBar(initialIndex: 2)));
+    } else if (index == 3) {
+      _routeNav(SettingRoute(commonBottomNavBar: const CommonBottomNavBar(initialIndex: 3)));
+    }
+  }
+
+  void _routeNav(PageRouteInfo page) {
+    if (appRouter.current.name == HomeRoute.name) {
+      appRouter.push(page);
+    } else {
+      appRouter.replace(page);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (homeController) {
-        return SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
-            decoration: BoxDecoration(
-              color: getTheme.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(iconList.length, (index) {
-                return GestureDetector(
-                  onTap: () {
-                    homeController.onNavMenuChange(index);
-                  },
-                  child: Container(
-                    child: _buildIcon(
-                      iconList.entries.elementAt(index),
-                      index,
-                      homeController,
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-        );
-      },
+    return SingleChildScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+        decoration: BoxDecoration(
+          color: getTheme.scaffoldBackgroundColor,
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(iconList.length, (index) {
+            return GestureDetector(
+              onTap: () => _onItemTapped(index),
+              child: _buildIcon(iconList.entries.elementAt(index), index),
+            );
+          }),
+        ),
+      ),
     );
   }
-Widget _buildIcon(
-    MapEntry<String, String> navIcon,
-    int index,
-    HomeController controller,
-  ) {
-    final bool isSelected = _isSelected(index, controller);
+
+  Widget _buildIcon(MapEntry<String, String> navIcon, int index) {
+    final bool isSelected = index == selectedIndex;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      padding: EdgeInsets.symmetric(
-        horizontal: isSelected ? 16.w : 8.w,
-        vertical: 8.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: isSelected ? 16.w : 8.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: isSelected ? selectedIconBackgroundColor: Colors.transparent,
+        color: isSelected ? selectedIconBackgroundColor : Colors.transparent,
         borderRadius: BorderRadius.circular(10.r),
-        boxShadow: isSelected
-            ? [
-                BoxShadow(
-                  color: selectedIconBackgroundColor,
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ]
-            : null,
+        boxShadow:
+            isSelected
+                ? [BoxShadow(color: selectedIconBackgroundColor, blurRadius: 8, offset: const Offset(0, 4))]
+                : null,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -122,7 +131,4 @@ Widget _buildIcon(
       ),
     );
   }
-
-  bool _isSelected(int index, HomeController controller) =>
-      index == controller.selectedNavMenu;
 }

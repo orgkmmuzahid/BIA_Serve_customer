@@ -45,17 +45,10 @@ class CommonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return enableBorder == true || backgroundColor != null
-        ? _withBorder(context)
-        : _withoutBorder(context);
+    return enableBorder == true || backgroundColor != null ? _withBorder(context) : _withoutBorder(context);
   }
 
-  EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(
-    left: left.w,
-    right: right.w,
-    top: top.h,
-    bottom: bottom.h,
-  );
+  EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(left: left.w, right: right.w, top: top.h, bottom: bottom.h);
 
   Widget _withBorder(BuildContext context) => Container(
     padding: _edgeInsetsBuilder(),
@@ -64,15 +57,13 @@ class CommonText extends StatelessWidget {
       //   BoxShadow(color: borderColor ?? Theme.of(context).dividerColor, blurRadius: 3, spreadRadius: 1)
       // ],
       color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
-      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, ),
+      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor),
     ),
     child: Align(alignment: _convertAlignment(), child: _textField(context)),
   );
 
-  Widget _withoutBorder(BuildContext context) => Padding(
-    padding: _edgeInsetsBuilder(),
-    child: Align(alignment: _convertAlignment(), child: _textField(context)),
-  );
+  Widget _withoutBorder(BuildContext context) =>
+      Padding(padding: _edgeInsetsBuilder(), child: Align(alignment: _convertAlignment(), child: _textField(context)));
 
   Alignment _convertAlignment() {
     switch (alignment) {
@@ -92,10 +83,7 @@ class CommonText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       softWrap: true,
-      overflow:
-          maxLines == null
-              ? TextOverflow.visible
-              : (overflow ?? TextOverflow.ellipsis),
+      overflow: maxLines == null ? TextOverflow.visible : (overflow ?? TextOverflow.ellipsis),
       style:
           style ??
           GoogleFonts.dmSans(

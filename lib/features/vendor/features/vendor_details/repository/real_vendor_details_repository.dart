@@ -3,6 +3,7 @@ import 'package:bai_serve/config/network/dio_service.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/model/product_details_model.dart';
 
 import 'package:bai_serve/features/vendor/features/vendor_details/model/product_model.dart';
+import 'package:bai_serve/features/vendor/features/vendor_details/model/vendor_proof_model.dart';
 
 import 'vendor_details_repository.dart';
 
@@ -23,6 +24,12 @@ class RealVendorDetailsRepository implements VendorDetailsRepository {
   @override
   Future<void> products({required OnRequestStateChange<List<ProductModel>> onStateChange}) {
     // TODO: implement products
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<VendorProofModel>> fetchVendorProof() {
+    // TODO: implement fetchVendorProof
     throw UnimplementedError();
   }
 }

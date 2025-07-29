@@ -1,8 +1,11 @@
 import 'package:bai_serve/config/network/dio_service.dart';
 import 'package:bai_serve/config/network/request_state.dart';
+import 'package:bai_serve/features/vendor/common_model/vendor_model.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/model/product_details_model.dart';
 import 'package:bai_serve/features/vendor/features/vendor_details/model/product_model.dart';
+import 'package:bai_serve/features/vendor/features/vendor_details/model/vendor_proof_model.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve/utils/helpers/simulate_moc_repo.dart';
 import 'package:flutter/material.dart';
 
 import 'vendor_details_repository.dart';
@@ -54,5 +57,23 @@ class MockVendorDetailsRepository implements VendorDetailsRepository {
         data: ['Man Fashion', 'Watch', 'Beauty', 'T-shirt', 'Stationary', 'Electronics', 'Shoes', 'Fashion Bag'],
       ),
     );
+  }
+
+  @override
+  Future<List<VendorProofModel>> fetchVendorProof() async {
+    await SimulateMocRepo();
+
+    return [
+      for (int i = 0; i < 5; i++)
+        VendorProofModel(
+          prifileLink: 'https://bia-serve.com/vendor/demo-vendor-12$i',
+          vendorId: '1234567$i',
+          name: 'Jerome Bell$i',
+          phone: '123456789$i',
+          status: VerificationStatus.verified,
+          profileImage: AppImages.callingBackground,
+          proofImages: [AppImages.callingBackground, AppImages.homeBanner, AppImages.callingBackground],
+        ),
+    ];
   }
 }

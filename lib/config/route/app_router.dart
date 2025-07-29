@@ -87,5 +87,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: VerificationStatusRoute.page),
     AutoRoute(page: ReturnProductRoute.page),
     AutoRoute(page: ReturnProductDetailsRoute.page),
+    AutoRoute(page: ReturnProcessingRoute.page),
+    AutoRoute(page: VendorProofRoute.page),
   ];
 }

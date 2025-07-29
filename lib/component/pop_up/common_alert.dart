@@ -6,13 +6,24 @@ import 'package:bai_serve/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 class CommonAlert {
-  CommonAlert({required this.title, required this.onTap, this.content}) {
+  CommonAlert({
+    required this.title,
+    required this.onTap,
+    this.content,
+    this.disableActionButton = false,
+    this.disableCancelButton = false,
+    this.actionButtonTittle = AppString.yes,
+    this.cancelButtonTittle = AppString.no,
+  }) {
     _alertBuilder();
   }
   final String title;
+  final String actionButtonTittle;
+  final String cancelButtonTittle;
   final Function onTap;
   final Widget? content;
-
+  final bool disableActionButton;
+  final bool disableCancelButton;
   Future<dynamic> _alertBuilder() {
     return showDialog(
       context: navigatorRouterKey.currentContext!,
@@ -22,25 +33,27 @@ class CommonAlert {
             actionsAlignment: MainAxisAlignment.center,
             content: content,
             actions: [
-              CommonButton(
-                titleText: AppString.no,
-                buttonWidth: 70,
-                buttonHeight: 35,
-                buttonColor: AppColors.primaryColor3,
-                titleColor: AppColors.textWhite,
-                onTap: appRouter.pop,
-              ),
-              CommonButton(
-                titleText: AppString.yes,
-                buttonWidth: 70,
-                buttonHeight: 35,
-                buttonColor: AppColors.success,
-                titleColor: AppColors.textWhite,
-                onTap: () {
-                  appRouter.pop();
-                  onTap();
-                },
-              ),
+              if (disableActionButton == false)
+                CommonButton(
+                  titleText: cancelButtonTittle,
+                  buttonWidth: 70,
+                  buttonHeight: 35,
+                  buttonColor: AppColors.primaryColor3,
+                  titleColor: AppColors.textWhite,
+                  onTap: appRouter.pop,
+                ),
+              if (disableCancelButton == false)
+                CommonButton(
+                  titleText: actionButtonTittle,
+                  buttonWidth: 70,
+                  buttonHeight: 35,
+                  buttonColor: AppColors.success,
+                  titleColor: AppColors.textWhite,
+                  onTap: () {
+                    appRouter.pop();
+                    onTap();
+                  },
+                ),
             ],
           ),
     );

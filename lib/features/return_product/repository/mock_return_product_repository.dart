@@ -1,3 +1,4 @@
+import 'package:bai_serve/features/return_product/model/pickup_address_model.dart';
 import 'package:bai_serve/features/return_product/model/return_product_model.dart';
 import 'package:bai_serve/utils/constants/app_images.dart';
 import 'package:bai_serve/utils/helpers/simulate_moc_repo.dart';
@@ -22,5 +23,15 @@ class MockReturnProductRepository implements ReturnProductRepository {
           totalPrice: 5552,
         ),
     ];
+  }
+
+  @override
+  Future<PickupAddressModel> getPickupAddress() async {
+    await SimulateMocRepo();
+    return PickupAddressModel(
+      name: 'Jack Taylor',
+      phoneNumber: '+123456789101',
+      address: '123 Maple Street ,Apt 456, Toronto, ON M5A 1A1 ,Canada',
+    );
   }
 }

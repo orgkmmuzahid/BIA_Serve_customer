@@ -14,16 +14,13 @@ class AppImages {
   static const String iconGoogle = '$baseurl/google.png';
 
   //drawer
-  static const String drawerReturnProduct =
-      '$baseurl/drawer_return_product.png';
-  static const String drawerLoyaltyPoints =
-      '$baseurl/drawer_loyalty_loints.png';
+  static const String drawerReturnProduct = '$baseurl/drawer_return_product.png';
+  static const String drawerLoyaltyPoints = '$baseurl/drawer_loyalty_loints.png';
   static const String drawerMessage = '$baseurl/drawer_message.png';
   static const String drawerMyPayment = '$baseurl/my_ayment.png';
   static const String drawerSupport = '$baseurl/drawer_Support.png';
   static const String drawerLanguage = '$baseurl/drawer_Language.png';
-  static const String drawerDeleteAccount =
-      '$baseurl/drawer_Delete_Account.png';
+  static const String drawerDeleteAccount = '$baseurl/drawer_Delete_Account.png';
   static const String drawerLogout = '$baseurl/drawer_log_out.png';
 
   //navbar
@@ -36,25 +33,19 @@ class AppImages {
   static const String homeBanner = '$baseurl/home_banner.png';
   static const String homePlaceOrder = '$baseurl/home_place_order.png';
   static const String homeVendorSourcing = '$baseurl/home_VendorSourcing.png';
-  static const String homePurchaseDelivery =
-      '$baseurl/home_Purchase & Delivery.png';
-  static const String homeBulkOrderAgents =
-      '$baseurl/home_Bulk Order Agents.png';
+  static const String homePurchaseDelivery = '$baseurl/home_Purchase & Delivery.png';
+  static const String homeBulkOrderAgents = '$baseurl/home_Bulk Order Agents.png';
   static const String homeVerifyVendor = '$baseurl/home_Verify Vendor.png';
-  static const String homeDoorToDoorPickup =
-      '$baseurl/home_Door-to-Door Pickup.png';
+  static const String homeDoorToDoorPickup = '$baseurl/home_Door-to-Door Pickup.png';
 
   //notification
-  static const String notificationDelivered =
-      '$baseurl/notification_delivered.png';
-  static const String notificationOnTheWay =
-      '$baseurl/notification_on_the_way.png';
+  static const String notificationDelivered = '$baseurl/notification_delivered.png';
+  static const String notificationOnTheWay = '$baseurl/notification_on_the_way.png';
   static const String notificationReady = '$baseurl/notification_ready.png';
 
   //loyalty
   static const String loyaltyLevel = '$baseurl/rewards_level.png';
-  static const String loyaltyPonitsBackground =
-      '$baseurl/loyalty_backgrounds.png';
+  static const String loyaltyPonitsBackground = '$baseurl/loyalty_backgrounds.png';
   static const String giftBox = '$baseurl/gift_box.png';
   static const String discount = '$baseurl/discount.png';
 
@@ -69,5 +60,6 @@ class AppImages {
   static const String myVendors = '$baseurl/myVendors.png';
 
   static const String money = '$baseurl/money.png';
+  static const String house = '$baseurl/house.png';
   static String step(int number) => '$baseurl/step_$number.png';
 }

@@ -1,4 +1,5 @@
 import 'package:bai_serve/component/button/common_button.dart';
+import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve/component/image/common_image.dart';
 import 'package:bai_serve/component/pop_up/common_alert.dart';
 import 'package:bai_serve/config/route/app_router.dart';
@@ -51,6 +52,10 @@ class HomeDrawer extends StatelessWidget {
                         buttonRadius: 4,
                         borderColor: getTheme.colorScheme.onPrimary,
                         buttonColor: getTheme.colorScheme.primary,
+                        onTap: () {
+                          appRouter.pop();
+                          appRouter.push(SettingRoute(commonBottomNavBar: const CommonBottomNavBar(initialIndex: 3)));
+                        },
                       ),
                       const Spacer(),
                     ],

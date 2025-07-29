@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-enum NotificationType { ready, delivered, onTheWay }
+enum NotificationType { ready, delivered, onTheWay, verification }
 
 class NotificationModel {
   final String id;
@@ -84,11 +84,6 @@ class NotificationModel {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        title.hashCode ^
-        subtitle.hashCode ^
-        type.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode;
+    return id.hashCode ^ title.hashCode ^ subtitle.hashCode ^ type.hashCode ^ createdAt.hashCode ^ updatedAt.hashCode;
   }
 }

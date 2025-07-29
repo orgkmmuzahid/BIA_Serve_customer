@@ -4,13 +4,12 @@ import 'package:bai_serve/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../component/common_bar/common_bottom_bar.dart';
-import '../../../../component/other_widgets/common_loader.dart';
-import '../../../../component/other_widgets/no_data.dart';
-import '../../data/model/notification_model.dart';
+import '../../../component/common_bar/common_bottom_bar.dart';
+import '../../../component/other_widgets/common_loader.dart';
+import '../../../component/other_widgets/no_data.dart';
+import '../model/notification_model.dart';
 import '../controller/notifications_controller.dart';
 import '../widgets/notification_item.dart';
-
 
 @RoutePage()
 class NotificationScreen extends StatelessWidget {
@@ -41,10 +40,7 @@ class NotificationScreen extends StatelessWidget {
                   /// show all Notifications here
                   : ListView.builder(
                     controller: controller.scrollController,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.sp,
-                      vertical: 10.sp,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
                     itemCount:
                         controller.isLoadingMore
                             ? controller.notifications.length + 1
@@ -55,8 +51,7 @@ class NotificationScreen extends StatelessWidget {
                       if (index > controller.notifications.length) {
                         return const CommonLoader(size: 40, strokeWidth: 2);
                       }
-                      final NotificationModel item =
-                          controller.notifications[index];
+                      final NotificationModel item = controller.notifications[index];
 
                       ///  Notification card item
                       return NotificationItem(item: item);

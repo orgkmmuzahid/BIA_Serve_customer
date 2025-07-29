@@ -17,8 +17,7 @@ import 'package:bai_serve/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
-final _formKey = GlobalKey<FormState>();
-
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 @RoutePage()
 class PurchaseDeliveryScreen extends StatelessWidget {
@@ -33,20 +32,17 @@ class PurchaseDeliveryScreen extends StatelessWidget {
         builder: (purchaseDeliveryController) {
           return SingleChildScrollView(
             child: Form(
+              key: _formKey,
               child: Column(
                 children: [
-                  CommonText(
-                    text: AppString.vendorName,
-                    style: getTheme.textTheme.bodyLarge,
-                  ).start,
+                  CommonText(text: AppString.vendorName, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonTextField(
                     hintText: AppString.vendorName,
                     validator: OtherHelper.requiredFieldValidator,
                     onSaved: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(name: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(name: value),
                       );
                     },
                   ),
@@ -56,8 +52,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                     validator: OtherHelper.requiredFieldValidator,
                     onSaved: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(vendorId: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(vendorId: value),
                       );
                     },
                   ),
@@ -68,19 +63,14 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                     validator: OtherHelper.phoneValidator,
                     onSaved: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(phoneNumber: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(phoneNumber: value),
                       );
                     },
                   ),
                   10.height,
+                  CommonMultiImagePickerFormField(onSaved: (newValue) {}),
 
-                   CommonMultiImagePicker(),
-
-                  CommonText(
-                    text: AppString.productAmount,
-                    style: getTheme.textTheme.bodyLarge,
-                  ).start,
+                  CommonText(text: AppString.productAmount, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonTextField(
                     hintText: AppString.productAmount,
@@ -89,59 +79,46 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                     keyboardType: TextInputType.number,
                     onSaved: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(amount: double.tryParse(value)),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(amount: double.tryParse(value)),
                       );
                     },
                   ),
                   10.height,
 
-                  CommonText(
-                    text: AppString.deliveryType,
-                    style: getTheme.textTheme.bodyLarge,
-                  ).start,
+                  CommonText(text: AppString.deliveryType, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonDropDown<DeliveryType>(
                     hint: AppString.deliveryType,
                     items: DeliveryType.values,
                     onChanged: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(deliveryType: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(deliveryType: value),
                       );
                     },
                     nameBuilder: (DeliveryType value) => value.displayName,
                   ),
 
                   10.height,
-                  CommonText(
-                    text: AppString.deliveryAddress,
-                    style: getTheme.textTheme.bodyLarge,
-                  ).start,
+                  CommonText(text: AppString.deliveryAddress, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonMultilineTextField(
                     hintText: AppString.deliveryAddress,
                     height: 80,
                     onSave: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(deliveryAddress: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(deliveryAddress: value),
                       );
                     },
                   ),
                   10.height,
-                  CommonText(
-                    text: AppString.productDescription,
-                    style: getTheme.textTheme.bodyLarge,
-                  ).start,
+                  CommonText(text: AppString.productDescription, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonMultilineTextField(
                     hintText: AppString.productDescription,
                     height: 80,
                     onSave: (value) {
                       purchaseDeliveryController.onFormChange(
-                        purchaseDeliveryController.purchaseDeliveryModel
-                            .copyWith(productDescription: value),
+                        purchaseDeliveryController.purchaseDeliveryModel.copyWith(productDescription: value),
                       );
                     },
                   ),
@@ -151,16 +128,8 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CommonText(
-                            text: AppString.serviceFee,
-                            style: getTheme.textTheme.bodyLarge,
-                            bottom: 10,
-                          ),
-                          CommonText(
-                            text: AppString.totalAmount,
-                            style: getTheme.textTheme.bodyLarge,
-                            top: 15,
-                          ),
+                          CommonText(text: AppString.serviceFee, style: getTheme.textTheme.bodyLarge, bottom: 10),
+                          CommonText(text: AppString.totalAmount, style: getTheme.textTheme.bodyLarge, top: 15),
                         ],
                       ),
                       10.width,
@@ -172,10 +141,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                               enableBorder: true,
                               top: 10,
                               bottom: 10,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                               left: 10,
                               alignment: MainAxisAlignment.center,
                               text:
