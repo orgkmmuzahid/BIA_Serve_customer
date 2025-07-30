@@ -1,16 +1,16 @@
 // File: setting_screen.dart
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/component/pop_up/common_alert.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/auth/widgets/delete_account_alert.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/pop_up/common_alert.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

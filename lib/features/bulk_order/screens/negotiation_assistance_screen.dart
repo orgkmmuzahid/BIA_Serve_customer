@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/bulk_order/controllers/bulk_order_controller.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

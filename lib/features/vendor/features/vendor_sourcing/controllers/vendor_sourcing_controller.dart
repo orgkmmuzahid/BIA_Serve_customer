@@ -1,5 +1,5 @@
 // File: vendor_sourcing_controller.dart
-import 'package:bai_serve/features/vendor/features/vendor_sourcing/repository/vendor_sourcing_repository.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/repository/vendor_sourcing_repository.dart';
 import 'package:get/get.dart';
 
 // Get.lazyPut(() => VendorSourcingController(), fenix: true);

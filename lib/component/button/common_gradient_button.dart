@@ -1,6 +1,6 @@
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 class CommonGradientButton extends StatelessWidget {
@@ -28,9 +28,7 @@ class CommonGradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: [const Color(0xff034045), getTheme.colorScheme.primary],
-      ),
+      gradient: LinearGradient(colors: [const Color(0xff034045), getTheme.colorScheme.primary]),
       borderRadius: BorderRadius.circular(04),
     ),
     child: CommonButton(

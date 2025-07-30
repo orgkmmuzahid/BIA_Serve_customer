@@ -1,11 +1,11 @@
-import 'package:bai_serve/config/network/dio_service.dart';
-import 'package:bai_serve/config/network/request_state.dart';
-import 'package:bai_serve/features/home/model/order_list_model.dart';
-import 'package:bai_serve/features/order/tracking_order/model/order_timeline_model.dart';
-import 'package:bai_serve/features/order/tracking_order/model/rider_info_model.dart';
-import 'package:bai_serve/features/order/tracking_order/model/tracking_order_model.dart';
-import 'package:bai_serve/features/order/tracking_order/repository/tracking_order_repository.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/config/network/dio_service.dart';
+import 'package:bai_serve_customer/config/network/request_state.dart';
+import 'package:bai_serve_customer/features/home/model/order_list_model.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/model/order_timeline_model.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/model/rider_info_model.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/model/tracking_order_model.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/repository/tracking_order_repository.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
 
 class MockTrackingOrderRepository implements TrackingOrderRepository {
   @override

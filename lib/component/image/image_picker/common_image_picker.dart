@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:bai_serve/component/image/image_picker/common_image_picker_controller.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/image/image_picker/common_image_picker_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

@@ -1,8 +1,8 @@
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/features/order/tracking_order/model/order_timeline_model.dart';
-import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/model/order_timeline_model.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 class CommonTimeline extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:bai_serve/config/dependency/dependency_injection.dart';
-import 'package:bai_serve/features/vendor/common_widget/category_selector/category_selctor_repository.dart';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
+import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/category_selctor_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'category_selector_state.dart';

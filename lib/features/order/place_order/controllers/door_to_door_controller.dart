@@ -1,5 +1,5 @@
-import 'package:bai_serve/features/order/place_order/enum/delivery_type.dart';
-import 'package:bai_serve/features/order/place_order/enum/pickup_type.dart';
+import 'package:bai_serve_customer/features/order/place_order/enum/delivery_type.dart';
+import 'package:bai_serve_customer/features/order/place_order/enum/pickup_type.dart';
 import 'package:get/get.dart';
 
 class DoorToDoorController extends GetxController {

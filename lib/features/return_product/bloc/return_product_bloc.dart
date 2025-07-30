@@ -1,6 +1,6 @@
-import 'package:bai_serve/config/dependency/dependency_injection.dart';
-import 'package:bai_serve/features/return_product/model/pickup_address_model.dart';
-import 'package:bai_serve/features/return_product/repository/return_product_repository.dart';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
+import 'package:bai_serve_customer/features/return_product/model/pickup_address_model.dart';
+import 'package:bai_serve_customer/features/return_product/repository/return_product_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'return_product_event.dart';

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/constants/app_images.dart';
 import '../../component/image/common_image.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:bai_serve/features/vendor/common_model/vendor_model.dart';
+import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart';
 
 class VendorProofModel {
   String vendorId;

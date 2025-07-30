@@ -1,10 +1,10 @@
 // File: chat_controller.dart
 
-import 'package:bai_serve/features/chat/model/chat_info.dart';
-import 'package:bai_serve/features/chat/model/chat_model.dart';
-import 'package:bai_serve/features/chat/model/chat_user_info.dart';
-import 'package:bai_serve/features/chat/model/message_model.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/features/chat/model/chat_info.dart';
+import 'package:bai_serve_customer/features/chat/model/chat_model.dart';
+import 'package:bai_serve_customer/features/chat/model/chat_user_info.dart';
+import 'package:bai_serve_customer/features/chat/model/message_model.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

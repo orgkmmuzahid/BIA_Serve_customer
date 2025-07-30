@@ -1,7 +1,7 @@
-import 'package:bai_serve/config/network/request_state.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/model/product_details_model.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/model/product_model.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
+import 'package:bai_serve_customer/config/network/request_state.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_details_model.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_model.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {

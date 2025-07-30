@@ -1,5 +1,5 @@
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/utils/log/error_log.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/utils/log/error_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart' as screenutil;

@@ -1,7 +1,7 @@
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 
 class CommonDropDown<T> extends StatefulWidget {

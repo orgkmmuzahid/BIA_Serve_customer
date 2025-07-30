@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/common_bar/common_bottom_bar.dart';
-import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/features/home/widgets/home_content.dart';
-import 'package:bai_serve/features/home/widgets/home_drawer.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
+import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
+import 'package:bai_serve_customer/features/home/widgets/home_content.dart';
+import 'package:bai_serve_customer/features/home/widgets/home_drawer.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

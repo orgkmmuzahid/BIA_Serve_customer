@@ -1,8 +1,8 @@
 // File: custom_google_map_controller.dart
 
-import 'package:bai_serve/component/other_widgets/permission_handler_helper.dart';
-import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/component/other_widgets/permission_handler_helper.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';

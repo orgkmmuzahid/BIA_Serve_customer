@@ -1,4 +1,4 @@
-import 'package:bai_serve/config/storage/user_login_info_model.dart';
+import 'package:bai_serve_customer/config/storage/user_login_info_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/component/button/common_gradient_button.dart';
-import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
-import 'package:bai_serve/features/auth/widgets/already_accunt_rich_text.dart';
-import 'package:bai_serve/features/auth/widgets/common_logo.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_gradient_button.dart';
+import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve_customer/features/auth/widgets/already_accunt_rich_text.dart';
+import 'package:bai_serve_customer/features/auth/widgets/common_logo.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'package:bai_serve/component/other_widgets/permission_handler_helper.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/component/other_widgets/permission_handler_helper.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';

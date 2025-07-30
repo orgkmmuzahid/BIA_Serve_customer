@@ -1,4 +1,4 @@
-import 'package:bai_serve/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/repository/vendor_details_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 

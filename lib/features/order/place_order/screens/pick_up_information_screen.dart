@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve/features/order/place_order/widgets/coupon_section_widget.dart';
-import 'package:bai_serve/features/order/place_order/widgets/door_to_door_delivery_type_widget.dart';
-import 'package:bai_serve/features/order/place_order/widgets/pickup_information_form_widget.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve_customer/features/order/place_order/widgets/coupon_section_widget.dart';
+import 'package:bai_serve_customer/features/order/place_order/widgets/door_to_door_delivery_type_widget.dart';
+import 'package:bai_serve_customer/features/order/place_order/widgets/pickup_information_form_widget.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

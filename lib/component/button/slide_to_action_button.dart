@@ -1,4 +1,4 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vibration/vibration.dart';

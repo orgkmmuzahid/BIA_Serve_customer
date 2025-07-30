@@ -10,93 +10,104 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i47;
-import 'package:bai_serve/component/common_bar/common_bottom_bar.dart' as _i49;
-import 'package:bai_serve/features/auth/screen/change_password_screen.dart'
+import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart'
+    as _i49;
+import 'package:bai_serve_customer/features/auth/screen/change_password_screen.dart'
     as _i5;
-import 'package:bai_serve/features/auth/screen/forget_password_screen.dart'
+import 'package:bai_serve_customer/features/auth/screen/forget_password_screen.dart'
     as _i9;
-import 'package:bai_serve/features/auth/screen/login_options_screen.dart'
+import 'package:bai_serve_customer/features/auth/screen/login_options_screen.dart'
     as _i12;
-import 'package:bai_serve/features/auth/screen/otp_send_screen.dart' as _i23;
-import 'package:bai_serve/features/auth/screen/profile_info_screen.dart'
+import 'package:bai_serve_customer/features/auth/screen/otp_send_screen.dart'
+    as _i23;
+import 'package:bai_serve_customer/features/auth/screen/profile_info_screen.dart'
     as _i28;
-import 'package:bai_serve/features/auth/screen/sign_in_screen.dart' as _i34;
-import 'package:bai_serve/features/auth/screen/sign_up_screen.dart' as _i35;
-import 'package:bai_serve/features/auth/screen/verify_user_screen.dart' as _i44;
-import 'package:bai_serve/features/bulk_order/screens/bulk_order_details_screen.dart'
+import 'package:bai_serve_customer/features/auth/screen/sign_in_screen.dart'
+    as _i34;
+import 'package:bai_serve_customer/features/auth/screen/sign_up_screen.dart'
+    as _i35;
+import 'package:bai_serve_customer/features/auth/screen/verify_user_screen.dart'
+    as _i44;
+import 'package:bai_serve_customer/features/bulk_order/screens/bulk_order_details_screen.dart'
     as _i2;
-import 'package:bai_serve/features/bulk_order/screens/bulk_order_screen.dart'
+import 'package:bai_serve_customer/features/bulk_order/screens/bulk_order_screen.dart'
     as _i3;
-import 'package:bai_serve/features/bulk_order/screens/negotiation_assistance_screen.dart'
+import 'package:bai_serve_customer/features/bulk_order/screens/negotiation_assistance_screen.dart'
     as _i19;
-import 'package:bai_serve/features/chat/screens/calling_screen.dart' as _i4;
-import 'package:bai_serve/features/chat/screens/chat_screen.dart' as _i6;
-import 'package:bai_serve/features/chat/screens/message_screen.dart' as _i14;
-import 'package:bai_serve/features/home/screen/home_screen.dart' as _i10;
-import 'package:bai_serve/features/loyalty_points/screens/loyalty_points_screen.dart'
+import 'package:bai_serve_customer/features/chat/screens/calling_screen.dart'
+    as _i4;
+import 'package:bai_serve_customer/features/chat/screens/chat_screen.dart'
+    as _i6;
+import 'package:bai_serve_customer/features/chat/screens/message_screen.dart'
+    as _i14;
+import 'package:bai_serve_customer/features/home/screen/home_screen.dart'
+    as _i10;
+import 'package:bai_serve_customer/features/loyalty_points/screens/loyalty_points_screen.dart'
     as _i13;
-import 'package:bai_serve/features/loyalty_points/screens/my_rewards_screen.dart'
+import 'package:bai_serve_customer/features/loyalty_points/screens/my_rewards_screen.dart'
     as _i17;
-import 'package:bai_serve/features/notifications/screen/notifications_screen.dart'
+import 'package:bai_serve_customer/features/notifications/screen/notifications_screen.dart'
     as _i20;
-import 'package:bai_serve/features/onboarding_screen/onboarding_screen.dart'
+import 'package:bai_serve_customer/features/onboarding_screen/onboarding_screen.dart'
     as _i21;
-import 'package:bai_serve/features/order/my_order/screens/my_order_screen.dart'
+import 'package:bai_serve_customer/features/order/my_order/screens/my_order_screen.dart'
     as _i15;
-import 'package:bai_serve/features/order/place_order/screens/checkout_screen.dart'
+import 'package:bai_serve_customer/features/order/place_order/screens/checkout_screen.dart'
     as _i7;
-import 'package:bai_serve/features/order/place_order/screens/door_to_door_pickup_screen.dart'
+import 'package:bai_serve_customer/features/order/place_order/screens/door_to_door_pickup_screen.dart'
     as _i8;
-import 'package:bai_serve/features/order/place_order/screens/order_details_screen.dart'
+import 'package:bai_serve_customer/features/order/place_order/screens/order_details_screen.dart'
     as _i22;
-import 'package:bai_serve/features/order/place_order/screens/pick_up_information_screen.dart'
+import 'package:bai_serve_customer/features/order/place_order/screens/pick_up_information_screen.dart'
     as _i25;
-import 'package:bai_serve/features/order/place_order/screens/place_order_screen.dart'
+import 'package:bai_serve_customer/features/order/place_order/screens/place_order_screen.dart'
     as _i26;
-import 'package:bai_serve/features/order/tracking_order/screens/tracking_order_screen.dart'
+import 'package:bai_serve_customer/features/order/tracking_order/screens/tracking_order_screen.dart'
     as _i38;
-import 'package:bai_serve/features/payment/screens/my_payment_screen.dart'
+import 'package:bai_serve_customer/features/payment/screens/my_payment_screen.dart'
     as _i16;
-import 'package:bai_serve/features/payment/screens/payment_screen.dart' as _i24;
-import 'package:bai_serve/features/purchase_delivery/screens/purchase_delivery_screen.dart'
+import 'package:bai_serve_customer/features/payment/screens/payment_screen.dart'
+    as _i24;
+import 'package:bai_serve_customer/features/purchase_delivery/screens/purchase_delivery_screen.dart'
     as _i29;
-import 'package:bai_serve/features/return_product/model/return_product_form_model.dart'
+import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart'
     as _i51;
-import 'package:bai_serve/features/return_product/model/return_product_model.dart'
+import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart'
     as _i50;
-import 'package:bai_serve/features/return_product/screens/return_processing_screen.dart'
+import 'package:bai_serve_customer/features/return_product/screens/return_processing_screen.dart'
     as _i30;
-import 'package:bai_serve/features/return_product/screens/return_product_details_screen.dart'
+import 'package:bai_serve_customer/features/return_product/screens/return_product_details_screen.dart'
     as _i31;
-import 'package:bai_serve/features/return_product/screens/return_product_screen.dart'
+import 'package:bai_serve_customer/features/return_product/screens/return_product_screen.dart'
     as _i32;
-import 'package:bai_serve/features/setting/screens/language_screen.dart'
+import 'package:bai_serve_customer/features/setting/screens/language_screen.dart'
     as _i11;
-import 'package:bai_serve/features/setting/screens/privacy_policy_screen.dart'
+import 'package:bai_serve_customer/features/setting/screens/privacy_policy_screen.dart'
     as _i27;
-import 'package:bai_serve/features/setting/screens/setting_screen.dart' as _i33;
-import 'package:bai_serve/features/setting/screens/terms_condition_screen.dart'
+import 'package:bai_serve_customer/features/setting/screens/setting_screen.dart'
+    as _i33;
+import 'package:bai_serve_customer/features/setting/screens/terms_condition_screen.dart'
     as _i37;
-import 'package:bai_serve/features/splash/splash_screen.dart' as _i36;
-import 'package:bai_serve/features/vendor/common_model/vendor_model.dart'
+import 'package:bai_serve_customer/features/splash/splash_screen.dart' as _i36;
+import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart'
     as _i52;
-import 'package:bai_serve/features/vendor/features/vendor_details/screens/all_product_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/all_product_screen.dart'
     as _i1;
-import 'package:bai_serve/features/vendor/features/vendor_details/screens/vendor_proof_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/vendor_proof_screen.dart'
     as _i40;
-import 'package:bai_serve/features/vendor/features/vendor_details/screens/view%20_product_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/view%20_product_screen.dart'
     as _i46;
-import 'package:bai_serve/features/vendor/features/vendor_details/widgets/vendor_details_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/widgets/vendor_details_screen.dart'
     as _i39;
-import 'package:bai_serve/features/vendor/features/vendor_sourcing/screens/vendor_sourcing_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/screens/vendor_sourcing_screen.dart'
     as _i41;
-import 'package:bai_serve/features/vendor/features/verify_vendor/screens/my_vendors_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/my_vendors_screen.dart'
     as _i18;
-import 'package:bai_serve/features/vendor/features/verify_vendor/screens/vendor_verify_form_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/vendor_verify_form_screen.dart'
     as _i42;
-import 'package:bai_serve/features/vendor/features/verify_vendor/screens/verification_status_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/verification_status_screen.dart'
     as _i43;
-import 'package:bai_serve/features/vendor/features/verify_vendor/screens/verify_vendor_screen.dart'
+import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/verify_vendor_screen.dart'
     as _i45;
 import 'package:flutter/material.dart' as _i48;
 

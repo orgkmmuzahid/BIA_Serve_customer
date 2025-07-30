@@ -1,16 +1,14 @@
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/component/other_widgets/common_ratting_bar.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/order/tracking_order/model/rider_info_model.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/other_widgets/common_ratting_bar.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/order/tracking_order/model/rider_info_model.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 
 class RiderInfoWidget extends StatelessWidget {
   const RiderInfoWidget({required this.riderInfo, super.key});
@@ -34,28 +32,40 @@ class RiderInfoWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CommonText(text: riderInfo.name, style: getTheme.textTheme.titleMedium),
-                    CommonRatingBar(rating: riderInfo.ratting, allowHalf: true, totalCount: riderInfo.totalCount, size: 15, spacing: 0),
+                    CommonRatingBar(
+                      rating: riderInfo.ratting,
+                      allowHalf: true,
+                      totalCount: riderInfo.totalCount,
+                      size: 15,
+                      spacing: 0,
+                    ),
                     10.height,
                     CommonText(text: riderInfo.bio, style: getTheme.textTheme.bodyMedium, textAlign: TextAlign.justify),
                     20.height,
-                    CommonText(text: '${AppString.phoneNumber} : ${riderInfo.phoneNumber}', style: getTheme.textTheme.titleSmall),
+                    CommonText(
+                      text: '${AppString.phoneNumber} : ${riderInfo.phoneNumber}',
+                      style: getTheme.textTheme.titleSmall,
+                    ),
                     20.height,
                     Row(
                       children: [
                         CommonButton(
                           titleText: AppString.callNow,
+                          titleSize: 12,
                           buttonColor: AppColors.success,
                           icon: const Icon(Icons.call, color: AppColors.iconColorWhite),
-                          buttonWidth: 130,
+                          buttonWidth: 120,
                           onTap: () {
-                            appRouter.push(const CallingRoute());                          },
+                            appRouter.push(const CallingRoute());
+                          },
                         ),
                         10.width,
                         CommonButton(
                           titleText: AppString.message,
+                          titleSize: 12,
                           buttonColor: AppColors.primaryButton,
                           icon: const Icon(Icons.message, color: AppColors.iconColorWhite),
-                          buttonWidth: 130,
+                          buttonWidth: 120,
                           onTap: () {
                             appRouter.push(ChatRoute());
                           },

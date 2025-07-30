@@ -1,4 +1,4 @@
-import 'package:bai_serve/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
 
 class InputData {
   static Map<String, String> paymentList = {

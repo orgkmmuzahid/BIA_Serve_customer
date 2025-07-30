@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/component/button/common_gradient_button.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
-import 'package:bai_serve/features/auth/widgets/common_logo.dart';
+import 'package:bai_serve_customer/component/button/common_gradient_button.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve_customer/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,6 @@ import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
 import '../controllers/sign_in_controller.dart';
 import '../widgets/do_not_account.dart';
-
 
 @RoutePage()
 class SignInScreen extends StatelessWidget {
@@ -37,7 +36,7 @@ class SignInScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Log In Instruction here
-                  100.height,
+                  60.height,
                   const CommonLogo().center,
                   50.height,
 
@@ -53,11 +52,7 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   /// Account Password Input here
-                  const CommonText(
-                    text: AppString.password,
-                    bottom: 8,
-                    top: 24,
-                  ),
+                  const CommonText(text: AppString.password, bottom: 8, top: 24),
                   CommonTextField(
                     controller: controller.passwordController,
                     // prefixIcon: const Icon(Icons.lock),
@@ -71,16 +66,10 @@ class SignInScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        Get.find<OtpController>().changeOtpFor(
-                          OtpFor.forgetPassword,
-                        );
+                        Get.find<OtpController>().changeOtpFor(OtpFor.forgetPassword);
                         appRouter.push(const OtpSendRoute());
                       },
-                      child: const CommonText(
-                        text: AppString.forgotThePassword,
-                        top: 10,
-                        bottom: 30,
-                      ),
+                      child: const CommonText(text: AppString.forgotThePassword, top: 10, bottom: 30),
                     ),
                   ),
 
@@ -94,13 +83,10 @@ class SignInScreen extends StatelessWidget {
                       buttonHeight: 40,
                     ),
                   ),
-                  142.height,
+                  100.height,
 
                   /// Account Creating Instruction here
-                  const Align(
-                    alignment: Alignment.bottomCenter,
-                    child: DoNotHaveAccount(),
-                  ),
+                  const Align(alignment: Alignment.bottomCenter, child: DoNotHaveAccount()),
                   30.height,
                 ],
               ),

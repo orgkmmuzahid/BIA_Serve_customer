@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';

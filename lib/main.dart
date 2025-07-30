@@ -1,8 +1,8 @@
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/bloc/app_bloc_observer.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/bloc/app_bloc_observer.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

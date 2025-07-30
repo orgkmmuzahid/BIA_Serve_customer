@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/image/image_picker/common_multi_image_picker.dart';
-import 'package:bai_serve/component/other_widgets/common_selectable_button.dart';
-import 'package:bai_serve/component/other_widgets/radio_group_form_field.dart';
-import 'package:bai_serve/component/text_field/common_multiline_text_field.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/return_product/model/return_product_form_model.dart';
-import 'package:bai_serve/features/return_product/model/return_product_model.dart';
-import 'package:bai_serve/features/return_product/widgets/return_product_builder_widget.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:bai_serve/utils/helpers/other_helper.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/image/image_picker/common_multi_image_picker.dart';
+import 'package:bai_serve_customer/component/other_widgets/common_selectable_button.dart';
+import 'package:bai_serve_customer/component/other_widgets/radio_group_form_field.dart';
+import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart';
+import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart';
+import 'package:bai_serve_customer/features/return_product/widgets/return_product_builder_widget.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

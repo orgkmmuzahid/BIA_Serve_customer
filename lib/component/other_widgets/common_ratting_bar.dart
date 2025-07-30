@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonRatingBar extends StatelessWidget {
   const CommonRatingBar({
-    required this.rating, super.key,
+    required this.rating,
+    super.key,
     this.maxRating = 5,
     this.size = 24,
     this.color = Colors.amber,
@@ -33,28 +35,22 @@ class CommonRatingBar extends StatelessWidget {
           children: List.generate(maxRating, (index) {
             final full = index + 1;
             final isHalf = allowHalf && (rating >= index + 0.5 && rating < full);
-            final icon = rating >= full
-                ? Icons.star
-                : isHalf
+            final icon =
+                rating >= full
+                    ? Icons.star
+                    : isHalf
                     ? Icons.star_half
                     : Icons.star_border;
 
             return GestureDetector(
-              onTap: onRatingChanged == null
-                  ? null
-                  : () => onRatingChanged!(
-                      allowHalf ? index + 1.0 : full.toDouble(),
-                    ),
-              child: Icon(icon, color: color, size: size),
+              onTap: onRatingChanged == null ? null : () => onRatingChanged!(allowHalf ? index + 1.0 : full.toDouble()),
+              child: Icon(icon, color: color, size: size.w),
             );
           }),
         ),
         if (totalCount != null) ...[
           const SizedBox(width: 6),
-          Text(
-            '($totalCount)',
-            style: textStyle ?? TextStyle(fontSize: size * 0.7, color: Colors.grey[700]),
-          ),
+          Text('($totalCount)', style: textStyle ?? TextStyle(fontSize: (size * 0.7).sp, color: Colors.grey[700])),
         ],
       ],
     );

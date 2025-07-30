@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/features/auth/controllers/otp_controller.dart';
-import 'package:bai_serve/features/auth/widgets/already_accunt_rich_text.dart';
-import 'package:bai_serve/features/auth/widgets/otp_send.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart';
+import 'package:bai_serve_customer/features/auth/widgets/already_accunt_rich_text.dart';
+import 'package:bai_serve_customer/features/auth/widgets/otp_send.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 

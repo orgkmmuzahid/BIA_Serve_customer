@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:bai_serve/features/vendor/common_model/vendor_model.dart';
+import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart';
 import 'package:flutter/foundation.dart';
 
 class VendorVerificationDetailsModel {

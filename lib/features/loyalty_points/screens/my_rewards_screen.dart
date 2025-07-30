@@ -6,15 +6,15 @@
 library;
 
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
-import 'package:bai_serve/features/loyalty_points/model/loyalty_offer_model.dart';
-import 'package:bai_serve/utils/constants/app_colors.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
+import 'package:bai_serve_customer/features/loyalty_points/model/loyalty_offer_model.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

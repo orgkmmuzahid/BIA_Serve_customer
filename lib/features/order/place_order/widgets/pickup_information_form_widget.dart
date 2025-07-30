@@ -1,13 +1,13 @@
-import 'package:bai_serve/common/inputdata/input_data.dart';
-import 'package:bai_serve/component/image/image_picker/common_multi_image_picker.dart';
-import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/component/text_field/common_text_field.dart';
-import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
-import 'package:bai_serve/utils/helpers/other_helper.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/common/inputdata/input_data.dart';
+import 'package:bai_serve_customer/component/image/image_picker/common_multi_image_picker.dart';
+import 'package:bai_serve_customer/component/other_widgets/common_drop_down.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

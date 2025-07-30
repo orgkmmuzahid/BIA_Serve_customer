@@ -1,5 +1,6 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonLinerProgressStep extends StatelessWidget {
   const CommonLinerProgressStep({
@@ -43,10 +44,7 @@ class CommonLinerProgressStep extends StatelessWidget {
                       borderRadius: BorderRadius.circular(stepSize),
                     ),
                     child: ColorFiltered(
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.serfeceBG,
-                        BlendMode.srcIn,
-                      ),
+                      colorFilter: const ColorFilter.mode(AppColors.serfeceBG, BlendMode.srcIn),
                       child: steps[stepIndex],
                     ),
                   ),
@@ -54,11 +52,7 @@ class CommonLinerProgressStep extends StatelessWidget {
               );
             } else {
               final isActive = (index ~/ 2) < currentStep - 1;
-              return Container(
-                width: lineWidth,
-                height: lineHeight,
-                color: isActive ? activeColor : inactiveColor,
-              );
+              return Container(width: lineWidth.w, height: lineHeight.h, color: isActive ? activeColor : inactiveColor);
             }
           }),
         ),

@@ -1,8 +1,8 @@
-import 'package:bai_serve/component/other_widgets/common_drop_down.dart';
-import 'package:bai_serve/features/vendor/common_widget/category_selector/category_model.dart';
-import 'package:bai_serve/features/vendor/common_widget/category_selector/category_selctor_cubit.dart';
-import 'package:bai_serve/features/vendor/common_widget/category_selector/category_selector_state.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/component/other_widgets/common_drop_down.dart';
+import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/category_model.dart';
+import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/category_selctor_cubit.dart';
+import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/category_selector_state.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

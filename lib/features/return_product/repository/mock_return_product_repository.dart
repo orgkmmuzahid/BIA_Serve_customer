@@ -1,7 +1,7 @@
-import 'package:bai_serve/features/return_product/model/pickup_address_model.dart';
-import 'package:bai_serve/features/return_product/model/return_product_model.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:bai_serve/utils/helpers/simulate_moc_repo.dart';
+import 'package:bai_serve_customer/features/return_product/model/pickup_address_model.dart';
+import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/helpers/simulate_moc_repo.dart';
 
 import 'return_product_repository.dart';
 

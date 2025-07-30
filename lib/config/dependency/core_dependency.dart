@@ -1,9 +1,9 @@
-import 'package:bai_serve/component/image/image_picker/common_image_picker_controller.dart';
-import 'package:bai_serve/config/network/dio_service.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/config/storage/storage_service.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/component/image/image_picker/common_image_picker_controller.dart';
+import 'package:bai_serve_customer/config/network/dio_service.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/config/storage/storage_service.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
 class CoreDependency {

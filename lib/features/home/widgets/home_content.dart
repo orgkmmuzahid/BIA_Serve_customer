@@ -1,15 +1,15 @@
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/component/image/common_rotating_image_banner.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/component/text_field/common_text_field.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/home/controller/home_controller.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/widgets/product_gridview_widget.dart';
-import 'package:bai_serve/utils/app_utils.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/image/common_rotating_image_banner.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/widgets/product_gridview_widget.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
 class HomeContent extends StatelessWidget {

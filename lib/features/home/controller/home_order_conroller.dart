@@ -1,4 +1,4 @@
-import 'package:bai_serve/features/home/model/order_list_model.dart';
+import 'package:bai_serve_customer/features/home/model/order_list_model.dart';
 import 'package:get/get.dart';
 
 class HomeOrderConroller extends GetxController {

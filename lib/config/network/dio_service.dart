@@ -2,8 +2,8 @@
 // ignore_for_file: avoid_annotating_with_dynamic
 
 import 'dart:async';
-import 'package:bai_serve/config/storage/storage_service.dart';
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/config/storage/storage_service.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:dio/dio.dart' as dio; // Alias Dio as dio to avoid conflict with FormData
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';

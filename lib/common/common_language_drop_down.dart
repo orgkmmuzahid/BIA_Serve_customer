@@ -1,6 +1,6 @@
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 

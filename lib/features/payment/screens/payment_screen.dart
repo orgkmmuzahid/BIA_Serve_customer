@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve/common/inputdata/input_data.dart';
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/image/common_image.dart';
-import 'package:bai_serve/features/payment/controllers/payment_controller.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/common/inputdata/input_data.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/features/payment/controllers/payment_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

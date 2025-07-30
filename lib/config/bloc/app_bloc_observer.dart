@@ -1,4 +1,4 @@
-import 'package:bai_serve/utils/log/app_log.dart';
+import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {

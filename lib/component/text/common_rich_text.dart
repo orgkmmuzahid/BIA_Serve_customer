@@ -1,4 +1,4 @@
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';

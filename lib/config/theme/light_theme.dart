@@ -1,5 +1,6 @@
-import 'package:bai_serve/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData lightTheme = ThemeData(
@@ -21,9 +22,7 @@ final ThemeData lightTheme = ThemeData(
     surface: Color(0xFFE6F1F1), // 🔲 Base surface: cards, modals
     onSurface: Color(0xFF333333), // 🔳 Text/icons on surface
 
-    surfaceContainerLowest: Color(
-      0xFFF9F9F9,
-    ), // 🪵 Scaffold background / lowest elevation
+    surfaceContainerLowest: Color(0xFFF9F9F9), // 🪵 Scaffold background / lowest elevation
     surfaceContainerLow: Color(0xFFF1F4F4), // 🪵 Lower elevation (forms, lists)
     surfaceContainer: Color(0xFFE6F1F1), // 🪵 Mid elevation surfaces
     surfaceContainerHigh: Color(0xFFDDEBEB), // 🪵 Higher elevation
@@ -31,9 +30,7 @@ final ThemeData lightTheme = ThemeData(
 
     onSurfaceVariant: Color(0xFF666666), // 📝 Subtle/inactive text/icons
 
-    inverseSurface: Color(
-      0xFF333333,
-    ), // 🔄 Reverse surface (e.g. pull-to-refresh)
+    inverseSurface: Color(0xFF333333), // 🔄 Reverse surface (e.g. pull-to-refresh)
     onInverseSurface: Color(0xFFFFFFFF), // ⚪ Text on inverseSurface
 
     inversePrimary: Color(0xFF4DB8BF), // 🔄 For contrast on dark background
@@ -56,40 +53,41 @@ final ThemeData lightTheme = ThemeData(
   ),
 
   textTheme: TextTheme(
-    bodyLarge: const TextStyle(
+    bodyLarge: TextStyle(
       overflow: TextOverflow.fade,
-      color: Color(0xFF333333),
-      fontSize: 16,
+      color: const Color(0xFF333333),
+      fontSize: 16.sp,
       fontWeight: FontWeight.w600,
     ), // 📝 Primary body text, font size 16
     bodyMedium: GoogleFonts.dmSans(
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         overflow: TextOverflow.fade,
-        color: Color(0xFF333333),
-        fontSize: 12,
+        color: const Color(0xFF333333),
+        fontSize: 12.sp,
         fontWeight: FontWeight.w400,
       ),
     ), // 📝 Secondary body text font size 14
     bodySmall: GoogleFonts.dmSans(
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         overflow: TextOverflow.fade,
-        color: Color(0xFF858585),
-        fontSize: 10,
+        color: const Color(0xFF858585),
+        fontSize: 10.sp,
         fontWeight: FontWeight.w400,
       ),
     ), //font size 12
 
-    titleLarge: const TextStyle(
+    titleLarge: TextStyle(
       overflow: TextOverflow.fade,
-      color: Color(0xFF333333),
+      color: const Color(0xFF333333),
       fontWeight: FontWeight.bold,
+      fontSize: 16.sp,
     ), // 🏷 Headings / Titles
 
     titleSmall: GoogleFonts.dmSans(
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         overflow: TextOverflow.fade,
-        color: Color(0xFF333333),
-        fontSize: 12,
+        color: const Color(0xFF333333),
+        fontSize: 12.sp,
         fontWeight: FontWeight.w700,
       ),
     ),
@@ -114,16 +112,10 @@ final ThemeData lightTheme = ThemeData(
     disabledBorder: _buildBorder(color: AppColors.disable),
     errorBorder: _buildBorder(color: AppColors.error),
     hintStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xFF979797)),
-    labelStyle: GoogleFonts.dmSans(
-      fontSize: 14,
-      color: const Color(0xffBFBFBF),
-    ),
+    labelStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xffBFBFBF)),
   ),
 );
 
 OutlineInputBorder _buildBorder({required Color color}) {
-  return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(5),
-    borderSide: BorderSide(color: color),
-  );
+  return OutlineInputBorder(borderRadius: BorderRadius.circular(5), borderSide: BorderSide(color: color));
 }

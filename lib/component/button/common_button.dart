@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../other_widgets/common_loader.dart';
 import '../text/common_text.dart';
 
@@ -39,8 +40,7 @@ class CommonButton extends StatefulWidget {
   State<CommonButton> createState() => _CommonButtonState();
 }
 
-class _CommonButtonState extends State<CommonButton>
-    with SingleTickerProviderStateMixin {
+class _CommonButtonState extends State<CommonButton> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -68,16 +68,13 @@ class _CommonButtonState extends State<CommonButton>
     return Transform.scale(
       scale: scale,
       child: Container(
-        width: widget.buttonWidth,
-        height: widget.buttonHeight,
+        width: widget.buttonWidth.w,
+        height: widget.buttonHeight.h,
         decoration: BoxDecoration(
           color: widget.buttonColor ?? Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(widget.buttonRadius),
+          borderRadius: BorderRadius.circular(widget.buttonRadius.r),
           border: Border.all(
-            color:
-                widget.borderColor ??
-                widget.buttonColor ??
-                Theme.of(context).scaffoldBackgroundColor,
+            color: widget.borderColor ?? widget.buttonColor ?? Theme.of(context).scaffoldBackgroundColor,
             width: widget.borderWidth,
           ),
         ),
@@ -95,27 +92,19 @@ class _CommonButtonState extends State<CommonButton>
             onTapCancel: () => _animationController.reverse(),
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 6.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
                 child: Row(
                   mainAxisAlignment: widget.alignment,
                   children: [
-                    if (widget.icon != null) ...[
-                      widget.icon!,
-                      const SizedBox(width: 6),
-                    ],
+                    if (widget.icon != null) ...[widget.icon!, SizedBox(width: 6.w)],
                     widget.isLoading
                         ? CommonLoader(size: widget.buttonHeight - 12)
                         : CommonText(
                           text: widget.titleText,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          fontSize: widget.titleSize,
-                          color:
-                              widget.titleColor ??
-                              Theme.of(context).colorScheme.onSecondary,
+                          fontSize: widget.titleSize.sp,
+                          color: widget.titleColor ?? Theme.of(context).colorScheme.onSecondary,
                           fontWeight: widget.titleWeight,
                         ),
                   ],

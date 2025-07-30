@@ -1,12 +1,12 @@
-import 'package:bai_serve/component/button/common_button.dart';
-import 'package:bai_serve/component/other_widgets/dual_field_row_widget.dart';
-import 'package:bai_serve/component/text/common_text.dart';
-import 'package:bai_serve/config/route/app_router.dart';
-import 'package:bai_serve/config/route/app_router.gr.dart';
-import 'package:bai_serve/features/loyalty_points/controllers/loyalty_points_controller.dart';
-import 'package:bai_serve/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve/utils/constants/app_string.dart';
-import 'package:bai_serve/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/other_widgets/dual_field_row_widget.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
+import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 

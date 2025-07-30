@@ -1,11 +1,11 @@
-import 'package:bai_serve/config/network/dio_service.dart';
-import 'package:bai_serve/config/network/request_state.dart';
-import 'package:bai_serve/features/vendor/common_model/vendor_model.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/model/product_details_model.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/model/product_model.dart';
-import 'package:bai_serve/features/vendor/features/vendor_details/model/vendor_proof_model.dart';
-import 'package:bai_serve/utils/constants/app_images.dart';
-import 'package:bai_serve/utils/helpers/simulate_moc_repo.dart';
+import 'package:bai_serve_customer/config/network/dio_service.dart';
+import 'package:bai_serve_customer/config/network/request_state.dart';
+import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_details_model.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_model.dart';
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/vendor_proof_model.dart';
+import 'package:bai_serve_customer/utils/constants/app_images.dart';
+import 'package:bai_serve_customer/utils/helpers/simulate_moc_repo.dart';
 import 'package:flutter/material.dart';
 
 import 'vendor_details_repository.dart';
