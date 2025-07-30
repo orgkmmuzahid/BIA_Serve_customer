@@ -12,12 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class OtpSend extends StatelessWidget {
-  const OtpSend({
-    required this.controller,
-    super.key,
-    this.title = '',
-    this.subtitle = '',
-  });
+  const OtpSend({required this.controller, super.key, this.title = '', this.subtitle = ''});
   final String title;
   final String subtitle;
   final OtpController controller;
@@ -25,25 +20,20 @@ class OtpSend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 58.w, vertical: 24.h),
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 24.h),
       child: Column(
         children: [
           const CommonLogo().center,
           50.height,
-          CommonText(
-            text: title,
-            style: getTheme.textTheme.bodyLarge,
-            alignment: MainAxisAlignment.center,
-          ),
-          CommonText(
-            text: subtitle,
-            style: getTheme.textTheme.bodyMedium,
-            alignment: MainAxisAlignment.center,
-          ),
+          CommonText(text: title, style: getTheme.textTheme.bodyLarge, alignment: MainAxisAlignment.center),
+          CommonText(text: subtitle, style: getTheme.textTheme.bodyMedium, alignment: MainAxisAlignment.center),
           20.height,
-          CommonPhoneNumberTextFiled(
-            controller: Get.find<OtpController>().phoneController,
-            countryChange: (value) {},
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: CommonPhoneNumberTextFiled(
+              controller: Get.find<OtpController>().phoneController,
+              countryChange: (value) {},
+            ),
           ),
 
           12.height,
@@ -51,8 +41,8 @@ class OtpSend extends StatelessWidget {
           CommonGradientButton(
             titleText: AppString.otpSendButton,
             isLoading: false,
-            buttonWidth: 140,
-            buttonHeight: 32,
+            buttonWidth: 160,
+            buttonHeight: 40.h,
             titleSize: 12,
             titleWeight: FontWeight.w500,
             onTap: () => appRouter.push(const VerifyUserRoute()),

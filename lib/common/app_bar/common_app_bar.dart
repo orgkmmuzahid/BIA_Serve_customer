@@ -32,6 +32,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) => AppBar(
     centerTitle: isCenterTitle,
+    actionsPadding: const EdgeInsets.only(bottom: 10),
     leading:
         leading ??
         IconButton(

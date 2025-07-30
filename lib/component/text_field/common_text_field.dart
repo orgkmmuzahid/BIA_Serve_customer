@@ -97,9 +97,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
   }
 
   Color _iconColor() {
-    return _focusNode.hasFocus
-        ? (widget.borderColor ?? getTheme.primaryColor)
-        : getTheme.colorScheme.outline;
+    return _focusNode.hasFocus ? (widget.borderColor ?? getTheme.primaryColor) : getTheme.colorScheme.outline;
   }
 
   @override
@@ -120,38 +118,29 @@ class _CommonTextFieldState extends State<CommonTextField> {
         onFieldSubmitted: widget.onSubmitted,
         onTap: widget.onTap,
         validator: widget.validator,
-        style: getTheme.textTheme.bodyLarge!.copyWith(
-          fontWeight: FontWeight.w500,
-          fontSize: 12.sp,
-        ),
+
+        style: getTheme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp),
         decoration: InputDecoration(
           filled: true,
           counterText: '',
           errorMaxLines: 2,
+          hintStyle: TextStyle(fontSize: 14.sp),
           prefixIcon:
               widget.prefixText?.isNotEmpty == true
                   ? Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                      right: 5,
-                    ), // add some right padding to allow hint space
-                    child: CommonText(
-                      text: widget.prefixText!,
-                      color: _iconColor(),
-                    ),
+                    padding: const EdgeInsets.only(left: 10, right: 5), // add some right padding to allow hint space
+                    child: CommonText(text: widget.prefixText!, color: _iconColor()),
                   )
-                  : widget.prefixIcon,
+                  : Padding(padding: const EdgeInsets.only(left: 10, right: 10), child: widget.prefixIcon),
           prefixIconConstraints: const BoxConstraints(maxWidth: 40),
-          suffixIcon:
-              widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
+          suffixIcon: widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
           prefixIconColor: _iconColor(),
           suffixIconColor: _iconColor(),
           enabledBorder:
               widget.borderColor != null
                   ? getTheme.inputDecorationTheme.enabledBorder?.copyWith(
                     borderSide:
-                        getTheme.inputDecorationTheme.enabledBorder?.borderSide
-                            .copyWith(color: widget.borderColor) ??
+                        getTheme.inputDecorationTheme.enabledBorder?.borderSide.copyWith(color: widget.borderColor) ??
                         BorderSide(color: widget.borderColor!),
                   )
                   : getTheme.inputDecorationTheme.enabledBorder,
@@ -171,12 +160,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
       onTap: _togglePasswordVisibility,
       child: Padding(
         padding: EdgeInsetsDirectional.only(end: 10.w),
-        child: Icon(
-          _obscureText
-              ? Icons.visibility_off_outlined
-              : Icons.visibility_outlined,
-          size: 20.sp,
-        ),
+        child: Icon(_obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined, size: 20.sp),
       ),
     );
   }

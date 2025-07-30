@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/component/image/image_picker/common_multi_image_picker.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
@@ -25,25 +26,18 @@ class BulkOrderScreen extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: const Text(AppString.homeBulkOrderAgents),
-          leading: GestureDetector(
-            onTap: bulkOrderController.onBackPress,
-            child: const Icon(Icons.arrow_back),
-          ),
+          leading: GestureDetector(onTap: bulkOrderController.onBackPress, child: const Icon(Icons.arrow_back)),
         ),
         body: Form(
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Column(
-              children: [
-                CommonText(
-                  text: AppString.listOfSupplier,
-                  style: getTheme.textTheme.bodyLarge,
-                ).start,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CommonText(text: AppString.listOfSupplier, style: getTheme.textTheme.bodyLarge).start,
 
-                ...List.generate(
-                  bulkOrderController.productItemDetails.length,
-                  (index) {
+                  ...List.generate(bulkOrderController.productItemDetails.length, (index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: CommonTextField(
@@ -51,91 +45,73 @@ class BulkOrderScreen extends StatelessWidget {
                         borderColor: getTheme.dividerColor,
                         validator: OtherHelper.requiredFieldValidator,
                         onSaved: (value) {
-                          final item = bulkOrderController
-                              .productItemDetails
-                              .entries
-                              .elementAt(index);
-                          bulkOrderController.onItemDetailsChange(
-                            item.key,
-                            value,
-                          );
+                          final item = bulkOrderController.productItemDetails.entries.elementAt(index);
+                          bulkOrderController.onItemDetailsChange(item.key, value);
                         },
                       ),
                     );
-                  },
-                ),
+                  }),
 
-                CommonButton(
-                  titleText: AppString.addProduct,
-                  buttonWidth: 200,
-                  onTap: () {
-                    bulkOrderController.increaseItemField();
-                  },
-                ),
-                20.height,
-                //image picker
-                GestureDetector(
-                  onTap: () {
-                    bulkOrderController.pickImage();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: getTheme.colorScheme.surfaceContainerLowest,
-                    ),
-                    height: 150,
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.add),
-                          CommonText(
-                            text: AppString.addImage,
-                            alignment: MainAxisAlignment.center,
-                          ),
-                        ],
-                      ),
-                    ),
+                  CommonButton(
+                    titleText: AppString.addProduct,
+                    buttonWidth: 200,
+                    onTap: () {
+                      bulkOrderController.increaseItemField();
+                    },
                   ),
-                ),
-                20.height,
+                  20.height,
+                  CommonMultiImagePickerFormField(),
+                  //image picker
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     bulkOrderController.pickImage();
+                  //   },
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       color: getTheme.colorScheme.surfaceContainerLowest,
+                  //     ),
+                  //     height: 150,
+                  //     child: const Center(
+                  //       child: Column(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Icon(Icons.add),
+                  //           CommonText(text: AppString.addImage, alignment: MainAxisAlignment.center),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // 20.height,
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(
-                      bulkOrderController.selectedImagesPath.length,
-                      (index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.only(left: 12),
-                          child: Image.file(
-                            width: 80,
-                            height: 80,
-                            File(
-                              bulkOrderController.selectedImagesPath.elementAt(
-                                index,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     children: List.generate(bulkOrderController.selectedImagesPath.length, (index) {
+                  //       return Container(
+                  //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  //         padding: const EdgeInsets.only(left: 12),
+                  //         child: Image.file(
+                  //           width: 80,
+                  //           height: 80,
+                  //           File(bulkOrderController.selectedImagesPath.elementAt(index)),
+                  //         ),
+                  //       );
+                  //     }),
+                  //   ),
+                  // ),
+                  20.height,
+
+                  CommonButton(
+                    titleText: AppString.continues,
+                    onTap: () {
+                      _formKey.currentState?.save();
+                      appRouter.push(PlaceOrderRoute(title: AppString.homeBulkOrderAgents));
+                    },
                   ),
-                ),
-
-                20.height,
-
-                CommonButton(
-                  titleText: AppString.continues,
-                  onTap: () {
-                    _formKey.currentState?.save();
-                    appRouter.push(PlaceOrderRoute(title:  AppString.homeBulkOrderAgents));
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

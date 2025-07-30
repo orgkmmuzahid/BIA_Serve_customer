@@ -178,30 +178,37 @@ class ViewProductScreen extends StatelessWidget {
 
   Row _nameBuilder(ProductController productController) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CommonText(
-          text: productController.productDetailsModel.data?.name ?? '',
-          style: getTheme.textTheme.bodyLarge,
-          fontSize: 20,
-          bottom: 10,
+        Expanded(
+          child: CommonText(
+            textAlign: TextAlign.start,
+            alignment: MainAxisAlignment.start,
+            text: productController.productDetailsModel.data?.name ?? '',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            bottom: 10,
+          ),
         ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () {
-            SharePlus.instance.share(
-              ShareParams(title: productController.productDetailsModel.data?.name, text: 'url here'),
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.serfeceBG,
-              border: BoxBorder.all(color: AppColors.primaryColor, width: 2),
-              borderRadius: BorderRadius.circular(30),
+        SizedBox(
+          width: 30,
+          child: GestureDetector(
+            onTap: () {
+              SharePlus.instance.share(
+                ShareParams(title: productController.productDetailsModel.data?.name, text: 'url here'),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.serfeceBG,
+                border: BoxBorder.all(color: AppColors.primaryColor, width: 2),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              width: 30,
+              height: 30,
+              padding: const EdgeInsets.only(),
+              child: const Icon(Icons.share, color: AppColors.primaryColor, size: 20),
             ),
-            width: 30,
-            height: 30,
-            padding: const EdgeInsets.only(),
-            child: const Icon(Icons.share, color: AppColors.primaryColor, size: 20),
           ),
         ),
       ],

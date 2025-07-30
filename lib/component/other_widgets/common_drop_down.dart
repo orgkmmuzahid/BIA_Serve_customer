@@ -3,6 +3,7 @@ import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonDropDown<T> extends StatefulWidget {
   const CommonDropDown({
@@ -98,7 +99,12 @@ class _CommonDropDownState<T> extends State<CommonDropDown<T>> with SingleTicker
           isExpanded: true,
           items:
               widget.items
-                  .map((item) => DropdownMenuItem<T>(value: item, child: CommonText(text: widget.nameBuilder(item))))
+                  .map(
+                    (item) => DropdownMenuItem<T>(
+                      value: item,
+                      child: CommonText(text: widget.nameBuilder(item), fontSize: 14.sp),
+                    ),
+                  )
                   .toList(),
           onChanged: (value) {
             setState(() {

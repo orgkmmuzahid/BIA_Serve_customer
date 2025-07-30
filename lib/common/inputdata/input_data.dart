@@ -2,6 +2,7 @@ import 'package:bai_serve_customer/utils/constants/app_images.dart';
 
 class InputData {
   static Map<String, String> paymentList = {
+    'escrow': AppImages.escrow,
     'mapesa': AppImages.mapesa,
     'tegopesa': AppImages.tegopesa,
     'airtel': AppImages.airtel,

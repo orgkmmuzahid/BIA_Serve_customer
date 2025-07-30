@@ -1,3 +1,4 @@
+import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/features/bulk_order/model/bulk_order_details_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
@@ -35,14 +36,11 @@ Available Variants (if any): [colors, sizes, types, etc.]''';
       'Item3': '',
     };
     bulkOrderDetailsModel = null;
-    Get.back();
+    appRouter.pop();
   }
 
   void onPromoSubmit(String promoCode) {
-    AppLogger.debug(
-      '==================> Promo Code: $promoCode',
-      tag: 'Bulk Order Controller',
-    );
+    AppLogger.debug('==================> Promo Code: $promoCode', tag: 'Bulk Order Controller');
     bulkOrderDetailsModel = BulkOrderDetailsModel(
       totalAmount: 11000,
       discountedAmount: 1000,
@@ -51,14 +49,9 @@ Available Variants (if any): [colors, sizes, types, etc.]''';
     update();
   }
 
-
   void increaseItemField() {
     final String key = 'Item${productItemDetails.length}';
-    productItemDetails.addIf(
-      productItemDetails.keys.contains(key) == false,
-      key,
-      '',
-    );
+    productItemDetails.addIf(productItemDetails.keys.contains(key) == false, key, '');
     update();
   }
 
@@ -72,8 +65,7 @@ Available Variants (if any): [colors, sizes, types, etc.]''';
       // imageQuality: 85, // reduce size if needed
     );
     if (pickedFile != null) {
-      if (selectedImagesPath.indexWhere((value) => value == pickedFile.path) ==
-          -1) {
+      if (selectedImagesPath.indexWhere((value) => value == pickedFile.path) == -1) {
         selectedImagesPath.add(pickedFile.path);
         update();
       }

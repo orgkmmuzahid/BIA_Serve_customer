@@ -13,6 +13,7 @@ import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/state_manager.dart';
 
 @RoutePage()
@@ -39,12 +40,8 @@ class TrackingOrderScreen extends StatelessWidget {
                   hintText: AppString.trackingID,
                   controller: trackingOrderController.searchController,
                 ),
-                10.height,
-                CommonText(
-                  text: '${AppString.trackingID} #${trackingOrderController.trackingOrderDetails.data?.trackingId}',
-                  style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor2),
-                ),
 
+                20.height,
                 CommonText(
                   alignment: MainAxisAlignment.center,
                   text: Utils.formatDurationToHms(
@@ -57,9 +54,10 @@ class TrackingOrderScreen extends StatelessWidget {
                   text: AppString.estimatedDeliveryTime,
                   style: getTheme.textTheme.bodyMedium,
                 ),
+                20.height,
                 if (trackingOrderController.trackingOrderDetails.data != null)
                   TrackingProgressWidget(trackingOrderModel: trackingOrderController.trackingOrderDetails.data!),
-                10.height,
+                20.height,
                 if (trackingOrderController.trackingOrderDetails.data != null)
                   CommonTimeline(timeline: trackingOrderController.trackingOrderDetails.data!.timeline),
                 20.height,

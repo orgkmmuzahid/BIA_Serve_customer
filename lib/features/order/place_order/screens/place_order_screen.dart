@@ -70,6 +70,7 @@ class PlaceOrderScreen extends StatelessWidget {
           borderColor: getTheme.dividerColor,
         ).paddingOnly(top: 10, left: 20, right: 20),
         CommonTextField(
+          initialText: '',
           prefixIcon: const Icon(Icons.place),
           controller: controller.marchentAddressTextEditController,
           borderColor: getTheme.dividerColor,

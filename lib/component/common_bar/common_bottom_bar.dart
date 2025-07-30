@@ -105,10 +105,10 @@ class _CommonBottomNavBarState extends State<CommonBottomNavBar> {
       decoration: BoxDecoration(
         color: isSelected ? selectedIconBackgroundColor : Colors.transparent,
         borderRadius: BorderRadius.circular(10.r),
-        boxShadow:
-            isSelected
-                ? [BoxShadow(color: selectedIconBackgroundColor, blurRadius: 8, offset: const Offset(0, 4))]
-                : null,
+        // boxShadow:
+        //     isSelected
+        //         ? [BoxShadow(color: selectedIconBackgroundColor, blurRadius: 8, offset: const Offset(0, 4))]
+        //         : null,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

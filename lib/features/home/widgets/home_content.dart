@@ -94,18 +94,19 @@ class HomeContent extends StatelessWidget {
       onTap: onTap,
       child: SizedBox(
         width: size,
-        height: size + 10,
+        height: size + 20,
         child: Card(
           elevation: 2,
-          shadowColor: getTheme.inputDecorationTheme.disabledBorder?.borderSide.color,
+
+          // shadowColor: getTheme.inputDecorationTheme.disabledBorder?.borderSide.color,
           color: getTheme.scaffoldBackgroundColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               CommonImage(imageSrc: image),
               Container(
-                height: 40,
-                padding: const EdgeInsets.only(left: 10, right: 10),
+                height: 50,
+                padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                 child: CommonText(
                   alignment: MainAxisAlignment.center,
                   text: titte,

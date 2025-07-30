@@ -2,10 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/inputdata/input_data.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/features/payment/controllers/payment_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 @RoutePage()
@@ -21,8 +23,16 @@ class PaymentScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: Column(
             children: [
-              ...List.generate(InputData.paymentList.length, (index) {
-                final payment = InputData.paymentList.entries.elementAt(index);
+              ...List.generate(InputData.paymentList.length + 1, (index) {
+                if (index == 1)
+                  return CommonText(
+                    text: AppString.mobileBanking,
+                    style: getTheme.textTheme.titleMedium,
+                    alignment: MainAxisAlignment.center,
+                    bottom: 15,
+                    top: 10,
+                  );
+                final payment = InputData.paymentList.entries.elementAt(index == 0 ? 0 : index - 1);
 
                 return GestureDetector(
                   onTap: () => paymentController.onPaymentChange(payment.key),
@@ -53,11 +63,8 @@ class PaymentScreen extends StatelessWidget {
                                   ? getTheme.colorScheme.primary
                                   : getTheme.dividerColor,
                         ),
-                        CommonImage(
-                          imageSrc: payment.value,
-                          width: 80,
-                          height: 30,
-                        ),
+                        10.width,
+                        CommonImage(imageSrc: payment.value, width: 80, height: 30),
                       ],
                     ),
                   ),

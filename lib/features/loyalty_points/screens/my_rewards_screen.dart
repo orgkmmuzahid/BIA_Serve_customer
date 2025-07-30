@@ -9,6 +9,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve_customer/features/loyalty_points/model/loyalty_offer_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
@@ -46,10 +47,7 @@ class MyRewardsScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                             20.height,
-                            const CommonImage(
-                              imageSrc: AppImages.loyaltyLevel,
-                              size: 80,
-                            ),
+                            const CommonImage(imageSrc: AppImages.loyaltyLevel, size: 80),
                           ],
                         ),
                         20.width,
@@ -64,9 +62,7 @@ class MyRewardsScreen extends StatelessWidget {
                   ),
                 ),
                 20.height,
-                ...List.generate(loyaltyController.loyltyOffers.length, (
-                  index,
-                ) {
+                ...List.generate(loyaltyController.loyltyOffers.length, (index) {
                   final model = loyaltyController.loyltyOffers[index];
                   return _discountBuilder(model, loyaltyController);
                 }),
@@ -78,10 +74,7 @@ class MyRewardsScreen extends StatelessWidget {
     ),
   );
 
-  Widget _discountBuilder(
-    LoyaltyOfferModel model,
-    LoyaltyPointsController controller,
-  ) {
+  Widget _discountBuilder(LoyaltyOfferModel model, LoyaltyPointsController controller) {
     return Container(
       height: 70,
       margin: const EdgeInsets.only(bottom: 10),
@@ -113,7 +106,7 @@ class MyRewardsScreen extends StatelessWidget {
             child: CommonButton(
               onTap: () {
                 showDialog(
-                  context: Get.context!,
+                  context: navigatorRouterKey.currentContext!,
                   builder:
                       (context) => AlertDialog(
                         backgroundColor: getTheme.scaffoldBackgroundColor,
@@ -121,9 +114,7 @@ class MyRewardsScreen extends StatelessWidget {
                           child: CommonText(
                             text: AppString.loaltyClaimingMessage(model.title),
                             maxLines: 5,
-                            style: getTheme.textTheme.bodyLarge?.copyWith(
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: getTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
                           ),
                         ),
                         actionsAlignment: MainAxisAlignment.center,
@@ -145,9 +136,7 @@ class MyRewardsScreen extends StatelessWidget {
               borderColor: AppColors.transparent,
               titleText: AppString.claim,
               buttonColor:
-                  controller.loyaltyPoints >= model.rewardPoints
-                      ? getTheme.colorScheme.error
-                      : getTheme.dividerColor,
+                  controller.loyaltyPoints >= model.rewardPoints ? getTheme.colorScheme.error : getTheme.dividerColor,
             ),
           ),
         ],

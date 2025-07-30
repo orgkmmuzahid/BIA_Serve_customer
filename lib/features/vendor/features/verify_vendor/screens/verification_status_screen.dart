@@ -5,10 +5,12 @@ import 'package:bai_serve_customer/component/other_widgets/dual_field_row_widget
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/model/vendor_verification_details_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/vendor_verification_details_cubit/vendor_verification_details_cubit.dart';
 
@@ -38,7 +40,7 @@ class VerificationStatusScreen extends StatelessWidget {
   );
 
   Column _details(VendorVerificationDetailsModel model) {
-    final imageWidth = ((Utils.deviceSize.width - 32) / 3) - 10;
+    final imageWidth = ((Utils.deviceSize.width - 32) / 2) - 10;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,11 +90,16 @@ class VerificationStatusScreen extends StatelessWidget {
           right: Padding(
             padding: const EdgeInsets.only(right: 50),
             child: CommonText(
+              borderRadius: 8,
+              borderColor: AppColors.success,
+              color: AppColors.success,
+              fontWeight: FontWeight.bold,
               text: '${AppString.monySign} ${model.verifciationFee}',
               enableBorder: true,
-              left: 10,
-              top: 5,
-              bottom: 5,
+              fontSize: 16.sp,
+              left: 15,
+              top: 10,
+              bottom: 10,
             ),
           ),
         ),
@@ -109,11 +116,13 @@ class VerificationStatusScreen extends StatelessWidget {
           right: Padding(
             padding: const EdgeInsets.only(right: 50),
             child: CommonText(
+              borderRadius: 8,
               text: model.verificationStatus.displayName,
               enableBorder: true,
-              left: 10,
-              top: 5,
-              bottom: 5,
+              fontSize: 16.sp,
+              left: 15,
+              top: 10,
+              bottom: 10,
             ),
           ),
         ),

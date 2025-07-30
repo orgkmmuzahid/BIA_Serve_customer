@@ -10,12 +10,11 @@ import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
- 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 @RoutePage()
 class ForgetPasswordScreen extends StatelessWidget {
- const ForgetPasswordScreen({super.key});
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -34,11 +33,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   50.height,
 
                   /// User Password here
-                  const CommonText(
-                    text: AppString.newPassword,
-                    bottom: 8,
-                    top: 12,
-                  ),
+                  const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
                   CommonTextField(
                     controller: controller.passwordController,
                     isPassword: true,
@@ -47,20 +42,12 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
 
                   /// User Confirm Password here
-                  const CommonText(
-                    text: AppString.confirmPassword,
-                    bottom: 8,
-                    top: 12,
-                  ),
+                  const CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
                   CommonTextField(
                     controller: controller.confirmPasswordController,
                     isPassword: true,
                     hintText: AppString.confirmPassword,
-                    validator:
-                        (value) => OtherHelper.confirmPasswordValidator(
-                          value,
-                          controller.passwordController,
-                        ),
+                    validator: (value) => OtherHelper.confirmPasswordValidator(value, controller.passwordController),
                   ),
                   20.height,
 
@@ -69,7 +56,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     titleText: AppString.save,
                     isLoading: controller.isLoading,
                     buttonWidth: 132,
-                    buttonHeight: 32,
+                    buttonHeight: 40,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         controller.resetPasswordRepo();

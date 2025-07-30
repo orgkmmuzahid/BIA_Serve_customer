@@ -85,9 +85,9 @@ class AppString {
   static const String otpTitleSignup = "What's Your Mobile Number?";
   static const String otpSubtitleSignup = 'Code sent to your mobile. Please enter it below.';
 
-  static const String otpTitleForgetPass = 'How would you like to get your code?';
+  static const String otpTitleForgetPass = 'What\'s Your Mobile Number?';
 
-  static const String otpSubTitleForgetPass = 'How would you like to get your code?';
+  static const String otpSubTitleForgetPass = 'Code sent to your mobile. Please enter it below.';
 
   static const String otpSendButton = 'Send Code Via SMS';
   static const String enterVerifyCode = 'Enter the code to verify your account.';
@@ -182,6 +182,7 @@ class AppString {
   static const String bankPayment = 'Bank Payment';
   static const String payment = 'Payment';
   static const String checkout = 'Checkout';
+  static const String mobileBanking = 'Mobile Banking';
   static const String totalPay = 'Total pay';
 
   static const pickupFromMe = 'Pick Up from Me';

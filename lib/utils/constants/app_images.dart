@@ -51,6 +51,7 @@ class AppImages {
 
   //payment
   static const String mapesa = '$baseurl/mapesa.png';
+  static const String escrow = '$baseurl/escrow.png';
   static const String tegopesa = '$baseurl/tegopesa.png';
   static const String airtel = '$baseurl/airtel.png';
   static const String holapesa = '$baseurl/holapesa.png';

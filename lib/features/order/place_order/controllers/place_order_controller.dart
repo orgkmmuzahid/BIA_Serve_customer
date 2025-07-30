@@ -25,8 +25,7 @@ class PlaceOrderController extends GetxController {
   TextEditingController clientAddressTextEditController = TextEditingController(
     text: '2464 Royal Ln. Mesa, New Jersey 45463',
   );
-  TextEditingController marchentAddressTextEditController =
-      TextEditingController();
+  TextEditingController marchentAddressTextEditController = TextEditingController();
 
   OrderDetailsModel orderDetailsModel = OrderDetailsModel(
     orderCode: 'orderCode',
@@ -65,6 +64,17 @@ class PlaceOrderController extends GetxController {
     placeOrderModel = placeOrderModel.copyWith(marchentAdressOnMap: text);
     marchentAddressTextEditController.text = text;
     update();
+  }
+
+  @override
+  void onInit() {
+    marchentAddressTextEditController.addListener(() {
+      final text = marchentAddressTextEditController.text.trim();
+      if (text.isEmpty || placeOrderModel.marchentAdressOnMap == text) return;
+      placeOrderModel = placeOrderModel.copyWith(marchentAdressOnMap: text);
+      update();
+    });
+    super.onInit();
   }
 
   @override

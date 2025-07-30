@@ -53,11 +53,12 @@ class CommonText extends StatelessWidget {
   Widget _withBorder(BuildContext context) => Container(
     padding: _edgeInsetsBuilder(),
     decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(borderRadius?.r ?? 0),
       // boxShadow: [
       //   BoxShadow(color: borderColor ?? Theme.of(context).dividerColor, blurRadius: 3, spreadRadius: 1)
       // ],
       color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
-      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor),
+      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.w),
     ),
     child: Align(alignment: _convertAlignment(), child: _textField(context)),
   );

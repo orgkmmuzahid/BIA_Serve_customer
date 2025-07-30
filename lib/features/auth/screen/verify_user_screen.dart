@@ -35,13 +35,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       /// App Bar Section starts here
-      appBar: AppBar(
-        title: const CommonText(
-          text: AppString.otpVerify,
-          fontWeight: FontWeight.w700,
-          fontSize: 24,
-        ),
-      ),
+      appBar: AppBar(title: const CommonText(text: AppString.otpVerify, fontWeight: FontWeight.w700, fontSize: 24)),
 
       /// Body Section starts here
       body: GetBuilder<OtpController>(
@@ -79,9 +73,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                     buttonWidth: 132,
                     onTap: () {
                       if (formKey.currentState!.validate()) {
-                        controller.verifyOtpRepo(
-                          
-                        );
+                        controller.verifyOtpRepo();
                       }
                     },
                   ),
@@ -105,8 +97,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
         ? _resendMessageBuilder(controller)
         : CommonText(
           alignment: MainAxisAlignment.end,
-          text:
-              '${AppString.resendCodeIn} ${controller.time} ${AppString.minute}',
+          text: '${AppString.resendCodeIn} ${controller.time} ${AppString.minute}',
         );
   }
 
@@ -132,11 +123,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
                   ..onTap = () {
                     if (controller.time == '00:00') controller.startTimer();
                   },
-            style: GoogleFonts.lato(
-              color: getTheme.colorScheme.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: GoogleFonts.lato(color: getTheme.colorScheme.primary, fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -152,10 +139,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
         autoDisposeControllers: false,
 
         cursorColor: getTheme.textSelectionTheme.cursorColor,
-        textStyle: getTheme.textTheme.bodyMedium?.copyWith(
-          fontSize: 25,
-          color: getTheme.inputDecorationTheme.enabledBorder?.borderSide.color,
-        ),
+        textStyle: getTheme.textTheme.bodyMedium?.copyWith(fontSize: 25, color: AppColors.primaryText),
         appContext: (context),
         autoFocus: true,
         pinTheme: PinTheme(

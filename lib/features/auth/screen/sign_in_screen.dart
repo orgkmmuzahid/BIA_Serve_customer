@@ -62,14 +62,16 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   /// Forget Password Button here
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.find<OtpController>().changeOtpFor(OtpFor.forgetPassword);
-                        appRouter.push(const OtpSendRoute());
-                      },
-                      child: const CommonText(text: AppString.forgotThePassword, top: 10, bottom: 30),
+                  GestureDetector(
+                    onTap: () {
+                      Get.find<OtpController>().changeOtpFor(OtpFor.forgetPassword);
+                      appRouter.push(const OtpSendRoute());
+                    },
+                    child: const CommonText(
+                      text: AppString.forgotThePassword,
+                      alignment: MainAxisAlignment.end,
+                      top: 10,
+                      bottom: 30,
                     ),
                   ),
 

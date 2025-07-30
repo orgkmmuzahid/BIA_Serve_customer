@@ -19,7 +19,7 @@
         android:maxSdkVersion="32" />
 
     <application
-        android:label="untitled_3"
+        android:label="Bai Serve Customer"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true"

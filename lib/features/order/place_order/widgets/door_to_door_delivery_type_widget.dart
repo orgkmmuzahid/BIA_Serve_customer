@@ -4,33 +4,29 @@ import 'package:bai_serve_customer/features/order/place_order/enum/delivery_type
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
   const DoorToDoorDeliveryTypeWidget({super.key});
 
   @override
-  Widget build(BuildContext context)=> _doorToDoorDeliveryType();
+  Widget build(BuildContext context) => _doorToDoorDeliveryType();
 
-   Widget _doorToDoorDeliveryType() {
+  Widget _doorToDoorDeliveryType() {
     return GetBuilder<DoorToDoorController>(
       builder: (doorToDoorConroller) {
         return Row(
           children: [
             Expanded(
               child: CommonButton(
+                titleSize: 12.sp,
                 onTap: () {
                   doorToDoorConroller.onDeliveryTypeChange(DeliveryType.urgent);
                 },
                 buttonColor: getTheme.scaffoldBackgroundColor,
-                borderColor: _getRadioColor(
-                  doorToDoorConroller,
-                  DeliveryType.urgent,
-                ),
-                titleColor: _getRadioColor(
-                  doorToDoorConroller,
-                  DeliveryType.urgent,
-                ),
+                borderColor: _getRadioColor(doorToDoorConroller, DeliveryType.urgent),
+                titleColor: _getRadioColor(doorToDoorConroller, DeliveryType.urgent),
                 titleText: AppString.urgentDelivery,
                 icon: Icon(
                   doorToDoorConroller.deliveryType == DeliveryType.urgent
@@ -43,23 +39,16 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
                 ),
               ),
             ),
-            10.width,
+            5.width,
             Expanded(
               child: CommonButton(
+                titleSize: 12.sp,
                 onTap: () {
-                  doorToDoorConroller.onDeliveryTypeChange(
-                    DeliveryType.regular,
-                  );
+                  doorToDoorConroller.onDeliveryTypeChange(DeliveryType.regular);
                 },
-                borderColor: _getRadioColor(
-                  doorToDoorConroller,
-                  DeliveryType.regular,
-                ),
+                borderColor: _getRadioColor(doorToDoorConroller, DeliveryType.regular),
                 buttonColor: getTheme.scaffoldBackgroundColor,
-                titleColor: _getRadioColor(
-                  doorToDoorConroller,
-                  DeliveryType.regular,
-                ),
+                titleColor: _getRadioColor(doorToDoorConroller, DeliveryType.regular),
                 titleText: AppString.regularDelivery,
                 icon: Icon(
                   doorToDoorConroller.deliveryType == DeliveryType.regular
@@ -78,12 +67,6 @@ class DoorToDoorDeliveryTypeWidget extends StatelessWidget {
     );
   }
 
-    Color _getRadioColor(
-    DoorToDoorController doorToDoorConroller,
-    DeliveryType buttonType,
-  ) =>
-      doorToDoorConroller.deliveryType == buttonType
-          ? getTheme.colorScheme.primary
-          : getTheme.disabledColor;
-  
+  Color _getRadioColor(DoorToDoorController doorToDoorConroller, DeliveryType buttonType) =>
+      doorToDoorConroller.deliveryType == buttonType ? getTheme.colorScheme.primary : getTheme.disabledColor;
 }

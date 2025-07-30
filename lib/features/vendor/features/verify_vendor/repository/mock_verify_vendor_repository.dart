@@ -45,7 +45,7 @@ class MockVerifyVendorRepository implements VerifyVendorRepository {
       venodorLocation: 'Vendors Location: Dar es Salam',
       verifciationFee: 5202,
       verificationStatus: VerificationStatus.pending,
-      images: [AppImages.homeBanner, AppImages.loyaltyPonitsBackground, AppImages.callingBackground],
+      images: [AppImages.homeBanner, AppImages.callingBackground],
     );
   }
 }

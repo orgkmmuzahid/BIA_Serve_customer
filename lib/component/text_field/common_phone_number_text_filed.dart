@@ -1,15 +1,12 @@
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl_phone_field_v2/intl_phone_field.dart';
 import 'package:intl_phone_field_v2/phone_number.dart';
 
 class CommonPhoneNumberTextFiled extends StatelessWidget {
-  const CommonPhoneNumberTextFiled({
-    required this.controller,
-    required this.countryChange,
-    super.key,
-  });
+  const CommonPhoneNumberTextFiled({required this.controller, required this.countryChange, super.key});
 
   final TextEditingController controller;
   final Function(PhoneNumber value) countryChange;
@@ -20,26 +17,18 @@ class CommonPhoneNumberTextFiled extends StatelessWidget {
       initialCountryCode: 'SE',
       controller: controller,
       validator: OtherHelper.phoneValidator,
-      style: getTheme.textTheme.bodyMedium?.copyWith(
-        fontWeight: FontWeight.w500,
-        fontSize: 12,
-      ),
+      style: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.sp),
 
       decoration: InputDecoration(
         labelText: '',
         prefixIcon: Container(
           padding: const EdgeInsets.only(right: 8),
-          decoration: const BoxDecoration(
-            border: Border(right: BorderSide(color: Colors.grey)),
-          ),
+          decoration: const BoxDecoration(border: Border(right: BorderSide(color: Colors.grey))),
         ),
       ),
       flagsButtonPadding: const EdgeInsets.only(left: 8, right: 8),
       dropdownIconPosition: IconPosition.trailing,
-      dropdownTextStyle: getTheme.textTheme.bodyMedium?.copyWith(
-        fontWeight: FontWeight.w500,
-        fontSize: 12,
-      ),
+      dropdownTextStyle: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.sp),
       disableLengthCheck: true,
       textAlignVertical: TextAlignVertical.center,
       onChanged: countryChange,
