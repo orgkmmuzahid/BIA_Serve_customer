@@ -20,9 +20,12 @@ class CommonText extends StatelessWidget {
     this.overflow,
     this.enableBorder = false,
     this.borderColor,
-    this.borderRadius,
+    this.borderRadious,
     this.backgroundColor,
     this.alignment,
+    this.borderRadiusOnly,
+    this.suffix,
+    this.preffix,
   });
 
   final double left;
@@ -39,9 +42,12 @@ class CommonText extends StatelessWidget {
   final TextStyle? style;
   final bool? enableBorder;
   final Color? borderColor;
-  final double? borderRadius;
+  final double? borderRadious;
+  final BorderRadius? borderRadiusOnly;
   final Color? backgroundColor;
   final MainAxisAlignment? alignment;
+  final Widget? suffix;
+  final Widget? preffix;
 
   @override
   Widget build(BuildContext context) {
@@ -50,48 +56,58 @@ class CommonText extends StatelessWidget {
 
   EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(left: left.w, right: right.w, top: top.h, bottom: bottom.h);
 
-  Widget _withBorder(BuildContext context) => Container(
-    padding: _edgeInsetsBuilder(),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(borderRadius?.r ?? 0),
-      // boxShadow: [
-      //   BoxShadow(color: borderColor ?? Theme.of(context).dividerColor, blurRadius: 3, spreadRadius: 1)
-      // ],
-      color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
-      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.w),
+  Widget _withBorder(BuildContext context) => ClipRRect(
+    borderRadius: borderRadiusOnly ?? BorderRadius.circular(borderRadious?.r ?? 0),
+    child: Container(
+      padding: _edgeInsetsBuilder(),
+      decoration: BoxDecoration(
+        color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
+        border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.w),
+      ),
+      child: _textField(context),
     ),
-    child: Align(alignment: _convertAlignment(), child: _textField(context)),
   );
 
-  Widget _withoutBorder(BuildContext context) =>
-      Padding(padding: _edgeInsetsBuilder(), child: Align(alignment: _convertAlignment(), child: _textField(context)));
+  Widget _withoutBorder(BuildContext context) => Padding(padding: _edgeInsetsBuilder(), child: _textField(context));
 
-  Alignment _convertAlignment() {
+  WrapAlignment _convertAlignment() {
     switch (alignment) {
       case MainAxisAlignment.center:
-        return Alignment.center;
+        return WrapAlignment.center;
       case MainAxisAlignment.end:
-        return Alignment.centerRight;
+        return WrapAlignment.end;
       case MainAxisAlignment.start:
       default:
-        return Alignment.centerLeft;
+        return WrapAlignment.start;
     }
   }
 
   Widget _textField(BuildContext context) {
-    return Text(
-      text,
-      textAlign: textAlign,
-      maxLines: maxLines,
-      softWrap: true,
-      overflow: maxLines == null ? TextOverflow.visible : (overflow ?? TextOverflow.ellipsis),
-      style:
-          style ??
-          GoogleFonts.dmSans(
-            fontSize: fontSize.sp,
-            fontWeight: fontWeight,
-            color: color ?? Theme.of(context).textTheme.bodyMedium?.color,
-          ),
+    return Wrap(
+      alignment: _convertAlignment(),
+      // mainAxisSize: MainAxisSize.min,
+      // mainAxisAlignment: alignment ?? MainAxisAlignment.start,
+      children: [
+        if (preffix != null) preffix!,
+        if (preffix != null) 10.width,
+        Text(
+          text,
+          textAlign: textAlign,
+          maxLines: maxLines,
+          softWrap: true,
+          overflow: maxLines == null ? TextOverflow.visible : (overflow ?? TextOverflow.ellipsis),
+          style:
+              style ??
+              GoogleFonts.dmSans(
+                fontSize: fontSize.sp,
+                fontWeight: fontWeight,
+                color: color ?? Theme.of(context).textTheme.bodyMedium?.color,
+              ),
+        ),
+        if (suffix != null) 10.width,
+        if (suffix != null) suffix!,
+        if (suffix != null) 10.width,
+      ],
     );
   }
 }

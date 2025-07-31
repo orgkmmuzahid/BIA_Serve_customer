@@ -109,7 +109,7 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 150),
+          const Spacer(),
           _buildMenu(
             image: AppImages.drawerLogout,
             title: AppString.logOut,
@@ -126,6 +126,7 @@ class HomeDrawer extends StatelessWidget {
               );
             },
           ),
+          50.height,
         ],
       ),
     );

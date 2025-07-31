@@ -33,7 +33,7 @@ class CommonAlert {
             actionsAlignment: MainAxisAlignment.center,
             content: content,
             actions: [
-              if (disableActionButton == false)
+              if (cancelButtonTittle == false)
                 CommonButton(
                   titleText: cancelButtonTittle,
                   buttonWidth: 70,
@@ -42,7 +42,7 @@ class CommonAlert {
                   titleColor: AppColors.textWhite,
                   onTap: appRouter.pop,
                 ),
-              if (disableCancelButton == false)
+              if (disableActionButton == false)
                 CommonButton(
                   titleText: actionButtonTittle,
                   buttonWidth: 70,

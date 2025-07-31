@@ -62,7 +62,7 @@ class VendorSourcingScreen extends StatelessWidget {
                       bottom: 10,
                       left: 15,
                       right: 15,
-                      borderRadius: 10,
+                      borderRadious: 10,
                     ),
                   ],
                 ),

@@ -7,7 +7,6 @@ import 'package:bai_serve_customer/features/payment/controllers/payment_controll
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 @RoutePage()

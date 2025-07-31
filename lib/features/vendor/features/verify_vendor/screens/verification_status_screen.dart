@@ -90,7 +90,7 @@ class VerificationStatusScreen extends StatelessWidget {
           right: Padding(
             padding: const EdgeInsets.only(right: 50),
             child: CommonText(
-              borderRadius: 8,
+              borderRadious: 8,
               borderColor: AppColors.success,
               color: AppColors.success,
               fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ class VerificationStatusScreen extends StatelessWidget {
           right: Padding(
             padding: const EdgeInsets.only(right: 50),
             child: CommonText(
-              borderRadius: 8,
+              borderRadious: 8,
               text: model.verificationStatus.displayName,
               enableBorder: true,
               fontSize: 16.sp,

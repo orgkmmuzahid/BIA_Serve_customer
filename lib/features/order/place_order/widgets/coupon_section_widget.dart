@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 class CouponSectionWidget extends StatelessWidget {
-
   const CouponSectionWidget({required this.placeOrderController, super.key});
   final PlaceOrderController placeOrderController;
 
@@ -23,14 +22,13 @@ class CouponSectionWidget extends StatelessWidget {
       builder: (loyaltyController) {
         return Column(
           children: [
-            if (placeOrderController.showCouponButton &&
-                loyaltyController.offercode == null)
+            if (placeOrderController.showCouponButton && loyaltyController.offercode == null)
               DualFieldRow(
-               left:  CommonButton(
+                left: CommonButton(
                   titleText: AppString.couponCode,
-                  onTap: ()=> appRouter.push(const MyRewardsRoute()),
+                  onTap: () => appRouter.push(const MyRewardsRoute()),
                 ),
-              right: CommonButton(
+                right: CommonButton(
                   titleText: AppString.noCouponCode,
                   buttonColor: getTheme.scaffoldBackgroundColor,
                   borderColor: getTheme.dividerColor,
@@ -47,14 +45,13 @@ class CouponSectionWidget extends StatelessWidget {
                 bottom: 15,
                 right: 10,
                 left: 10,
-                borderRadius: 10,
+                borderRadious: 10,
               ),
             10.height,
             CommonButton(
               buttonColor: getTheme.colorScheme.secondary.withAlpha(20),
               titleColor: getTheme.textTheme.bodyMedium?.color,
-              titleText:
-                  '${AppString.totalPrice}: Tsh ${placeOrderController.orderDetailsModel.totalPrice}',
+              titleText: '${AppString.totalPrice}: Tsh ${placeOrderController.orderDetailsModel.totalPrice}',
             ),
           ],
         );

@@ -97,7 +97,7 @@ class ProductGridviewWidget extends StatelessWidget {
               },
               child: CommonText(
                 enableBorder: isSelected ? false : true,
-                borderRadius: 8,
+                borderRadious: 8,
                 fontWeight: FontWeight.bold,
                 backgroundColor: isSelected ? AppColors.primaryColor : AppColors.serfeceBG,
                 color: isSelected ? AppColors.textWhite : AppColors.primaryText,
