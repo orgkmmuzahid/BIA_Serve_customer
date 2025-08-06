@@ -1,5 +1,6 @@
 class AppString {
   static const String dataEmpty = 'Data Empty';
+  static const String paymentHistory = 'Payment History';
   static const String noInternet = 'No Internet';
   static const String checkInternet = 'Check Internet';
   static const String back = 'Back';

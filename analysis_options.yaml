@@ -22,6 +22,12 @@ analyzer:
     - "**/*.config.dart"
     - "**/*.gen.dart"
     - "lib/generated_plugin_registrant.dart"
+    - build/**
+    - .dart_tool/**
+    - ios/**
+    - android/**
+    - bloc_feature/**
+    - getx_feature/**
 
 linter:
   rules:

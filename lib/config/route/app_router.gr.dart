@@ -64,10 +64,6 @@ import 'package:bai_serve_customer/features/order/place_order/screens/place_orde
     as _i26;
 import 'package:bai_serve_customer/features/order/tracking_order/screens/tracking_order_screen.dart'
     as _i38;
-import 'package:bai_serve_customer/features/payment/screens/my_payment_screen.dart'
-    as _i16;
-import 'package:bai_serve_customer/features/payment/screens/payment_screen.dart'
-    as _i24;
 import 'package:bai_serve_customer/features/purchase_delivery/screens/purchase_delivery_screen.dart'
     as _i29;
 import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart'
@@ -109,6 +105,9 @@ import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screen
     as _i43;
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/verify_vendor_screen.dart'
     as _i45;
+import 'package:bai_serve_customer/payment/screens/my_payment_screen.dart'
+    as _i16;
+import 'package:bai_serve_customer/payment/screens/payment_screen.dart' as _i24;
 import 'package:flutter/material.dart' as _i48;
 
 /// generated route for

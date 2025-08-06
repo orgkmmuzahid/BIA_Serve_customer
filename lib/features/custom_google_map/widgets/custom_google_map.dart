@@ -10,10 +10,7 @@ class CustomGoogleMap extends StatelessWidget {
   Widget build(BuildContext context) => GetBuilder<CustomGoogleMapController>(
     builder: (controller) {
       return GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: controller.startLocation,
-          zoom: 16,
-        ),
+        initialCameraPosition: CameraPosition(target: controller.startLocation, zoom: 16),
         polylines: controller.mapRoute,
         markers: controller.markers,
         onMapCreated: controller.onMapCreated,

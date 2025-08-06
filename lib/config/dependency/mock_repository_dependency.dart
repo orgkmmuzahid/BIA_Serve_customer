@@ -12,6 +12,8 @@ import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/repo
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/repository/vendor_sourcing_repository.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/repository/mock_verify_vendor_repository.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/repository/verify_vendor_repository.dart';
+import 'package:bai_serve_customer/payment/repository/mock_payment_repository.dart';
+import 'package:bai_serve_customer/payment/repository/payment_repository.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +28,7 @@ class MockRepositoryDependency {
     getIt.registerLazySingleton<VerifyVendorRepository>(MockVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(MockCategorySelctorRepository.new);
     getIt.registerLazySingleton<ReturnProductRepository>(MockReturnProductRepository.new);
+    getIt.registerLazySingleton<PaymentRepository>(MockPaymentRepository.new);
 
     AppLogger.debug('Mock repository dependency initalized', tag: 'dependency');
   }

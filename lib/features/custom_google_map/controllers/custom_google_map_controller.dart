@@ -22,13 +22,13 @@ class CustomGoogleMapController extends GetxController {
   LatLng startLocation = const LatLng(23.798440, 90.412663);
   LatLng endLocation = const LatLng(23.803544, 90.415371);
 
-  bool _initialized = false;
+  bool initialized = false;
 
   @override
   void onClose() {
     mapRoute.clear();
     markers.clear();
-    _initialized = false;
+    initialized = false;
     super.onClose();
   }
 
@@ -37,14 +37,19 @@ class CustomGoogleMapController extends GetxController {
     getPolylinePoints(startLocation, endLocation);
   }
 
+  bool _isInitializing = false;
   void onMapCreated(GoogleMapController controller) async {
-    if (_initialized) return;
-    mapController = controller;
-    _initialized = true;
+    if (_isInitializing) return;
+    _isInitializing = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      mapController = controller;
+      update();
+      _initMapAsync(); // See below
+    });
+  }
 
-    final isPermitted = await const PermissionHandlerHelper(
-      permission: Permission.location,
-    ).getStatus();
+  Future<void> _initMapAsync() async {
+    final isPermitted = await const PermissionHandlerHelper(permission: Permission.location).getStatus();
 
     if (!isPermitted || !Get.isRegistered<CustomGoogleMapController>()) return;
 
@@ -56,11 +61,7 @@ class CustomGoogleMapController extends GetxController {
 
       final startMarker = Marker(
         markerId: const MarkerId('start'),
-        icon: await Utils.bitmapDescriptorFromIconData(
-          Icons.gps_fixed_sharp,
-          size: 30,
-          color: Colors.blue,
-        ),
+        icon: await Utils.bitmapDescriptorFromIconData(Icons.gps_fixed_sharp, size: 30, color: Colors.blue),
         position: startLocation,
         infoWindow: const InfoWindow(title: 'Start'),
       );
@@ -75,9 +76,7 @@ class CustomGoogleMapController extends GetxController {
 
       try {
         await mapController.animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(target: startLocation, zoom: 18),
-          ),
+          CameraUpdate.newCameraPosition(CameraPosition(target: startLocation, zoom: 18)),
         );
       } catch (_) {
         AppLogger.warning('Failed to animate camera');
@@ -87,7 +86,7 @@ class CustomGoogleMapController extends GetxController {
 
       if (Get.isPrepared<CustomGoogleMapController>()) update();
     } catch (e) {
-      AppLogger.error(e.toString() ,tag:  'Map initialization failed', );
+      AppLogger.error(e.toString(), tag: 'Map initialization failed');
     }
   }
 
@@ -124,14 +123,7 @@ class CustomGoogleMapController extends GetxController {
 
   void _drawPolyline(List<LatLng> points) {
     mapRoute.clear();
-    mapRoute.add(
-      Polyline(
-        polylineId: const PolylineId('route'),
-        color: Colors.blue,
-        width: 5,
-        points: points,
-      ),
-    );
+    mapRoute.add(Polyline(polylineId: const PolylineId('route'), color: Colors.blue, width: 5, points: points));
 
     if (Get.isPrepared<CustomGoogleMapController>()) {
       update();

@@ -12,6 +12,8 @@ import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/repo
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/repository/vendor_sourcing_repository.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/repository/real_verify_vendor_repository.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/repository/verify_vendor_repository.dart';
+import 'package:bai_serve_customer/payment/repository/payment_repository.dart';
+import 'package:bai_serve_customer/payment/repository/real_payment_repository.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +28,7 @@ class RealRepositoryDependency {
     getIt.registerLazySingleton<VerifyVendorRepository>(RealVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(RealCategorySelctorRepository.new);
     getIt.registerLazySingleton<ReturnProductRepository>(RealReturnProductRepository.new);
+    getIt.registerLazySingleton<PaymentRepository>(RealPaymentRepository.new);
 
     AppLogger.debug('Real repository dependency initalized', tag: 'dependency');
   }

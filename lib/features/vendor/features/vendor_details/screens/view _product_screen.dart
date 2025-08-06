@@ -11,6 +11,7 @@ import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/instance_manager.dart';
 import 'package:share_plus/share_plus.dart';
 
 final GlobalKey _previewContainerKey = GlobalKey();
@@ -20,51 +21,60 @@ class ViewProductScreen extends StatelessWidget {
   const ViewProductScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => RepaintBoundary(
-    key: _previewContainerKey,
-    child: Scaffold(
-      appBar: const CommonAppBar(title: AppString.viewProduct),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: GetBuilder<ProductController>(
-          builder: (productController) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  CommonImage(
-                    imageSrc: productController.productDetailsModel.data?.image ?? '',
-                    height: 227,
-                    fill: BoxFit.fill,
-                  ),
+  Widget build(BuildContext context) => _content(context);
 
-                  13.height,
-                  _nameBuilder(productController),
-                  CommonText(
-                    text: productController.productDetailsModel.data?.description ?? '',
-                    textAlign: TextAlign.justify,
-                    fontSize: 13,
-                  ),
-                  20.height,
-                  CommonText(
-                    text: '${AppString.monySign} ${productController.productDetailsModel.data?.price}',
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor3,
-                  ),
-                  20.height,
-                  CommonText(text: AppString.productDetails, style: getTheme.textTheme.bodyLarge),
-                  20.height,
-                  _pickers(productController),
-                  30.height,
-                  _screenshot(context),
-                ],
-              ),
-            );
-          },
+  RepaintBoundary _content(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductController>().fetchProductDetails();
+    });
+
+    return RepaintBoundary(
+      key: _previewContainerKey,
+      child: Scaffold(
+        appBar: const CommonAppBar(title: AppString.viewProduct),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: GetBuilder<ProductController>(
+            builder: (productController) {
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonImage(
+                      imageSrc: productController.productDetailsModel.data?.image ?? '',
+                      height: 227,
+                      fill: BoxFit.fill,
+                    ),
+
+                    13.height,
+                    _nameBuilder(productController),
+                    CommonText(
+                      text: productController.productDetailsModel.data?.description ?? '',
+                      textAlign: TextAlign.justify,
+                      fontSize: 13,
+                    ),
+                    20.height,
+                    CommonText(
+                      text: '${AppString.monySign} ${productController.productDetailsModel.data?.price}',
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryColor3,
+                    ),
+                    20.height,
+                    CommonText(text: AppString.productDetails, style: getTheme.textTheme.bodyLarge),
+                    20.height,
+                    _pickers(productController),
+                    30.height,
+                    _screenshot(context),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   SizedBox _pickers(ProductController productController) {
     return SizedBox(

@@ -56,16 +56,15 @@ class CommonText extends StatelessWidget {
 
   EdgeInsets _edgeInsetsBuilder() => EdgeInsets.only(left: left.w, right: right.w, top: top.h, bottom: bottom.h);
 
-  Widget _withBorder(BuildContext context) => ClipRRect(
-    borderRadius: borderRadiusOnly ?? BorderRadius.circular(borderRadious?.r ?? 0),
-    child: Container(
-      padding: _edgeInsetsBuilder(),
-      decoration: BoxDecoration(
-        color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
-        border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.w),
-      ),
-      child: _textField(context),
+  Widget _withBorder(BuildContext context) => Container(
+    padding: _edgeInsetsBuilder(),
+    margin: EdgeInsets.all(5),
+    decoration: BoxDecoration(
+      color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
+      border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.2.w),
+      borderRadius: BorderRadius.circular(borderRadious?.r ?? 4.r),
     ),
+    child: _textField(context),
   );
 
   Widget _withoutBorder(BuildContext context) => Padding(padding: _edgeInsetsBuilder(), child: _textField(context));

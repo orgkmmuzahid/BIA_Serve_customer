@@ -37,6 +37,7 @@ class ReturnProcessingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (returnProductFormModel.images.isNotEmpty)
                 LayoutBuilder(
@@ -60,6 +61,7 @@ class ReturnProcessingScreen extends StatelessWidget {
               Card(
                 color: AppColors.cartBG,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CommonText(text: returnProductFormModel.reason ?? '', style: getTheme.textTheme.titleMedium),
                     10.height,
@@ -77,13 +79,12 @@ class ReturnProcessingScreen extends StatelessWidget {
                   CommonAlert(
                     title: AppString.productReturnSuccessMessage,
                     actionButtonTittle: AppString.done,
-                    disableActionButton: true,
                     onTap: () {
                       appRouter.popUntilRouteWithName(ReturnProductRoute.name);
                     },
                   );
                 },
-              ),
+              ).center,
             ],
           ),
         ),

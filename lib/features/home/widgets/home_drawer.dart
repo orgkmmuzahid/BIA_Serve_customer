@@ -6,6 +6,7 @@ import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
+import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
@@ -122,6 +123,7 @@ class HomeDrawer extends StatelessWidget {
                 title: AppString.logoutMessage,
                 onTap: () {
                   //logout action.
+                  appRouter.replace(const LoginOptionsRoute());
                 },
               );
             },
@@ -134,7 +136,7 @@ class HomeDrawer extends StatelessWidget {
 
   ListTile _buildMenu({required String image, required String title, required Function() onTap, TextStyle? style}) {
     return ListTile(
-      leading: CommonImage(imageSrc: image, size: 24),
+      leading: CommonImage(imageSrc: image, size: 24, imageColor: AppColors.iconColorBlack),
       title: Text(title, style: style ?? getTheme.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w400)),
       onTap: () {
         appRouter.pop();
