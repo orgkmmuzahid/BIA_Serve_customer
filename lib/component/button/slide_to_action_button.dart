@@ -125,7 +125,7 @@ class _SlideToCallActionState extends State<SlideToActionButton>
               offset: Offset(-_arrowAnimation.value, 0),
               child: const Icon(
                 Icons.double_arrow,
-                color: AppColors.primaryButton,
+                color: AppColors.success,
               ),
             ),
       ),
@@ -142,7 +142,7 @@ class _SlideToCallActionState extends State<SlideToActionButton>
               angle: 3.14,
               child: Transform.translate(
                 offset: Offset(-_arrowAnimation.value, 0),
-                child: const Icon(Icons.double_arrow, color: Colors.redAccent),
+                child: const Icon(Icons.double_arrow, color: AppColors.warning),
               ),
             ),
       ),
