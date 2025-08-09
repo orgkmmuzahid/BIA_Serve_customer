@@ -83,13 +83,13 @@ class _CommonDropDownState<T> extends State<CommonDropDown<T>> with SingleTicker
           value: _selectedItem,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(left: 10, right: 2),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: getTheme.dividerColor),
+              borderSide: BorderSide(color: getTheme.dividerColor, width: 1.w),
               borderRadius: BorderRadius.circular(8),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: borderColor),
+              borderSide: BorderSide(color: borderColor, width: 1.w),
               borderRadius: BorderRadius.circular(8),
             ),
           ),

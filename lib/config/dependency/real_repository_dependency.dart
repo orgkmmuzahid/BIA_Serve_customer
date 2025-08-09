@@ -21,14 +21,14 @@ class RealRepositoryDependency {
   static void dependencies() {
     Get.lazyPut<VendorSourcingRepository>(RealVendorSourcingRepository.new, fenix: true);
     Get.lazyPut<HomeRepository>(RealHomeRepository.new, fenix: true);
-    Get.lazyPut<TrackingOrderRepository>(RealTrackingOrderRepository.new, fenix: true);
-    Get.lazyPut<VendorDetailsRepository>(RealVendorDetailsRepository.new, fenix: true);
 
     //getit
     getIt.registerLazySingleton<VerifyVendorRepository>(RealVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(RealCategorySelctorRepository.new);
     getIt.registerLazySingleton<ReturnProductRepository>(RealReturnProductRepository.new);
     getIt.registerLazySingleton<PaymentRepository>(RealPaymentRepository.new);
+    getIt.registerLazySingleton<TrackingOrderRepository>(RealTrackingOrderRepository.new);
+    getIt.registerLazySingleton<VendorDetailsRepository>(RealVendorDetailsRepository.new);
 
     AppLogger.debug('Real repository dependency initalized', tag: 'dependency');
   }

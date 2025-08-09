@@ -2,13 +2,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
-import 'package:bai_serve_customer/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/controllers/product_controller.dart';
+import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/product_cateogry_widget.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
@@ -24,94 +23,81 @@ class VendorSourcingScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: const CommonAppBar(title: AppString.homeVendorSourcing),
     body: SingleChildScrollView(
-      child: GetBuilder<VendorSourcingController>(
-        builder: (vendorSourcingController) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Column(
-              children: [
-                CommonText(text: AppString.productCategory, style: getTheme.textTheme.bodyLarge, bottom: 10),
-                _productCategory(),
-
-                CommonText(text: AppString.numberOfVendor, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-
-                _vendorsServiceList(vendorSourcingController),
-
-                CommonText(text: AppString.budget, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-                const CommonTextField(hintText: AppString.budget, prefixText: AppString.monySign),
-
-                CommonText(
-                  text: AppString.specialInstruction,
-                  style: getTheme.textTheme.bodyLarge,
-                  bottom: 10,
-                  top: 10,
-                ),
-                CommonMultilineTextField(height: 120, hintText: AppString.specialInstruction, onSave: (value) {}),
-                10.height,
-                Row(
-                  children: [
-                    CommonText(text: AppString.serviceFee, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-                    10.width,
-                    CommonText(
-                      text: '${AppString.monySign} ${vendorSourcingController.selectedServiceFee.value}',
-                      style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor),
-                      enableBorder: true,
-                      backgroundColor: AppColors.serfeceBG,
-                      borderColor: AppColors.primaryColor,
-                      top: 10,
-                      bottom: 10,
-                      left: 15,
-                      right: 15,
-                      borderRadious: 10,
-                    ),
-                  ],
-                ),
-                20.height,
-                CommonButton(
-                  titleText: AppString.submitRequest,
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder:
-                          (_) => AlertDialog(
-                            backgroundColor: getTheme.scaffoldBackgroundColor,
-                            content: Text(
-                              AppString.vendorVerificationRequestMessage,
-                              textAlign: TextAlign.center,
-                              style: getTheme.textTheme.bodyLarge,
-                            ),
-                            actions: [
-                              CommonButton(
-                                titleText: AppString.done,
-                                onTap: () {
-                                  appRouter.popUntilRouteWithName(HomeRoute.name);
-                                },
-                              ),
-                            ],
-                          ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          );
-        },
+      child: Column(
+        children: [
+          CommonText(text: AppString.productCategory, style: getTheme.textTheme.bodyLarge, bottom: 10),
+          ProductCateogryWidget(onChange: (context, category) {}),
+          Expanded(child: _content(context)),
+        ],
       ),
     ),
   );
 
-  GetBuilder<ProductController> _productCategory() {
-    return GetBuilder<ProductController>(
-      builder: (productController) {
-        return CommonDropDown<String>(
-          hint: AppString.productCategory,
-          items: productController.categories.data,
-          onChanged: (value) => productController.onCategorySelection(value ?? ''),
-          nameBuilder: (value) => value,
+  GetBuilder<VendorSourcingController> _content(BuildContext context) {
+    return GetBuilder<VendorSourcingController>(
+      builder: (vendorSourcingController) {
+        return Column(
+          children: [
+            CommonText(text: AppString.numberOfVendor, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
+
+            _vendorsServiceList(vendorSourcingController),
+
+            CommonText(text: AppString.budget, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
+            const CommonTextField(hintText: AppString.budget, prefixText: AppString.monySign),
+
+            CommonText(text: AppString.specialInstruction, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
+            CommonMultilineTextField(height: 120, hintText: AppString.specialInstruction, onSave: (value) {}),
+            10.height,
+            Row(
+              children: [
+                CommonText(text: AppString.serviceFee, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
+                10.width,
+                CommonText(
+                  text: '${AppString.monySign} ${vendorSourcingController.selectedServiceFee.value}',
+                  style: getTheme.textTheme.titleMedium?.copyWith(color: AppColors.primaryColor),
+                  enableBorder: true,
+                  backgroundColor: AppColors.serfeceBG,
+                  borderColor: AppColors.primaryColor,
+                  top: 10,
+                  bottom: 10,
+                  left: 15,
+                  right: 15,
+                  borderRadious: 10,
+                ),
+              ],
+            ),
+            20.height,
+            CommonButton(
+              titleText: AppString.submitRequest,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder:
+                      (_) => AlertDialog(
+                        backgroundColor: getTheme.scaffoldBackgroundColor,
+                        content: Text(
+                          AppString.vendorVerificationRequestMessage,
+                          textAlign: TextAlign.center,
+                          style: getTheme.textTheme.bodyLarge,
+                        ),
+                        actions: [
+                          CommonButton(
+                            titleText: AppString.done,
+                            onTap: () {
+                              appRouter.popUntilRouteWithName(HomeRoute.name);
+                            },
+                          ),
+                        ],
+                      ),
+                );
+              },
+            ),
+          ],
         );
       },
     );
   }
+
 
   SizedBox _vendorsServiceList(VendorSourcingController vendorSourcingController) {
     return SizedBox(

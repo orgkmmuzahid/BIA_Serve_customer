@@ -10,26 +10,22 @@ import 'vendor_details_repository.dart';
 //Get.lazyPut<VendorDetailsRepository>(RealVendorDetailsRepository.new, fenix: true);
 class RealVendorDetailsRepository implements VendorDetailsRepository {
   @override
-  Future<void> productCategories({required OnRequestStateChange<List<String>> onStateChange}) {
-    // TODO: implement productCategories
+  Future<List<VendorProofModel>> fetchVendorProof() {
+    // TODO: implement fetchVendorProof
     throw UnimplementedError();
   }
 
   @override
-  Future<void> productDetails({required OnRequestStateChange<ProductDetailsModel> onStateChange}) {
+  Future<ProductDetailsModel> productDetails({required String productId}) {
     // TODO: implement productDetails
     throw UnimplementedError();
   }
 
   @override
-  Future<void> products({required OnRequestStateChange<List<ProductModel>> onStateChange}) {
+  Future<List<ProductModel>> products({required int page}) {
     // TODO: implement products
     throw UnimplementedError();
   }
 
-  @override
-  Future<List<VendorProofModel>> fetchVendorProof() {
-    // TODO: implement fetchVendorProof
-    throw UnimplementedError();
-  }
+
 }

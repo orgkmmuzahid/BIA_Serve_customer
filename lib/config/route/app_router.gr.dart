@@ -89,12 +89,12 @@ import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dar
     as _i52;
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/all_product_screen.dart'
     as _i1;
+import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/vendor_details_screen.dart'
+    as _i39;
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/vendor_proof_screen.dart'
     as _i40;
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/view%20_product_screen.dart'
     as _i46;
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/widgets/vendor_details_screen.dart'
-    as _i39;
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/screens/vendor_sourcing_screen.dart'
     as _i41;
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/screens/my_vendors_screen.dart'
@@ -1231,16 +1231,47 @@ class VerifyVendorRoute extends _i47.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i46.ViewProductScreen]
-class ViewProductRoute extends _i47.PageRouteInfo<void> {
-  const ViewProductRoute({List<_i47.PageRouteInfo>? children})
-    : super(ViewProductRoute.name, initialChildren: children);
+class ViewProductRoute extends _i47.PageRouteInfo<ViewProductRouteArgs> {
+  ViewProductRoute({
+    required String productId,
+    _i48.Key? key,
+    List<_i47.PageRouteInfo>? children,
+  }) : super(
+         ViewProductRoute.name,
+         args: ViewProductRouteArgs(productId: productId, key: key),
+         initialChildren: children,
+       );
 
   static const String name = 'ViewProductRoute';
 
   static _i47.PageInfo page = _i47.PageInfo(
     name,
     builder: (data) {
-      return const _i46.ViewProductScreen();
+      final args = data.argsAs<ViewProductRouteArgs>();
+      return _i46.ViewProductScreen(productId: args.productId, key: args.key);
     },
   );
+}
+
+class ViewProductRouteArgs {
+  const ViewProductRouteArgs({required this.productId, this.key});
+
+  final String productId;
+
+  final _i48.Key? key;
+
+  @override
+  String toString() {
+    return 'ViewProductRouteArgs{productId: $productId, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ViewProductRouteArgs) return false;
+    return productId == other.productId && key == other.key;
+  }
+
+  @override
+  int get hashCode => productId.hashCode ^ key.hashCode;
 }

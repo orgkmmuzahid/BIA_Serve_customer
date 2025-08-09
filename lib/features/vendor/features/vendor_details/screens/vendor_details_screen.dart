@@ -4,16 +4,13 @@ import 'package:bai_serve_customer/common/vendor_avater_widget.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/controllers/product_controller.dart';
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/controllers/vendor_details_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../common_model/vendor_model.dart';
-import 'product_gridview_widget.dart';
+import '../widgets/product_gridview_widget.dart';
 
 @RoutePage()
 class VendorDetailsScreen extends StatelessWidget {
@@ -24,34 +21,28 @@ class VendorDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) => _content();
 
   Scaffold _content() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<ProductController>().fetchProductDetails();
-    });
     return Scaffold(
       appBar: const CommonAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
-        child: GetBuilder<VendorDetailsController>(
-          builder:
-              (vendorController) => Stack(
-                children: [
-                  _vendorDetails(vendorModel),
-                  //message button
-                  Positioned(
-                    bottom: 20,
-                    right: 5,
-                    child: CommonButton(
-                      titleText: AppString.message,
-                      buttonWidth: 140,
-                      icon: const Icon(Icons.message, color: AppColors.iconColorWhite),
-                      buttonColor: AppColors.primaryColor3,
-                      onTap: () {
-                        appRouter.push(ChatRoute());
-                      },
-                    ),
-                  ),
-                ],
+        child: Stack(
+          children: [
+            _vendorDetails(vendorModel),
+            //message button
+            Positioned(
+              bottom: 20,
+              right: 5,
+              child: CommonButton(
+                titleText: AppString.message,
+                buttonWidth: 140,
+                icon: const Icon(Icons.message, color: AppColors.iconColorWhite),
+                buttonColor: AppColors.primaryColor3,
+                onTap: () {
+                  appRouter.push(ChatRoute());
+                },
               ),
+            ),
+          ],
         ),
       ),
     );

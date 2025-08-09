@@ -4,9 +4,10 @@ import 'package:bai_serve_customer/features/order/tracking_order/repository/trac
 
 class RealTrackingOrderRepository implements TrackingOrderRepository {
   @override
-  Future<void> trackingDetails({required String trackingId, required OnRequestStateChange<TrackingOrderModel> onStateChange}) {
+  Future<TrackingOrderModel> trackingDetails({required String orderNumber}) {
     // TODO: implement trackingDetails
     throw UnimplementedError();
   }
+
   
 }

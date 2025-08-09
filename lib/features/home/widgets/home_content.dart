@@ -18,19 +18,21 @@ class HomeContent extends StatelessWidget {
   final HomeController homeController;
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    child: Column(children: [_topItems(), 20.height, const ProductGridviewWidget(isDropdownFilter: true)]),
-  );
-
-  Widget _topItems() {
-    return Column(
-      children: [
+  Widget build(BuildContext context) => Column(
+    children: [
         CommonTextField(
           prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: homeController.onSearch),
           hintText: AppString.searchProduct,
           controller: homeController.searchController,
         ),
         20.height,
+      Expanded(child: ProductGridviewWidget(topWidget: _topItems(), showFilterAfterTopWidget: true)),
+    ],
+  );
+
+  Widget _topItems() {
+    return Column(
+      children: [
         CommonRotatingImageBanner(imageUrls: homeController.bannerUrls.data, currentIndex: homeController.currentIndex),
         20.height,
 

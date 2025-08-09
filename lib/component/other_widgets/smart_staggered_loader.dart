@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'package:flutter/material.dart';
-import 'package:staggered_grid_view/flutter_staggered_grid_view.dart';
-
 class SmartStaggeredLoader extends StatefulWidget {
   const SmartStaggeredLoader({
     required this.itemCount,
@@ -20,6 +17,7 @@ class SmartStaggeredLoader extends StatefulWidget {
     this.physics,
     this.staggeredTile,
     super.key,
+    this.topWidget
   });
 
   final int itemCount;
@@ -35,6 +33,7 @@ class SmartStaggeredLoader extends StatefulWidget {
   final double crossAxisSpacing;
   final ScrollPhysics? physics;
   final StaggeredTile? staggeredTile;
+  final Widget? topWidget;
 
   @override
   State<SmartStaggeredLoader> createState() => _SmartStaggeredLoaderState();
@@ -51,7 +50,7 @@ class _SmartStaggeredLoaderState extends State<SmartStaggeredLoader> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100 &&
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200 &&
         widget.onLoadMore != null &&
         !widget.isLoading &&
         !widget.isLoadingMore &&
@@ -68,13 +67,13 @@ class _SmartStaggeredLoaderState extends State<SmartStaggeredLoader> {
     super.dispose();
   }
 
-  Widget _buildGrid() {
+  Widget _buildGrid({ScrollController? controller, ScrollPhysics? physics}) {
     return StaggeredGridView.extentBuilder(
       key: ValueKey('staggered${widget.itemCount}'),
-      controller: _scrollController,
-      physics: widget.physics ?? const AlwaysScrollableScrollPhysics(),
+      controller: controller,
+      physics: physics ?? const AlwaysScrollableScrollPhysics(),
       padding: widget.padding,
-      shrinkWrap: widget.physics is NeverScrollableScrollPhysics,
+      shrinkWrap: physics is NeverScrollableScrollPhysics,
       maxCrossAxisExtent: widget.maxCrossAxisExtent,
       itemCount: widget.itemCount + 1, // +1 for loading or end indicator
       itemBuilder: (context, index) {
@@ -129,7 +128,13 @@ class _SmartStaggeredLoaderState extends State<SmartStaggeredLoader> {
     }
 
     // Show staggered grid with optional pull-to-refresh
-    final grid = _buildGrid();
+    final grid =
+        widget.topWidget == null
+            ? _buildGrid(physics: const AlwaysScrollableScrollPhysics(), controller: _scrollController)
+            : SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(children: [widget.topWidget!, _buildGrid(physics: const NeverScrollableScrollPhysics())]),
+            );
 
     return widget.onRefresh != null
         ? RefreshIndicator(

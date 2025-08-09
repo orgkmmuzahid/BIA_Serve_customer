@@ -16,7 +16,7 @@ class ProductBuilderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
     onTap: () {
-      appRouter.push(const ViewProductRoute());
+      appRouter.push(ViewProductRoute(productId: product.id));
     },
     child: LayoutBuilder(
       builder:

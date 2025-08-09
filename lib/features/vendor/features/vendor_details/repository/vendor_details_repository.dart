@@ -6,8 +6,7 @@ import 'package:bai_serve_customer/features/vendor/features/vendor_details/model
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/vendor_proof_model.dart';
 
 abstract class VendorDetailsRepository {
-  Future<void> products({required OnRequestStateChange<List<ProductModel>> onStateChange});
-  Future<void> productDetails({required OnRequestStateChange<ProductDetailsModel> onStateChange});
-  Future<void> productCategories({required OnRequestStateChange<List<String>> onStateChange});
+  Future<List<ProductModel>> products({required int page});
+  Future<ProductDetailsModel> productDetails({required String productId});
   Future<List<VendorProofModel>> fetchVendorProof();
 }

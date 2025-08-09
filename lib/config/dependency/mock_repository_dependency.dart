@@ -21,14 +21,14 @@ class MockRepositoryDependency {
   static void dependencies() {
     Get.lazyPut<VendorSourcingRepository>(MockVendorSourcingRepository.new, fenix: true);
     Get.lazyPut<HomeRepository>(MockHomeRepository.new, fenix: true);
-    Get.lazyPut<TrackingOrderRepository>(MockTrackingOrderRepository.new, fenix: true);
-    Get.lazyPut<VendorDetailsRepository>(MockVendorDetailsRepository.new, fenix: true);
 
     //get it
     getIt.registerLazySingleton<VerifyVendorRepository>(MockVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(MockCategorySelctorRepository.new);
     getIt.registerLazySingleton<ReturnProductRepository>(MockReturnProductRepository.new);
     getIt.registerLazySingleton<PaymentRepository>(MockPaymentRepository.new);
+    getIt.registerLazySingleton<TrackingOrderRepository>(MockTrackingOrderRepository.new);
+    getIt.registerLazySingleton<VendorDetailsRepository>(MockVendorDetailsRepository.new);
 
     AppLogger.debug('Mock repository dependency initalized', tag: 'dependency');
   }

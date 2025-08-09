@@ -11,8 +11,6 @@ class AllProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const Scaffold(
     appBar: CommonAppBar(title: AppString.allProducts),
-    body: SingleChildScrollView(
-      child: Padding(padding: EdgeInsets.only(left: 16, right: 16), child: ProductGridviewWidget(showFilter: false)),
-    ),
+    body: ProductGridviewWidget(),
   );
 }

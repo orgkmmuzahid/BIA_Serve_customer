@@ -9,11 +9,8 @@ import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_p
 import 'package:bai_serve_customer/features/order/my_order/controllers/my_order_controller.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/door_to_door_controller.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve_customer/features/order/tracking_order/controllers/tracking_order_controller.dart';
 import 'package:bai_serve_customer/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve_customer/features/setting/controllers/setting_controller.dart';
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/controllers/product_controller.dart';
-import 'package:bai_serve_customer/features/vendor/features/vendor_details/controllers/vendor_details_controller.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve_customer/payment/controllers/payment_controller.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
@@ -43,12 +40,8 @@ class StateDependency {
     Get.lazyPut(ChatController.new, fenix: true);
     Get.lazyPut(PurchaseDeliveryController.new, fenix: true);
     Get.lazyPut(MyOrderController.new, fenix: true);
-    Get.lazyPut(TrackingOrderController.new, fenix: true);
     Get.lazyPut(SettingController.new, fenix: true);
     Get.lazyPut(VendorSourcingController.new, fenix: true);
-    Get.lazyPut(ProductController.new, fenix: true);
-    Get.lazyPut(VendorDetailsController.new, fenix: true);
-
     //
 
     Get.lazyPut(NotificationsController.new, fenix: true);
