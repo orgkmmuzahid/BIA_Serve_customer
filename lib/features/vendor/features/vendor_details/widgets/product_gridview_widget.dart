@@ -36,13 +36,13 @@ class ProductGridviewWidget extends StatelessWidget {
         final cubit = context.read<ProductCubit>();
         return Column(
           children: [
-            if (showFilterAfterTopWidget == false) _category(),
+            if (showFilterAfterTopWidget == false) _category(cubit),
             Expanded(
               child: SmartStaggeredLoader(
                 itemCount: state.products?.length ?? 0,
                 onRefresh: cubit.fetch,
                 onLoadMore: cubit.loadMore,
-                topWidget: _topWidget(),
+                topWidget: _topWidget(cubit),
                 staggeredTile: const StaggeredTile.count(1, 1),
                 physics:
                     enableProductScrolling
@@ -60,7 +60,7 @@ class ProductGridviewWidget extends StatelessWidget {
       },
     ),
   );
-  Widget _category() => Padding(
+  Widget _category(ProductCubit cubit) => Padding(
     padding: EdgeInsets.symmetric(vertical: 10.w),
     child: Row(
       children: [
@@ -71,9 +71,9 @@ class ProductGridviewWidget extends StatelessWidget {
     ),
   );
 
-  Widget? _topWidget() {
-    if (topWidget == null) return showFilterAfterTopWidget ? _category() : null;
-    return Column(children: [topWidget!, if (showFilterAfterTopWidget) _category()]);
+  Widget? _topWidget(ProductCubit cubit) {
+    if (topWidget == null) return showFilterAfterTopWidget ? _category(cubit) : null;
+    return Column(children: [topWidget!, if (showFilterAfterTopWidget) _category(cubit)]);
   }
 
   Widget _productBuilder(ProductModel product) => GestureDetector(
