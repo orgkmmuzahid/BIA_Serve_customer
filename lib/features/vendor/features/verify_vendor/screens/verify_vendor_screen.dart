@@ -66,8 +66,7 @@ class VerifyVendorScreen extends StatelessWidget {
           },
         ),
         10.height,
-        // _filters(),
-        Expanded(
+        Flexible(
           child: CommonTabBar(
             tabs: AppString.vendorFilters,
             onTabChange: (index) {
