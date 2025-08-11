@@ -53,6 +53,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       builder:
           (controller) => GestureDetector(
             onTap: () {
+              if (appRouter.current.route.name == NotificationRoute.name) return;
               controller.onNotificationTap();
               appRouter.push(const NotificationRoute());
             },

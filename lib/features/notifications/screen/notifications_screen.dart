@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
+import 'package:bai_serve_customer/component/other_widgets/smart_list_loader.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,35 +30,24 @@ class NotificationScreen extends StatelessWidget {
           ),
 
           /// Body Section starts here
-          body: GetBuilder<NotificationsController>(
-            builder: (controller) {
-              return controller.isLoading
-                  /// Loading bar here
-                  ? const CommonLoader()
-                  : controller.notifications.isEmpty
-                  ///  data is Empty then show default Data
-                  ? const NoData()
-                  /// show all Notifications here
-                  : ListView.builder(
-                    controller: controller.scrollController,
-                    padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
-                    itemCount:
-                        controller.isLoadingMore
-                            ? controller.notifications.length + 1
-                            : controller.notifications.length,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      ///  Notification More Data Loading Bar
-                      if (index > controller.notifications.length) {
-                        return const CommonLoader(size: 40, strokeWidth: 2);
-                      }
-                      final NotificationModel item = controller.notifications[index];
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: SmartListLoader(
+              itemCount:
+                  controller.isLoadingMore ? controller.notifications.length + 1 : controller.notifications.length,
+              isLoadDone: controller.isLoading,
+              itemBuilder: (context, index) {
+                ///  Notification More Data Loading Bar
+                if (index > controller.notifications.length) {
+                  return const CommonLoader(size: 40, strokeWidth: 2);
+                }
+                final NotificationModel item = controller.notifications[index];
 
-                      ///  Notification card item
-                      return NotificationItem(item: item);
-                    },
-                  );
-            },
+                ///  Notification card item
+                return NotificationItem(item: item);
+              },
+                            
+            ),
           ),
 
           /// Bottom Navigation Bar Section starts here
