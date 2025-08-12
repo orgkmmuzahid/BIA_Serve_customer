@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
@@ -8,17 +9,13 @@ import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 @RoutePage()
 class LanguageScreen extends StatelessWidget {
   const LanguageScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text(AppString.drawerLanguage),
-      centerTitle: true,
-    ),
+    appBar: AppBar(title: const Text(AppString.drawerLanguage), centerTitle: true),
     body: Column(
       children: [
         CommonButton(
@@ -32,10 +29,8 @@ class LanguageScreen extends StatelessWidget {
             child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
           ),
           onTap: () {
-            Get.find<HomeController>().onCountryChange(
-              Get.find<HomeController>().availableCountries.entries.first,
-            );
-            Get.back();
+            Get.find<HomeController>().onCountryChange(Get.find<HomeController>().availableCountries.entries.first);
+            appRouter.pop();
           },
         ).center,
         18.height,
@@ -51,10 +46,8 @@ class LanguageScreen extends StatelessWidget {
             child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
           ),
           onTap: () {
-            Get.find<HomeController>().onCountryChange(
-              Get.find<HomeController>().availableCountries.entries.last,
-            );
-            Get.back();
+            Get.find<HomeController>().onCountryChange(Get.find<HomeController>().availableCountries.entries.last);
+            appRouter.pop();
           },
         ).center,
       ],

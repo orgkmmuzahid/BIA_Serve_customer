@@ -1,6 +1,5 @@
 // File: vendor_details_repository.dart
 
-import 'package:bai_serve_customer/config/network/dio_service.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_details_model.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_model.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/vendor_proof_model.dart';

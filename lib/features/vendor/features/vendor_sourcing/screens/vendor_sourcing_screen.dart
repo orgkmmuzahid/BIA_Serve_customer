@@ -13,6 +13,7 @@ import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 @RoutePage()
@@ -23,12 +24,16 @@ class VendorSourcingScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: const CommonAppBar(title: AppString.homeVendorSourcing),
     body: SingleChildScrollView(
-      child: Column(
-        children: [
-          CommonText(text: AppString.productCategory, style: getTheme.textTheme.bodyLarge, bottom: 10),
-          ProductCateogryWidget(onChange: (context, category) {}),
-          Expanded(child: _content(context)),
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CommonText(text: AppString.productCategory, style: getTheme.textTheme.bodyLarge, bottom: 10),
+            ProductCateogryWidget(onChange: (context, category) {}),
+            _content(context),
+          ],
+        ),
       ),
     ),
   );
@@ -37,6 +42,7 @@ class VendorSourcingScreen extends StatelessWidget {
     return GetBuilder<VendorSourcingController>(
       builder: (vendorSourcingController) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonText(text: AppString.numberOfVendor, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
 

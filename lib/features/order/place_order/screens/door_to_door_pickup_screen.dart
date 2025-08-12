@@ -36,9 +36,12 @@ class DoorToDoorPickupScreen extends StatelessWidget {
             10.height,
             CommonButton(
               onTap:
-                  () => controller.onPickupTypeChange(
+                  () {
+                controller.onPickupTypeChange(
                     PickupType.pickupFromVendor,
-                  ),
+                  );
+                appRouter.push(PlaceOrderRoute(title: AppString.homeDoorToDoorPickup));
+              },
               titleText: AppString.pickupFromVendor,
               buttonWidth: 200,
             ),

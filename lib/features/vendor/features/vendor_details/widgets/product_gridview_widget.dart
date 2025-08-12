@@ -96,7 +96,7 @@ class ProductGridviewWidget extends StatelessWidget {
                     width: constrains.maxWidth * .9,
                     height: constrains.maxHeight * .55,
                     fill: BoxFit.fill,
-                  ),
+                  ).center,
                   const Spacer(),
                   CommonText(
                     text: product.name,
