@@ -11,7 +11,7 @@ import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve_customer/features/purchase_delivery/model/purchase_delivery_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.homePurchaseDelivery)),
+    appBar: AppBar(title: Text(AppString.homePurchaseDelivery)),
     body: Padding(
       padding: const EdgeInsetsGeometry.only(left: 16, right: 16),
       child: GetBuilder<PurchaseDeliveryController>(

@@ -1,7 +1,7 @@
 import 'package:bai_serve_customer/component/button/common_button.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
@@ -12,14 +12,14 @@ class CommonAlert {
     this.content,
     this.disableActionButton = false,
     this.disableCancelButton = false,
-    this.actionButtonTittle = AppString.yes,
-    this.cancelButtonTittle = AppString.no,
+    this.actionButtonTittle,
+    this.cancelButtonTittle,
   }) {
     _alertBuilder();
   }
   final String title;
-  final String actionButtonTittle;
-  final String cancelButtonTittle;
+  String? actionButtonTittle;
+  String? cancelButtonTittle;
   final Function onTap;
   final Widget? content;
   final bool disableActionButton;
@@ -33,9 +33,9 @@ class CommonAlert {
             actionsAlignment: MainAxisAlignment.center,
             content: content,
             actions: [
-              if (cancelButtonTittle == false)
+              if (disableCancelButton == false)
                 CommonButton(
-                  titleText: cancelButtonTittle,
+                  titleText: cancelButtonTittle ?? AppString.no,
                   buttonWidth: 70,
                   buttonHeight: 35,
                   buttonColor: AppColors.primaryColor3,
@@ -43,16 +43,17 @@ class CommonAlert {
                   onTap: appRouter.pop,
                 ),
               if (disableActionButton == false)
-                CommonButton(
-                  titleText: actionButtonTittle,
-                  buttonWidth: 70,
-                  buttonHeight: 35,
-                  buttonColor: AppColors.success,
-                  titleColor: AppColors.textWhite,
-                  onTap: () {
-                    appRouter.pop();
-                    onTap();
-                  },
+                IntrinsicWidth(
+                  child: CommonButton(
+                    titleText: actionButtonTittle ?? AppString.yes,
+                    buttonHeight: 35,
+                    buttonColor: AppColors.success,
+                    titleColor: AppColors.textWhite,
+                    onTap: () {
+                      appRouter.pop();
+                      onTap();
+                    },
+                  ),
                 ),
             ],
           ),

@@ -3,7 +3,7 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 

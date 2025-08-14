@@ -1,6 +1,7 @@
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/config/bloc/app_bloc_observer.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
+import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await init.tryCatch();
+  await getIt.isReady<StorageService>();
 
   runApp(const MyApp());
 }

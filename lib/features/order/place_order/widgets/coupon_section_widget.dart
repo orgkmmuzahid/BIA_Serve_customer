@@ -5,7 +5,7 @@ import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -38,7 +38,7 @@ class CouponSectionWidget extends StatelessWidget {
                 space: 20,
               ),
             if (loyaltyController.offercode != null)
-              const CommonText(
+              CommonText(
                 text: AppString.submitCodeBy,
                 enableBorder: true,
                 top: 15,

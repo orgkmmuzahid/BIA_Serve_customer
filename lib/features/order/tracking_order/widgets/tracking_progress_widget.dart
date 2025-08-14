@@ -4,7 +4,7 @@ import 'package:bai_serve_customer/component/text/common_rich_text.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/model/tracking_order_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 

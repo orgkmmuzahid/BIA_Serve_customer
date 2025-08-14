@@ -6,7 +6,7 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/model/vendor_verification_details_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class VerificationStatusScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.verificationStatus),
+    appBar: CommonAppBar(title: AppString.verificationStatus),
     body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocProvider(

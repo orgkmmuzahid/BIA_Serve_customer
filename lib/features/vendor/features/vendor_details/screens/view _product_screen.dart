@@ -10,7 +10,7 @@ import 'package:bai_serve_customer/features/vendor/features/vendor_details/bloc/
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/model/product_details_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class ViewProductScreen extends StatelessWidget {
     return RepaintBoundary(
       key: _previewContainerKey,
       child: Scaffold(
-        appBar: const CommonAppBar(title: AppString.viewProduct),
+        appBar: CommonAppBar(title: AppString.viewProduct),
         body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: BlocProvider<ProductDetailsBloc>(
@@ -79,9 +79,9 @@ class ViewProductScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               15.height,
-              const CommonText(text: AppString.availableSize, fontSize: 14),
+              CommonText(text: AppString.availableSize, fontSize: 14),
               const Spacer(),
-              const CommonText(text: AppString.availableColor, fontSize: 14),
+              CommonText(text: AppString.availableColor, fontSize: 14),
               const Spacer(),
             ],
           ),

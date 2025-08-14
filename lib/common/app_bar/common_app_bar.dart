@@ -1,5 +1,6 @@
 import 'package:bai_serve_customer/common/common_language_drop_down.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/languages/widgets/common_language_slector.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
@@ -61,14 +62,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
     ),
     12.width,
-    GetBuilder<HomeController>(
-      builder:
-          (controller) => CommonLanguageDropDown(
-            slectedCountry: controller.selectedCountry,
-            availableCountries: controller.availableCountries,
-            onCountryChange: controller.onCountryChange,
-          ),
-    ),
+    const CommonLanguageSlector(),
     16.width,
   ];
 

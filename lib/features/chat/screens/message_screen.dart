@@ -9,7 +9,7 @@ import 'package:bai_serve_customer/features/chat/controllers/chat_controller.dar
 import 'package:bai_serve_customer/features/chat/model/message_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,7 @@ class MessageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.drawerMessage),
+    appBar: CommonAppBar(title: AppString.drawerMessage),
     body: Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: GetBuilder<ChatController>(
@@ -81,7 +81,7 @@ class MessageScreen extends StatelessWidget {
               CommonPopupMenu(
                 showTextTrigger: false,
                 showIconTrigger: true,
-                items: const [AppString.deleteUser, AppString.blockUser],
+                items: [AppString.deleteUser, AppString.blockUser],
                 icons: const [Icons.delete_outline, Icons.block_outlined],
                 onItemSelected: (value) {
                   if (value == AppString.deleteUser) {

@@ -4,7 +4,7 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/features/auth/controllers/forget_password_controller.dart';
 import 'package:bai_serve_customer/features/auth/widgets/common_logo.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   50.height,
 
                   /// User Password here
-                  const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
+                  CommonText(text: AppString.newPassword, bottom: 8, top: 12),
                   CommonTextField(
                     controller: controller.passwordController,
                     isPassword: true,
@@ -42,7 +42,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
 
                   /// User Confirm Password here
-                  const CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
+                  CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
                   CommonTextField(
                     controller: controller.confirmPasswordController,
                     isPassword: true,

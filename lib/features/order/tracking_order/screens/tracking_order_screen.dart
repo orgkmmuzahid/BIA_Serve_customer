@@ -10,7 +10,7 @@ import 'package:bai_serve_customer/features/order/tracking_order/widgets/rider_i
 import 'package:bai_serve_customer/features/order/tracking_order/widgets/tracking_progress_widget.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class TrackingOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.percelTracking, leading: SizedBox(width: 0, height: 0)),
+    appBar: CommonAppBar(title: AppString.percelTracking, leading: const SizedBox(width: 0, height: 0)),
     body: SingleChildScrollView(
       child: Padding(padding: const EdgeInsetsGeometry.only(left: 16, right: 16), child: _trackingBuilder()),
     ),

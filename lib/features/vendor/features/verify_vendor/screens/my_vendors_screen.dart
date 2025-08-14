@@ -8,7 +8,7 @@ import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dar
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/bloc/vendor_verification_bloc/vendor_list_bloc.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/bloc/vendor_verification_bloc/vendor_list_bloc_event.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class MyVendorScreen extends StatelessWidget {
   @override
   Widget build(_) {
     return Scaffold(
-      appBar: AppBar(title: const Text(AppString.myVendors), centerTitle: true),
+      appBar: AppBar(title: Text(AppString.myVendors), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocProvider(
@@ -83,7 +83,7 @@ class MyVendorScreen extends StatelessWidget {
                         ),
                         CommonText(
                           alignment: MainAxisAlignment.start,
-                          text: '${AppString.VerifyApplyDate}: ${data.applyDate.date}',
+                          text: '${AppString.verifyApplyDate}: ${data.applyDate.date}',
                           style: getTheme.textTheme.bodyMedium?.copyWith(overflow: TextOverflow.fade),
                         ),
                       ],

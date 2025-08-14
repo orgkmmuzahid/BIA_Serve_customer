@@ -9,7 +9,7 @@ import 'package:bai_serve_customer/payment/model/payment_history_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 
 import 'package:flutter/material.dart';
@@ -59,8 +59,8 @@ class MyPaymentScreen extends StatelessWidget {
 
           10.height,
 
-          const CommonButton(
-            icon: Icon(Icons.monetization_on, color: AppColors.iconColorWhite),
+          CommonButton(
+            icon: const Icon(Icons.monetization_on, color: AppColors.iconColorWhite),
             titleText: AppString.withdraw,
             buttonWidth: 180,
           ).center,

@@ -2,6 +2,7 @@
 // ignore_for_file: avoid_annotating_with_dynamic
 
 import 'dart:async';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:dio/dio.dart' as dio; // Alias Dio as dio to avoid conflict with FormData
@@ -10,10 +11,11 @@ import 'package:get/get.dart';
 import 'request_input.dart'; // Import the updated RequestInput
 import 'request_state.dart';
 
+
 // Callback for request state changes
 typedef OnRequestStateChange<T> = void Function(RequestState<T> state);
 
-class DioService extends GetxService {
+class DioService {
   DioService._(this._dio, this._storageService, {required this.onLogout}) : _debugMode = AppLogger.enableLogs;
   static final String _baseUrl = 'https://api.example.com';
   final Dio _dio;
@@ -24,7 +26,8 @@ class DioService extends GetxService {
   final List<_QueuedRequest> _queue = []; // Stores requests waiting for token refresh
 
   static Future<DioService> create({Function()? onLogout}) async {
-    final storageService = Get.find<StorageService>();
+    await getIt.isReady<StorageService>();
+    final StorageService storageService = getIt.get();
     AppLogger.debug('Dio has been created', tag: 'dio');
     final dioInstance = Dio(
       dio.BaseOptions(

@@ -2,13 +2,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/other_widgets/smart_list_loader.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/return_product/cubit/return_product_list_cubit.dart';
 import 'package:bai_serve_customer/features/return_product/cubit/return_product_list_state.dart';
 import 'package:bai_serve_customer/features/return_product/widgets/return_product_builder_widget.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +19,7 @@ class ReturnProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.drawerReturnsProduct),
+    appBar: CommonAppBar(title: AppString.drawerReturnsProduct),
     body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocProvider(

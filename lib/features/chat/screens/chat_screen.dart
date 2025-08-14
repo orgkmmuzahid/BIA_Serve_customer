@@ -6,6 +6,7 @@ import 'package:bai_serve_customer/common/common_language_drop_down.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/config/languages/widgets/common_language_slector.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
@@ -224,14 +225,7 @@ class ChatScreen extends StatelessWidget {
                 size: 27,
               ),
             ).paddingOnly(right: 10),
-        GetBuilder<HomeController>(
-          builder:
-              (homeController) => CommonLanguageDropDown(
-                slectedCountry: homeController.selectedCountry,
-                availableCountries: homeController.availableCountries,
-                onCountryChange: homeController.onCountryChange,
-              ),
-        ),
+        const CommonLanguageSlector()
       ],
     );
   }

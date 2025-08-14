@@ -4,7 +4,7 @@ import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/loyalty_points/model/loyalty_offer_model.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

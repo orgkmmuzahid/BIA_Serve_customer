@@ -1,6 +1,6 @@
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/features/bulk_order/model/bulk_order_details_model.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

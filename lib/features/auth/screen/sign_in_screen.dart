@@ -7,7 +7,7 @@ import 'package:bai_serve_customer/features/auth/widgets/common_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../../utils/constants/app_string.dart';
+import '../../../config/languages/cubit/language_cubit.dart';
 import '../../../../../utils/extensions/extension.dart';
 import '../../../../../utils/helpers/other_helper.dart';
 import '../../../component/text/common_text.dart';
@@ -41,7 +41,7 @@ class SignInScreen extends StatelessWidget {
                   50.height,
 
                   /// Account Email Input here
-                  const CommonText(text: AppString.phoneNumber, bottom: 8),
+                  CommonText(text: AppString.phoneNumber, bottom: 8),
 
                   CommonTextField(
                     controller: controller.phoneController,
@@ -52,7 +52,7 @@ class SignInScreen extends StatelessWidget {
                   ),
 
                   /// Account Password Input here
-                  const CommonText(text: AppString.password, bottom: 8, top: 24),
+                  CommonText(text: AppString.password, bottom: 8, top: 24),
                   CommonTextField(
                     controller: controller.passwordController,
                     // prefixIcon: const Icon(Icons.lock),
@@ -67,13 +67,12 @@ class SignInScreen extends StatelessWidget {
                       Get.find<OtpController>().changeOtpFor(OtpFor.forgetPassword);
                       appRouter.push(const OtpSendRoute());
                     },
-                    child: const CommonText(
+                    child: CommonText(
                       text: AppString.forgotThePassword,
-                      alignment: MainAxisAlignment.end,
                       top: 10,
                       bottom: 30,
                     ),
-                  ),
+                  ).end,
 
                   /// Submit Button here
                   Align(

@@ -13,7 +13,7 @@ import 'package:bai_serve_customer/features/order/my_order/enum/order_filter_enu
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -31,7 +31,7 @@ class MyOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.myOrder, leading: SizedBox(width: 0, height: 0)),
+    appBar: CommonAppBar(title: AppString.myOrder, leading: const SizedBox(width: 0, height: 0)),
     body: GetBuilder<MyOrderController>(
       builder: (myOrderController) {
         return Padding(

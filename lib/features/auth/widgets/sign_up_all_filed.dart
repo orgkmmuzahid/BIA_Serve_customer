@@ -3,7 +3,7 @@ import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../utils/constants/app_string.dart';
+import '../../../config/languages/cubit/language_cubit.dart';
 import '../../../../utils/helpers/other_helper.dart';
 import '../../../component/text/common_text.dart';
 import '../../../component/text_field/common_text_field.dart';
@@ -28,7 +28,7 @@ class SignUpAllField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// User Name here
-          const CommonText(text: AppString.fullName, bottom: 8, top: 12),
+          CommonText(text: AppString.fullName, bottom: 8, top: 12),
           CommonTextField(
             hintText: AppString.fullName,
             controller: controller.nameController,
@@ -36,7 +36,7 @@ class SignUpAllField extends StatelessWidget {
           ),
 
           /// User Phone here
-          const CommonText(text: AppString.phoneNumber, bottom: 8, top: 12),
+          CommonText(text: AppString.phoneNumber, bottom: 8, top: 12),
           CommonTextField(
             isReadOnly: true,
             controller: Get.find<OtpController>().phoneController,
@@ -45,11 +45,11 @@ class SignUpAllField extends StatelessWidget {
           ),
 
           ///Date of Birth here
-          const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
+          CommonText(text: AppString.dateOfBirth, bottom: 8, top: 12),
           CommonDateInputTextField(onSave: (date) {}),
 
           /// User Password here
-          const CommonText(text: AppString.newPassword, bottom: 8, top: 12),
+          CommonText(text: AppString.newPassword, bottom: 8, top: 12),
           CommonTextField(
             controller: controller.passwordController,
             isPassword: true,
@@ -58,7 +58,7 @@ class SignUpAllField extends StatelessWidget {
           ),
 
           /// User Confirm Password here
-          const CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
+          CommonText(text: AppString.confirmPassword, bottom: 8, top: 12),
           CommonTextField(
             controller: controller.confirmPasswordController,
             isPassword: true,

@@ -1,30 +1,32 @@
-import 'package:bai_serve_customer/component/image/image_picker/common_image_picker_controller.dart';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/network/dio_service.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
-import 'package:get/get.dart';
 
 class CoreDependency {
   static void dependencies() {
     // Step 1: Register and wait for StorageService first
-    Get.lazyPut<StorageService>((){
+    // Register StorageService (lazy singleton with init)
+    // Register StorageService as eager singleton
+    getIt.registerSingletonAsync<StorageService>(() async {
       final storageService = StorageService();
-      storageService.init();
+      await storageService.init(); // await init during registration
       return storageService;
     });
 
-    // Step 2: Chain DioService registration after StorageService is available
-    Get.putAsync<DioService>(() {
+    // Register DioService as eager singleton, depending on StorageService
+    getIt.registerSingletonAsync<DioService>(() async {
+      // Ensure StorageService is ready before creating DioService
+      await getIt.isReady<StorageService>();
+
       return DioService.create(
         onLogout: () {
-         appRouter.push(const LoginOptionsRoute());
+          appRouter.push(const LoginOptionsRoute());
         },
       );
     });
-
-     Get.lazyPut(CommonImagePickerController.new, fenix: true);
 
     AppLogger.debug('Core dependency initalized', tag: 'dependency');
   }

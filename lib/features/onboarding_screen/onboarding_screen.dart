@@ -3,8 +3,9 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/auth/widgets/common_logo.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../utils/constants/app_images.dart';
@@ -15,7 +16,6 @@ import '../../component/image/common_image.dart';
 @RoutePage()
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class OnboardingScreen extends StatelessWidget {
             180.height,
             const Center(child: CommonLogo()),
             50.height,
-            const CommonText(
+            CommonText(
               alignment: MainAxisAlignment.center,
               text: AppString.selectYourLanguage,
               fontSize: 20,
@@ -34,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
             ),
             10.height,
             CommonButton(
-              titleText: AppString.langEnglish,
+              titleText: Language.English.name,
               buttonColor: getTheme.scaffoldBackgroundColor,
               titleColor: getTheme.textTheme.bodyLarge!.color,
               borderColor: getTheme.colorScheme.outlineVariant,
@@ -42,15 +42,17 @@ class OnboardingScreen extends StatelessWidget {
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
               ),
-              onTap: () => appRouter.push(const LoginOptionsRoute()),
+              onTap: () => routeNext(Language.English),
+
             ),
             18.height,
 
             CommonButton(
-              titleText: AppString.langSwahili,
+              titleText: Language.Kiswahili.name,
               buttonColor: getTheme.scaffoldBackgroundColor,
               titleColor: getTheme.textTheme.bodyLarge!.color,
               borderColor: getTheme.colorScheme.outlineVariant,
+              onTap: () => routeNext(Language.Kiswahili),
               icon: const Padding(
                 padding: EdgeInsetsGeometry.only(right: 17.9),
                 child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
@@ -60,5 +62,10 @@ class OnboardingScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void routeNext(Language language) async {
+    appRouter.navigatorKey.currentContext?.read<LanguageCubit>().changeLanguage(language);
+    appRouter.push(const LoginOptionsRoute());
   }
 }

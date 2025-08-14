@@ -10,7 +10,8 @@ import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart';
 import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart';
 import 'package:bai_serve_customer/features/return_product/widgets/return_product_builder_widget.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
+import 'package:bai_serve_customer/utils/enum/enum.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
@@ -32,7 +33,7 @@ class _ReturnProductDetailsScreenState extends State<ReturnProductDetailsScreen>
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.drawerReturnsProduct),
+    appBar: CommonAppBar(title: AppString.drawerReturnsProduct),
     body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
@@ -44,19 +45,25 @@ class _ReturnProductDetailsScreenState extends State<ReturnProductDetailsScreen>
 
               CommonSelectableButton(
                 width: 145,
-                titles: AppString.returnTypes,
+                titles: [AppString.returnTypes_replacement, AppString.returnTypes_returnProduct],
                 validator: OtherHelper.requiredFieldValidator,
                 onSaved: (newValue) {
                   _returnProductFormModel = _returnProductFormModel.copyWith(type: newValue);
                 },
               ),
 
-              RadioGroupFormField(
-                options: AppString.returnReason,
+              RadioGroupFormField<ReturnReason>(
+                options: ReturnReason.values,
                 validator: OtherHelper.requiredFieldValidator,
-                labelBuilder: (value) => value,
+                labelBuilder: (value) {
+                  if (value == ReturnReason.damagedItem) return AppString.returnReason_damagedItem;
+                  if (value == ReturnReason.deliveryRiderMistake) return AppString.returnReason_deliveryRiderMistake;
+                  if (value == ReturnReason.vendorSentWrong) return AppString.returnReason_vendorSentWrong;
+
+                  return AppString.returnReason_other;
+                },
                 onSaved: (newValue) {
-                  _returnProductFormModel = _returnProductFormModel.copyWith(reason: newValue);
+                  _returnProductFormModel = _returnProductFormModel.copyWith(reason: newValue!.name);
                 },
               ),
 

@@ -9,7 +9,7 @@ import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class SettingScreen extends StatelessWidget {
   final CommonBottomNavBar commonBottomNavBar;
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.account, leading: SizedBox(width: 0, height: 0)),
+    appBar: CommonAppBar(title: AppString.account, leading: SizedBox(width: 0, height: 0)),
     body: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsetsGeometry.only(left: 16, right: 16),

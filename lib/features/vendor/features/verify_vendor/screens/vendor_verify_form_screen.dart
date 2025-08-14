@@ -7,7 +7,7 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class VendorVerifyFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.verifyVendor),
+    appBar: CommonAppBar(title: AppString.verifyVendor),
     body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Form(

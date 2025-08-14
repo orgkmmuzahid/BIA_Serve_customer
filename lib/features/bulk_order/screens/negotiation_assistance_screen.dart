@@ -5,7 +5,7 @@ import 'package:bai_serve_customer/component/text_field/common_multiline_text_fi
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class NegotiationAssistanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.homeBulkOrderAgents)),
+    appBar: AppBar(title: Text(AppString.homeBulkOrderAgents)),
     body: Form(
       key: _formKey,
       child: Padding(
@@ -29,7 +29,7 @@ class NegotiationAssistanceScreen extends StatelessWidget {
               text: AppString.negotiationAssistance,
               style: getTheme.textTheme.bodyLarge,
             ).start,
-            const CommonText(
+            CommonText(
               text: AppString.negotiationAssistanceSubTitle,
             ).start,
             14.height,

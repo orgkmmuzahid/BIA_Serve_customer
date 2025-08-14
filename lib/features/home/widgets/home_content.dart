@@ -8,7 +8,7 @@ import 'package:bai_serve_customer/features/home/controller/home_controller.dart
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/widgets/product_gridview_widget.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 

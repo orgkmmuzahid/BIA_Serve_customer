@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../utils/constants/app_string.dart';
+import '../../../config/languages/cubit/language_cubit.dart';
 import '../../../../../utils/extensions/extension.dart';
 import '../controllers/sign_up_controller.dart';
 import '../widgets/already_accunt_rich_text.dart';
@@ -32,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   20.height,
                   //upload image
-                  CommonImagePicker(width: 150, height: 150, borderRadious: 150, pickerIcon: Icons.person),
+                  CommonImagePickerFormField(width: 150, height: 150, borderRadious: 150, pickerIcon: Icons.person),
                   10.height,
                   CommonText(text: AppString.profilePhoto, style: getTheme.textTheme.titleMedium, alignment: MainAxisAlignment.center),
 

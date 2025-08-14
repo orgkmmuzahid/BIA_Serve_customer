@@ -14,7 +14,7 @@ import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_p
 import 'package:bai_serve_customer/features/loyalty_points/model/loyalty_offer_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class MyRewardsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.myRewards)),
+    appBar: AppBar(title: Text(AppString.myRewards)),
     body: Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: GetBuilder<LoyaltyPointsController>(
@@ -112,7 +112,7 @@ class MyRewardsScreen extends StatelessWidget {
                         backgroundColor: getTheme.scaffoldBackgroundColor,
                         content: IntrinsicHeight(
                           child: CommonText(
-                            text: AppString.loaltyClaimingMessage(model.title),
+                            text: AppString.loyaltyClaimingMessage.replaceFirst('#', model.title),
                             maxLines: 5,
                             style: getTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
                           ),

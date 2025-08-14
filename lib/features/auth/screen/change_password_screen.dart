@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../utils/constants/app_colors.dart';
-import '../../../../../utils/constants/app_string.dart';
+import '../../../config/languages/cubit/language_cubit.dart';
 import '../../../../../utils/extensions/extension.dart';
 import '../../../component/button/common_button.dart';
 import '../../../component/text/common_text.dart';
@@ -23,7 +23,7 @@ class ChangePasswordScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const CommonText(
+        title: CommonText(
           text: AppString.changePassword,
           fontSize: 20,
           fontWeight: FontWeight.w600,
@@ -41,7 +41,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   70.height,
 
                   /// current Password section
-                  const CommonText(text: AppString.currentPassword, bottom: 8),
+                  CommonText(text: AppString.currentPassword, bottom: 8),
                   CommonTextField(
                     controller: controller.currentPasswordController,
                     hintText: AppString.currentPassword,
@@ -51,7 +51,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
 
                   /// New Password section
-                  const CommonText(
+                  CommonText(
                     text: AppString.newPassword,
                     bottom: 8,
                     top: 16,
@@ -65,7 +65,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
 
                   /// confirm Password section
-                  const CommonText(
+                  CommonText(
                     text: AppString.confirmPassword,
                     bottom: 8,
                     top: 16,

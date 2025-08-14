@@ -10,7 +10,7 @@ import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/product_cateogry_widget.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +22,7 @@ class VendorSourcingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.homeVendorSourcing),
+    appBar: CommonAppBar(title: AppString.homeVendorSourcing),
     body: SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -49,7 +49,7 @@ class VendorSourcingScreen extends StatelessWidget {
             _vendorsServiceList(vendorSourcingController),
 
             CommonText(text: AppString.budget, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-            const CommonTextField(hintText: AppString.budget, prefixText: AppString.monySign),
+            CommonTextField(hintText: AppString.budget, prefixText: AppString.monySign),
 
             CommonText(text: AppString.specialInstruction, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
             CommonMultilineTextField(height: 120, hintText: AppString.specialInstruction, onSave: (value) {}),

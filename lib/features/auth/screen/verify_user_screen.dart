@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../../utils/constants/app_colors.dart';
-import '../../../../../utils/constants/app_string.dart';
+import '../../../config/languages/cubit/language_cubit.dart';
 import '../../../component/text/common_text.dart';
 
 @RoutePage()
@@ -35,7 +35,7 @@ class _VerifyUserState extends State<VerifyUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       /// App Bar Section starts here
-      appBar: AppBar(title: const CommonText(text: AppString.otpVerify, fontWeight: FontWeight.w700, fontSize: 24)),
+      appBar: AppBar(title: CommonText(text: AppString.otpVerify, fontWeight: FontWeight.w700, fontSize: 24)),
 
       /// Body Section starts here
       body: GetBuilder<OtpController>(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../utils/constants/app_colors.dart';
-import '../../../utils/constants/app_string.dart';
+import '../../config/languages/cubit/language_cubit.dart';
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({required this.onTap, super.key});
@@ -15,9 +15,9 @@ class ErrorScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 20),
-          const Text(
+          Text(
             AppString.someThingWrong,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16,
               color: AppColors.serfeceBG,
@@ -36,9 +36,9 @@ class ErrorScreen extends StatelessWidget {
                 ),
               ),
             ),
-            child: const Text(
+            child: Text(
               AppString.tryAgain,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,

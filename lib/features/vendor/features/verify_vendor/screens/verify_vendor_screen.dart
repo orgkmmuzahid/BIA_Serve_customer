@@ -12,7 +12,8 @@ import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dar
 import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/product_cateogry_widget.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/bloc/vendor_verification_bloc/vendor_list_bloc.dart';
 import 'package:bai_serve_customer/features/vendor/features/verify_vendor/bloc/vendor_verification_bloc/vendor_list_bloc_event.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
+import 'package:bai_serve_customer/utils/enum/enum.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +26,7 @@ class VerifyVendorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(title: AppString.allVendors),
+      appBar: CommonAppBar(title: AppString.allVendors),
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: BlocProvider(
@@ -68,7 +69,11 @@ class VerifyVendorScreen extends StatelessWidget {
         10.height,
         Flexible(
           child: CommonTabBar(
-            tabs: AppString.vendorFilters,
+            tabs: [
+              AppString.vendorFilters_allVendor,
+              AppString.vendorFilters_verified,
+              AppString.vendorFilters_newVendor,
+            ],
             onTabChange: (index) {
               final bloc = BlocProvider.of<VendorListBloc>(context);
               bloc.add(VendorListFetched(filters: index == 0 ? [] : [VerificationStatus.values[index - 1]]));

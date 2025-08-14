@@ -5,7 +5,7 @@ import 'package:bai_serve_customer/features/order/place_order/controllers/place_
 import 'package:bai_serve_customer/features/order/place_order/widgets/coupon_section_widget.dart';
 import 'package:bai_serve_customer/features/order/place_order/widgets/door_to_door_delivery_type_widget.dart';
 import 'package:bai_serve_customer/features/order/place_order/widgets/pickup_information_form_widget.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

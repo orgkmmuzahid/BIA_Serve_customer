@@ -1,13 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve_customer/component/button/common_button.dart';
-import 'package:bai_serve_customer/component/image/common_image.dart';
-import 'package:bai_serve_customer/config/route/app_router.dart';
-import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
-import 'package:bai_serve_customer/utils/extensions/extension.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
+import 'package:bai_serve_customer/config/languages/widgets/common_language_screen_content.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 @RoutePage()
 class LanguageScreen extends StatelessWidget {
@@ -15,42 +9,7 @@ class LanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.drawerLanguage), centerTitle: true),
-    body: Column(
-      children: [
-        CommonButton(
-          buttonWidth: 287,
-          titleText: AppString.langEnglish,
-          buttonColor: getTheme.scaffoldBackgroundColor,
-          titleColor: getTheme.textTheme.bodyLarge!.color,
-          borderColor: getTheme.colorScheme.outlineVariant,
-          icon: const Padding(
-            padding: EdgeInsetsGeometry.only(right: 17.9),
-            child: CommonImage(imageSrc: AppImages.langEnglish, size: 24),
-          ),
-          onTap: () {
-            Get.find<HomeController>().onCountryChange(Get.find<HomeController>().availableCountries.entries.first);
-            appRouter.pop();
-          },
-        ).center,
-        18.height,
-
-        CommonButton(
-          buttonWidth: 287,
-          titleText: AppString.langSwahili,
-          buttonColor: getTheme.scaffoldBackgroundColor,
-          titleColor: getTheme.textTheme.bodyLarge!.color,
-          borderColor: getTheme.colorScheme.outlineVariant,
-          icon: const Padding(
-            padding: EdgeInsetsGeometry.only(right: 17.9),
-            child: CommonImage(imageSrc: AppImages.langSwahili, size: 24),
-          ),
-          onTap: () {
-            Get.find<HomeController>().onCountryChange(Get.find<HomeController>().availableCountries.entries.last);
-            appRouter.pop();
-          },
-        ).center,
-      ],
-    ),
+    appBar: AppBar(title: Text(AppString.drawerLanguage), centerTitle: true),
+    body: const CommonLanguageScreenContent(),
   );
 }

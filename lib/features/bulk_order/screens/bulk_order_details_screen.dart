@@ -6,7 +6,7 @@ import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.orderDetails)),
+    appBar: AppBar(title: Text(AppString.orderDetails)),
     body: Padding(
       padding: const EdgeInsets.only(right: 16, left: 16),
       child: GetBuilder<BulkOrderController>(

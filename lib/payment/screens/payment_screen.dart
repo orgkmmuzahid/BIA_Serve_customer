@@ -3,8 +3,8 @@ import 'package:bai_serve_customer/common/inputdata/input_data.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/payment/controllers/payment_controller.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,7 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text(AppString.bankPayment)),
+    appBar: AppBar(title: Text(AppString.bankPayment)),
     body: GetBuilder<PaymentController>(
       builder: (paymentController) {
         return Padding(

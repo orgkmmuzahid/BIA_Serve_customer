@@ -9,7 +9,7 @@ import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/features/auth/controllers/change_password_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class ProfileInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: const CommonAppBar(title: AppString.profileInfo),
+    appBar: CommonAppBar(title: AppString.profileInfo),
 
     body: Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
@@ -51,7 +51,7 @@ class ProfileInfoScreen extends StatelessWidget {
           10.height,
           Expanded(
             child: CommonTabBar(
-              tabs: const [AppString.editProfile, AppString.changePassword],
+              tabs: [AppString.editProfile, AppString.changePassword],
               tabViews: [_profileChange(), _changePassowrd()],
             ),
           ),
@@ -71,7 +71,7 @@ class ProfileInfoScreen extends StatelessWidget {
                 30.height,
 
                 /// current Password section
-                const CommonText(text: AppString.currentPassword, bottom: 8),
+            CommonText(text: AppString.currentPassword, bottom: 8),
                 CommonTextField(
                   controller: controller.currentPasswordController,
                   hintText: AppString.currentPassword,
@@ -81,7 +81,7 @@ class ProfileInfoScreen extends StatelessWidget {
                 ),
 
                 /// New Password section
-                const CommonText(
+            CommonText(
                   text: AppString.newPassword,
                   bottom: 8,
                   top: 16,
@@ -95,7 +95,7 @@ class ProfileInfoScreen extends StatelessWidget {
                 ),
 
                 /// confirm Password section
-                const CommonText(
+            CommonText(
                   text: AppString.confirmPassword,
                   bottom: 8,
                   top: 16,
@@ -134,7 +134,7 @@ class ProfileInfoScreen extends StatelessWidget {
         30.height,
 
         /// current Password section
-        const CommonText(text: AppString.fullName, bottom: 8),
+        CommonText(text: AppString.fullName, bottom: 8),
         CommonTextField(
           hintText: AppString.fullName,
           validator: OtherHelper.requiredFieldValidator,
@@ -142,7 +142,7 @@ class ProfileInfoScreen extends StatelessWidget {
         ),
 
         /// New Password section
-        const CommonText(text: AppString.phoneNumber, bottom: 8, top: 16),
+        CommonText(text: AppString.phoneNumber, bottom: 8, top: 16),
         CommonTextField(
           hintText: AppString.phoneNumber,
           validator: OtherHelper.phoneValidator,
@@ -150,7 +150,7 @@ class ProfileInfoScreen extends StatelessWidget {
         ),
 
         /// confirm Password section
-        const CommonText(text: AppString.dateOfBirth, bottom: 8, top: 16),
+        CommonText(text: AppString.dateOfBirth, bottom: 8, top: 16),
         CommonDateInputTextField(onSave: (date) {}),
         20.height,
 

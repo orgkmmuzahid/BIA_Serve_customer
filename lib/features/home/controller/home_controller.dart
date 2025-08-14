@@ -6,7 +6,7 @@ import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/home/repository/home_repository.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/utils/constants/app_string.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -22,12 +22,6 @@ class HomeController extends GetxController {
   int selectedNavMenu = 0;
 
   TextEditingController searchController = TextEditingController();
-  MapEntry<String, String> selectedCountry = const MapEntry(AppString.langEnglish, AppImages.langEnglish);
-
-  Map<String, String> availableCountries = {
-    AppString.langEnglish: AppImages.langEnglish,
-    AppString.langSwahili: AppImages.langSwahili,
-  };
 
   int currentIndex = 0;
 
@@ -61,11 +55,6 @@ class HomeController extends GetxController {
         update();
       },
     );
-  }
-
-  void onCountryChange(MapEntry<String, String> country) {
-    selectedCountry = country;
-    update();
   }
 
   void onSearch() {}
