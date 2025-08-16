@@ -22,10 +22,10 @@ This bilingual (English/Swahili) mobile application caters to urban shoppers, bu
 ## Some Screenshots of UI
 
 <div style="display: flex; justify-content: space-around;">
-  <img src="https://drive.google.com/file/d/1HvbSqsik3VkKgnV0yEZFwxXA0FZcadIS/view?usp=drive_link" width="200" />
-  <img src="https://drive.google.com/file/d/1chDzyfV7GmwhAMVdZEAaTDKCERrrboDH/view?usp=drive_link" width="200" />
-  <img src="https://drive.google.com/file/d/1Cd6LUjZY238j2Xpk9pD8ndkQQqUm_w4d/view?usp=drive_link" width="200" />
-  <img src="https://drive.google.com/file/d/1uxhwg2_HzgFQBysLQgbWmrAEZnuJ1YFz/view?usp=drive_link" width="200" />
-  <img src="https://drive.google.com/file/d/1OWxrcUeJ-lRmwyhqH-mA0bw-N9NsvYZX/view?usp=drive_link" width="200" />
-  <img src="https://drive.google.com/file/d/1i6ZQH797fmZCHZtBWNmTItR_WocQJYfB/view?usp=drive_link" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1HvbSqsik3VkKgnV0yEZFwxXA0FZcadIS" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1chDzyfV7GmwhAMVdZEAaTDKCERrrboDH" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1Cd6LUjZY238j2Xpk9pD8ndkQQqUm_w4d" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1uxhwg2_HzgFQBysLQgbWmrAEZnuJ1YFz" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1OWxrcUeJ-lRmwyhqH-mA0bw-N9NsvYZX" width="200" />
+  <img src="https://drive.google.com/uc?export=view&id=1i6ZQH797fmZCHZtBWNmTItR_WocQJYfB" width="200" />
 </div>
