@@ -1,3 +1,4 @@
+import 'package:bai_serve_customer/component/search_bar/search_history_service.dart';
 import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/network/dio_service.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
@@ -27,6 +28,7 @@ class CoreDependency {
         },
       );
     });
+    getIt.registerLazySingleton(SearchHistoryService.new);
 
     AppLogger.debug('Core dependency initalized', tag: 'dependency');
   }

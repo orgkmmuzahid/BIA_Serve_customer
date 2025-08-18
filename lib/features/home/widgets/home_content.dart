@@ -1,5 +1,6 @@
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/image/common_rotating_image_banner.dart';
+import 'package:bai_serve_customer/component/search_bar/common_search_bar.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
@@ -20,12 +21,9 @@ class HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     children: [
-        CommonTextField(
-          prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: homeController.onSearch),
-          hintText: AppString.searchProduct,
-          controller: homeController.searchController,
-        ),
-        20.height,
+      10.height,
+      CommonSearchBar(hints: AppString.searchProduct, onSubmit: (term) {}),
+      10.height,
       Expanded(child: ProductGridviewWidget(topWidget: _topItems(), showFilterAfterTopWidget: true)),
     ],
   );

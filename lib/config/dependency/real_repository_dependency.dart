@@ -1,3 +1,4 @@
+import 'package:bai_serve_customer/component/search_bar/search_history_service.dart';
 import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/features/home/repository/home_repository.dart';
 import 'package:bai_serve_customer/features/home/repository/real_home_repository.dart';
@@ -29,6 +30,7 @@ class RealRepositoryDependency {
     getIt.registerLazySingleton<PaymentRepository>(RealPaymentRepository.new);
     getIt.registerLazySingleton<TrackingOrderRepository>(RealTrackingOrderRepository.new);
     getIt.registerLazySingleton<VendorDetailsRepository>(RealVendorDetailsRepository.new);
+    
 
     AppLogger.debug('Real repository dependency initalized', tag: 'dependency');
   }

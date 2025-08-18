@@ -67,7 +67,7 @@ class HomeDrawer extends StatelessWidget {
                         buttonColor: getTheme.colorScheme.primary,
                         onTap: () {
                           appRouter.pop();
-                            appRouter.push(SettingRoute(commonBottomNavBar: const CommonBottomNavBar()));
+                            // appRouter.push(SettingRoute(commonBottomNavBar: const CommonBottomNavBar()));
                         },
                         ),
                     ],

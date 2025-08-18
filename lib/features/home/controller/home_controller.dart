@@ -27,6 +27,11 @@ class HomeController extends GetxController {
 
   Timer? _timer;
 
+  void onNavigationChange(int index) {
+    selectedNavMenu = index;
+    update();
+  }
+
   void _startTimer() {
     if (bannerUrls.data.isEmpty == true) {
       return;

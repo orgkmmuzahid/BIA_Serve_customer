@@ -18,50 +18,44 @@ import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-@RoutePage()
 class MyOrderScreen extends StatelessWidget {
-  MyOrderScreen({required this.commonBottomNavBar, super.key})
+  MyOrderScreen({super.key})
     : orderListWidth = Utils.deviceSize.width - 32,
       orderlistImageWidth = (Utils.deviceSize.width - 32) / 3.2;
 
   //private constant fields.
   final double orderListWidth;
   final double orderlistImageWidth;
-  final CommonBottomNavBar commonBottomNavBar;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: CommonAppBar(title: AppString.myOrder, leading: const SizedBox(width: 0, height: 0)),
     body: GetBuilder<MyOrderController>(
       builder: (myOrderController) {
-        return Padding(
-          padding: const EdgeInsetsGeometry.only(left: 16, right: 16),
-          child: Column(
-            children: [
-              CommonTextField(
-                prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: myOrderController.onSearch),
-                hintText: AppString.searchForOrder,
-                controller: myOrderController.searchController,
-              ),
-              10.height,
-              _filters(myOrderController),
-              10.height,
-              if (myOrderController.orderList.data?.isNotEmpty == true)
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: myOrderController.orderList.data?.length ?? 0,
-                    shrinkWrap: true,
-                    itemBuilder: (_, index) => _orderListItem(myOrderController.orderList.data![index]),
-                  ),
+        return Column(
+          children: [
+            CommonTextField(
+              prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: myOrderController.onSearch),
+              hintText: AppString.searchForOrder,
+              controller: myOrderController.searchController,
+            ),
+            10.height,
+            _filters(myOrderController),
+            10.height,
+            if (myOrderController.orderList.data?.isNotEmpty == true)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: myOrderController.orderList.data?.length ?? 0,
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) => _orderListItem(myOrderController.orderList.data![index]),
                 ),
-              if (myOrderController.orderList.requestStatus == RequestStatus.requesting)
-                const Padding(padding: EdgeInsets.only(top: 50), child: CircularProgressIndicator()),
-            ],
-          ),
+              ),
+            if (myOrderController.orderList.requestStatus == RequestStatus.requesting)
+              const Padding(padding: EdgeInsets.only(top: 50), child: CircularProgressIndicator()),
+          ],
         );
       },
     ),
-    bottomNavigationBar: commonBottomNavBar,
   );
 
   Widget _filters(MyOrderController controller) {

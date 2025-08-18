@@ -5,30 +5,27 @@ import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve_customer/component/other_widgets/common_timeline.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/cubit/order_tracking_cubit.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/widgets/rider_info_widget.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/widgets/tracking_progress_widget.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-@RoutePage()
 class TrackingOrderScreen extends StatelessWidget {
-  const TrackingOrderScreen({required this.commonBottomNavBar, super.key});
+  const TrackingOrderScreen({super.key});
 
-  final CommonBottomNavBar commonBottomNavBar;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: CommonAppBar(title: AppString.percelTracking, leading: const SizedBox(width: 0, height: 0)),
     body: SingleChildScrollView(
-      child: Padding(padding: const EdgeInsetsGeometry.only(left: 16, right: 16), child: _trackingBuilder()),
+      child: _trackingBuilder(),
     ),
-    bottomNavigationBar: commonBottomNavBar,
   );
 
   Widget _trackingBuilder() {

@@ -114,6 +114,22 @@ final ThemeData lightTheme = ThemeData(
     hintStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xFF979797)),
     labelStyle: GoogleFonts.dmSans(fontSize: 14, color: const Color(0xffBFBFBF)),
   ),
+
+  searchBarTheme: SearchBarThemeData(
+    shape: WidgetStateOutlinedBorder.resolveWith(
+      (_) => RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(8.w)),
+    ),
+
+    backgroundColor: WidgetStateColor.resolveWith((_) => AppColors.transparent),
+
+    side: WidgetStateBorderSide.resolveWith((state) {
+      if (state.contains(WidgetState.focused))
+        return BorderSide(width: 1.w, color: AppColors.primaryColor.withAlpha(50));
+      return BorderSide(width: 1.w, color: AppColors.disable);
+    }),
+    hintStyle: WidgetStateTextStyle.resolveWith((_) => const TextStyle(color: AppColors.disable)),
+    textStyle: WidgetStateTextStyle.resolveWith((_) => const TextStyle(color: AppColors.primaryText)),
+  ),
 );
 
 OutlineInputBorder _buildBorder({required Color color}) {
