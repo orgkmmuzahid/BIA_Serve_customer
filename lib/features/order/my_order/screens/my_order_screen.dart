@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
+import 'package:bai_serve_customer/component/search_bar/common_search_bar.dart';
 import 'package:bai_serve_customer/component/text/common_rich_text.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
@@ -34,11 +35,8 @@ class MyOrderScreen extends StatelessWidget {
       builder: (myOrderController) {
         return Column(
           children: [
-            CommonTextField(
-              prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: myOrderController.onSearch),
-              hintText: AppString.searchForOrder,
-              controller: myOrderController.searchController,
-            ),
+            CommonSearchBar(hints: AppString.searchOrderNumber, onSubmit: (term) {}),
+
             10.height,
             _filters(myOrderController),
             10.height,

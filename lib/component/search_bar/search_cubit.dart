@@ -5,27 +5,25 @@ import 'search_history_service.dart';
 import 'search_state.dart';
 
 class SearchCubit extends SafeCubit<SearchState> {
-  SearchCubit(this.uniqueId) : super(const SearchState()) {
-    _loadAllSuggestions();
-  }
+  SearchCubit(this.uniqueId) : super(const SearchState());
   final String uniqueId;
   final SearchHistoryService _searchHistoryService = getIt();
 
-  List<String> _allHistorySuggestions = [];
-
-  Future<void> _loadAllSuggestions() async {
+  Future<void> loadAllSuggestions() async {
     emit(state.copyWith(isLoading: true));
-    _allHistorySuggestions = await _searchHistoryService.getSuggestions(uniqueId);
-    emit(state.copyWith(suggestions: _allHistorySuggestions, isLoading: false));
+    final allHistorySuggestions = await _searchHistoryService.getSuggestions(uniqueId);
+    emit(state.copyWith(suggestions: allHistorySuggestions, isLoading: false));
   }
 
   Future<void> filterSuggestions({required String term}) async {
     final trimmedTerm = term.trim().toLowerCase();
     if (trimmedTerm.isEmpty) {
-      emit(state.copyWith(suggestions: _allHistorySuggestions));
+      loadAllSuggestions();
     } else {
+      final allHistorySuggestions = await _searchHistoryService.getSuggestions(uniqueId);
+
       final filteredList =
-          _allHistorySuggestions.where((suggestion) => suggestion.toLowerCase().startsWith(trimmedTerm)).toList();
+          allHistorySuggestions.where((suggestion) => suggestion.toLowerCase().startsWith(trimmedTerm)).toList();
       emit(state.copyWith(suggestions: filteredList));
     }
   }
@@ -34,13 +32,12 @@ class SearchCubit extends SafeCubit<SearchState> {
     final trimmedTerm = term.trim();
     if (trimmedTerm.isNotEmpty) {
       await _searchHistoryService.addSearchTerm(uniqueId, trimmedTerm);
-      await _loadAllSuggestions();
+      emit(state.copyWith(suggestions: [term, ...state.suggestions]));
     }
   }
 
   Future<void> clearHistory() async {
     await _searchHistoryService.clearSuggestions(uniqueId);
-    _allHistorySuggestions = [];
     emit(const SearchState());
   }
 }

@@ -1,11 +1,9 @@
+import 'dart:async';
+
 import 'package:bai_serve_customer/component/search_bar/search_cubit.dart';
-import 'package:bai_serve_customer/utils/app_utils.dart';
-import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 import 'search_state.dart';
 
@@ -40,8 +38,7 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
     return BlocProvider(
       create: (_) => SearchCubit(widget.hints), //hints as unique id here
       child: LayoutBuilder(
-        builder: (c, contstrain) {
-          final cubit = c.read<SearchCubit>();
+        builder: (context, contstrain) {
           return SearchAnchor(
             searchController: controller,
             viewLeading: const Icon(Icons.search),
@@ -50,10 +47,12 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
 
             isFullScreen: false,
             viewOnChanged: (value) {
+              final cubit = context.read<SearchCubit>();
               cubit.filterSuggestions(term: value);
             },
 
             viewOnSubmitted: (value) {
+              final cubit = context.read<SearchCubit>();
               _performSearch(context, controller, cubit);
             },
             builder:
@@ -63,47 +62,20 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
                   padding: const WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
                   onTap: () {
                     c.openView();
+                    final cubit = context.read<SearchCubit>();
+                    cubit.filterSuggestions(term: controller.text.trim());
                   },
                   leading: IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
+                      final cubit = context.read<SearchCubit>();
                       _performSearch(context, controller, cubit);
                     },
                   ),
                 ),
-            suggestionsBuilder: (_, c) {
-              return [
-                StreamBuilder<SearchState>(
-                  stream: cubit.stream,
-                  initialData: cubit.state,
-                  builder: (context, snapshot) {
-                    final state = snapshot.data!;
-
-                    if (state.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    final filteredSuggestions = state.suggestions;
-
-                    if (filteredSuggestions.isEmpty) {
-                      return const Padding(padding: EdgeInsets.all(16.0), child: Text('No search history.'));
-                    }
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (state.suggestions.isNotEmpty)
-                          ..._buildSuggestions(
-                            context: context,
-                            suggestions: state.suggestions,
-                            onClear: cubit.clearHistory,
-                            onSubmit: widget.onSubmit,
-                          ),
-                      ],
-                    );
-                  },
-                ),
-              ];
+            suggestionsBuilder: (_, _) {
+              final cubit = context.read<SearchCubit>();
+              return _suggenstionsBuilder(cubit, controller);
             },
           );
         },
@@ -130,13 +102,7 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
   }) {
     return [
       if (suggestions.isNotEmpty)
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(onPressed: onClear, child: const Text('Clear All')),
-          ),
-        ),
+        Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onClear, child: const Text('Clear All'))),
       ...List.generate(suggestions.length, (index) {
         final item = suggestions[index];
         return ListTile(
@@ -149,6 +115,41 @@ class _CommonSearchBarState extends State<CommonSearchBar> {
           },
         );
       }),
+    ];
+  }
+
+  FutureOr<Iterable<Widget>> _suggenstionsBuilder(SearchCubit cubit, SearchController controller) {
+    return [
+      StreamBuilder<SearchState>(
+        stream: cubit.stream,
+        initialData: cubit.state,
+        builder: (context, snapshot) {
+          final state = snapshot.data!;
+
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final filteredSuggestions = state.suggestions;
+
+          if (filteredSuggestions.isEmpty) {
+            return const Padding(padding: EdgeInsets.all(16.0), child: Text('No search history.'));
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (state.suggestions.isNotEmpty)
+                ..._buildSuggestions(
+                  context: context,
+                  suggestions: state.suggestions,
+                  onClear: cubit.clearHistory,
+                  onSubmit: widget.onSubmit,
+                ),
+            ],
+          );
+        },
+      ),
     ];
   }
 }
