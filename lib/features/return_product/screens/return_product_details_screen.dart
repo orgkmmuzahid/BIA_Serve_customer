@@ -5,6 +5,7 @@ import 'package:bai_serve_customer/component/image/image_picker/common_multi_ima
 import 'package:bai_serve_customer/component/other_widgets/common_selectable_button.dart';
 import 'package:bai_serve_customer/component/other_widgets/radio_group_form_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart';
@@ -76,7 +77,7 @@ class _ReturnProductDetailsScreenState extends State<ReturnProductDetailsScreen>
               10.height,
               CommonMultilineTextField(
                 hintText: AppString.addMoreDetails,
-                validator: OtherHelper.requiredFieldValidator,
+                validationType: ValidationType.validateRequired,
                 height: 120,
                 onSave: (newValue) {
                   _returnProductFormModel = _returnProductFormModel.copyWith(details: newValue);

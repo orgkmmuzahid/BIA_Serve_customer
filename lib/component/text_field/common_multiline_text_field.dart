@@ -1,3 +1,4 @@
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,8 @@ class CommonMultilineTextField extends StatelessWidget {
   const CommonMultilineTextField({
     required this.height,
     required this.onSave,
+    required this.validationType,
     super.key,
-    this.validator,
     this.initialText,
     this.readOnly = false,
     this.hintText,
@@ -14,7 +15,7 @@ class CommonMultilineTextField extends StatelessWidget {
 
   final double height;
   final Function(String p1) onSave;
-  final String? Function(String?)? validator;
+  final ValidationType validationType;
   final String? initialText;
   final bool readOnly;
   final String? hintText;
@@ -35,13 +36,14 @@ class CommonMultilineTextField extends StatelessWidget {
         maxLines: null,
         style: getTheme.textTheme.bodyMedium,
         scrollPhysics: const BouncingScrollPhysics(),
-        validator: validator,
+        validator: (value) => InputHelper.validate(validationType, value),
+        inputFormatters: InputHelper.getInputFormatters(validationType),
+        keyboardType: InputHelper.getKeyboardType(validationType),
         expands: true, // expands to fill parent height
         decoration: InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
-            borderSide: getTheme.inputDecorationTheme.enabledBorder!.borderSide
-                .copyWith(color: getTheme.dividerColor),
+            borderSide: getTheme.inputDecorationTheme.enabledBorder!.borderSide.copyWith(color: getTheme.dividerColor),
             borderRadius: BorderRadius.circular(10),
           ),
           contentPadding: const EdgeInsets.all(12),

@@ -1,11 +1,9 @@
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../config/languages/cubit/language_cubit.dart';
 
@@ -17,10 +15,7 @@ class DoNotHaveAccount extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
-          TextSpan(
-            text: AppString.doNotHaveAccount,
-            style: getTheme.textTheme.titleSmall,
-          ),
+          TextSpan(text: AppString.doNotHaveAccount, style: getTheme.textTheme.titleSmall),
 
           /// Sign Up Button here
           TextSpan(
@@ -28,14 +23,15 @@ class DoNotHaveAccount extends StatelessWidget {
             recognizer:
                 TapGestureRecognizer()
                   ..onTap = () {
-                    Get.find<OtpController>().changeOtpFor(OtpFor.signup);
-                    appRouter.push(const OtpSendRoute());
+                    appRouter.push(
+                      OtpRoute(
+                        onSuccess: () {
+                          appRouter.push(const SignUpRoute());
+                        },
+                      ),
+                    );
                   },
-            style: GoogleFonts.dmSans(
-              color: getTheme.colorScheme.primary,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-            ),
+            style: GoogleFonts.dmSans(color: getTheme.colorScheme.primary, fontSize: 12, fontWeight: FontWeight.w700),
           ),
         ],
       ),

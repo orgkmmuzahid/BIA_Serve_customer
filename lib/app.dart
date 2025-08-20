@@ -2,6 +2,7 @@ import 'package:bai_serve_customer/config/languages/l10n/app_localizations.dart'
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/theme/cubit/theme_cubit.dart';
 import 'package:bai_serve_customer/config/theme/cubit/theme_state.dart';
+import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(create: (_) => ThemeCubit()..update()),
               BlocProvider(create: (_) => LanguageCubit()..init()),
+              BlocProvider(create: (_) => AuthCubit()),
             ],
             child: BlocBuilder<ThemeCubit, ThemeState>(
               builder: (context, themeState) {

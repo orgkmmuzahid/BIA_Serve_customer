@@ -1,36 +1,37 @@
+
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../text/common_text.dart';
+import 'input_helper.dart';
 
 class CommonTextField extends StatefulWidget {
   const CommonTextField({
+    required this.validationType,
     super.key,
     this.hintText,
     this.labelText,
     this.prefixIcon,
-    this.isPassword = false,
     this.controller,
     this.textInputAction = TextInputAction.next,
-    this.keyboardType = TextInputType.text,
     this.mexLength,
-    this.validator,
     this.prefixText,
     this.paddingHorizontal = 16,
     this.paddingVertical = 14,
     this.borderRadius = 10,
-    this.inputFormatters,
     this.onSaved,
     this.borderColor,
-    this.onSubmitted,
     this.onTap,
     this.suffixIcon,
     this.isReadOnly = false,
     this.initialText,
+    this.showActionButton = false,
+    this.actionButtonIcon,
+    this.originalPassword,
   });
 
-  final Function(String value)? onSaved;
+  final Function(String value, TextEditingController controller)? onSaved;
   final String? initialText;
   final bool isReadOnly;
   final String? hintText;
@@ -43,14 +44,13 @@ class CommonTextField extends StatefulWidget {
   final double paddingVertical;
   final double borderRadius;
   final int? mexLength;
-  final bool isPassword;
-  final Function(String)? onSubmitted;
   final VoidCallback? onTap;
   final TextEditingController? controller;
   final TextInputAction textInputAction;
-  final FormFieldValidator<String>? validator;
-  final TextInputType keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
+  final bool showActionButton;
+  final Widget? actionButtonIcon;
+  final ValidationType validationType;
+  final String? originalPassword;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
@@ -61,13 +61,15 @@ class _CommonTextFieldState extends State<CommonTextField> {
   late final FocusNode _focusNode;
   late bool _obscureText;
 
-  bool get _hasController => widget.controller != null;
+  // bool get _hasController => widget.controller != null;
 
   @override
   void initState() {
     super.initState();
 
-    _obscureText = widget.isPassword;
+    _obscureText =
+        widget.validationType == ValidationType.validatePassword ||
+        widget.validationType == ValidationType.validateConfirmPassword;
     _controller = widget.controller ?? TextEditingController();
     _focusNode = FocusNode();
 
@@ -84,9 +86,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   void dispose() {
     _focusNode.dispose();
-    if (!_hasController) {
+    // if (!_hasController) {
       _controller.dispose();
-    }
+    // }
     super.dispose();
   }
 
@@ -100,6 +102,13 @@ class _CommonTextFieldState extends State<CommonTextField> {
     return _focusNode.hasFocus ? (widget.borderColor ?? getTheme.primaryColor) : getTheme.colorScheme.outline;
   }
 
+  void _onSave(String? value) {
+    if (widget.validationType == ValidationType.validateConfirmPassword)
+      assert(widget.originalPassword == null, 'Orginal Password can not be null for Confirm password filed');
+    if (widget.onSaved == null) return;
+    widget.onSaved!(value?.trim() ?? '', _controller);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -110,14 +119,15 @@ class _CommonTextFieldState extends State<CommonTextField> {
         obscureText: _obscureText,
         readOnly: widget.isReadOnly,
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        keyboardType: widget.keyboardType,
+        keyboardType: InputHelper.getKeyboardType(widget.validationType),
         textInputAction: widget.textInputAction,
-        onSaved: widget.onSaved == null ? null : (v) => widget.onSaved!(v ?? ''),
+        onSaved: _onSave,
         maxLength: widget.mexLength,
-        inputFormatters: widget.inputFormatters,
-        onFieldSubmitted: widget.onSubmitted,
+        inputFormatters: InputHelper.getInputFormatters(widget.validationType),
+        onFieldSubmitted: _onSave,
         onTap: widget.onTap,
-        validator: widget.validator,
+        validator:
+            (value) => InputHelper.validate(widget.validationType, value, originalPassword: widget.originalPassword),
 
         style: getTheme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp),
         decoration: InputDecoration(
@@ -133,7 +143,17 @@ class _CommonTextFieldState extends State<CommonTextField> {
                   )
                   : Padding(padding: const EdgeInsets.only(left: 10, right: 10), child: widget.prefixIcon),
           prefixIconConstraints: const BoxConstraints(maxWidth: 40),
-          suffixIcon: widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
+          suffixIcon:
+              widget.showActionButton
+                  ? GestureDetector(
+                    onTap: () {
+                      _onSave(_controller.text.trim());
+                    },
+                    child: widget.actionButtonIcon ?? const Icon(Icons.search),
+                  )
+                  : _obscureText
+                  ? _buildPasswordSuffixIcon()
+                  : widget.suffixIcon,
           prefixIconColor: _iconColor(),
           suffixIconColor: _iconColor(),
           enabledBorder:

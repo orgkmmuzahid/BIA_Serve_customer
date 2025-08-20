@@ -98,6 +98,168 @@ abstract class AppLocalizations {
     Locale('sw'),
   ];
 
+  /// No description provided for @requiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get requiredField;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get invalidEmail;
+
+  /// No description provided for @invalidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number'**
+  String get invalidPhone;
+
+  /// No description provided for @invalidPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters long, contain an uppercase letter, and a digit'**
+  String get invalidPassword;
+
+  /// No description provided for @invalidDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid date (YYYY-MM-DD)'**
+  String get invalidDate;
+
+  /// No description provided for @passwordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordMismatch;
+
+  /// No description provided for @invalidURL.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid URL'**
+  String get invalidURL;
+
+  /// No description provided for @invalidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid number'**
+  String get invalidNumber;
+
+  /// No description provided for @invalidCreditCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid credit card number (16 digits)'**
+  String get invalidCreditCard;
+
+  /// No description provided for @invalidPostalCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid postal code'**
+  String get invalidPostalCode;
+
+  /// No description provided for @minLengthError.
+  ///
+  /// In en, this message translates to:
+  /// **'Input must be at least {minLength} characters'**
+  String minLengthError(Object minLength);
+
+  /// No description provided for @maxLengthError.
+  ///
+  /// In en, this message translates to:
+  /// **'Input must be no more than {maxLength} characters'**
+  String maxLengthError(Object maxLength);
+
+  /// No description provided for @invalidPattern.
+  ///
+  /// In en, this message translates to:
+  /// **'Input does not match the required pattern'**
+  String get invalidPattern;
+
+  /// No description provided for @invalidDateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Date must be between {startDate} and {endDate}'**
+  String invalidDateRange(Object endDate, Object startDate);
+
+  /// No description provided for @otpEntrySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Otp has been sent to {username}'**
+  String otpEntrySubtitle(Object username);
+
+  /// No description provided for @alphaNumericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Only alphanumeric characters are allowed'**
+  String get alphaNumericError;
+
+  /// No description provided for @usernameError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must be between 3 to 15 characters and can only contain letters, numbers, and underscores'**
+  String get usernameError;
+
+  /// No description provided for @invalidTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid time in HH:mm format'**
+  String get invalidTime;
+
+  /// No description provided for @invalidOTP.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid 6-digit OTP'**
+  String get invalidOTP;
+
+  /// No description provided for @invalidCurrency.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid amount (e.g., 1234.56)'**
+  String get invalidCurrency;
+
+  /// No description provided for @invalidIP.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid IPv4 address'**
+  String get invalidIP;
+
+  /// No description provided for @allDataLoaded.
+  ///
+  /// In en, this message translates to:
+  /// **'All data loaded'**
+  String get allDataLoaded;
+
+  /// No description provided for @nidRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'National ID is required.'**
+  String get nidRequired;
+
+  /// No description provided for @nidInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid National ID (12 digits).'**
+  String get nidInvalid;
+
+  /// No description provided for @fullNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name is required.'**
+  String get fullNameRequired;
+
+  /// No description provided for @fullNameInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid full name (e.g., John Doe, O\'Connor, Mary-Jane).'**
+  String get fullNameInvalid;
+
+  /// No description provided for @seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'Seconds'**
+  String get seconds;
+
   /// No description provided for @dataEmpty.
   ///
   /// In en, this message translates to:

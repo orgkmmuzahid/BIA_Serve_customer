@@ -2,18 +2,16 @@
 // ignore_for_file: avoid_annotating_with_dynamic
 
 import 'dart:async';
-import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:dio/dio.dart' as dio; // Alias Dio as dio to avoid conflict with FormData
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import '../dependency/dependency_injection.dart';
 import 'request_input.dart'; // Import the updated RequestInput
-import 'request_state.dart';
-
+import 'response_state.dart';
 
 // Callback for request state changes
-typedef OnRequestStateChange<T> = void Function(RequestState<T> state);
+typedef OnRequestStateChange<T> = void Function(ResponseState<T> state);
 
 class DioService {
   DioService._(this._dio, this._storageService, {required this.onLogout}) : _debugMode = AppLogger.enableLogs;
@@ -164,7 +162,7 @@ class DioService {
     AppLogger.apiDebug('Tokens cleared.', tag: 'Auth');
   }
 
-  Future<T> request<T>({
+  Future<ResponseState<T>> request<T>({
     required RequestInput input,
     required T Function(dynamic data) responseBuilder,
     int retryCount = 0,
@@ -189,7 +187,12 @@ class DioService {
       );
 
       final parsed = responseBuilder(response.data);
-      return parsed;
+      return ResponseState(
+        data: parsed,
+        message: response.statusMessage,
+        cancelToken: cancelToken,
+        statusCode: response.statusCode,
+      );
     } on DioException catch (e) {
       if (e.type == DioExceptionType.cancel) {
         AppLogger.apiDebug('Request cancelled: ${e.message}', tag: input.endpoint);

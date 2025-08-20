@@ -6,6 +6,7 @@ import 'package:bai_serve_customer/common/common_language_drop_down.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/languages/widgets/common_language_slector.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
@@ -97,6 +98,7 @@ class ChatScreen extends StatelessWidget {
           ],
         )
         : CommonTextField(
+          validationType: ValidationType.validateRequired,
           controller: chatController.inputMessageTextFiled,
           prefixIcon: GestureDetector(
             onTap: chatController.pickImage,

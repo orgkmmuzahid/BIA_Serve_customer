@@ -1,5 +1,4 @@
-import 'package:bai_serve_customer/features/auth/controllers/login_with_controller.dart';
-import 'package:bai_serve_customer/features/auth/controllers/otp_controller.dart';
+
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
 import 'package:bai_serve_customer/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve_customer/features/custom_google_map/controllers/custom_google_map_controller.dart';
@@ -15,21 +14,11 @@ import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/cont
 import 'package:bai_serve_customer/payment/controllers/payment_controller.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:get/get.dart';
-
-import '../../features/auth/controllers/change_password_controller.dart';
-import '../../features/auth/controllers/forget_password_controller.dart';
-import '../../features/auth/controllers/sign_in_controller.dart';
-import '../../features/auth/controllers/sign_up_controller.dart';
 import '../../features/notifications/controller/notifications_controller.dart';
 
 class StateDependency {
   static void dependencies() {
-    Get.lazyPut(SignUpController.new, fenix: true);
-    Get.lazyPut(SignInController.new, fenix: true);
-    Get.lazyPut(ForgetPasswordController.new, fenix: true);
-    Get.lazyPut(ChangePasswordController.new, fenix: true);
-    Get.lazyPut(OtpController.new, fenix: true);
-    Get.lazyPut(LoginWithController.new, fenix: true);
+
     Get.lazyPut(HomeController.new, fenix: true);
     Get.lazyPut(HomeOrderConroller.new, fenix: true);
     Get.lazyPut(DoorToDoorController.new, fenix: true);

@@ -4,6 +4,7 @@ import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/custom_google_map/widgets/custom_google_map.dart';
@@ -42,7 +43,7 @@ class PlaceOrderScreen extends StatelessWidget {
                     }
                     if (controller.placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
                         controller.placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
-                      appRouter.push(PickUpInformationRoute(title: title));
+                      appRouter.push(PickUpInformationRoute(title: title, formKey: GlobalKey<FormState>()));
                     }
                   },
                   buttonColor:
@@ -68,12 +69,14 @@ class PlaceOrderScreen extends StatelessWidget {
           prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
           controller: controller.clientAddressTextEditController,
           borderColor: getTheme.dividerColor,
+          validationType: ValidationType.validateRequired,
         ).paddingOnly(top: 10, left: 20, right: 20),
         CommonTextField(
           initialText: '',
           prefixIcon: const Icon(Icons.place),
           controller: controller.marchentAddressTextEditController,
           borderColor: getTheme.dividerColor,
+          validationType: ValidationType.validateRequired,
         ).paddingOnly(top: 10, left: 20, right: 20),
         20.height,
       ],

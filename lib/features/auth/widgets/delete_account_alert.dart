@@ -1,7 +1,7 @@
 import 'package:bai_serve_customer/component/pop_up/common_alert.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
-import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,8 +17,7 @@ class DeleteAccountAlert {
             /// current Password section
             CommonTextField(
               hintText: AppString.password,
-              validator: OtherHelper.passwordValidator,
-              isPassword: true,
+              validationType: ValidationType.validatePassword,
               prefixIcon: Icon(Icons.lock, size: 20.sp),
             ),
           ],

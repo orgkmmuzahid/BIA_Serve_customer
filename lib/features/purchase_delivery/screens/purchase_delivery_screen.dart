@@ -6,6 +6,7 @@ import 'package:bai_serve_customer/component/other_widgets/common_drop_down.dart
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
@@ -39,8 +40,8 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   10.height,
                   CommonTextField(
                     hintText: AppString.vendorName,
-                    validator: OtherHelper.requiredFieldValidator,
-                    onSaved: (value) {
+                    validationType: ValidationType.validateFullName,
+                    onSaved: (value, controller) {
                       purchaseDeliveryController.onFormChange(
                         purchaseDeliveryController.purchaseDeliveryModel.copyWith(name: value),
                       );
@@ -49,8 +50,8 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   10.height,
                   CommonTextField(
                     hintText: AppString.vendorId,
-                    validator: OtherHelper.requiredFieldValidator,
-                    onSaved: (value) {
+                    validationType: ValidationType.validateRequired,
+                    onSaved: (value, controller) {
                       purchaseDeliveryController.onFormChange(
                         purchaseDeliveryController.purchaseDeliveryModel.copyWith(vendorId: value),
                       );
@@ -60,8 +61,8 @@ class PurchaseDeliveryScreen extends StatelessWidget {
 
                   CommonTextField(
                     hintText: AppString.phoneNumber,
-                    validator: OtherHelper.phoneValidator,
-                    onSaved: (value) {
+                    validationType: ValidationType.validatePhone,
+                    onSaved: (value, controller) {
                       purchaseDeliveryController.onFormChange(
                         purchaseDeliveryController.purchaseDeliveryModel.copyWith(phoneNumber: value),
                       );
@@ -75,9 +76,8 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   CommonTextField(
                     hintText: AppString.productAmount,
                     prefixText: AppString.monySign,
-                    validator: OtherHelper.validateAmount,
-                    keyboardType: TextInputType.number,
-                    onSaved: (value) {
+                    validationType: ValidationType.validateCurrency,
+                    onSaved: (value, controller) {
                       purchaseDeliveryController.onFormChange(
                         purchaseDeliveryController.purchaseDeliveryModel.copyWith(amount: double.tryParse(value)),
                       );
@@ -103,6 +103,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   10.height,
                   CommonMultilineTextField(
                     hintText: AppString.deliveryAddress,
+                    validationType: ValidationType.validateRequired,
                     height: 80,
                     onSave: (value) {
                       purchaseDeliveryController.onFormChange(
@@ -114,6 +115,7 @@ class PurchaseDeliveryScreen extends StatelessWidget {
                   CommonText(text: AppString.productDescription, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
                   CommonMultilineTextField(
+                    validationType: ValidationType.validateRequired,
                     hintText: AppString.productDescription,
                     height: 80,
                     onSave: (value) {

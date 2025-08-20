@@ -1,4 +1,6 @@
 import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
+import 'package:bai_serve_customer/features/auth/repository/auth_repository.dart';
+import 'package:bai_serve_customer/features/auth/repository/mock_auth_repository.dart';
 import 'package:bai_serve_customer/features/home/repository/home_repository.dart';
 import 'package:bai_serve_customer/features/home/repository/mock_home_repository.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/repository/mock_tracking_order_repository.dart';
@@ -19,6 +21,9 @@ import 'package:get/get.dart';
 
 class MockRepositoryDependency {
   static void dependencies() {
+    getIt.registerLazySingleton<AuthRepository>(MockAuthRepository.new);
+
+
     Get.lazyPut<VendorSourcingRepository>(MockVendorSourcingRepository.new, fenix: true);
     Get.lazyPut<HomeRepository>(MockHomeRepository.new, fenix: true);
 

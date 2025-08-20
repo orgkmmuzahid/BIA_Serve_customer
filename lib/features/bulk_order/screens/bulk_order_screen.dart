@@ -5,6 +5,7 @@ import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/image_picker/common_multi_image_picker.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
@@ -43,8 +44,8 @@ class BulkOrderScreen extends StatelessWidget {
                       child: CommonTextField(
                         hintText: AppString.itemDetails,
                         borderColor: getTheme.dividerColor,
-                        validator: OtherHelper.requiredFieldValidator,
-                        onSaved: (value) {
+                        validationType: ValidationType.validateRequired,
+                        onSaved: (value, controller) {
                           final item = bulkOrderController.productItemDetails.entries.elementAt(index);
                           bulkOrderController.onItemDetailsChange(item.key, value);
                         },

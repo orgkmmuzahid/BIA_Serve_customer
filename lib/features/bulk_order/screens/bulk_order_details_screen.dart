@@ -3,6 +3,7 @@ import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
@@ -31,6 +32,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
               ).start,
               CommonMultilineTextField(
                 initialText: bulkOrderController.negotiationMessage,
+                validationType: ValidationType.validateRequired,
                 readOnly: true,
                 height: 200,
                 onSave: (String p1) {},
@@ -38,7 +40,7 @@ class BulkOrderDetailsScreen extends StatelessWidget {
               20.height,
               if (bulkOrderController.bulkOrderDetailsModel == null)
                 CommonTextField(
-                  onSubmitted: bulkOrderController.onPromoSubmit,
+                  validationType: ValidationType.validateRequired,
                   hintText: AppString.submitPromoCode,
                   borderRadius: 4,
                   paddingVertical: 20,

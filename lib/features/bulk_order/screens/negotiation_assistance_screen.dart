@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
@@ -34,6 +35,7 @@ class NegotiationAssistanceScreen extends StatelessWidget {
             ).start,
             14.height,
             CommonMultilineTextField(
+              validationType: ValidationType.validateRequired,
               initialText: Get.find<BulkOrderController>().negotiationMessage,
               height: 202,
               onSave: (value) {},

@@ -1,5 +1,7 @@
 import 'package:bai_serve_customer/component/search_bar/search_history_service.dart';
 import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
+import 'package:bai_serve_customer/features/auth/repository/auth_repository.dart';
+import 'package:bai_serve_customer/features/auth/repository/real_auth_repository.dart';
 import 'package:bai_serve_customer/features/home/repository/home_repository.dart';
 import 'package:bai_serve_customer/features/home/repository/real_home_repository.dart';
 import 'package:bai_serve_customer/features/order/tracking_order/repository/real_tracking_order_repository.dart';
@@ -20,6 +22,9 @@ import 'package:get/get.dart';
 
 class RealRepositoryDependency {
   static void dependencies() {
+    getIt.registerLazySingleton<AuthRepository>(RealAuthRepository.new);
+
+
     Get.lazyPut<VendorSourcingRepository>(RealVendorSourcingRepository.new, fenix: true);
     Get.lazyPut<HomeRepository>(RealHomeRepository.new, fenix: true);
 

@@ -6,6 +6,7 @@ import 'package:bai_serve_customer/component/other_widgets/dual_field_row_widget
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
@@ -34,30 +35,35 @@ class VendorVerifyFormScreen extends StatelessWidget {
               CommonTextField(
                 initialText: vendorModel?.name,
                 hintText: AppString.vendorName,
-                validator: OtherHelper.requiredFieldValidator,
-                onSaved: (value) {},
+                validationType: ValidationType.validateFullName,
+                onSaved: (value, controller) {},
               ),
 
               CommonText(text: AppString.vendorId, style: getTheme.textTheme.titleMedium, bottom: 5, top: 5),
               CommonTextField(
                 initialText: vendorModel?.id,
                 hintText: AppString.vendorId,
-                validator: OtherHelper.requiredFieldValidator,
-                onSaved: (value) {},
+                validationType: ValidationType.validateRequired,
+                onSaved: (value, controller) {},
               ),
 
               CommonText(text: AppString.phoneNumber, style: getTheme.textTheme.titleMedium, bottom: 5, top: 5),
               CommonTextField(
+                validationType: ValidationType.validatePhone,
                 initialText: vendorModel?.phoneNumber,
                 hintText: AppString.phoneNumber,
-                validator: OtherHelper.requiredFieldValidator,
-                onSaved: (value) {},
+                onSaved: (value, controller) {},
               ),
 
               // const CommonImagePicker(isMulti: true, title: "Upload Multiple Images"),
               CommonText(text: AppString.vendorLocation, style: getTheme.textTheme.titleMedium, top: 5, bottom: 5),
 
-              CommonMultilineTextField(height: 100, hintText: AppString.vendorLocation, onSave: (value) {}),
+              CommonMultilineTextField(
+                validationType: ValidationType.validateRequired,
+                height: 100,
+                hintText: AppString.vendorLocation,
+                onSave: (value) {},
+              ),
 
               CommonText(text: AppString.uplaodScreenshot, style: getTheme.textTheme.titleMedium, top: 5, bottom: 5),
               CommonMultiImagePickerFormField(isMulti: false, onSaved: (newValue) {}),

@@ -6,12 +6,14 @@ import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/pop_up/common_alert.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -49,9 +51,18 @@ class SettingScreen extends StatelessWidget {
             leading: const Icon(Icons.person_outline),
             title: AppString.changePersonalInfo,
             onTap: () {
-              appRouter.push(const ProfileInfoRoute());
+              appRouter.push(
+                ProfileInfoRoute(
+                  formKey1: GlobalKey<FormState>(),
+                  formKey2: GlobalKey<FormState>(),
+                  ctrCurrentPass: TextEditingController(),
+                  ctrNewPass: TextEditingController(),
+                  ctrConfPass: TextEditingController(),
+                ),
+              );
             },
           ),
+
 
           _buildMenu(
             leading: const Icon(Icons.payment),
@@ -96,6 +107,7 @@ class SettingScreen extends StatelessWidget {
             enableTrailing: false,
             title: AppString.logOut,
             onTap: () {
+              final authCubit = context.read<AuthCubit>();
               CommonAlert(
                 title: AppString.logoutMessage,
                 onTap: () {
@@ -103,6 +115,8 @@ class SettingScreen extends StatelessWidget {
                     title: AppString.logoutMessage,
                     onTap: () {
                       //logout action.
+
+                      authCubit.logout();
                     },
                   );
                 },

@@ -1,6 +1,6 @@
 {
   "@@locale": "sw",
-  "requiredField": "Huu uwanja unahitajika",
+   "requiredField": "Huu uwanja unahitajika",
   "invalidEmail": "Tafadhali ingiza anwani ya barua pepe inayofaa",
   "invalidPhone": "Tafadhali ingiza nambari ya simu inayofaa",
   "invalidPassword": "Neno la siri lazima liwe na herufi 8 angalau, liwe na herufi kubwa, na nambari",
@@ -21,8 +21,8 @@
   "invalidOTP": "Tafadhali ingiza OTP inayofaa ya nambari 6",
   "invalidCurrency": "Tafadhali ingiza kiasi kinachofaa (mfano, 1234.56)",
   "invalidIP": "Tafadhali ingiza anwani ya IPv4 inayofaa",
-  "allDataLoaded": "Data zote zimepakiwa",
-  "nidRequired": "Nambari ya Kitaifa inahitajika.",
+   "allDataLoaded": "Data zote zimepakiwa",
+"nidRequired": "Nambari ya Kitaifa inahitajika.",
   "nidInvalid": "Tafadhali ingiza Nambari ya Kitaifa halali (tarakimu 12).",
   "fullNameRequired": "Jina kamili linahitajika.",
   "fullNameInvalid": "Tafadhali ingiza jina kamili halali (mfano: John Doe, O'Connor, Mary-Jane).",
@@ -304,6 +304,7 @@
   "monthlyTask": "Kazi za Kila Mwezi",
   "noDetailsAvailableForThisNotification": "Arifa hii haina maelezo zaidi.",
   "vendorVerificationRequestMessage": "Ombi lako la Uthibitishaji wa Muuzaji limetumwa. Timu yetu itakujulisha hivi karibuni.",
+  "loaltyClaimingMessage": "Umepokea $value kwa agizo lako linalofuata! Usikose",
   "selectZone": "Chagua Eneo",
   "driverLicenseNumber": "Nambari ya Leseni ya Dereva",
   "licenseExpireDate": "Tarehe ya Kumalizika kwa Leseni",
@@ -376,7 +377,5 @@
     "submit": "Wasilisha",
   "editProduct": "Hariri Bidhaa",
    "deleteProduct": "Futa Bidhaa",
-   "updateProduct": "Sasisha Bidhaa",
-   "loaltyClaimingMessage": "Umepokea # kwa agizo lako linalofuata! Usikose"
-
+   "updateProduct": "Sasisha Bidhaa"
 }

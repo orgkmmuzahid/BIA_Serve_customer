@@ -1,12 +1,9 @@
 import 'dart:async';
 
-import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve_customer/config/network/request_state.dart';
+import 'package:bai_serve_customer/config/network/response_state.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/home/repository/home_repository.dart';
-import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -14,7 +11,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   HomeRepository homeRepository = Get.find();
 
-  RequestState<List<String>> bannerUrls = RequestState(data: []);
+  ResponseState<List<String>> bannerUrls = ResponseState(data: [], statusCode: 200);
 
   String name = 'Km Muzahid';
   String address = '1901 Thornridge Cir. Shiloh, Hawaii 81063';

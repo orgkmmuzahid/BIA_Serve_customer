@@ -8,12 +8,14 @@ import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({required this.userName, required this.address, required this.controller, super.key});
@@ -31,11 +33,11 @@ class HomeDrawer extends StatelessWidget {
           children: [
             // Drawer Header
             DrawerHeader(
-            decoration: BoxDecoration(color: getTheme.primaryColor),
-            child: SizedBox(
-              height: 146,
+              decoration: BoxDecoration(color: getTheme.primaryColor),
+              child: SizedBox(
+                height: 146,
                 child: Row(
-                children: [
+                  children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,25 +58,25 @@ class HomeDrawer extends StatelessWidget {
                           style: getTheme.textTheme.bodySmall?.copyWith(color: getTheme.colorScheme.onPrimary),
                         ),
                         10.height,
-                      CommonButton(
-                        titleText: AppString.viewProfile,
-                        buttonWidth: 100,
-                        buttonHeight: 30,
-                        titleSize: 10,
-                        titleColor: getTheme.colorScheme.onPrimary,
-                        buttonRadius: 4,
-                        borderColor: getTheme.colorScheme.onPrimary,
-                        buttonColor: getTheme.colorScheme.primary,
-                        onTap: () {
-                          appRouter.pop();
-                            // appRouter.push(SettingRoute(commonBottomNavBar: const CommonBottomNavBar()));
-                        },
+                        CommonButton(
+                          titleText: AppString.viewProfile,
+                          buttonWidth: 100,
+                          buttonHeight: 30,
+                          titleSize: 10,
+                          titleColor: getTheme.colorScheme.onPrimary,
+                          buttonRadius: 4,
+                          borderColor: getTheme.colorScheme.onPrimary,
+                          buttonColor: getTheme.colorScheme.primary,
+                          onTap: () {
+                            appRouter.pop();
+                            controller.onNavigationChange(3);
+                          },
                         ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
             ),
             // Drawer Items
             _buildMenu(
@@ -129,11 +131,11 @@ class HomeDrawer extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
               onTap: () {
+                final authCbut = context.read<AuthCubit>();
                 CommonAlert(
                   title: AppString.logoutMessage,
                   onTap: () {
-                    //logout action.
-                    appRouter.replace(const LoginOptionsRoute());
+                    authCbut.logout();
                   },
                 );
               },

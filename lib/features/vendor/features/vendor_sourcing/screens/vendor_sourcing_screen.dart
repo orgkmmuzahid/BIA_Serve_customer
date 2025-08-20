@@ -5,6 +5,7 @@ import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_multiline_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/vendor/common_widget/category_selector/product_cateogry_widget.dart';
@@ -49,10 +50,19 @@ class VendorSourcingScreen extends StatelessWidget {
             _vendorsServiceList(vendorSourcingController),
 
             CommonText(text: AppString.budget, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-            CommonTextField(hintText: AppString.budget, prefixText: AppString.monySign),
+            CommonTextField(
+              validationType: ValidationType.validateCurrency,
+              hintText: AppString.budget,
+              prefixText: AppString.monySign,
+            ),
 
             CommonText(text: AppString.specialInstruction, style: getTheme.textTheme.bodyLarge, bottom: 10, top: 10),
-            CommonMultilineTextField(height: 120, hintText: AppString.specialInstruction, onSave: (value) {}),
+            CommonMultilineTextField(
+              validationType: ValidationType.validateRequired,
+              height: 120,
+              hintText: AppString.specialInstruction,
+              onSave: (value) {},
+            ),
             10.height,
             Row(
               children: [

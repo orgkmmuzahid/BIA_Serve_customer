@@ -3,41 +3,45 @@ import 'package:bai_serve_customer/component/image/image_picker/common_multi_ima
 import 'package:bai_serve_customer/component/other_widgets/common_drop_down.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
-import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
+import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:bai_serve_customer/utils/helpers/other_helper.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-GlobalKey<FormState> _formKey = GlobalKey();
 
 class PickupInformationFormWidget extends StatelessWidget {
-  const PickupInformationFormWidget({super.key});
+  const PickupInformationFormWidget({required this.formKey, super.key});
+
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) => GetBuilder<PlaceOrderController>(
     builder: (placeOrderController) {
       return Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             CommonText(text: AppString.pickupInformation, style: getTheme.textTheme.bodyLarge).paddingOnly(bottom: 10),
             _rowBuilder(
               _inputTextBuilder(
                 prefixIcon: Icons.person,
+                initialText: 'Km Muzahid',
                 hint: AppString.fullName,
-                onSaved: (p0) {
-                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(fullName: p0));
-                },
+                validationType: ValidationType.validateFullName,
+                isReadOnly: true,
+                onSaved: (value, controller) {},
               ),
               _inputTextBuilder(
                 prefixIcon: Icons.phone,
                 hint: AppString.phoneNumber,
-                validator: OtherHelper.phoneValidator,
-                onSaved: (p0) {
-                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(phone: p0));
+                validationType: ValidationType.validatePhone,
+                onSaved: (value, controller) {
+                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(phone: value));
                 },
               ),
             ),
@@ -82,14 +86,15 @@ class PickupInformationFormWidget extends StatelessWidget {
 
             _inputTextBuilder(
               hint: AppString.plotApartment,
-              onSaved: (p0) {
-                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(plotApartment: p0));
+              validationType: ValidationType.validateRequired,
+              onSaved: (value, controller) {
+                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(plotApartment: value));
               },
             ).paddingOnly(bottom: 10),
             _multilineTextField(
               100,
-              onSave: (p0) {
-                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(itemDetails: p0));
+              onSave: (value) {
+                placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(itemDetails: value));
               },
             ).paddingOnly(bottom: 10),
 
@@ -102,13 +107,14 @@ class PickupInformationFormWidget extends StatelessWidget {
               _inputTextBuilder(
                 hint: placeOrderController.placeOrderModel.marchentPickupTime ?? '',
                 isReadOnly: true,
+                validationType: ValidationType.validateTime,
                 suffixIcon: _showTimer((time) {
                   placeOrderController.onFormChange(
                     placeOrderController.placeOrderModel.copyWith(marchentPickupTime: time),
                   );
                   placeOrderController.update();
                 }),
-                onSaved: (p0) {},
+                onSaved: (value, controller) {},
               ),
               CommonDropDown<String>(
                 hint: AppString.outsideCity,
@@ -140,17 +146,19 @@ class PickupInformationFormWidget extends StatelessWidget {
             _rowBuilder(
               _inputTextBuilder(
                 hint: '${placeOrderController.placeOrderModel.productWieght?.toString()} KG',
-                onSaved: (p0) {
+                validationType: ValidationType.validateRequired,
+                onSaved: (value, controller) {
                   placeOrderController.onFormChange(
-                    placeOrderController.placeOrderModel.copyWith(productWieght: double.tryParse(p0)),
+                    placeOrderController.placeOrderModel.copyWith(productWieght: double.tryParse(value)),
                   );
                 },
               ),
               _inputTextBuilder(
                 hint: '${placeOrderController.placeOrderModel.quantity?.toString()} Box',
-                onSaved: (p0) {
+                validationType: ValidationType.validateRequired,
+                onSaved: (value, controller) {
                   placeOrderController.onFormChange(
-                    placeOrderController.placeOrderModel.copyWith(quantity: int.tryParse(p0)),
+                    placeOrderController.placeOrderModel.copyWith(quantity: int.tryParse(value)),
                   );
                 },
               ),
@@ -162,16 +170,19 @@ class PickupInformationFormWidget extends StatelessWidget {
               _inputTextBuilder(
                 prefixIcon: Icons.person,
                 hint: AppString.fullName,
-                onSaved: (p0) {
-                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientFullName: p0));
+                validationType: ValidationType.validateFullName,
+                onSaved: (value, controller) {
+                  placeOrderController.onFormChange(
+                    placeOrderController.placeOrderModel.copyWith(clientFullName: value),
+                  );
                 },
               ),
               _inputTextBuilder(
                 prefixIcon: Icons.phone,
                 hint: AppString.phoneNumber,
-                validator: OtherHelper.phoneValidator,
-                onSaved: (p0) {
-                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPhone: p0));
+                validationType: ValidationType.validatePhone,
+                onSaved: (value, controller) {
+                  placeOrderController.onFormChange(placeOrderController.placeOrderModel.copyWith(clientPhone: value));
                 },
               ),
             ),
@@ -225,8 +236,9 @@ class PickupInformationFormWidget extends StatelessWidget {
             ),
             _rowBuilder(
               _inputTextBuilder(
-                hint: placeOrderController.placeOrderModel.clientPickupTime ?? '',
+                hint: '8:00 AM',
                 isReadOnly: true,
+                validationType: ValidationType.validateTime,
                 suffixIcon: _showTimer((time) {
                   AppLogger.debug('Piked time $time', tag: 'Pickup information screen');
                   placeOrderController.onFormChange(
@@ -234,7 +246,7 @@ class PickupInformationFormWidget extends StatelessWidget {
                   );
                   placeOrderController.update();
                 }),
-                onSaved: (p0) {},
+                onSaved: (value, controller) {},
               ),
               CommonDropDown<String>(
                 hint: AppString.outsideCity,
@@ -250,9 +262,10 @@ class PickupInformationFormWidget extends StatelessWidget {
 
             _inputTextBuilder(
               hint: AppString.plotApartment,
-              onSaved: (p0) {
+              validationType: ValidationType.validateRequired,
+              onSaved: (value, controller) {
                 placeOrderController.onFormChange(
-                  placeOrderController.placeOrderModel.copyWith(clientPlotApartment: p0),
+                  placeOrderController.placeOrderModel.copyWith(clientPlotApartment: value),
                 );
               },
             ).paddingOnly(bottom: 10),
@@ -308,15 +321,15 @@ class PickupInformationFormWidget extends StatelessWidget {
 
   CommonTextField _inputTextBuilder({
     required String hint,
-    required Function(String) onSaved,
-    FormFieldValidator? validator,
+    required Function(String, TextEditingController) onSaved,
+    required ValidationType validationType,
     String? initialText,
     bool? isReadOnly,
     IconData? prefixIcon,
     Widget? suffixIcon,
   }) => CommonTextField(
     initialText: initialText,
-    validator: validator,
+    validationType: validationType,
     suffixIcon: suffixIcon,
     isReadOnly: isReadOnly ?? false,
     prefixIcon: prefixIcon == null ? null : _prefixBuilder(prefixIcon),

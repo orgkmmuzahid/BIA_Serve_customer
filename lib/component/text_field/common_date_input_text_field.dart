@@ -1,4 +1,6 @@
+
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:flutter/material.dart';
 
 class CommonDateInputTextField extends StatefulWidget {
@@ -15,8 +17,7 @@ class CommonDateInputTextField extends StatefulWidget {
   final Function(String date)? onSave;
 
   @override
-  State<CommonDateInputTextField> createState() =>
-      _CommonDateInputTextFieldState();
+  State<CommonDateInputTextField> createState() => _CommonDateInputTextFieldState();
 }
 
 class _CommonDateInputTextFieldState extends State<CommonDateInputTextField> {
@@ -26,12 +27,6 @@ class _CommonDateInputTextFieldState extends State<CommonDateInputTextField> {
   void initState() {
     super.initState();
     _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   Future<void> _openDatePicker(BuildContext context) async {
@@ -54,13 +49,17 @@ class _CommonDateInputTextFieldState extends State<CommonDateInputTextField> {
       paddingVertical: widget.paddingVertical,
       borderRadius: widget.borderRadius,
       hintText: 'YYYY-MM-DD',
-      onSaved: widget.onSave,
+      onSaved: (value, _) {
+        if (widget.onSave == null) return;
+        widget.onSave!(value);
+      },
       suffixIcon: GestureDetector(
         onTap: () {
           _openDatePicker(context);
         },
         child: const Icon(Icons.calendar_month_outlined),
       ),
+      validationType: ValidationType.validateDate,
     );
   }
 }

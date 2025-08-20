@@ -9,6 +9,102 @@ class AppLocalizationsSw extends AppLocalizations {
   AppLocalizationsSw([String locale = 'sw']) : super(locale);
 
   @override
+  String get requiredField => 'Huu uwanja unahitajika';
+
+  @override
+  String get invalidEmail => 'Tafadhali ingiza anwani ya barua pepe inayofaa';
+
+  @override
+  String get invalidPhone => 'Tafadhali ingiza nambari ya simu inayofaa';
+
+  @override
+  String get invalidPassword =>
+      'Neno la siri lazima liwe na herufi 8 angalau, liwe na herufi kubwa, na nambari';
+
+  @override
+  String get invalidDate => 'Tafadhali ingiza tarehe inayofaa (YYYY-MM-DD)';
+
+  @override
+  String get passwordMismatch => 'Maneno ya siri hayatofautiani';
+
+  @override
+  String get invalidURL => 'Tafadhali ingiza URL inayofaa';
+
+  @override
+  String get invalidNumber => 'Tafadhali ingiza nambari inayofaa';
+
+  @override
+  String get invalidCreditCard =>
+      'Tafadhali ingiza nambari ya kadi ya mkopo inayofaa (nambari 16)';
+
+  @override
+  String get invalidPostalCode => 'Tafadhali ingiza nambari ya posta inayofaa';
+
+  @override
+  String minLengthError(Object minLength) {
+    return 'Ingizo lazima liwe na angalau $minLength wahusika';
+  }
+
+  @override
+  String maxLengthError(Object maxLength) {
+    return 'Ingizo lazima liwe na si zaidi ya $maxLength wahusika';
+  }
+
+  @override
+  String get invalidPattern => 'Ingizo halifai na mfano unaohitajika';
+
+  @override
+  String invalidDateRange(Object endDate, Object startDate) {
+    return 'Tarehe lazima iwe kati ya $startDate na $endDate';
+  }
+
+  @override
+  String otpEntrySubtitle(Object username) {
+    return 'Otp imetumwa kwa $username';
+  }
+
+  @override
+  String get alphaNumericError => 'Herufi na nambari pekee zinazoruhusiwa';
+
+  @override
+  String get usernameError =>
+      'Jina la mtumiaji lazima liwe na wahusika 3 hadi 15 na linaweza kuwa na herufi, nambari, na alama za chini ya mstari';
+
+  @override
+  String get invalidTime =>
+      'Tafadhali ingiza muda unaofaa katika fomu ya HH:mm';
+
+  @override
+  String get invalidOTP => 'Tafadhali ingiza OTP inayofaa ya nambari 6';
+
+  @override
+  String get invalidCurrency =>
+      'Tafadhali ingiza kiasi kinachofaa (mfano, 1234.56)';
+
+  @override
+  String get invalidIP => 'Tafadhali ingiza anwani ya IPv4 inayofaa';
+
+  @override
+  String get allDataLoaded => 'Data zote zimepakiwa';
+
+  @override
+  String get nidRequired => 'Nambari ya Kitaifa inahitajika.';
+
+  @override
+  String get nidInvalid =>
+      'Tafadhali ingiza Nambari ya Kitaifa halali (tarakimu 12).';
+
+  @override
+  String get fullNameRequired => 'Jina kamili linahitajika.';
+
+  @override
+  String get fullNameInvalid =>
+      'Tafadhali ingiza jina kamili halali (mfano: John Doe, O\'Connor, Mary-Jane).';
+
+  @override
+  String get seconds => 'Sekunde';
+
+  @override
   String get dataEmpty => 'Data Imetosha';
 
   @override
