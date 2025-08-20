@@ -55,9 +55,6 @@ class SettingScreen extends StatelessWidget {
                 ProfileInfoRoute(
                   formKey1: GlobalKey<FormState>(),
                   formKey2: GlobalKey<FormState>(),
-                  ctrCurrentPass: TextEditingController(),
-                  ctrNewPass: TextEditingController(),
-                  ctrConfPass: TextEditingController(),
                 ),
               );
             },

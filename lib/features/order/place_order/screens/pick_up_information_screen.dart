@@ -21,33 +21,30 @@ class PickUpInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: CommonAppBar(title: title, onBackPress: Get.find<PlaceOrderController>().onBackpress),
     body: SingleChildScrollView(
-      child: Form(
-        key: formKey,
-        child: GetBuilder<PlaceOrderController>(
-          builder: (placeOrderController) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                PickupInformationFormWidget(formKey: formKey),
+      child: GetBuilder<PlaceOrderController>(
+        builder: (placeOrderController) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PickupInformationFormWidget(formKey: formKey),
 
-                // _multilineTextField(100).paddingOnly(bottom: 10), //itemDetails
-                if (title == AppString.placeOrder) CouponSectionWidget(placeOrderController: placeOrderController),
+              // _multilineTextField(100).paddingOnly(bottom: 10), //itemDetails
+              if (title == AppString.placeOrder) CouponSectionWidget(placeOrderController: placeOrderController),
 
-                if (title == AppString.homeDoorToDoorPickup) const DoorToDoorDeliveryTypeWidget(),
+              if (title == AppString.homeDoorToDoorPickup) const DoorToDoorDeliveryTypeWidget(),
 
-                10.height,
-                CommonButton(
-                  titleText: AppString.continues,
-                  onTap: () {
-                    //  if( _formKey.currentState?.validate() == true){}
-                    formKey.currentState?.save();
-                    placeOrderController.placeOrderNow();
-                  },
-                ),
-              ],
-            ).paddingOnly(left: 16, right: 16, bottom: 25);
-          },
-        ),
+              10.height,
+              CommonButton(
+                titleText: AppString.continues,
+                onTap: () {
+                  //  if( _formKey.currentState?.validate() == true){}
+                  formKey.currentState?.save();
+                  placeOrderController.placeOrderNow();
+                },
+              ),
+            ],
+          ).paddingOnly(left: 16, right: 16, bottom: 25);
+        },
       ),
     ),
   );

@@ -705,9 +705,6 @@ class ProfileInfoRoute extends _i42.PageRouteInfo<ProfileInfoRouteArgs> {
   ProfileInfoRoute({
     required _i43.GlobalKey<_i43.FormState> formKey1,
     required _i43.GlobalKey<_i43.FormState> formKey2,
-    required _i43.TextEditingController ctrCurrentPass,
-    required _i43.TextEditingController ctrNewPass,
-    required _i43.TextEditingController ctrConfPass,
     _i43.Key? key,
     List<_i42.PageRouteInfo>? children,
   }) : super(
@@ -715,9 +712,6 @@ class ProfileInfoRoute extends _i42.PageRouteInfo<ProfileInfoRouteArgs> {
          args: ProfileInfoRouteArgs(
            formKey1: formKey1,
            formKey2: formKey2,
-           ctrCurrentPass: ctrCurrentPass,
-           ctrNewPass: ctrNewPass,
-           ctrConfPass: ctrConfPass,
            key: key,
          ),
          initialChildren: children,
@@ -732,9 +726,6 @@ class ProfileInfoRoute extends _i42.PageRouteInfo<ProfileInfoRouteArgs> {
       return _i26.ProfileInfoScreen(
         formKey1: args.formKey1,
         formKey2: args.formKey2,
-        ctrCurrentPass: args.ctrCurrentPass,
-        ctrNewPass: args.ctrNewPass,
-        ctrConfPass: args.ctrConfPass,
         key: args.key,
       );
     },
@@ -745,9 +736,6 @@ class ProfileInfoRouteArgs {
   const ProfileInfoRouteArgs({
     required this.formKey1,
     required this.formKey2,
-    required this.ctrCurrentPass,
-    required this.ctrNewPass,
-    required this.ctrConfPass,
     this.key,
   });
 
@@ -755,17 +743,11 @@ class ProfileInfoRouteArgs {
 
   final _i43.GlobalKey<_i43.FormState> formKey2;
 
-  final _i43.TextEditingController ctrCurrentPass;
-
-  final _i43.TextEditingController ctrNewPass;
-
-  final _i43.TextEditingController ctrConfPass;
-
   final _i43.Key? key;
 
   @override
   String toString() {
-    return 'ProfileInfoRouteArgs{formKey1: $formKey1, formKey2: $formKey2, ctrCurrentPass: $ctrCurrentPass, ctrNewPass: $ctrNewPass, ctrConfPass: $ctrConfPass, key: $key}';
+    return 'ProfileInfoRouteArgs{formKey1: $formKey1, formKey2: $formKey2, key: $key}';
   }
 
   @override
@@ -774,20 +756,11 @@ class ProfileInfoRouteArgs {
     if (other is! ProfileInfoRouteArgs) return false;
     return formKey1 == other.formKey1 &&
         formKey2 == other.formKey2 &&
-        ctrCurrentPass == other.ctrCurrentPass &&
-        ctrNewPass == other.ctrNewPass &&
-        ctrConfPass == other.ctrConfPass &&
         key == other.key;
   }
 
   @override
-  int get hashCode =>
-      formKey1.hashCode ^
-      formKey2.hashCode ^
-      ctrCurrentPass.hashCode ^
-      ctrNewPass.hashCode ^
-      ctrConfPass.hashCode ^
-      key.hashCode;
+  int get hashCode => formKey1.hashCode ^ formKey2.hashCode ^ key.hashCode;
 }
 
 /// generated route for

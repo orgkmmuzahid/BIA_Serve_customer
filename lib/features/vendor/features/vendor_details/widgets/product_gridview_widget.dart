@@ -22,12 +22,14 @@ class ProductGridviewWidget extends StatelessWidget {
     this.enableProductScrolling = false,
     this.topWidget,
     this.showFilterAfterTopWidget = false,
+    this.onRefresh,
   });
 
   final int limit;
   final bool enableProductScrolling;
   final Widget? topWidget;
   final bool showFilterAfterTopWidget;
+  final Function? onRefresh;
   @override
   Widget build(BuildContext context) => BlocProvider(
     create: (context) => ProductCubit()..fetch(),
@@ -40,7 +42,12 @@ class ProductGridviewWidget extends StatelessWidget {
             Expanded(
               child: SmartStaggeredLoader(
                 itemCount: state.products?.length ?? 0,
-                onRefresh: cubit.fetch,
+                onRefresh: () {
+                  cubit.fetch();
+                  if (onRefresh != null) {
+                    onRefresh!();
+                  }
+                },
                 onLoadMore: cubit.loadMore,
                 topWidget: _topWidget(cubit),
                 staggeredTile: const StaggeredTile.count(1, 1),

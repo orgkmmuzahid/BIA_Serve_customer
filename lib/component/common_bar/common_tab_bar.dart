@@ -11,10 +11,12 @@ class CommonTabBar extends StatefulWidget {
     this.onTabChange,
     this.selectedTextStyle,
     this.spaceing = 8,
+    this.isExpanded = false,
     this.unselectedTextStyle,
   });
   final List<String> tabs;
   final List<Widget> tabViews;
+  final bool isExpanded;
 
   final BoxDecoration? selectedStyle;
   final BoxDecoration? unselectedStyle;
@@ -111,22 +113,26 @@ class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMix
           },
         ),
         const SizedBox(height: 16),
+        widget.isExpanded ?
         Expanded(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            switchInCurve: Curves.easeIn,
-            switchOutCurve: Curves.easeOut,
-            transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
-            child: Container(
-              key: ValueKey<int>(index),
-              child:
-                  widget.tabViews.isNotEmpty
-                      ? widget.tabViews[index >= widget.tabViews.length ? widget.tabViews.length - 1 : index]
-                      : const SizedBox(), // fallback if no tabViews at all
-            ),
-          ),
-        ),
+          child: _content(index)) : _content(index),
       ],
+    );
+  }
+
+  AnimatedSwitcher _content(int index) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      switchInCurve: Curves.easeIn,
+      switchOutCurve: Curves.easeOut,
+      transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
+      child: Container(
+        key: ValueKey<int>(index),
+        child:
+            widget.tabViews.isNotEmpty
+                ? widget.tabViews[index >= widget.tabViews.length ? widget.tabViews.length - 1 : index]
+                : const SizedBox(), // fallback if no tabViews at all
+      ),
     );
   }
 }

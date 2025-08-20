@@ -2,10 +2,13 @@
 // ignore_for_file: avoid_annotating_with_dynamic
 
 import 'dart:async';
+import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
+import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:dio/dio.dart' as dio; // Alias Dio as dio to avoid conflict with FormData
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../dependency/dependency_injection.dart';
 import 'request_input.dart'; // Import the updated RequestInput
 import 'response_state.dart';
@@ -15,6 +18,7 @@ typedef OnRequestStateChange<T> = void Function(ResponseState<T> state);
 
 class DioService {
   DioService._(this._dio, this._storageService, {required this.onLogout}) : _debugMode = AppLogger.enableLogs;
+  AuthCubit? authCubit;
   static final String _baseUrl = 'https://api.example.com';
   final Dio _dio;
   final StorageService _storageService;
@@ -45,6 +49,7 @@ class DioService {
     _dio.interceptors.add(
       QueuedInterceptorsWrapper(
         onRequest: (options, handler) async {
+          authCubit ??= appRouter.navigatorKey.currentContext?.read<AuthCubit>();
           if (_debugMode) {
             AppLogger.apiDebug('REQUEST[${options.method}] => PATH: ${options.path}', tag: options.path);
             AppLogger.apiDebug('Headers: ${options.headers}', tag: options.path);
@@ -146,15 +151,14 @@ class DioService {
   }
 
   Future<void> _injectToken(RequestOptions options) async {
-    if (_storageService.userLoginInfoModel.accessToken.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer ${_storageService.userLoginInfoModel.accessToken}';
+    final accessToken = authCubit?.state.userLoginInfoModel.accessToken;
+    if (accessToken?.isNotEmpty == true) {
+      options.headers['Authorization'] = 'Bearer ${authCubit?.state.userLoginInfoModel.accessToken}';
     }
   }
 
   Future<void> _saveTokens(String access, String refresh) async {
-    await _storageService.saveUserInfo(
-      _storageService.userLoginInfoModel.copyWith(accessToken: access, refreshToken: refresh),
-    );
+    await authCubit?.updateToken(accessToken: access, refreshToken: refresh);
   }
 
   Future<void> clearTokens() async {
@@ -232,13 +236,16 @@ class DioService {
 
   // Refactored refresh logic to be called directly by the interceptor
   Future<void> _refreshTokenIfNeeded() async {
-    if (_storageService.userLoginInfoModel.refreshToken.isEmpty) {
-      throw Exception('No refresh token available.');
+    final refreshToken = authCubit?.state.userLoginInfoModel.refreshToken;
+
+    if (refreshToken?.isEmpty == true || refreshToken == null) {
+      AppLogger.debug('No refresh token available.', tag: 'DIO service');
+      return;
     }
     try {
       final response = await _dio.post(
         '/auth/refresh', // Replace with your actual refresh token endpoint
-        data: {'refresh_token': _storageService.userLoginInfoModel.refreshToken},
+        data: {'refresh_token': refreshToken},
         options: dio.Options(extra: {'requiresToken': false}), // Refresh token request does not require token
       );
       if (response.statusCode == 200) {
@@ -272,12 +279,13 @@ class DioService {
       e.type == DioExceptionType.unknown;
 
   Future<_RequestOptionsData> _buildRequestOptions(RequestInput input) async {
+    final accessToken = authCubit?.state.userLoginInfoModel.accessToken;
+
     String url = input.endpoint;
     input.pathParams?.forEach((k, v) => url = url.replaceAll('{$k}', Uri.encodeComponent(v.toString())));
 
     final headers = {
-      if (input.requiresToken && _storageService.userLoginInfoModel.accessToken.isNotEmpty)
-        'Authorization': 'Bearer ${_storageService.userLoginInfoModel.accessToken}',
+      if (input.requiresToken && accessToken?.isNotEmpty == true) 'Authorization': 'Bearer $accessToken',
       ...?input.headers,
     };
 

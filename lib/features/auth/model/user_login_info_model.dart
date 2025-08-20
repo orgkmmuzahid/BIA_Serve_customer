@@ -10,18 +10,19 @@ class UserLoginInfoModel {
   final String username;
   final String accessToken;
   final String refreshToken;
+  final String address;
   //enum
   final Role? role;
-  UserLoginInfoModel({
+  const UserLoginInfoModel({
     required this.id,
     required this.name,
     required this.image,
     required this.username,
     required this.accessToken,
     required this.refreshToken,
+    required this.address,
     this.role,
   });
-
 
   UserLoginInfoModel copyWith({
     String? id,
@@ -30,6 +31,7 @@ class UserLoginInfoModel {
     String? username,
     String? accessToken,
     String? refreshToken,
+    String? address,
     Role? role,
   }) {
     return UserLoginInfoModel(
@@ -39,6 +41,7 @@ class UserLoginInfoModel {
       username: username ?? this.username,
       accessToken: accessToken ?? this.accessToken,
       refreshToken: refreshToken ?? this.refreshToken,
+      address: address ?? this.address,
       role: role ?? this.role,
     );
   }
@@ -51,6 +54,7 @@ class UserLoginInfoModel {
       'username': username,
       'accessToken': accessToken,
       'refreshToken': refreshToken,
+      'address': address,
       'role': role?.index,
     };
   }
@@ -63,41 +67,44 @@ class UserLoginInfoModel {
       username: map['username'] as String,
       accessToken: map['accessToken'] as String,
       refreshToken: map['refreshToken'] as String,
+      address: map['address'] as String,
       role: map['role'] != null ? Role?.values[map['role'] as int] : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserLoginInfoModel.fromJson(String source) => UserLoginInfoModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserLoginInfoModel.fromJson(String source) =>
+      UserLoginInfoModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'UserLoginInfoModel(id: $id, name: $name, image: $image, username: $username, accessToken: $accessToken, refreshToken: $refreshToken, role: $role)';
+    return 'UserLoginInfoModel(id: $id, name: $name, image: $image, username: $username, accessToken: $accessToken, refreshToken: $refreshToken, address: $address, role: $role)';
   }
 
   @override
   bool operator ==(covariant UserLoginInfoModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.image == image &&
+
+    return other.id == id &&
+        other.name == name &&
+        other.image == image &&
         other.username == username &&
-      other.accessToken == accessToken &&
+        other.accessToken == accessToken &&
         other.refreshToken == refreshToken &&
+        other.address == address &&
         other.role == role;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      image.hashCode ^
+        name.hashCode ^
+        image.hashCode ^
         username.hashCode ^
-      accessToken.hashCode ^
+        accessToken.hashCode ^
         refreshToken.hashCode ^
+        address.hashCode ^
         role.hashCode;
   }
 }

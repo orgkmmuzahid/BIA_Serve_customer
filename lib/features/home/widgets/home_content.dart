@@ -3,20 +3,20 @@ import 'package:bai_serve_customer/component/image/common_rotating_image_banner.
 import 'package:bai_serve_customer/component/search_bar/common_search_bar.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
+import 'package:bai_serve_customer/features/home/cubit/home_cubit.dart';
+import 'package:bai_serve_customer/features/home/cubit/home_state.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/widgets/product_gridview_widget.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({required this.homeController, super.key});
-
-  final HomeController homeController;
+  const HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -31,7 +31,11 @@ class HomeContent extends StatelessWidget {
   Widget _topItems() {
     return Column(
       children: [
-        CommonRotatingImageBanner(imageUrls: homeController.bannerUrls.data, currentIndex: homeController.currentIndex),
+        BlocBuilder<HomeCubit, HomeStates>(
+          builder: (context, state) {
+            return CommonRotatingImageBanner(imageUrls: state.banners, currentIndex: state.currentBannerIndex);
+          },
+        ),
         20.height,
 
         //midle content

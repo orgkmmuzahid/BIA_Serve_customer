@@ -3,17 +3,16 @@ import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/pop_up/common_popup_menu.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve_customer/features/chat/model/message_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 @RoutePage()
 class MessageScreen extends StatelessWidget {
@@ -34,10 +33,7 @@ class MessageScreen extends StatelessWidget {
                         onTap: () {
                           appRouter.push(ChatRoute());
                         },
-                        child: Card(
-                          color: AppColors.serfeceBG,
-                          child: _chatItem(person),
-                        ),
+                        child: Card(color: AppColors.serfeceBG, child: _chatItem(person)),
                       ),
                     )
                     .toList(),
@@ -52,26 +48,13 @@ class MessageScreen extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: Row(
         children: [
-          CommonImage(
-            imageSrc: person.userImage,
-            fill: BoxFit.fill,
-            size: 30,
-            borderRadius: 30,
-          ),
+          CommonImage(imageSrc: person.userImage, fill: BoxFit.fill, size: 30, borderRadius: 30),
           10.width,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CommonText(
-                text: person.userName,
-                fontWeight: FontWeight.w700,
-                color: AppColors.primaryText,
-              ),
-              CommonText(
-                text: person.userStatus.displayName,
-                fontSize: 10,
-                color: AppColors.primaryText,
-              ),
+              CommonText(text: person.userName, fontWeight: FontWeight.w700, color: AppColors.primaryText),
+              CommonText(text: person.userStatus.displayName, fontSize: 10, color: AppColors.primaryText),
             ],
           ),
           const Spacer(),
@@ -91,11 +74,7 @@ class MessageScreen extends StatelessWidget {
                   }
                 },
               ),
-              CommonText(
-                text: Utils.formatTime(person.lastSendMessageTime),
-                color: AppColors.disable,
-                right: 15,
-              ),
+              CommonText(text: Utils.formatTime(person.lastSendMessageTime), color: AppColors.disable, right: 15),
             ],
           ),
         ],

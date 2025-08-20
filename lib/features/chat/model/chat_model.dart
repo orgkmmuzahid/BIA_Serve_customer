@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:bai_serve_customer/features/chat/model/chat_user_info.dart';
 
+
 enum ChatType { message, image, callSuccess, callFailed }
 
 class ChatModel {

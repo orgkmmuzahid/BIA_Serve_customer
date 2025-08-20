@@ -13,7 +13,6 @@ class CoreDependency {
     // Register StorageService as eager singleton
     getIt.registerSingletonAsync<StorageService>(() async {
       final storageService = StorageService();
-      await storageService.init(); // await init during registration
       return storageService;
     });
 

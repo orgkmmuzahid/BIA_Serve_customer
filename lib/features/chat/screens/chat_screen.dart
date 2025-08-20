@@ -2,7 +2,6 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:bai_serve_customer/common/common_language_drop_down.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
@@ -10,20 +9,18 @@ import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/languages/widgets/common_language_slector.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/config/storage/storage_service.dart';
+import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/features/chat/controllers/chat_controller.dart';
 import 'package:bai_serve_customer/features/chat/model/chat_model.dart';
-import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
 
 @RoutePage()
 class ChatScreen extends StatelessWidget {
-  ChatScreen({super.key, this.action})
-    : chatIemWidth = (Utils.deviceSize.width - 32) * .7;
+  ChatScreen({super.key, this.action}) : chatIemWidth = (Utils.deviceSize.width - 32) * .7;
   final Widget? action;
   final double chatIemWidth;
 
@@ -39,9 +36,7 @@ class ChatScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   reverse: true,
-                  child: Column(
-                    children: chatController.chats.map(_chatItem).toList(),
-                  ),
+                  child: Column(children: chatController.chats.map((e) => _chatItem(e, context)).toList()),
                 ),
               ),
               SizedBox(
@@ -51,24 +46,17 @@ class ChatScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: Container(
-                            color: getTheme.colorScheme.onSecondary,
-                            child: _inputField(chatController),
-                          ),
+                          child: Container(color: getTheme.colorScheme.onSecondary, child: _inputField(chatController)),
                         ),
                         10.width,
                         GestureDetector(
-                          onTap: chatController.onSend,
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: getTheme.colorScheme.onSecondary,
                             ),
-                            child: Icon(
-                              Icons.send,
-                              color: getTheme.textTheme.bodyLarge?.color,
-                            ),
+                            child: Icon(Icons.send, color: getTheme.textTheme.bodyLarge?.color),
                           ),
                         ),
                       ],
@@ -98,18 +86,14 @@ class ChatScreen extends StatelessWidget {
           ],
         )
         : CommonTextField(
+          prefixIcon: GestureDetector(onTap: chatController.pickImage, child: const Icon(Icons.attach_file)),
           validationType: ValidationType.validateRequired,
-          controller: chatController.inputMessageTextFiled,
-          prefixIcon: GestureDetector(
-            onTap: chatController.pickImage,
-            child: const Icon(Icons.attach_file),
-          ),
           borderColor: getTheme.colorScheme.onSecondary,
         );
   }
 
-  Widget _chatItem(ChatModel model) {
-    final bool isMe = model.userInfo.userId == Get.find<StorageService>().userLoginInfoModel.id;
+  Widget _chatItem(ChatModel model, BuildContext context) {
+    final bool isMe = model.userInfo.userId == context.read<AuthCubit>().state.userLoginInfoModel.id;
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child:
@@ -121,57 +105,41 @@ class ChatScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       CommonImage(imageSrc: model.content),
-                      CommonText(
-                        text: Utils.formatDateTime(model.createdAt),
-                      ).end,
+                      CommonText(text: Utils.formatDateTime(model.createdAt)).end,
                     ],
                   ),
                 ),
               )
               : Card(
-                color:
-                    isMe
-                        ? getTheme.colorScheme.outlineVariant
-                        : getTheme.dividerColor.withAlpha(20),
+                color: isMe ? getTheme.colorScheme.outlineVariant : getTheme.dividerColor.withAlpha(20),
                 child: SizedBox(
                   width: chatIemWidth,
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        if (model.chatType == ChatType.message)
-                          Text(model.content),
+                        if (model.chatType == ChatType.message) Text(model.content),
                         if (model.chatType == ChatType.callFailed)
                           Row(
                             children: [
                               Icon(
                                 Icons.call_missed_rounded,
-                                color:
-                                    isMe
-                                        ? getTheme.textTheme.bodySmall?.color
-                                        : getTheme.colorScheme.error,
+                                color: isMe ? getTheme.textTheme.bodySmall?.color : getTheme.colorScheme.error,
                               ),
                               CommonText(
                                 text: 'Voice Call',
-                                color:
-                                    isMe
-                                        ? getTheme.textTheme.bodySmall?.color
-                                        : getTheme.colorScheme.error,
+                                color: isMe ? getTheme.textTheme.bodySmall?.color : getTheme.colorScheme.error,
                               ),
                             ],
                           ),
                         if (model.chatType == ChatType.callSuccess)
                           Row(
                             children: [
-                              Icon(
-                                isMe ? Icons.call_made : Icons.call_received,
-                              ),
+                              Icon(isMe ? Icons.call_made : Icons.call_received),
                               const CommonText(text: 'Voice Call'),
                             ],
                           ),
-                        CommonText(
-                          text: Utils.formatDateTime(model.createdAt),
-                        ).end,
+                        CommonText(text: Utils.formatDateTime(model.createdAt)).end,
                       ],
                     ),
                   ),
@@ -185,20 +153,12 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: getTheme.colorScheme.outlineVariant,
       title: Row(
         children: [
-          CommonImage(
-            imageSrc: chatController.chatInfo.image,
-            size: 29,
-            borderRadius: 29,
-            fill: BoxFit.fill,
-          ),
+          CommonImage(imageSrc: chatController.chatInfo.image, size: 29, borderRadius: 29, fill: BoxFit.fill),
           10.width,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CommonText(
-                text: chatController.chatInfo.chatName,
-                style: getTheme.textTheme.titleSmall,
-              ),
+              CommonText(text: chatController.chatInfo.chatName, style: getTheme.textTheme.titleSmall),
               CommonText(text: chatController.chatInfo.status),
             ],
           ),
@@ -207,10 +167,7 @@ class ChatScreen extends StatelessWidget {
       leadingWidth: 40,
       leading: GestureDetector(
         onTap: appRouter.pop,
-        child: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Icon(Icons.arrow_back_ios),
-        ),
+        child: const Padding(padding: EdgeInsets.only(left: 10), child: Icon(Icons.arrow_back_ios)),
       ),
       actionsPadding: const EdgeInsets.only(right: 10),
       titleSpacing: 0,
@@ -221,13 +178,10 @@ class ChatScreen extends StatelessWidget {
               onTap: () {
                 appRouter.push(const CallingRoute());
               },
-              child: Icon(
-                Icons.call_rounded,
-                color: getTheme.primaryColor,
-                size: 27,
-              ),
+              child: Icon(Icons.call_rounded, color: getTheme.primaryColor, size: 27),
             ).paddingOnly(right: 10),
-        const CommonLanguageSlector()
+
+        const CommonLanguageSlector(),
       ],
     );
   }

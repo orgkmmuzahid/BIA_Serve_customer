@@ -12,7 +12,6 @@ import 'package:image_picker/image_picker.dart';
 // Get.lazyPut(() => ChatController(), fenix: true);
 
 class ChatController extends GetxController {
-  TextEditingController inputMessageTextFiled = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -129,31 +128,14 @@ class ChatController extends GetxController {
     update();
   }
 
-  void onSend() {
+  void onSend(String text) {
     if (selectedImagesPath != null) {
       //send image api
       selectedImagesPath = null;
       update();
       return;
     }
-    if (inputMessageTextFiled.text.isNotEmpty) {
-      //send message api
-      final ChatModel model = ChatModel(
-        chatId: 'chatId',
-        chatType: ChatType.message,
-        content: inputMessageTextFiled.text,
-        userInfo: ChatUserInfo(userId: '', name: '', image: AppImages.airtel),
-        createdAt: DateTime.now(),
-      );
-      chats.add(model);
-      inputMessageTextFiled.clear();
-      update();
-    }
+
   }
 
-  @override
-  void dispose() {
-    inputMessageTextFiled.dispose();
-    super.dispose();
-  }
 }

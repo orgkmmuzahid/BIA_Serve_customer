@@ -1,5 +1,5 @@
 import 'package:bai_serve_customer/config/network/response_state.dart';
-import 'package:bai_serve_customer/config/storage/user_login_info_model.dart';
+import 'package:bai_serve_customer/features/auth/model/user_login_info_model.dart';
 import 'package:bai_serve_customer/features/auth/model/sign_up_model.dart';
 import 'package:bai_serve_customer/features/auth/repository/auth_repository.dart';
 

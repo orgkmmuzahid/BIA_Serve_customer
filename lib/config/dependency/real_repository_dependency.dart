@@ -1,4 +1,3 @@
-import 'package:bai_serve_customer/component/search_bar/search_history_service.dart';
 import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/features/auth/repository/auth_repository.dart';
 import 'package:bai_serve_customer/features/auth/repository/real_auth_repository.dart';
@@ -26,9 +25,9 @@ class RealRepositoryDependency {
 
 
     Get.lazyPut<VendorSourcingRepository>(RealVendorSourcingRepository.new, fenix: true);
-    Get.lazyPut<HomeRepository>(RealHomeRepository.new, fenix: true);
 
     //getit
+    getIt.registerLazySingleton<HomeRepository>(RealHomeRepository.new);
     getIt.registerLazySingleton<VerifyVendorRepository>(RealVerifyVendorRepository.new);
     getIt.registerLazySingleton<CategorySelctorRepository>(RealCategorySelctorRepository.new);
     getIt.registerLazySingleton<ReturnProductRepository>(RealReturnProductRepository.new);

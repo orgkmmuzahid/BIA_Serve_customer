@@ -19,16 +19,10 @@ class ProfileInfoScreen extends StatelessWidget {
   const ProfileInfoScreen({
     required this.formKey1,
     required this.formKey2,
-    required this.ctrCurrentPass,
-    required this.ctrNewPass,
-    required this.ctrConfPass,
     super.key,
   });
   final GlobalKey<FormState> formKey1;
   final GlobalKey<FormState> formKey2;
-  final TextEditingController ctrCurrentPass;
-  final TextEditingController ctrNewPass;
-  final TextEditingController ctrConfPass;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -71,7 +65,6 @@ class ProfileInfoScreen extends StatelessWidget {
         /// current Password section
         CommonText(text: AppString.currentPassword, bottom: 8),
         CommonTextField(
-          controller: ctrCurrentPass,
           hintText: AppString.currentPassword,
           validationType: ValidationType.validatePassword,
           prefixIcon: Icon(Icons.lock, size: 20.sp),
@@ -80,7 +73,6 @@ class ProfileInfoScreen extends StatelessWidget {
         /// New Password section
         CommonText(text: AppString.newPassword, bottom: 8, top: 16),
         CommonTextField(
-          controller: ctrNewPass,
           hintText: AppString.newPassword,
           validationType: ValidationType.validatePassword,
           prefixIcon: Icon(Icons.lock, size: 20.sp),
@@ -89,10 +81,8 @@ class ProfileInfoScreen extends StatelessWidget {
         /// confirm Password section
         CommonText(text: AppString.confirmPassword, bottom: 8, top: 16),
         CommonTextField(
-          controller: ctrConfPass,
           hintText: AppString.confirmPassword,
           validationType: ValidationType.validateConfirmPassword,
-          originalPassword: ctrNewPass.text,
           prefixIcon: Icon(Icons.lock, size: 20.sp),
         ),
         20.height,

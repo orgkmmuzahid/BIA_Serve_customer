@@ -1,5 +1,5 @@
 import 'package:bai_serve_customer/config/network/response_state.dart';
-import 'package:bai_serve_customer/config/storage/user_login_info_model.dart';
+import 'package:bai_serve_customer/features/auth/model/user_login_info_model.dart';
 import 'package:bai_serve_customer/features/auth/model/sign_up_model.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/helpers/simulate_moc_repo.dart';
@@ -17,6 +17,7 @@ class MockAuthRepository implements AuthRepository {
           username: username,
           accessToken: 'bearer dddddd',
           refreshToken: 'beared ddddddds',
+          address: '1901 Thornridge Cir. Shiloh, Hawaii 81063',
         ),
         statusCode: 200,
       );
@@ -40,6 +41,7 @@ class MockAuthRepository implements AuthRepository {
   Future<ResponseState<UserLoginInfoModel>> getCurrentUser({required String username}) async => ResponseState(
     data: UserLoginInfoModel(
       id: '',
+      address: '1901 Thornridge Cir. Shiloh, Hawaii 81063',
       name: 'Km M Islam',
       image: AppImages.callingBackground,
       username: username,

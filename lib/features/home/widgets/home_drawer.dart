@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:bai_serve_customer/component/button/common_button.dart';
-import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/pop_up/common_alert.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
@@ -10,7 +9,7 @@ import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
-import 'package:bai_serve_customer/features/home/controller/home_controller.dart';
+import 'package:bai_serve_customer/features/home/cubit/home_cubit.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
@@ -18,10 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeDrawer extends StatelessWidget {
-  const HomeDrawer({required this.userName, required this.address, required this.controller, super.key});
+  const HomeDrawer({required this.userName, required this.address, super.key});
   final String userName;
   final String address;
-  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +67,7 @@ class HomeDrawer extends StatelessWidget {
                           buttonColor: getTheme.colorScheme.primary,
                           onTap: () {
                             appRouter.pop();
-                            controller.onNavigationChange(3);
+                            context.read<HomeCubit>().onNavigatinChange(3);
                           },
                         ),
                       ],
