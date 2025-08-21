@@ -1,129 +1,104 @@
-// File: custom_google_map_controller.dart
-
-import 'dart:ui';
-
-import 'package:bai_serve_customer/component/other_widgets/permission_handler_helper.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
-import 'package:bai_serve_customer/config/route/app_router.dart';
-import 'package:bai_serve_customer/utils/app_utils.dart';
+import 'package:bai_serve_customer/config/bloc/safe_cubit.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
-import 'package:bai_serve_customer/utils/constants/app_images.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
-// Get.lazyPut(() => CustomGoogleMapController(), fenix: true);
 
-class CustomGoogleMapController extends GetxController {
-  Set<Polyline> mapRoute = {};
-  Set<Marker> markers = {};
-  late GoogleMapController mapController;
+import 'map_state.dart';
 
-  TravelMode _mode = TravelMode.driving;
+class MapCubit extends SafeCubit<MapState> {
+  MapCubit() : super(MapState.initial());
   final String _mapKey = 'AIzaSyDk7p1Vl9WOtcDztagS6yPsgUYaVu_bCro';
 
-  LatLng startLocation = const LatLng(23.772882, 90.420017);
-  LatLng endLocation = const LatLng(23.772109, 90.419656);
+  late GoogleMapController mapController;
 
-  bool initialized = false;
-
-  @override
-  void onClose() {
-    mapRoute.clear();
-    markers.clear();
-    initialized = false;
-    super.onClose();
-  }
-
+  // This method is used for travel mode changes
   void onTravelModeChange(TravelMode mode) {
-    _mode = mode;
-    getPolylinePoints(startLocation, endLocation);
+    emit(state.copyWith(travelMode: mode));
+    getPolylinePoints(state.startLocation, state.endLocation);
   }
 
-  bool _isInitializing = false;
-  void onMapCreated(GoogleMapController controller) async {
-    if (_isInitializing) return;
-    _isInitializing = true;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      mapController = controller;
-      update();
-      _initMapAsync(); // See below
-    });
+  // This method initializes the map and retrieves the current location
+  Future<void> onMapCreated(GoogleMapController controller) async {
+    // if (state.initializing) return;
+    emit(state.copyWith(isLoading: true));
+
+    mapController = controller;
+    await _initMapAsync();
   }
 
+  // Async initialization method
   Future<void> _initMapAsync() async {
-    final isPermitted = await const PermissionHandlerHelper(permission: Permission.location).getStatus();
+    final isPermitted = await Permission.location.isGranted;
 
-    if (!isPermitted || !Get.isRegistered<CustomGoogleMapController>()) return;
+    if (!isPermitted) {
+      emit(state.copyWith(initializing: false));
+      return;
+    }
 
     try {
       final position = await Geolocator.getCurrentPosition();
-
-      startLocation = LatLng(position.latitude, position.longitude);
+      final startLocation = LatLng(position.latitude, position.longitude);
 
       final startMarker = Marker(
         markerId: const MarkerId('start'),
-        icon: await Utils.bitmapDescriptorFromIconData(Icons.gps_fixed_sharp, size: 30, color: Colors.blue),
         position: startLocation,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         infoWindow: const InfoWindow(title: 'Start'),
       );
 
       final endMarker = Marker(
         markerId: const MarkerId('end'),
-        position: endLocation,
-        icon: await Utils.bitmapDescriptorFromIconData(Icons.place, size: 30, color: Colors.blue),
+        position: state.endLocation,
         infoWindow: const InfoWindow(title: 'Destination'),
       );
 
-      markers.addAll({startMarker, endMarker});
+      emit(
+        state.copyWith(
+          markers: {startMarker, endMarker},
+          startLocation: startLocation,
+          initializing: false,
+          initialized: true,
+          isLoading: false,
+        ),
+      );
 
-      try {
-        await mapController.animateCamera(
-          CameraUpdate.newCameraPosition(CameraPosition(target: startLocation, zoom: 18)),
-        );
-      } catch (_) {
-        AppLogger.warning('Failed to animate camera');
-      }
-
-      await getPolylinePoints(startLocation, endLocation);
-
-      update();
+      await getPolylinePoints(startLocation, state.endLocation);
     } catch (e) {
-      AppLogger.error(e.toString(), tag: 'Map initialization failed');
+      emit(state.copyWith(initializing: false)); // Handle error gracefully
+      AppLogger.error('Error initializing map: $e', tag: 'Map Cubit');
     }
   }
 
+  // This method retrieves the polyline points based on travel mode
   Future<void> getPolylinePoints(LatLng start, LatLng end) async {
+    emit(state.copyWith(isLoading: true));
     try {
       final polylinePoints = PolylinePoints();
       final List<LatLng> polylineCoordinates = [];
-      mapRoute.clear();
-      update();
       final result = await polylinePoints.getRouteBetweenCoordinates(
         request: PolylineRequest(
           origin: PointLatLng(start.latitude, start.longitude),
           destination: PointLatLng(end.latitude, end.longitude),
-          mode: _mode,
+          mode: state.travelMode,
         ),
         googleApiKey: _mapKey,
       );
-
+      emit(state.copyWith(isLoading: false));
       if (result.points.isNotEmpty) {
         polylineCoordinates.addAll(result.points.map((p) => LatLng(p.latitude, p.longitude)));
 
         _drawPolyline(polylineCoordinates);
-        num distance = result.totalDistanceValue ?? 1 / 1000; // Convert to km
-        num duration = result.totalDurationValue ?? 1 / 60; // Convert to minutes
+        final num distance = result.totalDistanceValue ?? 1 / 1000; // Convert to km
+        final num duration = result.totalDurationValue ?? 1 / 60; // Convert to minutes
 
         if (polylineCoordinates.isEmpty) return;
-
         // Place markers at start, middle, and end
         _addMarkers(
           start,
@@ -132,24 +107,23 @@ class CustomGoogleMapController extends GetxController {
           distance.toDouble(),
           duration.toDouble(),
         );
-
-        print("Distance: ${distance} km  ${polylineCoordinates.length}");
-        print("Duration: ${duration} minutes");
       }
     } catch (e) {
       AppLogger.error(e.toString(), tag: 'Map Polyline Error');
     }
   }
 
+  // Method to draw polyline on the map
   void _drawPolyline(List<LatLng> points) {
-    mapRoute.add(Polyline(polylineId: const PolylineId('route'), color: Colors.blue, width: 5, points: points));
-    update();
+    final polyline = Polyline(polylineId: const PolylineId('route'), color: Colors.blue, width: 5, points: points);
+
+    emit(state.copyWith(mapRoute: {polyline}));
     _moveCameraToFitPolyline(points);
   }
 
+  // Move the camera to fit the polyline on the map
   void _moveCameraToFitPolyline(List<LatLng> polylinePoints) {
     if (polylinePoints.isNotEmpty) {
-      // Calculate the bounds of the polyline points (bounding box)
       double minLat = polylinePoints[0].latitude;
       double maxLat = polylinePoints[0].latitude;
       double minLng = polylinePoints[0].longitude;
@@ -161,12 +135,14 @@ class CustomGoogleMapController extends GetxController {
         if (point.longitude < minLng) minLng = point.longitude;
         if (point.longitude > maxLng) maxLng = point.longitude;
       }
-      mapController.animateCamera(
-        CameraUpdate.newLatLngBounds(
-          LatLngBounds(southwest: LatLng(minLat, minLng), northeast: LatLng(maxLat, maxLng)),
-          50,
-        ),
-      );
+      if (!isClosed)
+        mapController.animateCamera(
+          CameraUpdate.newLatLngBounds(
+            LatLngBounds(southwest: LatLng(minLat, minLng), northeast: LatLng(maxLat, maxLng)),
+            50,
+          ),
+          duration: const Duration(milliseconds: 300),
+        );
     }
   }
 
@@ -178,8 +154,8 @@ class CustomGoogleMapController extends GetxController {
     // BitmapDescriptor endMarkerIcon = await _createCustomMarker(
     //   "End\n${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min",
     // );
-    BitmapDescriptor middleMarkerIcon = await _createCustomMarker(
-      "${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min",
+    final BitmapDescriptor middleMarkerIcon = await _createCustomMarker(
+      '${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min',
     );
 
     // Add markers with custom icons
@@ -189,15 +165,14 @@ class CustomGoogleMapController extends GetxController {
       icon: await const Icon(Icons.gps_fixed, color: Colors.blue).toBitmapDescriptor(),
     );
 
-    final endMarker = Marker(markerId: MarkerId('end'), position: end);
+    final endMarker = Marker(markerId: const MarkerId('end'), position: end);
 
-    final middleMarker = Marker(markerId: MarkerId('middle'), position: middle, icon: middleMarkerIcon);
+    final middleMarker = Marker(markerId: const MarkerId('middle'), position: middle, icon: middleMarkerIcon);
 
-    // Add all markers to the map
-    markers.addAll({startMarker, endMarker, middleMarker});
-    update(); // Update the map to show the markers
+    emit(state.copyWith(markers: {startMarker, endMarker, middleMarker}));
   }
-Future<BitmapDescriptor> _createCustomMarker(String text) async {
+
+  Future<BitmapDescriptor> _createCustomMarker(String text) async {
     return CommonText(
       text: text,
       backgroundColor: Colors.white,
@@ -209,8 +184,5 @@ Future<BitmapDescriptor> _createCustomMarker(String text) async {
       borderColor: AppColors.primaryColor2,
       borderRadious: 4.r,
     ).toBitmapDescriptor();
-}
-
-
-
+  }
 }

@@ -1,5 +1,6 @@
-import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
+
 
 class CommonTabBar extends StatefulWidget {
   const CommonTabBar({
@@ -14,6 +15,7 @@ class CommonTabBar extends StatefulWidget {
     this.isExpanded = false,
     this.unselectedTextStyle,
   });
+
   final List<String> tabs;
   final List<Widget> tabViews;
   final bool isExpanded;
@@ -30,62 +32,47 @@ class CommonTabBar extends StatefulWidget {
   State<CommonTabBar> createState() => _CommonTabBarState();
 }
 
-class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMixin {
-  late TabController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TabController(length: widget.tabs.length, vsync: this);
-    _controller.addListener(() {
-      if (_controller.indexIsChanging) {
-        if (widget.onTabChange != null) {
-          widget.onTabChange!(_controller.index);
-        }
-        setState(() {});
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class _CommonTabBarState extends State<CommonTabBar> {
+  int _selectedIndex = 0; // Keep track of the selected tab index
+  Color primaryColor = getTheme.colorScheme.primary.withAlpha(30);
 
   @override
   Widget build(BuildContext context) {
-    final index = _controller.index;
-
     return Column(
       children: [
         LayoutBuilder(
           builder: (context, constraints) {
             return Row(
               children: List.generate(widget.tabs.length, (tabIndex) {
-                final isSelected = index == tabIndex;
+                final isSelected = _selectedIndex == tabIndex;
 
                 final defaultSelectedStyle = BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: primaryColor, // Replace with AppColors.primaryColor if needed
                   borderRadius: BorderRadius.circular(8),
                 );
 
                 final defaultUnselectedStyle = BoxDecoration(
-                  border: Border.all(color: AppColors.primaryColor),
+                  border: Border.all(color: primaryColor), // Replace with AppColors.primaryColor
                   borderRadius: BorderRadius.circular(8),
                 );
 
-                final defaultSelectedTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.bold);
-
-                final defaultUnselectedTextStyle = const TextStyle(
-                  color: AppColors.primaryColor,
+                final defaultSelectedTextStyle = TextStyle(
+                  color: getTheme.colorScheme.primary,
                   fontWeight: FontWeight.bold,
+                );
+
+                final defaultUnselectedTextStyle = TextStyle(
+                  color: _selectedIndex == tabIndex ? primaryColor : getTheme.primaryColor, 
+                  fontWeight: FontWeight.bold,
+                  fontSize: _selectedIndex == tabIndex ? 14 : 12
                 );
 
                 return Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      _controller.animateTo(tabIndex);
+                      setState(() {
+                        _selectedIndex = tabIndex; // Update the selected index
+                      });
                       if (widget.onTabChange != null) {
                         widget.onTabChange!(tabIndex);
                       }
@@ -113,26 +100,17 @@ class _CommonTabBarState extends State<CommonTabBar> with TickerProviderStateMix
           },
         ),
         const SizedBox(height: 16),
-        widget.isExpanded ?
-        Expanded(
-          child: _content(index)) : _content(index),
+        widget.isExpanded ? Expanded(child: _tabViewContent()) : _tabViewContent(),
       ],
     );
   }
 
-  AnimatedSwitcher _content(int index) {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      switchInCurve: Curves.easeIn,
-      switchOutCurve: Curves.easeOut,
-      transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child),
-      child: Container(
-        key: ValueKey<int>(index),
-        child:
-            widget.tabViews.isNotEmpty
-                ? widget.tabViews[index >= widget.tabViews.length ? widget.tabViews.length - 1 : index]
-                : const SizedBox(), // fallback if no tabViews at all
-      ),
+  // This method shows the content corresponding to the selected index using IndexedStack
+  Widget _tabViewContent() {
+    final index = _selectedIndex < widget.tabViews.length ? _selectedIndex : widget.tabViews.length - 1;
+    return IndexedStack(
+      index: index, // Show content corresponding to selected tab index
+      children: widget.tabViews,
     );
   }
 }

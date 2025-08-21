@@ -1,7 +1,6 @@
 
 import 'package:bai_serve_customer/features/bulk_order/controllers/bulk_order_controller.dart';
 import 'package:bai_serve_customer/features/chat/controllers/chat_controller.dart';
-import 'package:bai_serve_customer/features/custom_google_map/controllers/custom_google_map_controller.dart';
 import 'package:bai_serve_customer/features/home/controller/home_order_conroller.dart';
 import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve_customer/features/order/my_order/controllers/my_order_controller.dart';
@@ -33,7 +32,6 @@ class StateDependency {
 
     Get.lazyPut(NotificationsController.new, fenix: true);
     Get.lazyPut(ChatController.new, fenix: true);
-    Get.lazyPut(CustomGoogleMapController.new, fenix: true);
     Get.lazyPut(PaymentController.new, fenix: true);
 
     AppLogger.debug('State dependency initalized', tag: 'dependency');

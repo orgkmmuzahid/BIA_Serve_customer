@@ -1,12 +1,10 @@
 // File: place_order_controller.dart
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/custom_google_map/controllers/custom_google_map_controller.dart';
 import 'package:bai_serve_customer/features/order/place_order/model/order_details_model.dart';
 import 'package:bai_serve_customer/features/order/place_order/model/place_order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // Get.lazyPut(() => PlaceOrderController(), fenix: true);
 

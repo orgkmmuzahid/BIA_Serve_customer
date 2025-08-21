@@ -701,66 +701,18 @@ class PrivacyPolicyRoute extends _i42.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i26.ProfileInfoScreen]
-class ProfileInfoRoute extends _i42.PageRouteInfo<ProfileInfoRouteArgs> {
-  ProfileInfoRoute({
-    required _i43.GlobalKey<_i43.FormState> formKey1,
-    required _i43.GlobalKey<_i43.FormState> formKey2,
-    _i43.Key? key,
-    List<_i42.PageRouteInfo>? children,
-  }) : super(
-         ProfileInfoRoute.name,
-         args: ProfileInfoRouteArgs(
-           formKey1: formKey1,
-           formKey2: formKey2,
-           key: key,
-         ),
-         initialChildren: children,
-       );
+class ProfileInfoRoute extends _i42.PageRouteInfo<void> {
+  const ProfileInfoRoute({List<_i42.PageRouteInfo>? children})
+    : super(ProfileInfoRoute.name, initialChildren: children);
 
   static const String name = 'ProfileInfoRoute';
 
   static _i42.PageInfo page = _i42.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<ProfileInfoRouteArgs>();
-      return _i26.ProfileInfoScreen(
-        formKey1: args.formKey1,
-        formKey2: args.formKey2,
-        key: args.key,
-      );
+      return const _i26.ProfileInfoScreen();
     },
   );
-}
-
-class ProfileInfoRouteArgs {
-  const ProfileInfoRouteArgs({
-    required this.formKey1,
-    required this.formKey2,
-    this.key,
-  });
-
-  final _i43.GlobalKey<_i43.FormState> formKey1;
-
-  final _i43.GlobalKey<_i43.FormState> formKey2;
-
-  final _i43.Key? key;
-
-  @override
-  String toString() {
-    return 'ProfileInfoRouteArgs{formKey1: $formKey1, formKey2: $formKey2, key: $key}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! ProfileInfoRouteArgs) return false;
-    return formKey1 == other.formKey1 &&
-        formKey2 == other.formKey2 &&
-        key == other.key;
-  }
-
-  @override
-  int get hashCode => formKey1.hashCode ^ formKey2.hashCode ^ key.hashCode;
 }
 
 /// generated route for

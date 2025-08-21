@@ -1,16 +1,14 @@
 // File: setting_screen.dart
-import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
-import 'package:bai_serve_customer/component/common_bar/common_bottom_bar.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/pop_up/common_alert.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/auth/cubit/auth_cubit.dart';
 import 'package:bai_serve_customer/features/auth/widgets/delete_account_alert.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +17,6 @@ class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CommonAppBar(title: AppString.account, leading: const SizedBox(width: 0, height: 0)),
     body: SingleChildScrollView(
       child: Column(
         children: [
@@ -32,7 +29,6 @@ class SettingScreen extends StatelessWidget {
             child:
                 const CommonImage(
                   imageSrc: AppImages.homeBanner,
-                  fill: BoxFit.fill,
                   borderRadius: 130,
                   width: 130,
                   height: 130,
@@ -52,10 +48,7 @@ class SettingScreen extends StatelessWidget {
             title: AppString.changePersonalInfo,
             onTap: () {
               appRouter.push(
-                ProfileInfoRoute(
-                  formKey1: GlobalKey<FormState>(),
-                  formKey2: GlobalKey<FormState>(),
-                ),
+                const ProfileInfoRoute(),
               );
             },
           ),
