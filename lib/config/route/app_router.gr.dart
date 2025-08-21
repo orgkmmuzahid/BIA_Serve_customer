@@ -579,16 +579,11 @@ class PickUpInformationRoute
     extends _i42.PageRouteInfo<PickUpInformationRouteArgs> {
   PickUpInformationRoute({
     required String title,
-    required _i43.GlobalKey<_i43.FormState> formKey,
     _i43.Key? key,
     List<_i42.PageRouteInfo>? children,
   }) : super(
          PickUpInformationRoute.name,
-         args: PickUpInformationRouteArgs(
-           title: title,
-           formKey: formKey,
-           key: key,
-         ),
+         args: PickUpInformationRouteArgs(title: title, key: key),
          initialChildren: children,
        );
 
@@ -598,42 +593,32 @@ class PickUpInformationRoute
     name,
     builder: (data) {
       final args = data.argsAs<PickUpInformationRouteArgs>();
-      return _i23.PickUpInformationScreen(
-        title: args.title,
-        formKey: args.formKey,
-        key: args.key,
-      );
+      return _i23.PickUpInformationScreen(title: args.title, key: args.key);
     },
   );
 }
 
 class PickUpInformationRouteArgs {
-  const PickUpInformationRouteArgs({
-    required this.title,
-    required this.formKey,
-    this.key,
-  });
+  const PickUpInformationRouteArgs({required this.title, this.key});
 
   final String title;
-
-  final _i43.GlobalKey<_i43.FormState> formKey;
 
   final _i43.Key? key;
 
   @override
   String toString() {
-    return 'PickUpInformationRouteArgs{title: $title, formKey: $formKey, key: $key}';
+    return 'PickUpInformationRouteArgs{title: $title, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! PickUpInformationRouteArgs) return false;
-    return title == other.title && formKey == other.formKey && key == other.key;
+    return title == other.title && key == other.key;
   }
 
   @override
-  int get hashCode => title.hashCode ^ formKey.hashCode ^ key.hashCode;
+  int get hashCode => title.hashCode ^ key.hashCode;
 }
 
 /// generated route for

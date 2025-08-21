@@ -3,8 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/common/app_bar/common_app_bar.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
-import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
-import 'package:bai_serve_customer/component/text_field/input_helper.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
 import 'package:bai_serve_customer/features/custom_google_map/widgets/custom_google_map.dart';
@@ -24,64 +22,36 @@ class PlaceOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) => GetBuilder<PlaceOrderController>(
     builder:
         (controller) => Scaffold(
-          appBar: CommonAppBar(title: title),
-          body: Padding(
-            padding: const EdgeInsetsGeometry.all(16),
-            child: Column(
-              children: [
-                _header(controller),
-                if (controller.recentSearch.isNotEmpty) _recentSearch(controller).start,
-                Expanded(child: _map()),
-
-                CommonButton(
-                  titleText: AppString.continues,
-                  onTap: () {
-                    if (title == AppString.homeBulkOrderAgents) {
-                      //send to negotiation assistance.
-                      appRouter.push(const NegotiationAssistanceRoute());
-                      return;
-                    }
-                    if (controller.placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
-                        controller.placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
-                      appRouter.push(PickUpInformationRoute(title: title, formKey: GlobalKey<FormState>()));
-                    }
-                  },
-                  buttonColor:
-                      controller.marchentAddressTextEditController.text.isEmpty ? getTheme.disabledColor : null,
-                ),
-              ],
-            ),
+          appBar: CommonAppBar(title: AppString.setPickupDeliveryLocation),
+          body: CustomGoogleMap(
+            widgets: (context, state) => [Align(alignment: Alignment.bottomCenter, child: _continueButton(controller))],
           ),
         ),
   );
 
-  Widget _map() => const Card(child: CustomGoogleMap());
+  Widget _continueButton(PlaceOrderController controller) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: CommonButton(
+        buttonWidth: 150,
+        titleText: AppString.continues,
+        onTap: () {
+          if (title == AppString.homeBulkOrderAgents) {
+            //send to negotiation assistance.
+            appRouter.push(const NegotiationAssistanceRoute());
+            return;
+          }
+          if (controller.placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
+              controller.placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
+            appRouter.push(PickUpInformationRoute(title: title));
+          }
+        },
+        buttonColor: controller.marchentAddressTextEditController.text.isEmpty ? getTheme.disabledColor : null,
+      ),
+    );
+  }
 
-  Widget _header(PlaceOrderController controller) => Card(
-    color: getTheme.scaffoldBackgroundColor,
-    elevation: 2,
-    shadowColor: getTheme.dividerColor,
-    child: Column(
-      children: [
-        20.height,
-        CommonText(text: AppString.setPickupDeliveryLocation, style: getTheme.textTheme.bodyLarge),
-        CommonTextField(
-          prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
-          controller: controller.clientAddressTextEditController,
-          borderColor: getTheme.dividerColor,
-          validationType: ValidationType.validateRequired,
-        ).paddingOnly(top: 10, left: 20, right: 20),
-        CommonTextField(
-          initialText: '',
-          prefixIcon: const Icon(Icons.place),
-          controller: controller.marchentAddressTextEditController,
-          borderColor: getTheme.dividerColor,
-          validationType: ValidationType.validateRequired,
-        ).paddingOnly(top: 10, left: 20, right: 20),
-        20.height,
-      ],
-    ),
-  );
+
 
   Widget _recentSearch(PlaceOrderController controller) {
     return Column(

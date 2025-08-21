@@ -58,7 +58,7 @@ class CommonText extends StatelessWidget {
 
   Widget _withBorder(BuildContext context) => Container(
     padding: _edgeInsetsBuilder(),
-    margin: EdgeInsets.all(5),
+    margin: const EdgeInsets.all(5),
     decoration: BoxDecoration(
       color: backgroundColor ?? getTheme.scaffoldBackgroundColor,
       border: Border.all(color: borderColor ?? Theme.of(context).dividerColor, width: 1.2.w),

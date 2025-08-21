@@ -1,14 +1,20 @@
+import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
+import 'package:bai_serve_customer/component/text_field/input_helper.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
+import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../cubit/map_cubit.dart';
 import '../cubit/map_state.dart';
 
 class CustomGoogleMap extends StatelessWidget {
-  const CustomGoogleMap({super.key});
+  const CustomGoogleMap({required this.widgets, super.key});
+  final List<Widget> Function(BuildContext context, MapState state) widgets;
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +22,24 @@ class CustomGoogleMap extends StatelessWidget {
       create: (context) => MapCubit(),
       child: BlocBuilder<MapCubit, MapState>(
         builder: (context, state) {
+          final cubit = context.read<MapCubit>();
           return Stack(
             children: [
               GoogleMap(
-                initialCameraPosition: CameraPosition(target: state.startLocation, zoom: 14.0),
+                onTap: (coordinate) {
+                  cubit.setPoint(coordinate: coordinate);
+                },
+                initialCameraPosition: CameraPosition(target: state.starting.coordinate, zoom: 14.0),
                 markers: state.markers,
                 polylines: state.mapRoute,
                 onMapCreated: (cotroller) {
                   context.read<MapCubit>().onMapCreated(cotroller);
                 },
               ),
+
+              Align(alignment: Alignment.topCenter, child: _header(cubit, state)),
+
+              ...widgets(context, state),
 
               if (state.isLoading)
                 Center(
@@ -45,4 +59,35 @@ class CustomGoogleMap extends StatelessWidget {
       ),
     );
   }
+
+  Widget _header(MapCubit cubit, MapState state) => Card(
+    color: getTheme.scaffoldBackgroundColor,
+    elevation: 2,
+    shadowColor: getTheme.dividerColor,
+    child: SizedBox(
+      width: Utils.deviceSize.width - 32,
+      height: 135.w,
+      child: Column(
+        children: [
+          CommonTextField(
+            prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
+            onTap: () {
+              cubit.setPointType(PointType.starting);
+            },
+            borderColor: getTheme.dividerColor,
+            validationType: ValidationType.validateRequired,
+          ).paddingAll(10),
+
+          CommonTextField(
+            prefixIcon: Icon(Icons.place, color: getTheme.primaryColor),
+            onTap: () {
+              cubit.setPointType(PointType.destination);
+            },
+            borderColor: getTheme.dividerColor,
+            validationType: ValidationType.validateRequired,
+          ).paddingOnly(left: 10, right: 10, bottom: 10),
+        ],
+      ),
+    ),
+  );
 }
