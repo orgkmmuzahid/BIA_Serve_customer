@@ -5,6 +5,7 @@ import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
+import 'package:bai_serve_customer/features/custom_google_map/cubit/map_state.dart';
 import 'package:bai_serve_customer/features/custom_google_map/widgets/custom_google_map.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
@@ -19,17 +20,15 @@ class PlaceOrderScreen extends StatelessWidget {
   final String title;
 
   @override
-  Widget build(BuildContext context) => GetBuilder<PlaceOrderController>(
-    builder:
-        (controller) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
           appBar: CommonAppBar(title: AppString.setPickupDeliveryLocation),
           body: CustomGoogleMap(
-            widgets: (context, state) => [Align(alignment: Alignment.bottomCenter, child: _continueButton(controller))],
-          ),
+      widgets: (context, state) => [Align(alignment: Alignment.bottomCenter, child: _continueButton(state))],
+          
         ),
   );
 
-  Widget _continueButton(PlaceOrderController controller) {
+  Widget _continueButton(MapState state) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: CommonButton(
@@ -41,40 +40,13 @@ class PlaceOrderScreen extends StatelessWidget {
             appRouter.push(const NegotiationAssistanceRoute());
             return;
           }
-          if (controller.placeOrderModel.marchentAdressOnMap?.isNotEmpty == true &&
-              controller.placeOrderModel.clientAdressOnMap?.isNotEmpty == true) {
+          if (state.mapRoute.isNotEmpty) {
             appRouter.push(PickUpInformationRoute(title: title));
           }
         },
-        buttonColor: controller.marchentAddressTextEditController.text.isEmpty ? getTheme.disabledColor : null,
+        buttonColor: state.mapRoute.isEmpty ? getTheme.disabledColor : null,
       ),
     );
   }
 
-
-
-  Widget _recentSearch(PlaceOrderController controller) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        34.height,
-        CommonText(text: AppString.recentSearch, style: getTheme.textTheme.bodyLarge).paddingOnly(bottom: 10),
-        ...List.generate(controller.recentSearch.length, (index) {
-          final String text = controller.recentSearch[index];
-          return GestureDetector(
-            onTap: () => controller.onRecentSearch(text),
-            child: CommonText(
-              top: 10,
-              bottom: 10,
-              right: 10,
-              left: 10,
-              text: text,
-              enableBorder: true,
-              style: getTheme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500, fontSize: 12),
-            ),
-          );
-        }),
-      ],
-    );
-  }
 }

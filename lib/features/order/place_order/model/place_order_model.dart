@@ -4,34 +4,44 @@ import 'dart:convert';
 // File: place_order_model.dart
 
 class PlaceOrderModel {
-  String? fullName;
-  String? phone;
-  String? district;
-  String? city;
-  String? ward;
-  String? subWard;
-  String? plotApartment;
-  String? marchentPickupTime;
-  String? serviceType;
-  double? productWieght;
-  int? quantity;
-  String? itemDetails;
-  String? marchentAdressOnMap;
-  String? clientAdressOnMap;
+  final String? fullName;
+  final String? phone;
+  final String? district;
+  final String? city;
+  final String? ward;
+  final String? subWard;
+  final String? plotApartment;
+  final String? marchentPickupTime;
+  final String? serviceType;
+  final double? productWieght;
+  final int? quantity;
+  final String? itemDetails;
+  final String? marchentAdressOnMap;
+  final String? clientAdressOnMap;
+  final String? clientFullName;
+  final String? clientPhone;
+  final String? clientDistrict;
+  final String? clientCity;
+  final String? clientWard;
+  final String? clientSubWard;
+  final String? clientPlotApartment;
+  final String? clientPickupTime;
+  final String? clientServiceType;
+  final double? clientProductWieght;
+  final int? clientQuantity;
 
-  String? clientFullName;
-  String? clientPhone;
-  String? clientDistrict;
-  String? clientCity;
-  String? clientWard;
-  String? clientSubWard;
-  String? clientPlotApartment;
-  String? clientPickupTime;
-  String? clientServiceType;
-  double? clientProductWieght;
-  int? clientQuantity;
-
-  PlaceOrderModel({
+  final String? orderNumber;
+  final String? customer;
+  final String? phoneNumber;
+  final String? shippingAddress;
+  final String? productDetails;
+  final double? weight;
+  final DateTime? orderDate;
+  final String? orderStatus;
+  final double? totalPrice;
+  final double? deliveryCharge;
+  final double? discountPercentage;
+  const PlaceOrderModel({
     this.fullName,
     this.phone,
     this.district,
@@ -57,6 +67,17 @@ class PlaceOrderModel {
     this.clientServiceType,
     this.clientProductWieght,
     this.clientQuantity,
+    this.orderNumber,
+    this.customer,
+    this.phoneNumber,
+    this.shippingAddress,
+    this.productDetails,
+    this.weight,
+    this.orderDate,
+    this.orderStatus,
+    this.totalPrice,
+    this.deliveryCharge,
+    this.discountPercentage,
   });
 
   PlaceOrderModel copyWith({
@@ -85,6 +106,17 @@ class PlaceOrderModel {
     String? clientServiceType,
     double? clientProductWieght,
     int? clientQuantity,
+    String? orderNumber,
+    String? customer,
+    String? phoneNumber,
+    String? shippingAddress,
+    String? productDetails,
+    double? weight,
+    DateTime? orderDate,
+    String? orderStatus,
+    double? totalPrice,
+    double? deliveryCharge,
+    double? discountPercentage,
   }) {
     return PlaceOrderModel(
       fullName: fullName ?? this.fullName,
@@ -112,6 +144,17 @@ class PlaceOrderModel {
       clientServiceType: clientServiceType ?? this.clientServiceType,
       clientProductWieght: clientProductWieght ?? this.clientProductWieght,
       clientQuantity: clientQuantity ?? this.clientQuantity,
+      orderNumber: orderNumber ?? this.orderNumber,
+      customer: customer ?? this.customer,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      shippingAddress: shippingAddress ?? this.shippingAddress,
+      productDetails: productDetails ?? this.productDetails,
+      weight: weight ?? this.weight,
+      orderDate: orderDate ?? this.orderDate,
+      orderStatus: orderStatus ?? this.orderStatus,
+      totalPrice: totalPrice ?? this.totalPrice,
+      deliveryCharge: deliveryCharge ?? this.deliveryCharge,
+      discountPercentage: discountPercentage ?? this.discountPercentage,
     );
   }
 
@@ -142,6 +185,17 @@ class PlaceOrderModel {
       'clientServiceType': clientServiceType,
       'clientProductWieght': clientProductWieght,
       'clientQuantity': clientQuantity,
+      'orderNumber': orderNumber,
+      'customer': customer,
+      'phoneNumber': phoneNumber,
+      'shippingAddress': shippingAddress,
+      'productDetails': productDetails,
+      'weight': weight,
+      'orderDate': orderDate?.millisecondsSinceEpoch,
+      'orderStatus': orderStatus,
+      'totalPrice': totalPrice,
+      'deliveryCharge': deliveryCharge,
+      'discountPercentage': discountPercentage,
     };
   }
 
@@ -153,61 +207,36 @@ class PlaceOrderModel {
       city: map['city'] != null ? map['city'] as String : null,
       ward: map['ward'] != null ? map['ward'] as String : null,
       subWard: map['subWard'] != null ? map['subWard'] as String : null,
-      plotApartment:
-          map['plotApartment'] != null ? map['plotApartment'] as String : null,
-      marchentPickupTime:
-          map['marchentPickupTime'] != null
-              ? map['marchentPickupTime'] as String
-              : null,
-      serviceType:
-          map['serviceType'] != null ? map['serviceType'] as String : null,
-      productWieght:
-          map['productWieght'] != null ? map['productWieght'] as double : null,
+      plotApartment: map['plotApartment'] != null ? map['plotApartment'] as String : null,
+      marchentPickupTime: map['marchentPickupTime'] != null ? map['marchentPickupTime'] as String : null,
+      serviceType: map['serviceType'] != null ? map['serviceType'] as String : null,
+      productWieght: map['productWieght'] != null ? map['productWieght'] as double : null,
       quantity: map['quantity'] != null ? map['quantity'] as int : null,
-      itemDetails:
-          map['itemDetails'] != null ? map['itemDetails'] as String : null,
-      marchentAdressOnMap:
-          map['marchentAdressOnMap'] != null
-              ? map['marchentAdressOnMap'] as String
-              : null,
-      clientAdressOnMap:
-          map['clientAdressOnMap'] != null
-              ? map['clientAdressOnMap'] as String
-              : null,
-      clientFullName:
-          map['clientFullName'] != null
-              ? map['clientFullName'] as String
-              : null,
-      clientPhone:
-          map['clientPhone'] != null ? map['clientPhone'] as String : null,
-      clientDistrict:
-          map['clientDistrict'] != null
-              ? map['clientDistrict'] as String
-              : null,
-      clientCity:
-          map['clientCity'] != null ? map['clientCity'] as String : null,
-      clientWard:
-          map['clientWard'] != null ? map['clientWard'] as String : null,
-      clientSubWard:
-          map['clientSubWard'] != null ? map['clientSubWard'] as String : null,
-      clientPlotApartment:
-          map['clientPlotApartment'] != null
-              ? map['clientPlotApartment'] as String
-              : null,
-      clientPickupTime:
-          map['clientPickupTime'] != null
-              ? map['clientPickupTime'] as String
-              : null,
-      clientServiceType:
-          map['clientServiceType'] != null
-              ? map['clientServiceType'] as String
-              : null,
-      clientProductWieght:
-          map['clientProductWieght'] != null
-              ? map['clientProductWieght'] as double
-              : null,
-      clientQuantity:
-          map['clientQuantity'] != null ? map['clientQuantity'] as int : null,
+      itemDetails: map['itemDetails'] != null ? map['itemDetails'] as String : null,
+      marchentAdressOnMap: map['marchentAdressOnMap'] != null ? map['marchentAdressOnMap'] as String : null,
+      clientAdressOnMap: map['clientAdressOnMap'] != null ? map['clientAdressOnMap'] as String : null,
+      clientFullName: map['clientFullName'] != null ? map['clientFullName'] as String : null,
+      clientPhone: map['clientPhone'] != null ? map['clientPhone'] as String : null,
+      clientDistrict: map['clientDistrict'] != null ? map['clientDistrict'] as String : null,
+      clientCity: map['clientCity'] != null ? map['clientCity'] as String : null,
+      clientWard: map['clientWard'] != null ? map['clientWard'] as String : null,
+      clientSubWard: map['clientSubWard'] != null ? map['clientSubWard'] as String : null,
+      clientPlotApartment: map['clientPlotApartment'] != null ? map['clientPlotApartment'] as String : null,
+      clientPickupTime: map['clientPickupTime'] != null ? map['clientPickupTime'] as String : null,
+      clientServiceType: map['clientServiceType'] != null ? map['clientServiceType'] as String : null,
+      clientProductWieght: map['clientProductWieght'] != null ? map['clientProductWieght'] as double : null,
+      clientQuantity: map['clientQuantity'] != null ? map['clientQuantity'] as int : null,
+      orderNumber: map['orderNumber'] as String,
+      customer: map['customer'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      shippingAddress: map['shippingAddress'] as String,
+      productDetails: map['productDetails'] as String,
+      weight: map['weight'] as double,
+      orderDate: map['orderDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['orderDate'] as int) : null,
+      orderStatus: map['orderStatus'] as String,
+      totalPrice: map['totalPrice'] as double,
+      deliveryCharge: map['deliveryCharge'] as double,
+      discountPercentage: map['discountPercentage'] as double,
     );
   }
 
@@ -218,13 +247,13 @@ class PlaceOrderModel {
 
   @override
   String toString() {
-    return 'PlaceOrderModel(fullName: $fullName, phone: $phone, district: $district, city: $city, ward: $ward, subWard: $subWard, plotApartment: $plotApartment, marchentPickupTime: $marchentPickupTime, serviceType: $serviceType, productWieght: $productWieght, quantity: $quantity, itemDetails: $itemDetails, marchentAdressOnMap: $marchentAdressOnMap, clientAdressOnMap: $clientAdressOnMap, clientFullName: $clientFullName, clientPhone: $clientPhone, clientDistrict: $clientDistrict, clientCity: $clientCity, clientWard: $clientWard, clientSubWard: $clientSubWard, clientPlotApartment: $clientPlotApartment, clientPickupTime: $clientPickupTime, clientServiceType: $clientServiceType, clientProductWieght: $clientProductWieght, clientQuantity: $clientQuantity)';
+    return 'PlaceOrderModel(fullName: $fullName, phone: $phone, district: $district, city: $city, ward: $ward, subWard: $subWard, plotApartment: $plotApartment, marchentPickupTime: $marchentPickupTime, serviceType: $serviceType, productWieght: $productWieght, quantity: $quantity, itemDetails: $itemDetails, marchentAdressOnMap: $marchentAdressOnMap, clientAdressOnMap: $clientAdressOnMap, clientFullName: $clientFullName, clientPhone: $clientPhone, clientDistrict: $clientDistrict, clientCity: $clientCity, clientWard: $clientWard, clientSubWard: $clientSubWard, clientPlotApartment: $clientPlotApartment, clientPickupTime: $clientPickupTime, clientServiceType: $clientServiceType, clientProductWieght: $clientProductWieght, clientQuantity: $clientQuantity, orderNumber: $orderNumber, customer: $customer, phoneNumber: $phoneNumber, shippingAddress: $shippingAddress, productDetails: $productDetails, weight: $weight, orderDate: $orderDate, orderStatus: $orderStatus, totalPrice: $totalPrice, deliveryCharge: $deliveryCharge, discountPercentage: $discountPercentage)';
   }
 
   @override
   bool operator ==(covariant PlaceOrderModel other) {
     if (identical(this, other)) return true;
-
+  
     return other.fullName == fullName &&
         other.phone == phone &&
         other.district == district &&
@@ -249,7 +278,18 @@ class PlaceOrderModel {
         other.clientPickupTime == clientPickupTime &&
         other.clientServiceType == clientServiceType &&
         other.clientProductWieght == clientProductWieght &&
-        other.clientQuantity == clientQuantity;
+        other.clientQuantity == clientQuantity &&
+        other.orderNumber == orderNumber &&
+        other.customer == customer &&
+        other.phoneNumber == phoneNumber &&
+        other.shippingAddress == shippingAddress &&
+        other.productDetails == productDetails &&
+        other.weight == weight &&
+        other.orderDate == orderDate &&
+        other.orderStatus == orderStatus &&
+        other.totalPrice == totalPrice &&
+        other.deliveryCharge == deliveryCharge &&
+        other.discountPercentage == discountPercentage;
   }
 
   @override
@@ -278,6 +318,17 @@ class PlaceOrderModel {
         clientPickupTime.hashCode ^
         clientServiceType.hashCode ^
         clientProductWieght.hashCode ^
-        clientQuantity.hashCode;
+        clientQuantity.hashCode ^
+        orderNumber.hashCode ^
+        customer.hashCode ^
+        phoneNumber.hashCode ^
+        shippingAddress.hashCode ^
+        productDetails.hashCode ^
+        weight.hashCode ^
+        orderDate.hashCode ^
+        orderStatus.hashCode ^
+        totalPrice.hashCode ^
+        deliveryCharge.hashCode ^
+        discountPercentage.hashCode;
   }
 }

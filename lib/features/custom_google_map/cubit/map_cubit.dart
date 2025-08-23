@@ -1,8 +1,12 @@
+
+
 import 'dart:convert';
 
 import 'package:bai_serve_customer/component/text/common_text.dart';
 import 'package:bai_serve_customer/config/bloc/safe_cubit.dart';
+import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/secret_key/secret_key.dart';
+import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/features/custom_google_map/model/place_details.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
@@ -14,68 +18,70 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
+
 import 'map_state.dart';
 import 'package:http/http.dart' as http;
+
 
 class MapCubit extends SafeCubit<MapState> {
   MapCubit() : super(MapState.initial());
 
+
+  final StorageService _storageService = getIt();
+  final String _lastLocationKey = 'last_gps';
+
+
   late GoogleMapController mapController;
 
-  // This method is used for travel mode changes
+
   void onTravelModeChange(TravelMode mode) {
     emit(state.copyWith(travelMode: mode));
     getPolylinePoints(state.starting.coordinate, state.destination.coordinate);
   }
 
-  // This method initializes the map and retrieves the current location
+
   Future<void> onMapCreated(GoogleMapController controller) async {
-    // if (state.initializing) return;
     emit(state.copyWith(isLoading: true));
+
 
     mapController = controller;
     await _initMapAsync();
   }
 
-  // Async initialization method
+
   Future<void> _initMapAsync() async {
     final isPermitted = await Permission.location.isGranted;
+
 
     if (!isPermitted) {
       emit(state.copyWith(initializing: false));
       return;
     }
+    final String? getLastLocation = await _storageService.read(_lastLocationKey);
 
-    // _getAddress(-2.396847, 33.987773); //for testing only
-    // _getAddress(23.787543, 90.411245); //for testing only
 
+    if (getLastLocation != null) {
+      final Position position = Position.fromMap(json.decode(getLastLocation));
+      await setPoint(coordinate: LatLng(position.latitude, position.longitude));
+    }
+    setCurrentPosition();
+  }
+
+
+  Future<void> setCurrentPosition() async {
     try {
-      final position = await Geolocator.getCurrentPosition();
-      final startLocation = LatLng(position.latitude, position.longitude);
-
-      final startMarker = _startMarker(startLocation);
-
-      final endMarker = _destinationMarker(state.destination.coordinate);
-
-      final startDetails = await _getPlaceDetails(startLocation.latitude, startLocation.longitude);
-      if (startDetails == null) return;
-
-      emit(
-        state.copyWith(
-          markers: {startMarker, endMarker},
-          starting: startDetails,
-          initializing: false,
-          initialized: true,
-          isLoading: false,
-        ),
-      );
-
-      // await getPolylinePoints(startLocation, state.destination.coordinate);
+      Geolocator.getCurrentPosition().then((position) {
+        final startLocation = LatLng(position.latitude, position.longitude);
+        _storageService.write(_lastLocationKey, json.encode(position.toJson()));
+        setPointType(PointType.starting);
+        setPoint(coordinate: startLocation);
+      });
     } catch (e) {
       emit(state.copyWith(initializing: false)); // Handle error gracefully
       AppLogger.error('Error initializing map: $e', tag: 'Map Cubit');
     }
   }
+
 
   Marker _destinationMarker(LatLng coordinate) {
     return Marker(
@@ -84,6 +90,7 @@ class MapCubit extends SafeCubit<MapState> {
       infoWindow: const InfoWindow(title: 'Destination'),
     );
   }
+
 
   Marker _startMarker(LatLng startLocation) {
     final startMarker = Marker(
@@ -95,7 +102,7 @@ class MapCubit extends SafeCubit<MapState> {
     return startMarker;
   }
 
-  // This method retrieves the polyline points based on travel mode
+
   Future<void> getPolylinePoints(LatLng start, LatLng end) async {
     emit(state.copyWith(isLoading: true));
     try {
@@ -113,18 +120,17 @@ class MapCubit extends SafeCubit<MapState> {
       if (result.points.isNotEmpty) {
         polylineCoordinates.addAll(result.points.map((p) => LatLng(p.latitude, p.longitude)));
 
-        _drawPolyline(polylineCoordinates);
-        final num distance = result.totalDistanceValue ?? 1 / 1000; // Convert to km
-        final num duration = result.totalDurationValue ?? 1 / 60; // Convert to minutes
 
-        if (polylineCoordinates.isEmpty) return;
+        await _drawPolyline(polylineCoordinates);
+
+        if (state.mapRoute.first.points.isEmpty) return;
         // Place markers at start, middle, and end
         _addMarkers(
           start,
           end,
-          polylineCoordinates[(polylineCoordinates.length / 2).toInt()],
-          distance.toDouble(),
-          duration.toDouble(),
+          state.mapRoute.first.points[(state.mapRoute.first.points.length / 2).toInt()],
+          result.distanceTexts?.first ?? '',
+          result.durationTexts?.first ?? '',
         );
       }
     } catch (e) {
@@ -132,13 +138,21 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
+
   // Method to draw polyline on the map
-  void _drawPolyline(List<LatLng> points) {
-    final polyline = Polyline(polylineId: const PolylineId('route'), color: Colors.blue, width: 5, points: points);
+  Future<void> _drawPolyline(List<LatLng> points) async {
+    final polyline = Polyline(
+      polylineId: const PolylineId('route'),
+      color: AppColors.primaryColor,
+      width: 5,
+      points: points,
+    );
+
 
     emit(state.copyWith(mapRoute: {polyline}));
     _moveCameraToFitPolyline(points);
   }
+
 
   // Move the camera to fit the polyline on the map
   void _moveCameraToFitPolyline(List<LatLng> polylinePoints) {
@@ -148,7 +162,8 @@ class MapCubit extends SafeCubit<MapState> {
       double minLng = polylinePoints[0].longitude;
       double maxLng = polylinePoints[0].longitude;
 
-      for (var point in polylinePoints) {
+
+      for (final point in polylinePoints) {
         if (point.latitude < minLat) minLat = point.latitude;
         if (point.latitude > maxLat) maxLat = point.latitude;
         if (point.longitude < minLng) minLng = point.longitude;
@@ -165,31 +180,25 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
-  void _addMarkers(LatLng start, LatLng end, LatLng middle, double distance, double duration) async {
-    // Create custom markers with text
-    // BitmapDescriptor startMarkerIcon = await _createCustomMarker(
-    //   "Start\n${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min",
-    // );
-    // BitmapDescriptor endMarkerIcon = await _createCustomMarker(
-    //   "End\n${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min",
-    // );
-    final BitmapDescriptor middleMarkerIcon = await _createCustomMarker(
-      '${distance.toStringAsFixed(2)} km\n${duration.toStringAsFixed(2)} min',
-    );
 
-    // Add markers with custom icons
+  void _addMarkers(LatLng start, LatLng end, LatLng middle, String distance, String duration) async {
+    final BitmapDescriptor middleMarkerIcon = await _createCustomMarker('Distance- $distance\nDuration- $duration');
     final startMarker = Marker(
       markerId: MarkerId(PointType.starting.name),
       position: start,
-      icon: await const Icon(Icons.gps_fixed, color: Colors.blue).toBitmapDescriptor(),
+      icon: await const Icon(Icons.gps_fixed, color: AppColors.primaryColor).toBitmapDescriptor(),
     );
+
 
     final endMarker = Marker(markerId: MarkerId(PointType.destination.name), position: end);
 
+
     final middleMarker = Marker(markerId: const MarkerId('middle'), position: middle, icon: middleMarkerIcon);
+
 
     emit(state.copyWith(markers: {startMarker, endMarker, middleMarker}));
   }
+
 
   Future<BitmapDescriptor> _createCustomMarker(String text) async {
     return CommonText(
@@ -199,28 +208,35 @@ class MapCubit extends SafeCubit<MapState> {
       right: 5,
       bottom: 5,
       left: 5,
-      color: Colors.red,
+      color: AppColors.primaryColor2,
       borderColor: AppColors.primaryColor2,
       borderRadious: 4.r,
+      fontWeight: FontWeight.bold,
     ).toBitmapDescriptor();
   }
+
 
   Future<void> onPointTypeChange(PointType pointType) async {
     final updatedMarker = state.markers;
     updatedMarker.removeWhere((element) => element.markerId.value == pointType.name);
 
+
     emit(state.copyWith(lastPikedPointType: pointType, markers: updatedMarker));
   }
 
+
   Future<void> setPointType(PointType pointType) async {
     emit(state.copyWith(lastPikedPointType: pointType));
+    AppLogger.debug(pointType.name);
   }
+
 
   Future<void> setPoint({required LatLng coordinate}) async {
     final details = await _getPlaceDetails(coordinate.latitude, coordinate.longitude);
     if (state.lastPikedPointType == PointType.starting) {
       _startMarker(coordinate);
       emit(state.copyWith(starting: details));
+      getPolylinePoints(coordinate, state.destination.coordinate);
     } else if (state.lastPikedPointType == PointType.destination) {
       _destinationMarker(coordinate);
       emit(state.copyWith(destination: details));
@@ -228,12 +244,14 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
+
   Future<PlaceDetails?> _getPlaceDetails(double latitude, double longitude) async {
     try {
       // Reverse Geocoding API (Google Maps Geocoding API or OpenCage API)
       final url =
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=${SecretKey.mapKey}';
       final response = await http.get(Uri.parse(url));
+
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -246,13 +264,23 @@ class MapCubit extends SafeCubit<MapState> {
     return null;
   }
 
-  // Future<void> _getAddress(double latitude, double longitude) async {
-  //   Debouncer(delay: const Duration(milliseconds: 300)).call(() async {
-  //     final url =
-  //         'https://nominatim.openstreetmap.org/reverse?format=json&lat=$latitude&lon=$longitude&addressdetails=1&accept-language=en';
-  //     final response = await http.get(Uri.parse(url));
 
-  //     AppLogger.debug(response.body);
-  //   });
-  // }
+  Future<void> setCoordinateFromPlaceId({required String placeId, required String address}) async {
+    final url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=${SecretKey.mapKey}';
+
+
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      final double lat = result['result']['geometry']['location']['lat'];
+      final double lng = result['result']['geometry']['location']['lng'];
+      final coordinate = LatLng(lat, lng);
+      final place = PlaceDetails(address: address, coordinate: coordinate);
+      if (state.lastPikedPointType == PointType.starting)
+        emit(state.copyWith(starting: place));
+      else if (state.lastPikedPointType == PointType.destination)
+        emit(state.copyWith(destination: place));
+      setPoint(coordinate: coordinate);
+    }
+  }
 }

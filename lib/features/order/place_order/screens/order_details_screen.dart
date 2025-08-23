@@ -2,95 +2,56 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/text/common_rich_text.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
+import 'package:bai_serve_customer/features/order/place_order/model/place_order_model.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 @RoutePage()
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
+  const OrderDetailsScreen({required this.placeOrderModel, super.key});
+  final PlaceOrderModel placeOrderModel;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(AppString.orderDetails)),
-    body: GetBuilder<PlaceOrderController>(
-      builder:
-          (orderController) => Padding(
+    body: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Table(
-                    columnWidths: const {
-                      0: FlexColumnWidth(1.8),
-                      1: FlexColumnWidth(0.5),
-                      2: FlexColumnWidth(3),
-                    },
+              columnWidths: const {0: FlexColumnWidth(1.8), 1: FlexColumnWidth(0.5), 2: FlexColumnWidth(3)},
                     children: [
-                      _rowBuilder(
-                        AppString.orderCode,
-                        orderController.orderDetailsModel.orderCode,
-                      ),
-                      _rowBuilder(
-                        AppString.customer,
-                        orderController.orderDetailsModel.customer,
-                      ),
-                      _rowBuilder(
-                        AppString.phoneNumber,
-                        orderController.orderDetailsModel.phoneNumber,
-                      ),
-                      _rowBuilder(
-                        AppString.shippingAddress,
-                        orderController.orderDetailsModel.shippingAddress,
-                      ),
-                      _rowBuilder(
-                        AppString.productDetails,
-                        orderController.orderDetailsModel.productDetails,
-                      ),
-                      _rowBuilder(
-                        AppString.weight,
-                        '${orderController.orderDetailsModel.weight} KG',
-                      ),
-                      _rowBuilder(
-                        AppString.quantity,
-                        '${orderController.orderDetailsModel.quantity} Box',
-                      ),
+                _rowBuilder(AppString.orderNo, placeOrderModel.orderNumber ?? ''),
+                _rowBuilder(AppString.customer, placeOrderModel.customer ?? ''),
+                _rowBuilder(AppString.phoneNumber, placeOrderModel.phoneNumber ?? ''),
+                _rowBuilder(AppString.shippingAddress, placeOrderModel.shippingAddress ?? ''),
+                _rowBuilder(AppString.productDetails, placeOrderModel.productDetails ?? ''),
+                _rowBuilder(AppString.weight, '${placeOrderModel.weight} KG'),
+                _rowBuilder(AppString.quantity, '${placeOrderModel.quantity} Box'),
                       _rowBuilder(
                         AppString.orderDateTime,
-                        Utils.formatDateTime(
-                          orderController.orderDetailsModel.orderDate,
-                        ),
-                      ),
-                      _rowBuilder(
-                        AppString.orderStatus,
-                        orderController.orderDetailsModel.orderStatus,
-                      ),
-                      _rowBuilder(
-                        AppString.totalPrice,
-                        'TSH ${orderController.orderDetailsModel.totalPrice}',
-                      ),
+                        Utils.formatDateTime(placeOrderModel.orderDate ?? DateTime.now())),
+                _rowBuilder(AppString.orderStatus, placeOrderModel.orderStatus ?? ''),
+                _rowBuilder(AppString.totalPrice, 'TSH ${placeOrderModel.totalPrice}'),
                     ],
                   ),
 
                   20.height,
                   Row(
                     children: [
-                      _amountBuilder(
-                        orderController,
+                _amountBuilder(
                         AppString.deliveryCharge,
-                        orderController.orderDetailsModel.deliveryCharge,
+                        placeOrderModel.deliveryCharge ?? 0,
                       ),
                       const Spacer(),
-                      _amountBuilder(
-                        orderController,
+                _amountBuilder(
                         AppString.totalAmount,
-                        orderController.orderDetailsModel.deliveryCharge +
-                            orderController.orderDetailsModel.totalPrice,
+                  (placeOrderModel.deliveryCharge ?? 0) + (placeOrderModel.totalPrice ?? 0),
                       ),
                     ],
                   ),
@@ -105,14 +66,10 @@ class OrderDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-    ),
+    
   );
 
-  Container _amountBuilder(
-    PlaceOrderController orderController,
-    String title,
-    double price,
-  ) {
+  Container _amountBuilder(String title, double price) {
     return Container(
       width: (Utils.deviceSize.width / 2) - 26,
       alignment: Alignment.center,
@@ -123,10 +80,7 @@ class OrderDetailsScreen extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
       child: CommonRichText(
         richTextContent: [
-          CommonSimpleRichTextContent(
-            text: title,
-            style: getTheme.textTheme.titleMedium,
-          ),
+          CommonSimpleRichTextContent(text: title, style: getTheme.textTheme.titleMedium),
           CommonSimpleRichTextContent(
             text: '\nTSH $price',
             style: getTheme.textTheme.bodyLarge?.copyWith(fontSize: 24),
@@ -143,26 +97,20 @@ class OrderDetailsScreen extends StatelessWidget {
           text: title,
           textAlign: TextAlign.start,
           top: 10,
-          style: getTheme.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.w400,
-          ),
+          style: getTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
         ),
         Center(
           child: CommonText(
             text: ':',
             top: 10,
-            style: getTheme.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w400,
-            ),
+            style: getTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
           ),
         ),
         CommonText(
           text: data,
           textAlign: TextAlign.start,
           top: 10,
-          style: getTheme.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.w400,
-          ),
+          style: getTheme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
         ),
       ],
     );

@@ -21,7 +21,8 @@ import 'package:get/get.dart';
 
 @RoutePage()
 class MyRewardsScreen extends StatelessWidget {
-  const MyRewardsScreen({super.key});
+  const MyRewardsScreen({required this.onClaimSuccess, super.key});
+  final Function onClaimSuccess;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -122,6 +123,7 @@ class MyRewardsScreen extends StatelessWidget {
                           CommonButton(
                             onTap: () {
                               controller.onClaim(model);
+                              onClaimSuccess();
                             },
                             titleText: AppString.continues,
                             buttonColor: getTheme.colorScheme.secondary,

@@ -3,66 +3,65 @@ import 'package:bai_serve_customer/component/button/common_button.dart';
 import 'package:bai_serve_customer/component/image/common_image.dart';
 import 'package:bai_serve_customer/component/text/common_rich_text.dart';
 import 'package:bai_serve_customer/component/text/common_text.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/config/route/app_router.dart';
 import 'package:bai_serve_customer/config/route/app_router.gr.dart';
-import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_images.dart';
-import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import '../model/place_order_model.dart';
 
 @RoutePage()
 class CheckoutScreen extends StatelessWidget {
-  CheckoutScreen({super.key})
+  CheckoutScreen({required this.placeOrderModel, super.key})
     : orderListWidth = Utils.deviceSize.width - 32,
       orderlistImageWidth = (Utils.deviceSize.width - 32) / 3.2;
   final double orderListWidth;
   final double orderlistImageWidth;
+  final PlaceOrderModel placeOrderModel;
 
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(AppString.checkout)),
     body: Padding(
       padding: const EdgeInsetsGeometry.only(left: 16, right: 16),
-      child: GetBuilder<PlaceOrderController>(
-        builder: (orderController) {
-          return Column(
+      child: Column(
             children: [
               CommonText(text: AppString.productDetails, style: getTheme.textTheme.titleMedium).start,
-              _orderListItem(orderController),
-              _middleCard(orderController),
+          _orderListItem(),
+          _middleCard(),
               _card([
-                _rowBuilder(title: AppString.totalPrice, data: 'TSH ${orderController.orderDetailsModel.totalPrice}'),
+            _rowBuilder(title: AppString.totalPrice, data: 'TSH ${placeOrderModel.totalPrice}'),
                 _rowBuilder(
                   title: AppString.deliveryCharge,
-                  data: 'TSH ${orderController.orderDetailsModel.deliveryCharge}',
+                  data: 'TSH ${placeOrderModel.deliveryCharge}',
                 ),
                 _rowBuilder(
                   title: AppString.totalAmount,
                   data:
-                      'TSH ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge}',
+                      'TSH ${(placeOrderModel.totalPrice ?? 0) + (placeOrderModel.deliveryCharge ?? 0)}',
                   isBold: true,
                 ),
                 _rowBuilder(
                   isBold: true,
-                  title: '${orderController.orderDetailsModel.discountPercentage}% ${AppString.discount}',
+              title: '${placeOrderModel.discountPercentage}% ${AppString.discount}',
                   data:
-                      'TSH ${getDeductedAmount(orderController.orderDetailsModel.discountPercentage, orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice)}',
+                  'TSH ${getDeductedAmount(placeOrderModel.discountPercentage ?? 0, (placeOrderModel.totalPrice ?? 0) + (placeOrderModel.deliveryCharge ?? 0))}',
                 ),
                 _rowBuilder(
                   isBold: true,
                   title: AppString.totalPay,
                   data:
-                      'TSH ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge - (getDeductedAmount(orderController.orderDetailsModel.discountPercentage, orderController.orderDetailsModel.deliveryCharge + orderController.orderDetailsModel.totalPrice))}',
+                  'TSH ${(placeOrderModel.totalPrice ?? 0) + (placeOrderModel.deliveryCharge ?? 0)}',
                 ),
               ]),
 
               20.height,
               CommonText(
                 style: getTheme.textTheme.titleMedium,
-                text: orderController.orderDetailsModel.orderStatus,
+            text: placeOrderModel.orderStatus ?? '',
                 top: 10,
                 bottom: 10,
                 left: 20,
@@ -78,9 +77,7 @@ class CheckoutScreen extends StatelessWidget {
                 },
               ),
             ],
-          );
-        },
-      ),
+      )
     ),
   );
 
@@ -104,7 +101,7 @@ class CheckoutScreen extends StatelessWidget {
     ),
   );
 
-  Card _middleCard(PlaceOrderController controller) {
+  Card _middleCard() {
     return _card([
       Container(
         decoration: BoxDecoration(color: getTheme.primaryColor, borderRadius: BorderRadius.circular(10)),
@@ -129,15 +126,15 @@ class CheckoutScreen extends StatelessWidget {
         children: [
           const Icon(Icons.person),
           10.width,
-          CommonText(text: controller.placeOrderModel.clientFullName ?? ''),
+          CommonText(text: placeOrderModel.clientFullName ?? ''),
         ],
       ),
-      Row(children: [const Icon(Icons.phone), 10.width, CommonText(text: controller.placeOrderModel.phone ?? '')]),
+      Row(children: [const Icon(Icons.phone), 10.width, CommonText(text: placeOrderModel.phone ?? '')]),
       Row(
         children: [
           const Icon(Icons.place),
           10.width,
-          CommonText(text: controller.clientAddressTextEditController.text),
+          CommonText(text: placeOrderModel.clientAdressOnMap ?? ''),
         ],
       ),
     ]);
@@ -157,7 +154,7 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget _orderListItem(PlaceOrderController orderController) => SizedBox(
+  Widget _orderListItem() => SizedBox(
     width: orderListWidth,
     child: Card(
       elevation: 5,
@@ -170,24 +167,24 @@ class CheckoutScreen extends StatelessWidget {
             CommonRichText(
               richTextContent: [
                 CommonSimpleRichTextContent(
-                  text: '#${orderController.orderDetailsModel.orderCode}\n',
+                  text: '#${placeOrderModel.orderNumber}\n',
                   style: getTheme.textTheme.bodyLarge?.copyWith(color: getTheme.primaryColor),
                 ),
                 CommonSimpleRichTextContent(
-                  text: 'Order Placed – ${Utils.formatDateTime(orderController.orderDetailsModel.orderDate)}\n',
+                  text: 'Order Placed – ${Utils.formatDateTime(placeOrderModel.orderDate ?? DateTime.now())}\n',
                   style: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                 ),
                 CommonSimpleRichTextContent(
-                  text: 'Parcel Picked Up – ${orderController.placeOrderModel.clientPickupTime}\n',
+                  text: 'Parcel Picked Up – ${placeOrderModel.clientPickupTime}\n',
                   style: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                 ),
                 CommonSimpleRichTextContent(
-                  text: 'Quantity – ${orderController.placeOrderModel.quantity}\n',
+                  text: 'Quantity – ${placeOrderModel.quantity}\n',
                   style: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                 ),
                 CommonSimpleRichTextContent(
                   text:
-                      'Total Price – ${orderController.orderDetailsModel.totalPrice + orderController.orderDetailsModel.deliveryCharge}\n',
+                      'Total Price – ${(placeOrderModel.totalPrice ?? 0) + (placeOrderModel.deliveryCharge ?? 0)}\n',
                   style: getTheme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 12),
                 ),
               ],

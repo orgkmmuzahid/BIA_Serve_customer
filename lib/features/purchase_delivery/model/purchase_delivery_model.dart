@@ -3,7 +3,7 @@ import 'dart:convert';
 
 // File: purchase_delivery_model.dart
 
-enum DeliveryType { outSideTheCity, insideTheCity }
+enum RegionType { outSideTheCity, insideTheCity }
 
 class PurchaseDeliveryModel {
   String? name;
@@ -11,7 +11,7 @@ class PurchaseDeliveryModel {
   String? phoneNumber;
   double? amount;
   //enum
-  DeliveryType deliveryType;
+  RegionType deliveryType;
   String? deliveryAddress;
   String? productDescription;
   double? serviceFee;
@@ -33,7 +33,7 @@ class PurchaseDeliveryModel {
     String? vendorId,
     String? phoneNumber,
     double? amount,
-    DeliveryType? deliveryType,
+    RegionType? deliveryType,
     String? deliveryAddress,
     String? productDescription,
     double? serviceFee,
@@ -73,7 +73,7 @@ class PurchaseDeliveryModel {
       phoneNumber:
           map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       amount: map['amount'] != null ? map['amount'] as double : null,
-      deliveryType: DeliveryType.values[map['deliveryType'] as int],
+      deliveryType: RegionType.values[map['deliveryType'] as int],
       deliveryAddress:
           map['deliveryAddress'] != null
               ? map['deliveryAddress'] as String

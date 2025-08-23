@@ -44,6 +44,8 @@ import 'package:bai_serve_customer/features/notifications/screen/notifications_s
     as _i18;
 import 'package:bai_serve_customer/features/onboarding_screen/onboarding_screen.dart'
     as _i19;
+import 'package:bai_serve_customer/features/order/place_order/model/place_order_model.dart'
+    as _i44;
 import 'package:bai_serve_customer/features/order/place_order/screens/checkout_screen.dart'
     as _i6;
 import 'package:bai_serve_customer/features/order/place_order/screens/door_to_door_pickup_screen.dart'
@@ -57,9 +59,9 @@ import 'package:bai_serve_customer/features/order/place_order/screens/place_orde
 import 'package:bai_serve_customer/features/purchase_delivery/screens/purchase_delivery_screen.dart'
     as _i27;
 import 'package:bai_serve_customer/features/return_product/model/return_product_form_model.dart'
-    as _i45;
+    as _i46;
 import 'package:bai_serve_customer/features/return_product/model/return_product_model.dart'
-    as _i44;
+    as _i45;
 import 'package:bai_serve_customer/features/return_product/screens/return_processing_screen.dart'
     as _i28;
 import 'package:bai_serve_customer/features/return_product/screens/return_product_details_screen.dart'
@@ -74,7 +76,7 @@ import 'package:bai_serve_customer/features/setting/screens/terms_condition_scre
     as _i34;
 import 'package:bai_serve_customer/features/splash/splash_screen.dart' as _i33;
 import 'package:bai_serve_customer/features/vendor/common_model/vendor_model.dart'
-    as _i46;
+    as _i47;
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/all_product_screen.dart'
     as _i1;
 import 'package:bai_serve_customer/features/vendor/features/vendor_details/screens/vendor_details_screen.dart'
@@ -214,45 +216,51 @@ class ChatRouteArgs {
 /// generated route for
 /// [_i6.CheckoutScreen]
 class CheckoutRoute extends _i42.PageRouteInfo<CheckoutRouteArgs> {
-  CheckoutRoute({_i43.Key? key, List<_i42.PageRouteInfo>? children})
-    : super(
-        CheckoutRoute.name,
-        args: CheckoutRouteArgs(key: key),
-        initialChildren: children,
-      );
+  CheckoutRoute({
+    required _i44.PlaceOrderModel placeOrderModel,
+    _i43.Key? key,
+    List<_i42.PageRouteInfo>? children,
+  }) : super(
+         CheckoutRoute.name,
+         args: CheckoutRouteArgs(placeOrderModel: placeOrderModel, key: key),
+         initialChildren: children,
+       );
 
   static const String name = 'CheckoutRoute';
 
   static _i42.PageInfo page = _i42.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<CheckoutRouteArgs>(
-        orElse: () => const CheckoutRouteArgs(),
+      final args = data.argsAs<CheckoutRouteArgs>();
+      return _i6.CheckoutScreen(
+        placeOrderModel: args.placeOrderModel,
+        key: args.key,
       );
-      return _i6.CheckoutScreen(key: args.key);
     },
   );
 }
 
 class CheckoutRouteArgs {
-  const CheckoutRouteArgs({this.key});
+  const CheckoutRouteArgs({required this.placeOrderModel, this.key});
+
+  final _i44.PlaceOrderModel placeOrderModel;
 
   final _i43.Key? key;
 
   @override
   String toString() {
-    return 'CheckoutRouteArgs{key: $key}';
+    return 'CheckoutRouteArgs{placeOrderModel: $placeOrderModel, key: $key}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! CheckoutRouteArgs) return false;
-    return key == other.key;
+    return placeOrderModel == other.placeOrderModel && key == other.key;
   }
 
   @override
-  int get hashCode => key.hashCode;
+  int get hashCode => placeOrderModel.hashCode ^ key.hashCode;
 }
 
 /// generated route for
@@ -416,18 +424,52 @@ class MyPaymentRoute extends _i42.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.MyRewardsScreen]
-class MyRewardsRoute extends _i42.PageRouteInfo<void> {
-  const MyRewardsRoute({List<_i42.PageRouteInfo>? children})
-    : super(MyRewardsRoute.name, initialChildren: children);
+class MyRewardsRoute extends _i42.PageRouteInfo<MyRewardsRouteArgs> {
+  MyRewardsRoute({
+    required Function onClaimSuccess,
+    _i43.Key? key,
+    List<_i42.PageRouteInfo>? children,
+  }) : super(
+         MyRewardsRoute.name,
+         args: MyRewardsRouteArgs(onClaimSuccess: onClaimSuccess, key: key),
+         initialChildren: children,
+       );
 
   static const String name = 'MyRewardsRoute';
 
   static _i42.PageInfo page = _i42.PageInfo(
     name,
     builder: (data) {
-      return const _i15.MyRewardsScreen();
+      final args = data.argsAs<MyRewardsRouteArgs>();
+      return _i15.MyRewardsScreen(
+        onClaimSuccess: args.onClaimSuccess,
+        key: args.key,
+      );
     },
   );
+}
+
+class MyRewardsRouteArgs {
+  const MyRewardsRouteArgs({required this.onClaimSuccess, this.key});
+
+  final Function onClaimSuccess;
+
+  final _i43.Key? key;
+
+  @override
+  String toString() {
+    return 'MyRewardsRouteArgs{onClaimSuccess: $onClaimSuccess, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! MyRewardsRouteArgs) return false;
+    return onClaimSuccess == other.onClaimSuccess && key == other.key;
+  }
+
+  @override
+  int get hashCode => onClaimSuccess.hashCode ^ key.hashCode;
 }
 
 /// generated route for
@@ -496,18 +538,55 @@ class OnboardingRoute extends _i42.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.OrderDetailsScreen]
-class OrderDetailsRoute extends _i42.PageRouteInfo<void> {
-  const OrderDetailsRoute({List<_i42.PageRouteInfo>? children})
-    : super(OrderDetailsRoute.name, initialChildren: children);
+class OrderDetailsRoute extends _i42.PageRouteInfo<OrderDetailsRouteArgs> {
+  OrderDetailsRoute({
+    required _i44.PlaceOrderModel placeOrderModel,
+    _i43.Key? key,
+    List<_i42.PageRouteInfo>? children,
+  }) : super(
+         OrderDetailsRoute.name,
+         args: OrderDetailsRouteArgs(
+           placeOrderModel: placeOrderModel,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'OrderDetailsRoute';
 
   static _i42.PageInfo page = _i42.PageInfo(
     name,
     builder: (data) {
-      return const _i20.OrderDetailsScreen();
+      final args = data.argsAs<OrderDetailsRouteArgs>();
+      return _i20.OrderDetailsScreen(
+        placeOrderModel: args.placeOrderModel,
+        key: args.key,
+      );
     },
   );
+}
+
+class OrderDetailsRouteArgs {
+  const OrderDetailsRouteArgs({required this.placeOrderModel, this.key});
+
+  final _i44.PlaceOrderModel placeOrderModel;
+
+  final _i43.Key? key;
+
+  @override
+  String toString() {
+    return 'OrderDetailsRouteArgs{placeOrderModel: $placeOrderModel, key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! OrderDetailsRouteArgs) return false;
+    return placeOrderModel == other.placeOrderModel && key == other.key;
+  }
+
+  @override
+  int get hashCode => placeOrderModel.hashCode ^ key.hashCode;
 }
 
 /// generated route for
@@ -721,8 +800,8 @@ class PurchaseDeliveryRoute extends _i42.PageRouteInfo<void> {
 class ReturnProcessingRoute
     extends _i42.PageRouteInfo<ReturnProcessingRouteArgs> {
   ReturnProcessingRoute({
-    required _i44.ReturnProductModel returnProductModel,
-    required _i45.ReturnProductFormModel returnProductFormModel,
+    required _i45.ReturnProductModel returnProductModel,
+    required _i46.ReturnProductFormModel returnProductFormModel,
     _i43.Key? key,
     List<_i42.PageRouteInfo>? children,
   }) : super(
@@ -757,9 +836,9 @@ class ReturnProcessingRouteArgs {
     this.key,
   });
 
-  final _i44.ReturnProductModel returnProductModel;
+  final _i45.ReturnProductModel returnProductModel;
 
-  final _i45.ReturnProductFormModel returnProductFormModel;
+  final _i46.ReturnProductFormModel returnProductFormModel;
 
   final _i43.Key? key;
 
@@ -789,7 +868,7 @@ class ReturnProcessingRouteArgs {
 class ReturnProductDetailsRoute
     extends _i42.PageRouteInfo<ReturnProductDetailsRouteArgs> {
   ReturnProductDetailsRoute({
-    required _i44.ReturnProductModel returnProductModel,
+    required _i45.ReturnProductModel returnProductModel,
     _i43.Key? key,
     List<_i42.PageRouteInfo>? children,
   }) : super(
@@ -821,7 +900,7 @@ class ReturnProductDetailsRouteArgs {
     this.key,
   });
 
-  final _i44.ReturnProductModel returnProductModel;
+  final _i45.ReturnProductModel returnProductModel;
 
   final _i43.Key? key;
 
@@ -984,7 +1063,7 @@ class TermsConditionRoute extends _i42.PageRouteInfo<void> {
 /// [_i35.VendorDetailsScreen]
 class VendorDetailsRoute extends _i42.PageRouteInfo<VendorDetailsRouteArgs> {
   VendorDetailsRoute({
-    required _i46.VendorModel vendorModel,
+    required _i47.VendorModel vendorModel,
     _i43.Key? key,
     List<_i42.PageRouteInfo>? children,
   }) : super(
@@ -1010,7 +1089,7 @@ class VendorDetailsRoute extends _i42.PageRouteInfo<VendorDetailsRouteArgs> {
 class VendorDetailsRouteArgs {
   const VendorDetailsRouteArgs({required this.vendorModel, this.key});
 
-  final _i46.VendorModel vendorModel;
+  final _i47.VendorModel vendorModel;
 
   final _i43.Key? key;
 
@@ -1068,7 +1147,7 @@ class VendorVerifyFormRoute
     extends _i42.PageRouteInfo<VendorVerifyFormRouteArgs> {
   VendorVerifyFormRoute({
     _i43.Key? key,
-    _i46.VendorModel? vendorModel,
+    _i47.VendorModel? vendorModel,
     List<_i42.PageRouteInfo>? children,
   }) : super(
          VendorVerifyFormRoute.name,
@@ -1097,7 +1176,7 @@ class VendorVerifyFormRouteArgs {
 
   final _i43.Key? key;
 
-  final _i46.VendorModel? vendorModel;
+  final _i47.VendorModel? vendorModel;
 
   @override
   String toString() {

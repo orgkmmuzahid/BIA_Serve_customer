@@ -1,5 +1,8 @@
+import 'package:bai_serve_customer/component/search_bar/common_search_bar.dart';
 import 'package:bai_serve_customer/component/text_field/common_text_field.dart';
 import 'package:bai_serve_customer/component/text_field/input_helper.dart';
+import 'package:bai_serve_customer/config/languages/cubit/language_cubit.dart';
+import 'package:bai_serve_customer/features/custom_google_map/widgets/map_search_bar.dart';
 import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/extensions/extension.dart';
@@ -69,22 +72,42 @@ class CustomGoogleMap extends StatelessWidget {
       height: 135.w,
       child: Column(
         children: [
-          CommonTextField(
-            prefixIcon: Icon(Icons.my_location, color: getTheme.primaryColor),
+          MapSearchBar(
+            icon: GestureDetector(
+              onTap: () {
+                cubit.setPointType(PointType.starting).then((_) {
+                  cubit.setCurrentPosition();
+                });
+              },
+              child: Icon(
+                Icons.gps_fixed_outlined,
+                color: state.lastPikedPointType == PointType.starting ? AppColors.primaryColor2 : AppColors.disable,
+              ),
+            ),
+            initalAddress: state.starting.address,
+            hints: 'Current Address',
+            onSubmit: cubit.setCoordinateFromPlaceId,
             onTap: () {
               cubit.setPointType(PointType.starting);
             },
-            borderColor: getTheme.dividerColor,
-            validationType: ValidationType.validateRequired,
           ).paddingAll(10),
 
-          CommonTextField(
-            prefixIcon: Icon(Icons.place, color: getTheme.primaryColor),
+          MapSearchBar(
+            icon: GestureDetector(
+              onTap: () {
+                cubit.setPointType(PointType.destination);
+              },
+              child: Icon(
+                Icons.place,
+                color: state.lastPikedPointType == PointType.destination ? AppColors.primaryColor2 : AppColors.disable,
+              ),
+            ),
+            hints: 'Destination Address',
+            initalAddress: state.destination.address,
+            onSubmit: cubit.setCoordinateFromPlaceId,
             onTap: () {
               cubit.setPointType(PointType.destination);
             },
-            borderColor: getTheme.dividerColor,
-            validationType: ValidationType.validateRequired,
           ).paddingOnly(left: 10, right: 10, bottom: 10),
         ],
       ),

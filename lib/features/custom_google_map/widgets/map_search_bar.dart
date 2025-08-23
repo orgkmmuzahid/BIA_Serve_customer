@@ -1,0 +1,149 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../cubit/cubit/map_search_cubit.dart';
+import '../cubit/cubit/map_search_state.dart';
+
+class MapSearchBar extends StatefulWidget {
+  const MapSearchBar({
+    required this.hints,
+    required this.onSubmit,
+    required this.icon,
+    required this.onTap,
+    this.onCurrentPosition,
+    this.initalAddress,
+    super.key,
+  });
+
+  final String hints;
+  final Function({required String placeId, required String address}) onSubmit;
+  final Function onTap;
+  final Function? onCurrentPosition;
+  final Widget icon;
+  final String? initalAddress;
+
+  @override
+  State<MapSearchBar> createState() => _MapSearchBarState();
+}
+
+class _MapSearchBarState extends State<MapSearchBar> {
+  late SearchController controller;
+  bool isListenerAdded = false;
+
+  @override
+  void initState() {
+    controller = SearchController();
+    controller.text = widget.initalAddress ?? '';
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => MapSearchCubit(), //hints as unique id here
+      child: LayoutBuilder(
+        builder: (context, contstrain) {
+          final cubit = context.read<MapSearchCubit>();
+          return SearchAnchor(
+            searchController: controller,
+            viewLeading: widget.icon,
+            viewShape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(8.w)),
+            viewBackgroundColor: Colors.white,
+
+            isFullScreen: false,
+            viewOnChanged: cubit.getPlaceSuggestions,
+
+            viewOnSubmitted: (value) {
+              _performSearch(
+                context,
+                controller,
+                cubit.state.searchResults.isEmpty ? null : cubit.state.searchResults.entries.first,
+              );
+            },
+            builder:
+                (_, c) => SearchBar(
+                  controller: controller,
+                  hintText: widget.hints,
+                  padding: const WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+                  onTap: () {
+                    c.openView();
+                    widget.onTap();
+                  },
+                  leading: widget.icon,
+                ),
+            suggestionsBuilder: (_, _) {
+              return _suggenstionsBuilder(cubit, controller);
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  void _performSearch(BuildContext context, SearchController controller, MapEntry<String, String>? searchItem) {
+    FocusScope.of(context).unfocus();
+    if (searchItem == null) return;
+    controller.text = '';
+    controller.closeView(searchItem.value);
+    widget.onSubmit(placeId: searchItem.key, address: searchItem.value);
+  }
+
+  List<Widget> _buildSuggestions({
+    required BuildContext context,
+    required Map<String, String> suggestions,
+    required VoidCallback onClear,
+  }) {
+    return [
+      if (suggestions.isNotEmpty)
+        Align(alignment: Alignment.centerRight, child: TextButton(onPressed: onClear, child: const Text('Clear All'))),
+      ...suggestions.entries.map((item) {
+        return ListTile(
+          title: Text(item.value),
+          onTap: () {
+            controller.text = item.value;
+            controller.closeView(item.value);
+
+            widget.onSubmit(placeId: item.key, address: item.value);
+          },
+        );
+      }),
+    ];
+  }
+
+  FutureOr<Iterable<Widget>> _suggenstionsBuilder(MapSearchCubit cubit, SearchController controller) {
+    return [
+      StreamBuilder<MapSearchState>(
+        stream: cubit.stream,
+        initialData: cubit.state,
+        builder: (context, snapshot) {
+          final state = snapshot.data!;
+
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state.searchResults.isEmpty) {
+            return const Padding(padding: EdgeInsets.all(16.0), child: Text('No search history.'));
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (state.searchResults.isNotEmpty)
+                ..._buildSuggestions(context: context, suggestions: state.searchResults, onClear: cubit.onClear),
+            ],
+          );
+        },
+      ),
+    ];
+  }
+}

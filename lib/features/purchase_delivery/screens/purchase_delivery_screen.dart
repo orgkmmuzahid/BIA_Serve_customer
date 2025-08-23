@@ -87,15 +87,15 @@ class PurchaseDeliveryScreen extends StatelessWidget {
 
                   CommonText(text: AppString.deliveryType, style: getTheme.textTheme.bodyLarge).start,
                   10.height,
-                  CommonDropDown<DeliveryType>(
+                  CommonDropDown<RegionType>(
                     hint: AppString.deliveryType,
-                    items: DeliveryType.values,
+                    items: RegionType.values,
                     onChanged: (value) {
                       purchaseDeliveryController.onFormChange(
                         purchaseDeliveryController.purchaseDeliveryModel.copyWith(deliveryType: value),
                       );
                     },
-                    nameBuilder: (DeliveryType value) => value.displayName,
+                    nameBuilder: (RegionType value) => value.displayName,
                   ),
 
                   10.height,

@@ -6,6 +6,6 @@ class SecretKey {
   static final String secretKey = dotenv.env['STRIPESCERETKEY'] ?? '';
 
   static final String paymentIntent = dotenv.env['STRIPEPAYMENTINTENT'] ?? '';
-  static final String mapKey = 'AIzaSyDk7p1Vl9WOtcDztagS6yPsgUYaVu_bCro';
+  static final String mapKey = dotenv.env['GOOGLEMAPKEY'] ?? '';
 
 }

@@ -25,18 +25,18 @@ class LoyaltyPointsController extends GetxController {
 
     offercode = 'OFFERCODE';
 
-    if (Get.find<PlaceOrderController>()
-                .placeOrderModel
-                .marchentAdressOnMap
-                ?.isEmpty ==
-            true ||
-        Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap ==
-            null) {
-        appRouter.popUntilRouteWithName(HomeRoute.name);
-        appRouter.push(PlaceOrderRoute(title: AppString.placeOrder));
-    } else {
-      appRouter.popUntilRouteWithName(PickUpInformationRoute.name);
-    }
+    // if (Get.find<PlaceOrderController>()
+    //             .placeOrderModel
+    //             .marchentAdressOnMap
+    //             ?.isEmpty ==
+    //         true ||
+    //     Get.find<PlaceOrderController>().placeOrderModel.marchentAdressOnMap ==
+    //         null) {
+    //     appRouter.popUntilRouteWithName(HomeRoute.name);
+    //     appRouter.push(PlaceOrderRoute(title: AppString.placeOrder));
+    // } else {
+    //   appRouter.popUntilRouteWithName(PickUpInformationRoute.name);
+    // }
     update();
   }
 

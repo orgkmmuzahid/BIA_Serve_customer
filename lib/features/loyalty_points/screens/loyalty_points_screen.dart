@@ -157,7 +157,14 @@ class LoyaltyPointsScreen extends StatelessWidget {
               CommonButton(
                 titleText: AppString.viewRewards,
                 onTap: () {
-                  appRouter.push(const MyRewardsRoute());
+                  appRouter.push(
+                    MyRewardsRoute(
+                      onClaimSuccess: () {
+                        appRouter.popUntilRouteWithName(HomeRoute.name);
+                        appRouter.push(PlaceOrderRoute(title: AppString.placeOrder));
+                      },
+                    ),
+                  );
                 },
               ),
             ],

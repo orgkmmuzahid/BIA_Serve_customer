@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class PurchaseDeliveryController extends GetxController {
   PurchaseDeliveryModel purchaseDeliveryModel = PurchaseDeliveryModel(
-    deliveryType: DeliveryType.insideTheCity,
+    deliveryType: RegionType.insideTheCity,
     totalPay: 0,
   );
 

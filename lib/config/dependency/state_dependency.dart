@@ -5,7 +5,6 @@ import 'package:bai_serve_customer/features/home/controller/home_order_conroller
 import 'package:bai_serve_customer/features/loyalty_points/controllers/loyalty_points_controller.dart';
 import 'package:bai_serve_customer/features/order/my_order/controllers/my_order_controller.dart';
 import 'package:bai_serve_customer/features/order/place_order/controllers/door_to_door_controller.dart';
-import 'package:bai_serve_customer/features/order/place_order/controllers/place_order_controller.dart';
 import 'package:bai_serve_customer/features/purchase_delivery/controllers/purchase_delivery_controller.dart';
 import 'package:bai_serve_customer/features/setting/controllers/setting_controller.dart';
 import 'package:bai_serve_customer/features/vendor/features/vendor_sourcing/controllers/vendor_sourcing_controller.dart';
@@ -21,7 +20,7 @@ class StateDependency {
     Get.lazyPut(DoorToDoorController.new, fenix: true);
     Get.lazyPut(BulkOrderController.new, fenix: true);
 
-    Get.lazyPut(PlaceOrderController.new, fenix: true);
+    // Get.lazyPut(PlaceOrderController.new, fenix: true);
     Get.lazyPut(LoyaltyPointsController.new, fenix: true);
     Get.lazyPut(ChatController.new, fenix: true);
     Get.lazyPut(PurchaseDeliveryController.new, fenix: true);
