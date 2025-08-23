@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:bai_serve_customer/component/text/common_text.dart';
@@ -8,6 +6,7 @@ import 'package:bai_serve_customer/config/dependency/dependency_injection.dart';
 import 'package:bai_serve_customer/config/secret_key/secret_key.dart';
 import 'package:bai_serve_customer/config/storage/storage_service.dart';
 import 'package:bai_serve_customer/features/custom_google_map/model/place_details.dart';
+import 'package:bai_serve_customer/utils/app_utils.dart';
 import 'package:bai_serve_customer/utils/constants/app_colors.dart';
 import 'package:bai_serve_customer/utils/log/app_log.dart';
 import 'package:flutter/material.dart';
@@ -18,40 +17,31 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
-
 import 'map_state.dart';
 import 'package:http/http.dart' as http;
-
 
 class MapCubit extends SafeCubit<MapState> {
   MapCubit() : super(MapState.initial());
 
-
   final StorageService _storageService = getIt();
   final String _lastLocationKey = 'last_gps';
 
-
   late GoogleMapController mapController;
-
 
   void onTravelModeChange(TravelMode mode) {
     emit(state.copyWith(travelMode: mode));
     getPolylinePoints(state.starting.coordinate, state.destination.coordinate);
   }
 
-
   Future<void> onMapCreated(GoogleMapController controller) async {
     emit(state.copyWith(isLoading: true));
-
 
     mapController = controller;
     await _initMapAsync();
   }
 
-
   Future<void> _initMapAsync() async {
     final isPermitted = await Permission.location.isGranted;
-
 
     if (!isPermitted) {
       emit(state.copyWith(initializing: false));
@@ -59,14 +49,12 @@ class MapCubit extends SafeCubit<MapState> {
     }
     final String? getLastLocation = await _storageService.read(_lastLocationKey);
 
-
     if (getLastLocation != null) {
       final Position position = Position.fromMap(json.decode(getLastLocation));
       await setPoint(coordinate: LatLng(position.latitude, position.longitude));
     }
     setCurrentPosition();
   }
-
 
   Future<void> setCurrentPosition() async {
     try {
@@ -82,7 +70,6 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
-
   Marker _destinationMarker(LatLng coordinate) {
     return Marker(
       markerId: const MarkerId('end'),
@@ -90,7 +77,6 @@ class MapCubit extends SafeCubit<MapState> {
       infoWindow: const InfoWindow(title: 'Destination'),
     );
   }
-
 
   Marker _startMarker(LatLng startLocation) {
     final startMarker = Marker(
@@ -102,42 +88,42 @@ class MapCubit extends SafeCubit<MapState> {
     return startMarker;
   }
 
-
   Future<void> getPolylinePoints(LatLng start, LatLng end) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final polylinePoints = PolylinePoints();
+      final polylinePoints = PolylinePoints(apiKey: SecretKey.mapKey);
       final List<LatLng> polylineCoordinates = [];
-      final result = await polylinePoints.getRouteBetweenCoordinates(
-        request: PolylineRequest(
-          origin: PointLatLng(start.latitude, start.longitude),
-          destination: PointLatLng(end.latitude, end.longitude),
-          mode: state.travelMode,
-        ),
-        googleApiKey: SecretKey.mapKey,
+      final request = RoutesApiRequest(
+        origin: PointLatLng(start.latitude, start.longitude),
+        destination: PointLatLng(end.latitude, end.longitude),
+        travelMode: state.travelMode,
       );
+      final result = await polylinePoints.getRouteBetweenCoordinatesV2(request: request);
       emit(state.copyWith(isLoading: false));
-      if (result.points.isNotEmpty) {
-        polylineCoordinates.addAll(result.points.map((p) => LatLng(p.latitude, p.longitude)));
-
-
+      if (result.hasRoutes) {
+        polylineCoordinates.addAll(
+          (result.primaryRoute?.polylinePoints ?? []).map((p) => LatLng(p.latitude, p.longitude)),
+        );
         await _drawPolyline(polylineCoordinates);
 
         if (state.mapRoute.first.points.isEmpty) return;
         // Place markers at start, middle, and end
+        final mDistance = result.primaryRoute?.distanceMeters ?? 0;
+        final double mDuration = ((result.primaryRoute?.duration ?? 1) / 60);
+        
+        
         _addMarkers(
           start,
           end,
           state.mapRoute.first.points[(state.mapRoute.first.points.length / 2).toInt()],
-          result.distanceTexts?.first ?? '',
-          result.durationTexts?.first ?? '',
+          (mDistance < 1000 ? '$mDistance m' : '${result.primaryRoute?.distanceKm ?? 0} km'),
+          mDuration < 59 ? '${Utils.formatDouble(mDuration)} minutes' : '${Utils.formatDouble(mDuration / 60)} hours',
         );
       }
     } catch (e) {
       AppLogger.error(e.toString(), tag: 'Map Polyline Error');
     }
   }
-
 
   // Method to draw polyline on the map
   Future<void> _drawPolyline(List<LatLng> points) async {
@@ -148,11 +134,9 @@ class MapCubit extends SafeCubit<MapState> {
       points: points,
     );
 
-
     emit(state.copyWith(mapRoute: {polyline}));
     _moveCameraToFitPolyline(points);
   }
-
 
   // Move the camera to fit the polyline on the map
   void _moveCameraToFitPolyline(List<LatLng> polylinePoints) {
@@ -161,7 +145,6 @@ class MapCubit extends SafeCubit<MapState> {
       double maxLat = polylinePoints[0].latitude;
       double minLng = polylinePoints[0].longitude;
       double maxLng = polylinePoints[0].longitude;
-
 
       for (final point in polylinePoints) {
         if (point.latitude < minLat) minLat = point.latitude;
@@ -180,7 +163,6 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
-
   void _addMarkers(LatLng start, LatLng end, LatLng middle, String distance, String duration) async {
     final BitmapDescriptor middleMarkerIcon = await _createCustomMarker('Distance- $distance\nDuration- $duration');
     final startMarker = Marker(
@@ -189,16 +171,12 @@ class MapCubit extends SafeCubit<MapState> {
       icon: await const Icon(Icons.gps_fixed, color: AppColors.primaryColor).toBitmapDescriptor(),
     );
 
-
     final endMarker = Marker(markerId: MarkerId(PointType.destination.name), position: end);
-
 
     final middleMarker = Marker(markerId: const MarkerId('middle'), position: middle, icon: middleMarkerIcon);
 
-
     emit(state.copyWith(markers: {startMarker, endMarker, middleMarker}));
   }
-
 
   Future<BitmapDescriptor> _createCustomMarker(String text) async {
     return CommonText(
@@ -215,21 +193,17 @@ class MapCubit extends SafeCubit<MapState> {
     ).toBitmapDescriptor();
   }
 
-
   Future<void> onPointTypeChange(PointType pointType) async {
     final updatedMarker = state.markers;
     updatedMarker.removeWhere((element) => element.markerId.value == pointType.name);
 
-
     emit(state.copyWith(lastPikedPointType: pointType, markers: updatedMarker));
   }
-
 
   Future<void> setPointType(PointType pointType) async {
     emit(state.copyWith(lastPikedPointType: pointType));
     AppLogger.debug(pointType.name);
   }
-
 
   Future<void> setPoint({required LatLng coordinate}) async {
     final details = await _getPlaceDetails(coordinate.latitude, coordinate.longitude);
@@ -244,14 +218,12 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
-
   Future<PlaceDetails?> _getPlaceDetails(double latitude, double longitude) async {
     try {
       // Reverse Geocoding API (Google Maps Geocoding API or OpenCage API)
       final url =
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=${SecretKey.mapKey}';
       final response = await http.get(Uri.parse(url));
-
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -264,10 +236,8 @@ class MapCubit extends SafeCubit<MapState> {
     return null;
   }
 
-
   Future<void> setCoordinateFromPlaceId({required String placeId, required String address}) async {
     final url = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=${SecretKey.mapKey}';
-
 
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
