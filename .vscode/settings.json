@@ -1,5 +1,6 @@
 {
-    "window.zoomLevel": 1,
-    "html.format.wrapLineLength": 120,
-    "dart.lineLength": 120
+  "window.zoomLevel": 1,
+  "html.format.wrapLineLength": 120,
+  "dart.lineLength": 120,
+  "dart.flutterSdkPath": ".fvm/versions/3.32.8"
 }

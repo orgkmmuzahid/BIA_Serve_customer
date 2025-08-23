@@ -14,11 +14,12 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 import 'map_state.dart';
-import 'package:http/http.dart' as http;
 
 class MapCubit extends SafeCubit<MapState> {
   MapCubit() : super(MapState.initial());
@@ -107,11 +108,8 @@ class MapCubit extends SafeCubit<MapState> {
         await _drawPolyline(polylineCoordinates);
 
         if (state.mapRoute.first.points.isEmpty) return;
-        // Place markers at start, middle, and end
         final mDistance = result.primaryRoute?.distanceMeters ?? 0;
         final double mDuration = ((result.primaryRoute?.duration ?? 1) / 60);
-        
-        
         _addMarkers(
           start,
           end,
@@ -125,7 +123,6 @@ class MapCubit extends SafeCubit<MapState> {
     }
   }
 
-  // Method to draw polyline on the map
   Future<void> _drawPolyline(List<LatLng> points) async {
     final polyline = Polyline(
       polylineId: const PolylineId('route'),
@@ -138,7 +135,6 @@ class MapCubit extends SafeCubit<MapState> {
     _moveCameraToFitPolyline(points);
   }
 
-  // Move the camera to fit the polyline on the map
   void _moveCameraToFitPolyline(List<LatLng> polylinePoints) {
     if (polylinePoints.isNotEmpty) {
       double minLat = polylinePoints[0].latitude;
@@ -220,7 +216,6 @@ class MapCubit extends SafeCubit<MapState> {
 
   Future<PlaceDetails?> _getPlaceDetails(double latitude, double longitude) async {
     try {
-      // Reverse Geocoding API (Google Maps Geocoding API or OpenCage API)
       final url =
           'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=${SecretKey.mapKey}';
       final response = await http.get(Uri.parse(url));
