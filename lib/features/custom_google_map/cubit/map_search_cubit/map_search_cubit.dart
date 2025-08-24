@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:bai_serve_customer/component/search_bar/search_state.dart';
 import 'package:bai_serve_customer/config/bloc/safe_cubit.dart';
 import 'package:bai_serve_customer/config/secret_key/secret_key.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'map_search_state.dart';
 

@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../cubit/map_cubit.dart';
-import '../cubit/map_state.dart';
+import '../cubit/map_cubit/map_cubit.dart';
+import '../cubit/map_cubit/map_state.dart';
 
 class CustomGoogleMap extends StatelessWidget {
   const CustomGoogleMap({required this.widgets, super.key});

@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../model/place_details.dart';
+import '../../model/place_details.dart';
 
 enum PointType { starting, destination }
 
@@ -57,8 +57,6 @@ class MapState extends Equatable {
       lastPikedPointType,
     ];
   }
-
-
 
   MapState copyWith({
     PointType? lastPikedPointType,

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../cubit/cubit/map_search_cubit.dart';
-import '../cubit/cubit/map_search_state.dart';
+import '../cubit/map_search_cubit/map_search_cubit.dart';
+import '../cubit/map_search_cubit/map_search_state.dart';
 
 class MapSearchBar extends StatefulWidget {
   const MapSearchBar({
